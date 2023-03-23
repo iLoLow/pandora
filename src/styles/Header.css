@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: #0b4048;
+}
+.logo-pandora {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.header nav {
+  display: flex;
+  gap: 50px;
+  font-weight: 500;
+
+  padding: 30px;
+}
+.link {
+  text-decoration: none;
+  color: black;
+  transition: 0.3s;
+}
+.link:hover,
+.link-active {
+  text-decoration: underline;
+}

@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logoPandora.png";
 import "../styles/Header.css";
+import MenuMobile from "./MenuMobile";
 
 function Header() {
   return (
@@ -8,9 +9,12 @@ function Header() {
       <Link to="/" aria-label="Accueil">
         <img src={logo} className="logo-pandora" alt="logo pandora" />
       </Link>
-      <nav>
+      <nav className="navDesktop">
         <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/">
           Accueil
+        </NavLink>
+        <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/annonces">
+          Annonces
         </NavLink>
         <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/boutique">
           Boutique
@@ -19,6 +23,7 @@ function Header() {
           S'identifier
         </NavLink>
       </nav>
+      <MenuMobile />
     </header>
   );
 }

@@ -1,0 +1,26 @@
+.banner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  overflow: hidden;
+  max-height: 180px;
+  margin: 10px;
+}
+.banner img {
+  object-fit: cover;
+}
+.banner::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: #000000;
+  mix-blend-mode: darken;
+  opacity: 0.3;
+}
+@media screen and (max-width: 768px) {
+  .banner {
+    border-radius: 10px;
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Inscription() {
-  const [username, setNom] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,7 +14,7 @@ function Inscription() {
     <form onSubmit={handleSubmit}>
       <label>
         Nom d'utilisateur :
-        <input type="text" value={username} onChange={(e) => setNom(e.target.value)} />
+        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
       </label>
       <br />
       <label>

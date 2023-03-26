@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logoPandora.png";
-import "../styles/Header.css";
+import "../Styles/Header.css";
 import MenuMobile from "./MenuMobile";
 
 function Header() {
@@ -15,6 +15,9 @@ function Header() {
         </NavLink>
         <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/annonces">
           Annonces
+        </NavLink>
+        <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/rejoindre">
+          Nous rejoindre
         </NavLink>
         <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/boutique">
           Boutique

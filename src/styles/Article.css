@@ -1,0 +1,25 @@
+.article {
+  border: 1px solid #0d7f90;
+  border-radius: 5px;
+  padding: 10px;
+  margin-block: 15px;
+}
+.articleTitre {
+  text-align: center;
+  border-bottom: 2px solid #0d7f90;
+}
+.articleImg {
+  border-radius: 15px;
+  margin-top: 15px;
+  max-height: 330px;
+  height: 100%;
+}
+.articleParagrapghe {
+  text-align: justify;
+  margin-block: 15px;
+}
+.articleFooter {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #0d7f90;
+}

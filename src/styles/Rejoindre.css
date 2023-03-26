@@ -1,0 +1,11 @@
+.rejoindre {
+  display: flex;
+  flex-direction: column;
+  margin-block: 20px;
+}
+.rejoindreTitre {
+  text-align: center;
+}
+.rejoindreTexte {
+  line-height: 2;
+}

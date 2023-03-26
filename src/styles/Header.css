@@ -3,7 +3,8 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background: #0b4048;
+  background: #0d7f90;
+  color: black;
 }
 .logo-pandora {
   max-width: 100px;
@@ -18,7 +19,7 @@
 }
 .link {
   text-decoration: none;
-  color: black;
+  color: inherit;
   transition: 0.3s;
 }
 .link:hover,

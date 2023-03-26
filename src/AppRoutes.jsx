@@ -5,6 +5,7 @@ import Erreur from "./pages/Erreur";
 import Accueil from "./pages/Accueil";
 import Identification from "./pages/Identification";
 import Rejoindre from "./pages/Rejoindre";
+import Inscription from "./pages/Inscription";
 
 function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ function AppRoutes() {
       <Route path="/rejoindre" element={<Rejoindre />} />
       <Route path="/boutique" element={<Boutique />} />
       <Route path="/identification" element={<Identification />} />
+      <Route path="Inscription" element={<Inscription />} />
       <Route path="*" element={<Erreur />} />
     </Routes>
   );

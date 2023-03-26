@@ -11,7 +11,7 @@ function Identification() {
     console.log(`Submitting: ${username} - ${password}`);
   };
   return (
-    <section className="formIdentification">
+    <section className="form">
       <form onSubmit={handleSubmit}>
         <label>
           Nom d'utilisateur:

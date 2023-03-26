@@ -15,7 +15,7 @@ function AppRoutes() {
       <Route path="/rejoindre" element={<Rejoindre />} />
       <Route path="/boutique" element={<Boutique />} />
       <Route path="/identification" element={<Identification />} />
-      <Route path="Inscription" element={<Inscription />} />
+      <Route path="/inscription" element={<Inscription />} />
       <Route path="*" element={<Erreur />} />
     </Routes>
   );

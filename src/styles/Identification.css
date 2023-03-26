@@ -2,4 +2,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 15px;
+  border: 2px solid #0d7f90;
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.034);
+  max-width: 350px;
+}
+label {
+  display: flex;
+  justify-content: space-between;
+}
+input {
+  border-radius: 15px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.266);
+}
+button {
+  border-radius: 15px;
+  padding: 5px 10px;
 }

@@ -20,7 +20,7 @@
 .link {
   text-decoration: none;
   color: inherit;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 .link:hover,
 .link-active {

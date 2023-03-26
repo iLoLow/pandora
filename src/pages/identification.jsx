@@ -14,7 +14,7 @@ function Identification() {
     <section className="formIdentification">
       <form onSubmit={handleSubmit}>
         <label>
-          Pseudo:
+          Nom d'utilisateur:
           <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
         </label>
         <br />

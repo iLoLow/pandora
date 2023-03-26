@@ -21,3 +21,16 @@ function Article() {
   );
 }
 export default Article;
+
+/*exemple
+<section className="article">
+<h2 className="articleTitre">{titreArticle}</h2>
+<img className="articleImg" src={img} alt="" />
+<p className="articleParagrapghe">
+  {texteArticle}
+  </p>
+<div className="articleFooter">
+  <p className="articleDate">Ecris le : {date}</p>
+  <p className="articleAuteur">Rédigé par : {auteur}</p>
+</div>
+</section>*/

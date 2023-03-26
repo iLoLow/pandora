@@ -1,4 +1,4 @@
-import "../Styles/Rejoindre.css";
+import "../styles/Rejoindre.css";
 
 function Rejoindre() {
   return (

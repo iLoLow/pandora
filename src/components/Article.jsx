@@ -1,4 +1,4 @@
-import "../Styles/Article.css";
+import "../styles/Article.css";
 import imgbanner from "../assets/banner.png";
 
 function Article() {

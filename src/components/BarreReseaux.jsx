@@ -1,4 +1,4 @@
-import "../Styles/BarreReseaux.css";
+import "../styles/BarreReseaux.css";
 
 function BarreReseaux() {
   return (

@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import AppRoutes from "./AppRoutes";
 import Footer from "./components/Footer";
 import { useState } from "react";
-import "./Styles/App.css";
+import "./styles/App.css";
 
 function App() {
   const [theme, setTheme] = useState("light");

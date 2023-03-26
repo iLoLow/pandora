@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logoPandora.png";
-import "../Styles/Header.css";
+import "../styles/Header.css";
 import MenuMobile from "./MenuMobile";
 
 function Header() {

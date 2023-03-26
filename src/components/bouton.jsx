@@ -1,4 +1,4 @@
-import "../Styles/Bouton.css";
+import "../styles/Bouton.css";
 
 function Bouton() {
   return <button className="btn"></button>;

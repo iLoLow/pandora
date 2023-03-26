@@ -1,4 +1,4 @@
-import "../Styles/Banner.css";
+import "../styles/Banner.css";
 import imgbanner from "../assets/banner.png";
 
 function Banner() {

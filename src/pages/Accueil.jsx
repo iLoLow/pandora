@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Article from "../components/Article";
 import Banner from "../components/Banner";
 import BarreReseaux from "../components/BarreReseaux";
-import "../Styles/Accueil.css";
+import "../styles/Accueil.css";
 
 function Accueil() {
   document.title = "Pandora RP";

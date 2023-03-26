@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import "../Styles/MenuMobile.css";
+import "../styles/MenuMobile.css";
 
 function MenuMobile() {
   const [isOpen, setIsOpen] = useState(false);

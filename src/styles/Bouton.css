@@ -1,0 +1,15 @@
+.btn {
+  padding: 8px;
+  border-radius: 20px;
+  max-width: 120px;
+  border: none;
+  background: #0d7f90;
+  transition: 350ms;
+}
+.btn:hover {
+  box-shadow: 1px 1px 5px 0px #0d7f90e3;
+}
+.btn a {
+  text-decoration: none;
+  color: inherit;
+}

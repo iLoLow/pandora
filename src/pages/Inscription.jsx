@@ -28,7 +28,7 @@ function Inscription() {
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </label>
         <br />
-        <button type="submit">S'inscrire</button>
+        <button className="btn" type="submit">S'inscrire</button>
       </form>
     </section>
   );

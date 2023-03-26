@@ -1,5 +1,6 @@
 import "../Styles/Identification.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Identification() {
   document.title = "Pandora RP";
@@ -12,6 +13,11 @@ function Identification() {
   };
   return (
     <section className="form">
+      <button className="btn">
+        <Link to="/inscription" aria-label="Accueil">
+          S'inscrire
+        </Link>
+      </button>
       <form onSubmit={handleSubmit}>
         <label>
           Nom d'utilisateur:
@@ -23,7 +29,9 @@ function Identification() {
           <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
         </label>
         <br />
-        <button type="submit">Login</button>
+        <button className="btn" type="submit">
+          Login
+        </button>
       </form>
     </section>
   );

@@ -33,6 +33,5 @@ body {
   flex: 1 1;
   padding-inline: 20px;
   width: 100%;
-  background: rgb(2, 2, 42);
-  background: linear-gradient(141deg, rgba(2, 2, 42, 1) 0%, rgba(4, 4, 50, 1) 35%, rgba(4, 4, 120, 1) 100%);
+  background: #021772;
 }

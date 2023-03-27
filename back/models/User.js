@@ -40,6 +40,21 @@ class User {
     });
   }
 
+
+/**
+ * Il prend une adresse e-mail comme paramètre et renvoie l'objet utilisateur qui a cette adresse
+ * e-mail
+ * @param email - L'e-mail de l'utilisateur que vous souhaitez obtenir.
+ */
+  static getByEmail(email) {
+    return new Promise((resolve, reject) => {
+      connection.query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      });
+    });
+  }
+
   /**
    * Obtenez tous les utilisateurs de la base de données et transmettez les résultats à la fonction de
    * rappel.

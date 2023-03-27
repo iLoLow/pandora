@@ -1,26 +1,5 @@
 import User from "../models/User.js";
-import { v4 } from "uuid";
 
-/**
- * Il crée un utilisateur dans la base de données
- * @param req - l'objet de la requête
- * @param res - l'objet de réponse
- * @param next - une fonction qui sera appelée lorsque le middleware sera terminé.
- */
-export const createUser = (req, res, next) => {
-  const { username, email, password } = req.body;
-  const user_id = v4();
-  User.create(user_id, username, email, password, (err) => {
-    if (err.code === "ER_DUP_ENTRY") {
-      return res.status(400).json({ message: "Impossible de créer l'utilisateur avec cet " + email });
-      next();
-    } else if (err) {
-      return res.status(500).json({ message: "Erreur interne du serveur" });
-      next();
-    }
-    res.status(201).json({ message: "Utilisateur créé" });
-  });
-};
 
 /**
  * Il récupère tous les utilisateurs de la base de données et les renvoie dans un objet JSON
@@ -60,14 +39,14 @@ export const getUserById = (req, res) => {
  * @param res - l'objet de réponse
  */
 export const updateUser = (req, res) => {
-	const { username, email, password } = req.body;
-	User.update(req.params.userId, username, email, password, (err) => {
-		if (err) {
-			return res.status(500).json({ message: "Impossible de mettre à jour l'utilsateur" });
-			next();
-		}
-		res.status(200).json({ message: "Utilisateur mis à jour" });
-	});
+  const { username, email, password } = req.body;
+  User.update(req.params.userId, username, email, password, (err) => {
+    if (err) {
+      return res.status(500).json({ message: "Impossible de mettre à jour l'utilsateur" });
+      next();
+    }
+    res.status(200).json({ message: "Utilisateur mis à jour" });
+  });
 };
 
 /**
@@ -76,13 +55,13 @@ export const updateUser = (req, res) => {
  * @param res - l'objet de réponse
  */
 export const deleteUser = (req, res) => {
-	User.delete(req.params.userId, (err) => {
-		if (err) {
-			return res.status(500).json({ message: "Impossible de supprimer l'utilisateur" });
-			next();
-		}
-		res.status(200).json({ message: "Utilisateur supprimé" });
-	});
+  User.delete(req.params.userId, (err) => {
+    if (err) {
+      return res.status(500).json({ message: "Impossible de supprimer l'utilisateur" });
+      next();
+    }
+    res.status(200).json({ message: "Utilisateur supprimé" });
+  });
 };
 
 /**
@@ -91,11 +70,11 @@ export const deleteUser = (req, res) => {
  * @param res - l'objet de réponse
  */
 export const getAnnoncesByUser = (req, res) => {
-	User.getAnnoncesByUser(req.params.userId, (err, result) => {
-		if (err) {
-			return res.status(500).json({ message: "Impossible de récupérer les annonces de l'utilisateur" });
-			next();
-		}
-		res.status(200).json(result);
-	});
+  User.getAnnoncesByUser(req.params.userId, (err, result) => {
+    if (err) {
+      return res.status(500).json({ message: "Impossible de récupérer les annonces de l'utilisateur" });
+      next();
+    }
+    res.status(200).json(result);
+  });
 };

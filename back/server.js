@@ -6,6 +6,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import { fileURLToPath } from "url";
 import userRoutes from "./routes/userRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 // Resolve dirname anf filename for es6
 const __filename = fileURLToPath(import.meta.url); // Résolution du chemin du fichier
@@ -36,6 +37,9 @@ app.use(Express.static(path.join(__dirname, "../front/build")));
 
 // Définition de la route par défaut pour les assets
 app.use("/assets", Express.static(path.join(__dirname, "public/assets")));
+
+// Definition des routes d'authentification
+app.use("/api/auth", authRoutes);
 
 // Definition de la route user
 app.use("/api/user", userRoutes);

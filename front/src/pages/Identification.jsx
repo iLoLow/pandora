@@ -4,13 +4,25 @@ import { Link } from "react-router-dom";
 
 function Identification() {
   document.title = "Pandora RP";
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const login = async (user) => {
+    await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`Submitting: ${username} - ${password}`);
+    const user = { email, password };
+    login(user);
   };
+
   return (
     <section className="form">
       <h2 className="titleForm">S'identifier</h2>
@@ -19,10 +31,10 @@ function Identification() {
           S'inscrire
         </Link>
       </button>
-      <form onSubmit={handleSubmit}>
+      <form method="POST" onSubmit={(e) => handleSubmit(e)}>
         <label>
-          Nom d'utilisateur:
-          <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+          Email de l'utilisateur:
+          <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} />
         </label>
         <br />
         <label>
@@ -31,7 +43,7 @@ function Identification() {
         </label>
         <br />
         <button className="btn" type="submit">
-          Login
+          Se connecter
         </button>
       </form>
     </section>

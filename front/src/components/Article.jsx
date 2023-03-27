@@ -4,7 +4,7 @@ import imgbanner from "../assets/banner.png";
 function Article() {
   return (
     <>
-      <section className="article">
+      <article className="article">
         <h2 className="articleTitre">Article test</h2>
         <img className="articleImg" src={imgbanner} alt="" />
         <p className="articleParagrapghe">
@@ -16,7 +16,7 @@ function Article() {
           <p className="articleDate">Ecris le : 1/01/2023</p>
           <p className="articleAuteur">Rédigé par : Admin</p>
         </div>
-      </section>
+      </article>
     </>
   );
 }

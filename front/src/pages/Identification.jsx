@@ -13,6 +13,7 @@ function Identification() {
   };
   return (
     <section className="form">
+      <h2 className="titleForm">S'identifier</h2>
       <button className="btn">
         <Link to="/inscription" aria-label="Accueil">
           S'inscrire

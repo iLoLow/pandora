@@ -3,10 +3,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 25px;
+  border-radius: 15px;
   overflow: hidden;
-  max-height: 180px;
+  max-height: 270px;
   margin: 10px;
+  border: 2px solid #0d7f90;
 }
 .banner img {
   object-fit: cover;

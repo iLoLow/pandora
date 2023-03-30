@@ -5,11 +5,12 @@ import connection from "../config/connectionDB.js";
  * @description This class is used to create, update, delete, and get users from the database.
  */
 class User {
-  constructor(user_id, username, email, password) {
+  constructor(user_id, username, email, password, avatar_url) {
     this.user_id = user_id;
     this.username = username;
     this.email = email;
     this.password = password;
+    this.avatar_url = avatar_url;
   }
 
   /**
@@ -20,10 +21,14 @@ class User {
    * @param password - le mot de passe que l'utilisateur a saisi
    * @param cb - fonction de rappel
    */
-  static create(user_id, username, email, password, cb) {
-    connection.query("INSERT INTO users (user_id, username, email, password) VALUES (?, ?, ?, ?)", [user_id, username, email, password], (err, result) => {
-      cb(err, result);
-    });
+  static create(user_id, username, email, password, avatar_url, cb) {
+    connection.query(
+      "INSERT INTO users (user_id, username, email, password, avatar_url) VALUES (?, ?, ?, ?,?)",
+      [user_id, username, email, password, avatar_url],
+      (err, result) => {
+        cb(err, result);
+      }
+    );
   }
 
   /**
@@ -40,17 +45,16 @@ class User {
     });
   }
 
-
-/**
- * Il prend une adresse e-mail comme paramètre et renvoie l'objet utilisateur qui a cette adresse
- * e-mail
- * @param email - L'e-mail de l'utilisateur que vous souhaitez obtenir.
- */
+  /**
+   * Il prend une adresse e-mail comme paramètre et renvoie l'objet utilisateur qui a cette adresse
+   * e-mail
+   * @param email - L'e-mail de l'utilisateur que vous souhaitez obtenir.
+   */
   static getByEmail(email) {
     return new Promise((resolve, reject) => {
       connection.query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
         if (err) reject(err);
-        resolve(result);
+        resolve(result[0]);
       });
     });
   }
@@ -75,10 +79,14 @@ class User {
    * @param password - le mot de passe que l'utilisateur a saisi dans le formulaire
    * @param cb - fonction de rappel
    */
-  static update(user_id, username, email, password, cb) {
-    connection.query("UPDATE users SET username = ?, email = ?, password = ? WHERE user_id = ?", [username, email, password, user_id], (err, results) => {
-      cb(err, results);
-    });
+  static update(user_id, username, email, password, avatar_url, cb) {
+    connection.query(
+      "UPDATE users SET username = ?, email = ?, password = ?, avatar_url=?, WHERE user_id = ?",
+      [username, email, password, avatar_url, user_id],
+      (err, results) => {
+        cb(err, results);
+      }
+    );
   }
 
   /**

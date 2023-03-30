@@ -1,36 +1,26 @@
 import "../styles/Article.css";
-import imgbanner from "../assets/banner.png";
+import Avatar from "./Avatar";
+import moment from "../utils/moment";
 
-function Article() {
+function Article({ annonce }) {
   return (
     <>
       <article className="article">
-        <h2 className="articleTitre">Article test</h2>
-        <img className="articleImg" src={imgbanner} alt="" />
-        <p className="articleParagrapghe">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque ea sunt ad. Dolorem fuga, maxime magnam perspiciatis soluta minima ipsa dolore quisquam eum ut velit
-          nihil sunt corrupti animi magni! Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat quam accusantium veritatis ipsum labore sit, voluptatibus ducimus
-          placeat, magnam quo asperiores consectetur! Velit cupiditate ullam quis autem harum corporis ad.
-        </p>
+        <h2 className="articleTitre">{annonce.title}</h2>
+        <img className="articleImg" src={annonce.image_url} alt="annonce" />
+        <p className="articleParagraphe">{annonce.description}</p>
         <div className="articleFooter">
-          <p className="articleDate">Ecris le : 1/01/2023</p>
-          <p className="articleAuteur">Rédigé par : Admin</p>
+          <div className="articleAuteur">
+            <Avatar avatarUrl={annonce.avatar_url} />
+            <p>{annonce.author}</p>
+          </div>
+          <div className="articleDate">
+            <p>{"Créé le " + moment(annonce.created_at).format("DD/MM/YYYY à HH:mm")}</p>
+            <p>{"Mis à jour " + moment(annonce.updated_at).fromNow()}</p>
+          </div>
         </div>
       </article>
     </>
   );
 }
 export default Article;
-
-/*exemple
-<section className="article">
-<h2 className="articleTitre">{titreArticle}</h2>
-<img className="articleImg" src={img} alt="" />
-<p className="articleParagrapghe">
-  {texteArticle}
-  </p>
-<div className="articleFooter">
-  <p className="articleDate">Ecris le : {date}</p>
-  <p className="articleAuteur">Rédigé par : {auteur}</p>
-</div>
-</section>*/

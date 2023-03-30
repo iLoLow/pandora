@@ -2,11 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 1280px;
+  margin-inline: auto;
 }
 
 .presentationTitre {
   text-align: center;
-  font-size: 23px;
+  font-size: 30px;
+  margin-block: 15px;
 }
 .presentationDescription {
   line-height: 2.5;

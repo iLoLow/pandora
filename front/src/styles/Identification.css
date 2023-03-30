@@ -1,24 +1,106 @@
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 15px;
-  border: 2px solid #0d7f90;
+.sectionForm {
+  margin: 40px auto;
   padding: 20px;
+  border: 2px solid #0d7f90;
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.034);
-  max-width: 380px;
+  max-width: 500px;
 }
-label {
+
+.sectionForm h2 {
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  line-height: 2;
+  text-transform: uppercase;
+}
+
+.sectionForm .formIdentification {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
 }
+
+form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sectionForm label {
+  color: white;
+  font-size: 1rem;
+  line-height: 1.3;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
 input {
-  border-radius: 15px;
-  margin-bottom: 10px;
-  background: rgba(255, 255, 255, 0.266);
-}
-button {
-  border-radius: 15px;
   padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.errorSmall {
+  color: rgb(149, 8, 8);
+  font-size: 0.8rem;
+  margin-left: 5px;
+}
+
+.sectionForm button {
+  background: #0d7f90;
+  margin: auto;
+  border-radius: 10px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+}
+
+.sectionForm button:hover {
+  background: #07616e;
+}
+
+.linkBtn {
+  text-align: center;
+  color: ecec;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.linkBtn:hover {
+  color: #0d7f90;
+  text-decoration: underline;
+}
+
+.dropzone {
+  background: white;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  height: 80px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.zone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-width: 2px;
+  border-style: dashed;
+  border-color: #07616e;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  text-align: center;
+  color: black;
+  font-weight: 500;
+}
+
+.zone.zone-error {
+  border-color: rgb(149, 8, 8);
 }

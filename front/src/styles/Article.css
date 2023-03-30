@@ -2,25 +2,49 @@
   border: 1px solid #0d7f90;
   border-radius: 5px;
   padding: 10px;
-  margin-block: 15px;
+  margin-block: 20px;
   box-shadow: -1px 1px 9px 0px #0d7f90e3;
+  max-width: 900px;
 }
 .articleTitre {
   text-align: center;
   border-bottom: 2px solid #0d7f90;
+  margin-bottom: 15px;
 }
 .articleImg {
   border-radius: 15px;
-  margin-top: 15px;
   max-height: 330px;
   height: 100%;
+  object-fit: cover;
 }
-.articleParagrapghe {
+
+.articleParagraphe {
   text-align: justify;
   margin-block: 15px;
+  padding-block: 15px;
 }
 .articleFooter {
+  margin-top: 15px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-top: 1px solid #0d7f90;
+  padding-top: 15px;
+}
+
+.articleAuteur {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.articleDate {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: right;
+}
+
+.articleDate p {
+  font-size: 0.8rem;
 }

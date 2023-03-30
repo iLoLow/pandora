@@ -1,0 +1,4 @@
+.formAnnonce {
+  display: flex;
+  flex-direction: column;
+}

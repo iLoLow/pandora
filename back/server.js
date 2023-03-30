@@ -1,4 +1,4 @@
-import Express  from "express";
+import Express from "express";
 import * as path from "path";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -7,6 +7,7 @@ import morgan from "morgan";
 import { fileURLToPath } from "url";
 import userRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import annonceRoutes from "./routes/annonceRoutes.js";
 
 // Resolve dirname anf filename for es6
 const __filename = fileURLToPath(import.meta.url); // Résolution du chemin du fichier
@@ -33,7 +34,8 @@ app.use(cors());
 app.use(morgan("dev"));
 
 // Définition du dossier de build du front (React)
-app.use(Express.static(path.join(__dirname, "../front/build")));
+
+app.use(Express.static(path.join(__dirname, "../front/dist")));
 
 // Définition de la route par défaut pour les assets
 app.use("/assets", Express.static(path.join(__dirname, "public/assets")));
@@ -42,8 +44,11 @@ app.use("/assets", Express.static(path.join(__dirname, "public/assets")));
 app.use("/api/auth", authRoutes);
 
 // Definition de la route user
-app.use("/api/user", userRoutes);
+app.use("/api/users", userRoutes);
+
+// Définition de la route annonce
+app.use("/api/annonces", annonceRoutes);
 
 app.listen(process.env.PORT, () => {
-	console.log(`Server is running on port ${process.env.PORT}`);
+  console.log(`Server is running on port ${process.env.PORT}`);
 });

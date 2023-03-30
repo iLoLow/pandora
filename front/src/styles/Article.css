@@ -9,7 +9,10 @@
 .articleTitre {
   text-align: center;
   border-bottom: 2px solid #0d7f90;
+  font-size: 1.5rem;
+  padding-block: 15px;
   margin-bottom: 15px;
+  text-transform: capitalize;
 }
 .articleImg {
   border-radius: 15px;
@@ -20,8 +23,8 @@
 
 .articleParagraphe {
   text-align: justify;
-  margin-block: 15px;
-  padding-block: 15px;
+  padding: 10px;
+  line-height: 1.5;
 }
 .articleFooter {
   margin-top: 15px;

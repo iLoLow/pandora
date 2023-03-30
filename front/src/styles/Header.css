@@ -4,10 +4,31 @@
   align-items: center;
   width: 100%;
   border-bottom: 2px solid #0d7f90;
+  position: fixed;
+  background: var(--background);
+  box-shadow: -1px 1px 9px 0px #0d7f90e3;
+  padding-block: 10px;
 }
 .logo-pandora {
-  max-width: 100px;
-  max-height: 100px;
+  position: absolute;
+  top: -10px;
+  width: 120px;
+  height: 120px;
+}
+
+.logo-pandora::after {
+  display: block;
+  top: 50%;
+  left: 50%;
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: var(--shadow);
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px 12px var(--shadow);
 }
 
 .header nav {
@@ -26,4 +47,19 @@
 .link-active {
   text-decoration: underline;
   color: var(--accent);
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    position: sticky;
+  }
+  .logo-pandora {
+    top: 0;
+    width: 60px;
+    height: 60px;
+  }
+  .logo-pandora::after {
+    width: 15px;
+    height: 15px;
+  }
 }

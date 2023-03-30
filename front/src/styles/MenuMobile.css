@@ -4,10 +4,9 @@
   align-items: center;
   gap: 30px;
   background-color: var(--background);
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
+  position: fixed;
+  inset: 0;
+
   z-index: 2;
 }
 .NavMobile .link {
@@ -76,11 +75,16 @@
   .NavMobile {
     height: 100%;
     font-size: 16px;
-    padding-block: 60px;
     justify-content: center;
   }
   .MenuBurger {
     display: flex;
     z-index: 3;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .NavMobile .link {
+    width: 90%;
   }
 }

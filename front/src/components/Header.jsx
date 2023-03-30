@@ -12,7 +12,9 @@ function Header() {
   return (
     <header className="header">
       <Link to="/" aria-label="Accueil">
-        <img src={logo} className="logo-pandora" alt="logo pandora" />
+        <div className="logo-pandora">
+          <img src={logo} alt="logo pandora" />
+        </div>
       </Link>
       <nav className="navDesktop">
         <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/">

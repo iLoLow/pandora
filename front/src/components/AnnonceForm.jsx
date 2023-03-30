@@ -48,3 +48,20 @@ function AnnonceForm() {
 }
 
 export default AnnonceForm;
+/*
+<Dropzone multiple={false} onDrop={(acceptedFiles) => setValues({ ...values, avatar: acceptedFiles[0] })}>
+              {({ getRootProps, getInputProps }) => (
+                <div {...getRootProps()} className="dropzone">
+                  <div className={errors.avatar ? "zone zone-error" : "zone"}>
+                    <input {...getInputProps()} />
+                    {errors.avatar ? (
+                      <small className="errorSmall">{errors.avatar}</small>
+                    ) : values.avatar ? (
+                      <p>Image choisie : {values.avatar.name}</p>
+                    ) : (
+                      <p>Glissez-déposez une image ici, ou cliquez pour sélectionner une image.</p>
+                    )}
+                  </div>
+                </div>
+              )}
+            </Dropzone>*/

@@ -15,6 +15,7 @@
 .NavmobileFlex {
   display: flex;
   justify-content: space-between;
+  user-select: none;
 }
 .NavMobileSvgHome {
   width: 17px;

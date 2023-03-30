@@ -6,6 +6,8 @@
   border: inset 1px #0d7f90;
   overflow: hidden;
   padding: 1px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .toggleBtn .toggle {

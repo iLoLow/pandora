@@ -7,7 +7,8 @@
   position: fixed;
   background: var(--background);
   box-shadow: -1px 1px 9px 0px #0d7f90e3;
-  padding-block: 10px;
+
+  height: 70px;
 }
 .logo-pandora {
   position: absolute;

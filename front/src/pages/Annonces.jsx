@@ -35,7 +35,7 @@ function Annonces() {
     <>
       <section className="annonces">
         <h2 className="titleAnnonces">Annonces du Serveur</h2>
-        <AnnonceForm />
+
         {annonces && annonces.map((annonce, k) => <Article key={k} annonce={annonce} />)}
       </section>
     </>

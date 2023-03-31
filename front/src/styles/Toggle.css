@@ -8,6 +8,7 @@
   padding: 1px;
   cursor: pointer;
   user-select: none;
+  box-shadow: 0px 1px 5px 0px var(--shadow);
 }
 
 .toggleBtn .toggle {

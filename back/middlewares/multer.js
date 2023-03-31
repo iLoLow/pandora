@@ -12,7 +12,6 @@ const storage = multer.diskStorage({
     cb(null, "./public/assets");
   },
   filename: (req, file, cb) => {
-    console.log(file.mimetype);
     // const extension = MIME_TYPES[file.mimetype];
     // const name = file.originalname.split(".")[0];
     cb(null, file.originalname);

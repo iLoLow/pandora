@@ -21,7 +21,6 @@ export const getAllAnnonces = async (req, res) => {
 };
 
 export const getAnnoncesByUser = async (req, res) => {
-  console.log(req.params.userId);
   try {
     const annonces = await Annonce.getAllByUser(req.params.userId);
     res.status(200).json(annonces);
@@ -40,9 +39,10 @@ export const getAnnonce = async (req, res) => {
 };
 
 export const updateAnnonce = async (req, res) => {
+  console.log(req.body);
   const { title, description, image_url } = req.body;
   try {
-    const annonce = await Annonce.update(req.params.id, title, description, image_url);
+    await Annonce.update(req.params.id, title, description, image_url);
     res.status(200).json({ message: "Annonce mise à jour" });
   } catch (error) {
     res.status(500).json({ message: "Impossible de mettre à jour l'annonce" });

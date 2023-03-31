@@ -9,7 +9,7 @@ router.post("/", verifyToken, multerStorage.single("image"), createAnnonce);
 router.get("/", getAllAnnonces);
 router.get("/:userId", verifyToken, getAnnoncesByUser);
 router.get("/:id", getAnnonce);
-router.put("/:id", verifyToken, multerStorage.single("image"), updateAnnonce);
+router.patch("/:id", verifyToken, multerStorage.single("image"), updateAnnonce);
 router.delete("/:id", verifyToken, deleteAnnonce);
 
 export default router;

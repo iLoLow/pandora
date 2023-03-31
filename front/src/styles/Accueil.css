@@ -32,3 +32,13 @@
   text-decoration: none;
   color: inherit;
 }
+.banniereDev {
+  display: none;
+  overflow: hidden;
+  border-radius: 10px;
+  max-width: 520px;
+  max-height: 200px;
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}

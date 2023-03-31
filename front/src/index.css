@@ -28,6 +28,8 @@ body {
   --text-secondary: #0d7f90;
   --accent: #0d7f90;
   --shadow: #0d7f90e3;
+  --red: rgb(149, 8, 8);
+  --green: rgb(3, 148, 34);
 }
 [data-theme="dark"] {
   --background: #080c1d;

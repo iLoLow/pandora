@@ -1,3 +1,4 @@
+import BarreReseaux from "../components/BarreReseaux";
 import "../styles/Rejoindre.css";
 
 function Rejoindre() {
@@ -10,9 +11,11 @@ function Rejoindre() {
           Si tu estimes que ton RP est sérieux, dynamique ou inventif, n'hésite plus et rejoins nous sur Pandora RP! ( WL ) 🌴 Le staff est réactif et posé, avec un mapping et un
           système RP unique.
         </p>
-        <p>Rejoints vite le serveur Discord pour demander ton accès!</p>
-        <p>Nous espérons t'avoir convaincue de nous rejoindre et t'attendons que tu joignes le projet pour jouer ensemble ! </p>
+        <p>Rejoints vite le serveur Discord pour demander ton accès !</p>
+        <p>Nous espérons t'avoir convaincue de nous rejoindre et t'attendons que tu rejoignes le projet pour jouer ensemble !</p>
       </div>
+
+      <BarreReseaux />
     </section>
   );
 }

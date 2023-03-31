@@ -3,7 +3,7 @@ import Article from "../components/Article";
 import Banner from "../components/Banner";
 import BarreReseaux from "../components/BarreReseaux";
 import "../styles/Accueil.css";
-import Palmier from "../assets/palmier.png";
+import BannerDev from "../assets/SOYEZ_Laurent_Developpeur_WEB.gif";
 
 function Accueil() {
   document.title = "Pandora RP";
@@ -20,7 +20,10 @@ function Accueil() {
         <button className="btn">
           <Link to="/rejoindre">Rejoins-nous</Link>
         </button>
-        {/* <Article  /> */}
+        {/* <Article  /> */}{" "}
+        <div className="banniereDev">
+          <img src={BannerDev} alt="banner dev" />
+        </div>
       </section>
 
       {/* <BarreReseaux /> */}

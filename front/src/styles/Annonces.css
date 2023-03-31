@@ -1,5 +1,6 @@
 .annonces {
   max-width: 900px;
   width: 100%;
-  margin: 0 auto;
+  margin: 35px auto;
+  padding-inline: 10px;
 }

@@ -74,18 +74,3 @@ export const deleteUser = (req, res) => {
     res.status(200).json({ message: "Utilisateur supprimé" });
   });
 };
-
-/**
- * Il récupère toutes les annonces d'un utilisateur
- * @param req - L'objet de la requête.
- * @param res - l'objet de réponse
- */
-export const getAnnoncesByUser = (req, res) => {
-  User.getAnnoncesByUser(req.params.userId, (err, result) => {
-    if (err) {
-      return res.status(500).json({ message: "Impossible de récupérer les annonces de l'utilisateur" });
-      next();
-    }
-    res.status(200).json(result);
-  });
-};

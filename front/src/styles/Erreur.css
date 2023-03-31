@@ -1,0 +1,12 @@
+.erreur {
+  padding-top: 60px;
+  text-align: center;
+  line-height: 3;
+}
+.erreur h1 {
+  font-size: 25px;
+  font-weight: 700;
+}
+.erreur p {
+  font-size: 18px;
+}

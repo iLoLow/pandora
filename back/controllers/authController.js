@@ -41,7 +41,10 @@ export const login = async (req, res, next) => {
 
     // On vérifie le mot de passe
     const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) res.status(400).json({ message: "Email ou mot de passe incorrect" });
+    if (!validPassword) {
+      return res.status(400).json({ message: "Email ou mot de passe incorrect" });
+      next();
+    }
 
     // Création du token
     const token = jwt.sign({ userId: user.user_id }, process.env.JWT_SECRET_KEY, {
@@ -57,5 +60,6 @@ export const login = async (req, res, next) => {
     res.status(200).json({ user, token });
   } catch (err) {
     res.status(500).json({ message: "Erreur lors de la connexion de l'utilisateur" });
+    next();
   }
 };

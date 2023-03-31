@@ -18,14 +18,11 @@
   padding: 20px;
   margin: 10px 0;
   border-radius: 15px;
-  box-shadow: -1px 1px 9px 0px #0d7f90e3;
+  box-shadow: -1px 1px 9px 0px var(--shadow);
 }
 
 .profil-links a {
   color: var(--text-primary);
   text-decoration: none;
   font-weight: 700;
-}
-.profil-links a:hover {
-  color: #0d7f90;
 }

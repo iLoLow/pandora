@@ -1,0 +1,26 @@
+/* .annoncesAdminWrapper {
+} */
+
+.annoncesAdminWrapper h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.tableauAnnonceItem {
+  border: 1px solid var(--text-secondary);
+  box-shadow: -1px 1px 9px 0px var(--shadow);
+  border-radius: 10px;
+  max-width: 300px;
+  padding: 10px;
+}
+
+.tableauAnnonceicone svg {
+  width: 30px;
+  height: 30px;
+  color: var(--text-secondary);
+}
+.tableauAnnonceImg {
+  overflow: hidden;
+  border-radius: 10px;
+}

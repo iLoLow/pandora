@@ -59,6 +59,21 @@ class Annonce {
   }
 
   /**
+   * Il renvoie une promesse qui se résout en un tableau de toutes les annonces appartenant à un
+   * utilisateur
+   * @param user_id - l'identifiant de l'utilisateur qui a posté l'annonce
+   * @returns Un tableau d'objets
+   */
+  static getAllByUser(user_id) {
+    return new Promise((resolve, reject) => {
+      connection.query("SELECT * FROM Annonces WHERE user_id = ?", [user_id], (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      });
+    });
+  }
+
+  /**
    * Il met à jour la base de données avec les nouvelles valeurs des champs title, description, imageUrl
    * pour la ligne dont l'id est égal à l'id passé en paramètre
    * @param id - l'id de l'annonce à mettre à jour

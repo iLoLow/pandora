@@ -1,14 +1,14 @@
 .article {
-  border: 1px solid #0d7f90;
+  border: 1px solid var(--text-secondary);
   border-radius: 5px;
   padding: 10px;
   margin-block: 20px;
-  box-shadow: -1px 1px 9px 0px #0d7f90e3;
+  box-shadow: -1px 1px 9px 0px var(--shadow);
   max-width: 900px;
 }
 .articleTitre {
   text-align: center;
-  border-bottom: 2px solid #0d7f90;
+  border-bottom: 2px solid var(--text-secondary);
   font-size: 1.5rem;
   padding-block: 15px;
   margin-bottom: 15px;
@@ -31,7 +31,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #0d7f90;
+  border-top: 1px solid var(--text-secondary);
   padding-top: 15px;
 }
 

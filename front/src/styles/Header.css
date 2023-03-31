@@ -3,11 +3,11 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  border-bottom: 2px solid #0d7f90;
+  border-bottom: 2px solid var(--text-secondary);
   position: fixed;
   background: var(--background);
-  box-shadow: -1px 1px 9px 0px #0d7f90e3;
-
+  box-shadow: -1px 1px 9px 0px var(--shadow);
+  z-index: 10;
   height: 70px;
 }
 .logo-pandora {
@@ -51,9 +51,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .header {
-    position: sticky;
-  }
   .logo-pandora {
     top: 0;
     width: 60px;

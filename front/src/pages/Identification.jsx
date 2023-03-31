@@ -167,7 +167,7 @@ function Identification() {
                     ) : values.avatar ? (
                       <p>Image choisie : {values.avatar.name}</p>
                     ) : (
-                      <p>Glissez-déposez une image ici, ou cliquez pour sélectionner une image.</p>
+                      <p>Glissez-déposez votre avatar, ou cliquez pour sélectionner votre avatar.</p>
                     )}
                   </div>
                 </div>

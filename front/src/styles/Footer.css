@@ -2,4 +2,13 @@
   display: flex;
   padding: 10px;
   justify-content: flex-end;
+  border-top: 1px solid var(--accent);
+  box-shadow: -1px 1px 9px 0px var(--shadow);
+  background: var(--background);
+  z-index: 10;
+}
+
+.footer p {
+  font-size: 0.8rem;
+  opacity: 0.8;
 }

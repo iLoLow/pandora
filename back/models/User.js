@@ -99,18 +99,6 @@ class User {
       cb(err, results);
     });
   }
-
-  /**
-   * Il récupère toutes les annonces de la base de données qui ont le même user_id que celui passé dans
-   * la fonction
-   * @param user_id - l'identifiant de l'utilisateur
-   * @param cb - fonction de rappel
-   */
-  static getAnnoncesByUser(user_id, cb) {
-    connection.query("SELECT * FROM annonces WHERE user_id = ?", [user_id], (err, results) => {
-      cb(err, results);
-    });
-  }
 }
 
 export default User;

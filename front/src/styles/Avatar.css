@@ -3,8 +3,8 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid #0d7f90;
-  box-shadow: -1px 1px 9px 0px #0d7f90e3;
+  border: 2px solid var(--text-secondary);
+  box-shadow: -1px 1px 9px 0px var(--shadow);
 }
 .profil-img img {
   object-fit: cover;

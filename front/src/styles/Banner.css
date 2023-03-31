@@ -6,7 +6,7 @@
   overflow: hidden;
   max-height: 270px;
   margin: 10px;
-  border: 2px solid #0d7f90;
+  border: 2px solid var(--text-secondary);
 }
 .banner img {
   object-fit: cover;

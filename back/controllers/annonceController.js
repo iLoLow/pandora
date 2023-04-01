@@ -20,6 +20,15 @@ export const getAllAnnonces = async (req, res) => {
   }
 };
 
+export const getLastAnnonces = async (req, res) => {
+  try {
+    const annonce = await Annonce.getLast({ limit: 1 });
+    res.status(200).json(annonce);
+  } catch (error) {
+    res.status(500).json({ message: "Impossible de récupérer l'annonce" });
+  }
+};
+
 export const getAnnoncesByUser = async (req, res) => {
   try {
     const annonces = await Annonce.getAllByUser(req.params.userId);

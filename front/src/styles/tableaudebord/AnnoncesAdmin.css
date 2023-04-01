@@ -38,7 +38,7 @@
   display: grid;
   grid-template-columns: 100px 0.5fr 1fr 40px;
   grid-template-rows: 100px;
-  margin-bottom: 20px;
+  margin-top: 15px;
   border: 1px solid var(--text-secondary);
   border-radius: 10px;
   overflow: hidden;

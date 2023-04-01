@@ -58,6 +58,15 @@ class Annonce {
     });
   }
 
+  static getLast({ limit = 1}) {
+    return new Promise((resolve, reject) => {
+      connection.query(`SELECT * FROM Annonces ORDER BY updated_at DESC LIMIT ${limit}`, (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      });
+    });
+  }
+
   /**
    * Il renvoie une promesse qui se résout en un tableau de toutes les annonces appartenant à un
    * utilisateur

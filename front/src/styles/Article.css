@@ -5,6 +5,7 @@
   margin-block: 20px;
   box-shadow: -1px 1px 9px 0px var(--shadow);
   max-width: 900px;
+  width: 100%;
 }
 .articleTitre {
   text-align: center;

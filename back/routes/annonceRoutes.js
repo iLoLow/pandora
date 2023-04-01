@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { multerStorage } from "../middlewares/multer.js";
 import { verifyToken } from "../middlewares/auth.js";
-import { createAnnonce, getAllAnnonces, getAnnoncesByUser, getAnnonce, updateAnnonce, deleteAnnonce } from "../controllers/annonceController.js";
+import { createAnnonce, getAllAnnonces, getLastAnnonces, getAnnoncesByUser, getAnnonce, updateAnnonce, deleteAnnonce } from "../controllers/annonceController.js";
 
 const router = new Router();
 
 router.post("/", verifyToken, multerStorage.single("image"), createAnnonce);
 router.get("/", getAllAnnonces);
+router.get("/last", getLastAnnonces);
 router.get("/user/:userId", verifyToken, getAnnoncesByUser);
 router.get("/:id", getAnnonce);
 router.patch("/:id", verifyToken, multerStorage.single("image"), updateAnnonce);

@@ -13,6 +13,7 @@ function Annonces() {
       try {
         const responseUsers = await fetch("/api/users");
         const datasUsers = await responseUsers.json();
+
         const response = await fetch("/api/annonces");
         const datas = await response.json();
 
@@ -36,7 +37,7 @@ function Annonces() {
       <section className="annonces">
         <h2 className="titleAnnonces">Annonces du Serveur</h2>
 
-        {annonces && annonces.map((annonce, k) => <Article key={k} annonce={annonce} />)}
+        {annonces.length > 0 && annonces.map((annonce, k) => <Article key={k} annonce={annonce} />)}
       </section>
     </>
   );

@@ -11,21 +11,10 @@ function Annonces() {
   useEffect(() => {
     (async () => {
       try {
-        const responseUsers = await fetch("/api/users");
-        const datasUsers = await responseUsers.json();
-
         const response = await fetch("/api/annonces");
         const datas = await response.json();
 
-        const newAnnonces = datas.map((data) => {
-          const user = datasUsers.find((user) => user.user_id === data.user_id);
-          return {
-            ...data,
-            author: user.username,
-            avatar_url: user.avatar_url,
-          };
-        });
-        setAnnonces(newAnnonces);
+        setAnnonces(datas);
       } catch (error) {
         navigate("/erreur");
       }

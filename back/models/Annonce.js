@@ -31,39 +31,30 @@ class Annonce {
   }
 
   /**
-   * Il renvoie une promesse qui se résout en résultat d'une requête qui sélectionne toutes les colonnes
-   * de la table Annonces où l'id est égal à l'id passé en paramètre
-   * @param id - l'identifiant de l'annonce que vous souhaitez obtenir
-   * @returns Le résultat de la requête.
-   */
-  static get(id) {
-    return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM Annonces WHERE id = ?", [id], (err, result) => {
-        if (err) reject(err);
-        resolve(result);
-      });
-    });
-  }
-
-  /**
    * Récupère toutes les annonces de la base de données
    * @returns Une promesse
    */
   static getAll() {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM Annonces ORDER BY updated_at DESC", (err, result) => {
-        if (err) reject(err);
-        resolve(result);
-      });
+      connection.query(
+        "SELECT annonces.*, users.username, users.avatar_url FROM annonces INNER JOIN users ON annonces.user_id = users.user_id ORDER BY annonces.updated_at DESC",
+        (err, result) => {
+          if (err) reject(err);
+          resolve(result);
+        }
+      );
     });
   }
 
-  static getLast({ limit = 1}) {
+  static getLast({ limit = 1 }) {
     return new Promise((resolve, reject) => {
-      connection.query(`SELECT * FROM Annonces ORDER BY updated_at DESC LIMIT ${limit}`, (err, result) => {
-        if (err) reject(err);
-        resolve(result);
-      });
+      connection.query(
+        `SELECT annonces.*, users.username, users.avatar_url FROM Annonces INNER JOIN users ON annonces.user_id = users.user_id ORDER BY updated_at DESC LIMIT ${limit}`,
+        (err, result) => {
+          if (err) reject(err);
+          resolve(result);
+        }
+      );
     });
   }
 

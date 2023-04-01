@@ -38,15 +38,6 @@ export const getAnnoncesByUser = async (req, res) => {
   }
 };
 
-export const getAnnonce = async (req, res) => {
-  try {
-    const annonce = await Annonce.get(req.params.id);
-    res.status(200).json(annonce);
-  } catch (error) {
-    res.status(500).json({ message: "Impossible de récupérer l'annonce" });
-  }
-};
-
 export const updateAnnonce = async (req, res) => {
   console.log(req.body);
   const { title, description, image_url } = req.body;

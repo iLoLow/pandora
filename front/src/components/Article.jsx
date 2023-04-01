@@ -17,7 +17,7 @@ function Article({ annonce }) {
         <div className="articleFooter">
           <div className="articleAuteur">
             <Avatar avatarUrl={annonce.avatar_url} />
-            <p>{annonce.author}</p>
+            <p>{annonce.username}</p>
           </div>
           <div className="articleDate">
             <p>{"Créé le " + moment(annonce.created_at).format("DD/MM/YYYY à HH:mm")}</p>

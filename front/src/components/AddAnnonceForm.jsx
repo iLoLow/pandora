@@ -26,7 +26,6 @@ function AddAnnonceForm({ reloadAnnonces = () => {} }) {
         formData.append(value, validatedAnnonces[value]);
       }
 
-      //formData.append("image_url", "/assets/" + values.image.name);
       formData.append("user_id", user_id);
 
       const savedAnnonceResponse = await fetch("/api/annonces", {
@@ -39,7 +38,6 @@ function AddAnnonceForm({ reloadAnnonces = () => {} }) {
 
       if (savedAnnonce) {
         reloadAnnonces();
-        //navigate("/tableaudebord/annonces");
       }
     } catch (error) {
       const errors = error.inner.reduce((acc, error) => {

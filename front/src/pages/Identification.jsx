@@ -6,6 +6,7 @@ import { setLogin } from "../state";
 import * as yup from "yup";
 import Dropzone from "react-dropzone";
 import { registerValidationSchema } from "../utils/schemasValidation";
+import Button from "../components/Button";
 
 function Identification() {
   document.title = "Pandora RP";
@@ -150,7 +151,7 @@ function Identification() {
             </Dropzone>
           </>
         )}
-        <button type="submit">{isLogin ? "Se connecter" : "S'inscrire"}</button>
+        <Button type="submit" children={isLogin ? "Se connecter" : "S'inscrire"} />
       </form>
       <div
         className="linkBtn"

@@ -1,4 +1,5 @@
 import "../styles/AnnonceForm.css";
+import Button from "../components/Button";
 
 import Dropzone from "react-dropzone";
 
@@ -40,7 +41,7 @@ function AnnonceForm({ values, setValues, errors, handleSubmit = () => {} }) {
           </div>
         )}
       </Dropzone>
-      <button type="submit">Valider</button>
+      <Button type="submit" children="Valider" />
     </form>
   );
 }

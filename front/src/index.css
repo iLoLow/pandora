@@ -23,7 +23,7 @@ body {
 }
 
 :root {
-  --background: #efefef;
+  --background: #e1e1e1;
   --text-primary: black;
   --text-secondary: #0d7f90;
   --accent: #0d7f90;
@@ -33,7 +33,7 @@ body {
 }
 [data-theme="dark"] {
   --background: #080c1d;
-  --text-primary: white;
+  --text-primary: rgb(224, 219, 219);
 }
 a {
   color: inherit;
@@ -48,7 +48,6 @@ a:hover {
   background-color: var(--background);
   display: flex;
   flex-direction: column;
-
   flex: 1 1;
 }
 .main {

@@ -7,7 +7,7 @@ const router = new Router();
 
 router.post("/", verifyToken, multerStorage.single("image"), createAnnonce);
 router.get("/", getAllAnnonces);
-router.get("/:userId", verifyToken, getAnnoncesByUser);
+router.get("/user/:userId", verifyToken, getAnnoncesByUser);
 router.get("/:id", getAnnonce);
 router.patch("/:id", verifyToken, multerStorage.single("image"), updateAnnonce);
 router.delete("/:id", verifyToken, deleteAnnonce);

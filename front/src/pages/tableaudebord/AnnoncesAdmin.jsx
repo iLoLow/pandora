@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import "../../styles/tableaudebord/AnnoncesAdmin.css";
 import AddAnnonceForm from "../../components/AddAnnonceForm";
 import ModifyAnnonceForm from "../../components/ModifyAnnonceForm";
+import { useNavigate } from "react-router-dom";
+import { setLogout } from "../../state";
+import { useDispatch } from "react-redux";
 
 function AnnoncesAdmin() {
   const user = useSelector((state) => state.user) || {};
@@ -11,6 +14,8 @@ function AnnoncesAdmin() {
   const [addAnnonce, setAddAnnonce] = useState(false);
   const [editAnnonceIndex, setEditAnnonceIndex] = useState(-1);
   const [editAnnonce, setEditAnnonce] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const getAnnonces = async () => {
     try {
@@ -19,13 +24,15 @@ function AnnoncesAdmin() {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).catch((error) => {
-        console.log(error);
       });
 
       const data = await response.json();
+      
+      if (data.error) {
+        dispatch(setLogout());
+        navigate("/identification");
+      }
       setAnnonces(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

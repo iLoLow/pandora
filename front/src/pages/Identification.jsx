@@ -112,7 +112,7 @@ function Identification() {
 
       if (loggedInUser) {
         dispatch(setLogin({ user: loggedInUser.user, token: loggedInUser.token }));
-        navigate("/");
+        navigate("/tableaudebord");
       }
     } catch (e) {
       const errors = e.inner.reduce((acc, error) => {

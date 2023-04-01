@@ -1,15 +1,16 @@
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import "../styles/TableauDeBord.css";
 import { Routes, Route } from "react-router-dom";
 import ProfilAdmin from "./tableaudebord/ProfilAdmin";
 import AnnoncesAdmin from "./tableaudebord/AnnoncesAdmin";
 import BoutiqueAdmin from "./tableaudebord/BoutiqueAdmin";
+import AccueilAdmin from "./tableaudebord/AccueilAdmin";
 
 function TableauDeBord() {
   document.title = "Tableau de bord";
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const getUser = async (userId) => {
     await fetch("api/user/" + { userId }, {
@@ -17,6 +18,26 @@ function TableauDeBord() {
       body: userId,
     });
   };
+
+
+  useEffect(() => {
+
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsOpen(false);
+      } else {
+        setIsOpen(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  
+  }, []);
+
   return (
     <div className="tableauDeBordWrapper">
       <aside className={isOpen ? "tableauDeBordAside" : "tableauDeBordAside tableauDeBordAsideSmall"}>
@@ -29,6 +50,14 @@ function TableauDeBord() {
             </span>
           </div>
         </div>
+        <NavLink to="/tableaudebord">
+          <span className="tableauDeBordIcone">
+            <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path d="M416 174.74V48h-80v58.45L256 32 0 272h64v208h144V320h96v160h144V272h64l-96-97.26z" />
+            </svg>
+          </span>
+          <span>accueil</span>
+        </NavLink>
         <NavLink to="/tableaudebord/profil">
           <span className="tableauDeBordIcone">
             <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -57,9 +86,9 @@ function TableauDeBord() {
           <span>boutique</span>
         </NavLink>
       </aside>
-      {/* <span style={isOpen ? { width: "200px", transition: "width 250ms ease-in-out" } : { width: "60px" }}></span> */}
       <section className={isOpen ? "tableauDeBordBody" : "tableauDeBordBody  tableauDeBordBodySmall"}>
         <Routes>
+          <Route path="/" element={<AccueilAdmin />} />
           <Route path="/profil" element={<ProfilAdmin />} />
           <Route path="/annonces" element={<AnnoncesAdmin />} />
           <Route path="/boutique" element={<BoutiqueAdmin />} />

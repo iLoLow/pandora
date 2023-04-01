@@ -4,9 +4,24 @@ import Banner from "../components/Banner";
 import BarreReseaux from "../components/BarreReseaux";
 import "../styles/Accueil.css";
 import BannerDev from "../assets/SOYEZ_Laurent_Developpeur_WEB.gif";
+import { useState, useEffect } from "react";
 
 function Accueil() {
   document.title = "Pandora RP";
+
+  const [annonces, setAnnonces] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch("/api/annonces/last");
+        const data = await response.json();
+        setAnnonces(data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
   return (
     <>
@@ -20,7 +35,7 @@ function Accueil() {
         <button className="btn">
           <Link to="/rejoindre">Rejoins-nous</Link>
         </button>
-        {/* <Article  /> */}{" "}
+        {annonces && <Article annonce={annonces[0]} />}
         <div className="banniereDev">
           <img src={BannerDev} alt="banner dev" />
         </div>

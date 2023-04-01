@@ -48,7 +48,7 @@ export const login = async (req, res, next) => {
 
     // Création du token
     const token = jwt.sign({ userId: user.user_id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: 86400, // 24 heures
+      expiresIn: process.env.JWT_EXPIRES_IN, // Expiration du token dans les variables d'environnement
     });
 
     // On supprime les propriétés de l'utilisateur pour ne pas les renvoyer vers le front

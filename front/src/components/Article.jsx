@@ -3,6 +3,11 @@ import Avatar from "./Avatar";
 import moment from "../utils/moment";
 
 function Article({ annonce }) {
+
+  if (!annonce) {
+    return
+  }
+
   return (
     <>
       <article className="article">

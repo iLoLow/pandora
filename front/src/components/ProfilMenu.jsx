@@ -26,6 +26,7 @@ function ProfilMenu({ user }) {
             Tableau de bord
           </Link>
           <Link
+            to="/"
             onClick={() => {
               setIsOpen(!isOpen);
               dispatch(setLogout());

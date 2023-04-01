@@ -33,10 +33,6 @@ app.use(cors());
 // journalisation pour Express (logs).
 app.use(morgan("dev"));
 
-// Définition du dossier de build du front (React)
-
-app.use(Express.static(path.join(__dirname, "../front/dist")));
-
 // Définition de la route par défaut pour les assets
 app.use("/assets", Express.static(path.join(__dirname, "public/assets")));
 
@@ -48,6 +44,17 @@ app.use("/api/users", userRoutes);
 
 // Définition de la route annonce
 app.use("/api/annonces", annonceRoutes);
+
+// Attention ces routes doivent être définies après les routes de l'api !!! (sinon elles seront prioritaires)
+// Définition du dossier de build du front (React)
+app.use(Express.static(path.join(__dirname, "../front/dist")));
+
+// Redirection vers le fichier index.html
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../front/dist/index.html"), (err) => {
+    if (err) res.status(500).json(err);
+  });
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

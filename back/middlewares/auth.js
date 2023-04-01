@@ -6,7 +6,7 @@ export const verifyToken = (req, res, next) => {
 
     // vérifie si le token est présent
     if (!token) {
-      return res.status(403).json({ message: "Vous n'êtes pas autorisé, veuillez vous connecter." });
+      return res.status(403).json({ message: "Vous n'êtes pas autorisé, veuillez vous connecter.", code: 403 });
     }
 
     if (token.startsWith("Bearer ")) {
@@ -14,9 +14,16 @@ export const verifyToken = (req, res, next) => {
       token = token.slice(7, token.length).trimLeft();
     }
     // Vérifie si le token est valide et non expiré
-    req.user = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    next();
-  } catch (e) {
+
+    jwt.verify(token, process.env.JWT_SECRET, { algorithms: ["HS256"] }, (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ message: "Vous n'êtes pas autorisé, veuillez vous connecter.", code: 403 });
+        next();
+      }
+      return (req.user = decoded);
+      next();
+    });
+  } catch (error) {
     res.status(500).json({ message: "Autorisation échouée, veuillez vous connecter." });
   }
 };

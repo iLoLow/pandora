@@ -54,7 +54,7 @@ function ModifyAnnonceForm({ annonce, reloadAnnonces = () => {} }) {
 
   return (
     <div className="annonceFormTitle">
-      <h2>Modifier une annonce</h2>
+      <h2>Modifier une annonce :</h2>
       <AnnonceForm values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleModifyAnnonceSubmit(e)} />;
     </div>
   );

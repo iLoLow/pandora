@@ -14,15 +14,18 @@ function AnnoncesAdmin() {
 
   const getAnnonces = async () => {
     try {
-      const response = await fetch("/api/annonces/" + user.user_id, {
+      const response = await fetch("/api/annonces/user/" + user.user_id, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
+      }).catch((error) => {
+        console.log(error);
       });
 
       const data = await response.json();
       setAnnonces(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +73,7 @@ function AnnoncesAdmin() {
       {/* add annonce */}
       {addAnnonce && <AddAnnonceForm reloadAnnonces={handleReload} />}
 
-      {annonces &&
+      {annonces.length > 0 &&
         annonces.map((annonce, index) => (
           <div key={annonce.id}>
             <div className="tableauAnnonce">

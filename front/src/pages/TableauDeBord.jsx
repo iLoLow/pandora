@@ -7,6 +7,8 @@ import AnnoncesAdmin from "./tableaudebord/AnnoncesAdmin";
 import BoutiqueAdmin from "./tableaudebord/BoutiqueAdmin";
 
 function TableauDeBord() {
+  document.title = "Tableau de bord";
+
   const [isOpen, setIsOpen] = useState(false);
 
   const getUser = async (userId) => {

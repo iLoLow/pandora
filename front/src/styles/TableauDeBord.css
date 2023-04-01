@@ -65,6 +65,7 @@
   padding: 30px;
   margin-left: 200px;
   transition: margin-left 250ms ease-in-out;
+  width: 100%;
 }
 
 .tableauDeBordBody.tableauDeBordBodySmall {

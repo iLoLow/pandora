@@ -6,12 +6,12 @@ function AnnonceForm({ values, setValues, errors, handleSubmit = () => {} }) {
   return (
     <form className="formAnnonce" method="POST" onSubmit={handleSubmit}>
       <form-group>
-        <label htmlFor="title">Titre</label>
+        <label htmlFor="title">Titre :</label>
         <input type="text" name="title" id="title" value={values.title} onChange={(e) => setValues({ ...values, title: e.target.value })} />
         {errors.title && <small className="errorSmall">{errors.title}</small>}
       </form-group>
       <form-group>
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">Description :</label>
         <textarea
           name="description"
           id="description"

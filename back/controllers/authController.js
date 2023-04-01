@@ -54,8 +54,6 @@ export const login = async (req, res, next) => {
     // On supprime les propriétés de l'utilisateur pour ne pas les renvoyer vers le front
     delete user.id;
     delete user.password;
-    delete user.created_at;
-    delete user.updated_at;
 
     res.status(200).json({ user, token });
   } catch (err) {

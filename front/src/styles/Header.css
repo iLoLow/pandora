@@ -34,7 +34,7 @@
 
 .header nav {
   display: flex;
-  gap: 25px;
+  gap: 20px;
   font-weight: 700;
   padding-inline: 20px;
   align-items: center;

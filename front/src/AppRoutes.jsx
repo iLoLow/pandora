@@ -5,6 +5,7 @@ import Erreur from "./pages/Erreur";
 import Accueil from "./pages/Accueil";
 import Identification from "./pages/Identification";
 import Rejoindre from "./pages/Rejoindre";
+import Partenariat from "./pages/Partenariat";
 import TableauDeBord from "./pages/TableauDeBord";
 
 function AppRoutes() {
@@ -14,6 +15,7 @@ function AppRoutes() {
       <Route path="/annonces" element={<Annonces />} />
       <Route path="/rejoindre" element={<Rejoindre />} />
       <Route path="/boutique" element={<Boutique />} />
+      <Route path="/partenariat" element={<Partenariat />} />
       <Route path="/identification" element={<Identification />} />
       <Route path="/tableaudebord/*" element={<TableauDeBord />} />
       <Route path="*" element={<Erreur />} />

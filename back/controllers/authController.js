@@ -18,13 +18,13 @@ export const register = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     User.create(user_id, username, email, hashedPassword, avatar_url, (err) => {
       if (err) {
-        return res.status(400).json({ message: "Impossible de créer l'utilisateur avec cet email: " + email });
+        return res.status(400).json({ error: "Impossible de créer l'utilisateur avec cet email: " + email, code: 400 });
         next();
       }
-      res.status(201).json({ message: "Utilisateur créé" });
+      res.status(201).json({ message: "Votre compte a bien été créé. Vous pouvez maintenant vous connecter.", code: 201 });
     });
   } catch (err) {
-    return res.status(500).json({ message: "Erreur lors de la création de l'utilisateur" });
+    return res.status(500).json({ error: "Erreur lors de la création de l'utilisateur", code: 500 });
     next();
   }
 };
@@ -37,12 +37,12 @@ export const login = async (req, res, next) => {
     const user = await User.getByEmail(email);
 
     // Si l'utilisateur n'existe pas
-    if (!user) return res.status(400).json({ message: "Email ou mot de passe incorrect" });
+    if (!user) return res.status(400).json({ error: "Email ou mot de passe incorrect", code: 400 });
 
     // On vérifie le mot de passe
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
-      return res.status(400).json({ message: "Email ou mot de passe incorrect" });
+      return res.status(400).json({ error: "Email ou mot de passe incorrect", code: 400 });
       next();
     }
 
@@ -55,9 +55,9 @@ export const login = async (req, res, next) => {
     delete user.id;
     delete user.password;
 
-    res.status(200).json({ user, token });
+    res.status(200).json({ message: "Connexion réussi.", user, token, code: 200 });
   } catch (err) {
-    res.status(500).json({ message: "Erreur lors de la connexion de l'utilisateur" });
+    res.status(500).json({ error: "Erreur lors de la connexion de l'utilisateur", code: 500 });
     next();
   }
 };

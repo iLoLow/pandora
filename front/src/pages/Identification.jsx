@@ -7,6 +7,7 @@ import * as yup from "yup";
 import Dropzone from "react-dropzone";
 import { registerValidationSchema } from "../utils/schemasValidation";
 import Button from "../components/Button";
+import useToast from "../hooks/useToast";
 
 function Identification() {
   document.title = "Pandora RP";
@@ -26,8 +27,7 @@ function Identification() {
   const isSignup = formType === "signUp";
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  
+  const notify = useToast();
 
   // Enregistrement d'un nouvel utilisateur
   const register = async () => {
@@ -49,8 +49,14 @@ function Identification() {
 
       const savedUser = await savedUserResponse.json();
 
+      if (savedUser.code === 400 || savedUser.code === 500) {
+        notify("error", savedUser.error);
+        return;
+      }
+
       if (savedUser) {
         setFormType("login");
+        notify("success", savedUser.message);
       }
     } catch (e) {
       const errors = e.inner.reduce((acc, error) => {
@@ -86,9 +92,15 @@ function Identification() {
 
       const loggedInUser = await loggedInResponse.json();
 
+      if (loggedInUser.code === 400 || loggedInUser.code === 500) {
+        notify("error", loggedInUser.error);
+        return;
+      }
+
       if (loggedInUser) {
         dispatch(setLogin({ user: loggedInUser.user, token: loggedInUser.token }));
         navigate("/tableaudebord");
+        notify("success", loggedInUser.message);
       }
     } catch (e) {
       const errors = e.inner.reduce((acc, error) => {

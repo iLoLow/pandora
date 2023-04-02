@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import { setLogout } from "../state";
 import { useDispatch } from "react-redux";
 import Avatar from "./Avatar";
+import useToast from "../hooks/useToast";
 
 function ProfilMenu({ user }) {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+  const notify = useToast();
 
   const openHandleMenu = () => {
     setIsOpen(!isOpen);
@@ -30,6 +32,7 @@ function ProfilMenu({ user }) {
             onClick={() => {
               setIsOpen(!isOpen);
               dispatch(setLogout());
+              notify("info", "Vous êtes déconnecté");
             }}
           >
             Déconnexion

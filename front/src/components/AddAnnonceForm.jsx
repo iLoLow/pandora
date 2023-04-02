@@ -1,7 +1,9 @@
 import { useState } from "react";
 import AnnonceForm from "./AnnonceForm";
 import { annonceValidationSchema } from "../utils/schemasValidation";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import useToast from "../hooks/useToast";
+import { useNavigate } from "react-router-dom";
 
 function AddAnnonceForm({ reloadAnnonces = () => {} }) {
   const initialValues = {
@@ -15,6 +17,9 @@ function AddAnnonceForm({ reloadAnnonces = () => {} }) {
   const token = useSelector((state) => state.token) || "";
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
+  const notify = useToast();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const createAnnonce = async () => {
     try {
@@ -36,7 +41,18 @@ function AddAnnonceForm({ reloadAnnonces = () => {} }) {
 
       const savedAnnonce = await savedAnnonceResponse.json();
 
+      if (savedAnnonce.code === 500) {
+        notify("error", savedAnnonce.error);
+      }
+
+      if (savedAnnonce.code === 403) {
+        notify("error", savedAnnonce.error);
+        dispatch(setLogout());
+        navigate("/identification");
+      }
+
       if (savedAnnonce) {
+        notify("success", savedAnnonce.message);
         reloadAnnonces();
       }
     } catch (error) {

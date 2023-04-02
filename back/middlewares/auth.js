@@ -22,9 +22,8 @@ export const verifyToken = (req, res, next) => {
       req.user = decoded;
       next();
     });
-
   } catch (error) {
-    res.status(500).json({ error: "Autorisation échouée, veuillez vous connecter." });
+    res.status(500).json({ error: "Autorisation échouée, veuillez vous connecter.", code: 500 });
     next();
   }
 };

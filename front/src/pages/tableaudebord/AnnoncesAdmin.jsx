@@ -6,6 +6,7 @@ import ModifyAnnonceForm from "../../components/ModifyAnnonceForm";
 import { useNavigate } from "react-router-dom";
 import { setLogout } from "../../state";
 import { useDispatch } from "react-redux";
+import useToast from "../../hooks/useToast";
 
 function AnnoncesAdmin() {
   const user = useSelector((state) => state.user) || {};
@@ -16,6 +17,7 @@ function AnnoncesAdmin() {
   const [editAnnonce, setEditAnnonce] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const notify = useToast();
 
   const getAnnonces = async () => {
     try {
@@ -27,8 +29,13 @@ function AnnoncesAdmin() {
       });
 
       const data = await response.json();
-      
-      if (data.error) {
+
+      if (data.code === 500) {
+        notify("error", data.error);
+      }
+
+      if (data.code === 403) {
+        notify("error", data.error);
         dispatch(setLogout());
         navigate("/identification");
       }
@@ -52,7 +59,17 @@ function AnnoncesAdmin() {
           },
         });
         const data = await response.json();
-        console.log(data);
+        if (data.code === 500) {
+          notify("error", data.error);
+        }
+
+        if (data.code === 403) {
+          notify("error", data.error);
+          dispatch(setLogout());
+          navigate("/identification");
+        }
+
+        notify("success", data.message);
         setAnnonces(annonces.filter((annonce) => annonce.id !== id));
       } catch (error) {
         console.log(error);

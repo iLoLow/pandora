@@ -2,6 +2,10 @@ import { useState } from "react";
 import AnnonceForm from "./AnnonceForm";
 import { annonceModifyValidationSchema } from "../utils/schemasValidation";
 import { useSelector } from "react-redux";
+import useToast from "../hooks/useToast";
+import { useDispatch } from "react-redux";
+import { setLogout } from "../state";
+import { useNavigate } from "react-router-dom";
 
 function ModifyAnnonceForm({ annonce, reloadAnnonces = () => {} }) {
   const initialValues = {
@@ -14,6 +18,9 @@ function ModifyAnnonceForm({ annonce, reloadAnnonces = () => {} }) {
   const token = useSelector((state) => state.token) || "";
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const notify = useToast();
 
   const editAnnonce = async () => {
     try {
@@ -33,9 +40,19 @@ function ModifyAnnonceForm({ annonce, reloadAnnonces = () => {} }) {
 
       const savedAnnonce = await savedAnnonceResponse.json();
 
+      if (savedAnnonce.code === 500) {
+        notify("error", savedAnnonce.error);
+      }
+
+      if (savedAnnonce.code === 403) {
+        notify("error", savedAnnonce.error);
+        dispatch(setLogout());
+        navigate("/identification");
+      }
+
       if (savedAnnonce) {
         reloadAnnonces();
-        //navigate("/tableaudebord/annonces");
+        notify("success", savedAnnonce.message);
       }
     } catch (error) {
       const errors = error.inner.reduce((acc, error) => {

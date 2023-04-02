@@ -26,6 +26,8 @@ body {
   --background: #e1e1e1;
   --text-primary: black;
   --text-secondary: #0d7f90;
+  --color-form: #4aadbc29;
+  --color-main: #cbdadc;
   --accent: #0d7f90;
   --shadow: #0d7f90e3;
   --red: rgb(149, 8, 8);
@@ -34,6 +36,9 @@ body {
 [data-theme="dark"] {
   --background: #080c1d;
   --text-primary: rgb(224, 219, 219);
+  --color-form: rgba(255, 255, 255, 0.034);
+  --color-main: #080c1d;
+  --accent: #04deff;
 }
 a {
   color: inherit;
@@ -56,7 +61,24 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   margin-top: 70px;
+  background: var(--color-main);
 }
+
+/* Custom message React Toastify */
+.toastify {
+  margin-top: 80px;
+}
+.toastMessage {
+  background: var(--color-main) !important;
+  box-shadow: -1px 1px 9px 0px var(--shadow) !important;
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  text-transform: capitalize !important;
+}
+.Toastify__close-button {
+  color: var(--text-primary) !important;
+}
+
 @media screen and (max-width: 768px) {
   .main {
     margin-top: 60px;

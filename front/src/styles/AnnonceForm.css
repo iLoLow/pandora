@@ -6,7 +6,7 @@
   border: 2px solid var(--text-secondary);
   box-shadow: -1px 1px 9px 0px var(--shadow);
   border-radius: 15px;
-  background: rgba(255, 255, 255, 0.034);
+  background: var(--color-form);
 }
 .formAnnonce label {
   color: var(--text-primary);

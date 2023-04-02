@@ -30,7 +30,7 @@ function Accueil() {
         <h1 className="presentationTitre">Pandora RP - Serveur GTA RP</h1>
         <Banner />
         <div className="presentationDescription">
-          <p>Bienvenue sur notre site de roleplay GTA 5.</p>
+          <h2>Bienvenue sur notre site de roleplay GTA 5.</h2>
           <p>Pandora RP est un serveur WhiteList</p>
         </div>
         <BarreReseaux />

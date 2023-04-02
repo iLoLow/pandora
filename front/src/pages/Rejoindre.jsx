@@ -6,13 +6,13 @@ function Rejoindre() {
     <section className="rejoindre">
       <h2 className="rejoindreTitre">Nous Rejoindre</h2>
       <div className="rejoindreTexte">
-        <p>Tu cherches un serveur GTA RP avec une vrai expérience roleplay et du jamais vue sur GTA RP?</p>
+        <h3>Tu cherches un serveur GTA RP avec une vrai expérience roleplay et du jamais vue sur GTA RP?</h3>
         <p>
-          Si tu estimes que ton RP est sérieux, dynamique ou inventif, n'hésite plus et rejoins nous sur Pandora RP! ( WL ) 🌴 Le staff est réactif et posé, avec un mapping et un
-          système RP unique.
+          Plongez dans une expérience de jeu immersive et conviviale avec Pandora RP, le serveur RP GTA 5 qui allie sérieux, dynamisme et inventivité. Rejoignez notre communauté en
+          obtenant votre place dans notre White List et vivez des aventures uniques dans un environnement de jeu réaliste. Rejoignez-nous dès maintenant pour découvrir un monde de
+          possibilités infinies !
         </p>
-        <p>Rejoints vite le serveur Discord pour demander ton accès !</p>
-        <p>Nous espérons t'avoir convaincue de nous rejoindre et t'attendons que tu rejoignes le projet pour jouer ensemble !</p>
+        <p>Pour faire partie de l'aventure, rejoins-nous sur Discord.</p>
       </div>
 
       <BarreReseaux />

@@ -4,7 +4,8 @@ import Banner from "../components/Banner";
 import "../styles/Accueil.css";
 import BannerDev from "../assets/SOYEZ_Laurent_Developpeur_WEB.gif";
 import { useState, useEffect } from "react";
-import Button from "../components/Button";
+
+import BarreReseaux from "../components/BarreReseaux";
 
 function Accueil() {
   document.title = "Pandora RP";
@@ -32,7 +33,7 @@ function Accueil() {
           <p>Bienvenue sur notre site de roleplay GTA 5.</p>
           <p>Pandora RP est un serveur WhiteList</p>
         </div>
-        <Button children="Rejoins-nous" />
+        <BarreReseaux />
         {annonces && <Article annonce={annonces[0]} />}
         <div className="banniereDev">
           <img src={BannerDev} alt="banner dev" />

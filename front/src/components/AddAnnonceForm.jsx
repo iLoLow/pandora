@@ -5,13 +5,15 @@ import { useSelector, useDispatch } from "react-redux";
 import useToast from "../hooks/useToast";
 import { useNavigate } from "react-router-dom";
 
-function AddAnnonceForm({ reloadAnnonces = () => {} }) {
+function AddAnnonceForm({ setClose= () => {}, reloadAnnonces = () => {} }) {
   const initialValues = {
     title: "",
     description: "",
     image: null,
     image_url: "",
   };
+
+
 
   const { user_id } = useSelector((state) => state.user) || "";
   const token = useSelector((state) => state.token) || "";
@@ -53,7 +55,10 @@ function AddAnnonceForm({ reloadAnnonces = () => {} }) {
 
       if (savedAnnonce) {
         notify("success", savedAnnonce.message);
+        setValues(initialValues);
         reloadAnnonces();
+        setErrors({});
+        setClose();
       }
     } catch (error) {
       const errors = error.inner.reduce((acc, error) => {
@@ -67,9 +72,7 @@ function AddAnnonceForm({ reloadAnnonces = () => {} }) {
   const handleAddAnnonceSubmit = (e) => {
     e.preventDefault();
     createAnnonce();
-    setErrors({});
-    setValues(initialValues);
-    reloadAnnonces();
+    
   };
 
   return (

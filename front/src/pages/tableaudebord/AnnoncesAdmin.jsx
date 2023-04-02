@@ -14,7 +14,6 @@ function AnnoncesAdmin() {
   const [annonces, setAnnonces] = useState([]);
   const [addAnnonce, setAddAnnonce] = useState(false);
   const [editAnnonceIndex, setEditAnnonceIndex] = useState(-1);
-  const [editAnnonce, setEditAnnonce] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const notify = useToast();
@@ -95,7 +94,7 @@ function AnnoncesAdmin() {
       </div>
 
       {/* add annonce */}
-      {addAnnonce && <AddAnnonceForm reloadAnnonces={handleReload} />}
+      {addAnnonce && <AddAnnonceForm setClose={() => setAddAnnonce(false)} reloadAnnonces={handleReload} />}
 
       {annonces.length > 0 &&
         annonces.map((annonce, index) => (
@@ -120,7 +119,6 @@ function AnnoncesAdmin() {
                 <div
                   className="tableauAnnonceicone"
                   onClick={() => {
-                    setEditAnnonce(!editAnnonce);
                     setEditAnnonceIndex(index);
                   }}
                 >
@@ -137,7 +135,7 @@ function AnnoncesAdmin() {
                 </div>
               </div>
             </div>
-            {editAnnonce && editAnnonceIndex === index && <ModifyAnnonceForm annonce={annonce} reloadAnnonces={handleReload} />}
+            {editAnnonceIndex === index && <ModifyAnnonceForm annonce={annonce} setClose={() => setEditAnnonceIndex(-1)} reloadAnnonces={handleReload} />}
           </div>
         ))}
     </section>

@@ -7,8 +7,11 @@ import Identification from "./pages/Identification";
 import Rejoindre from "./pages/Rejoindre";
 import Partenariat from "./pages/Partenariat";
 import TableauDeBord from "./pages/TableauDeBord";
+import { useSelector } from "react-redux";
 
 function AppRoutes() {
+
+  const user = useSelector((state) => state.user);
   return (
     <Routes>
       <Route path="/" element={<Accueil />} />
@@ -17,7 +20,7 @@ function AppRoutes() {
       <Route path="/boutique" element={<Boutique />} />
       <Route path="/partenariat" element={<Partenariat />} />
       <Route path="/identification" element={<Identification />} />
-      <Route path="/tableaudebord/*" element={<TableauDeBord />} />
+      <Route path="/tableaudebord/*" element={user ? <TableauDeBord /> : <Identification />} />
       <Route path="*" element={<Erreur />} />
     </Routes>
   );

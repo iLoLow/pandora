@@ -38,10 +38,10 @@ export const annonceValidationSchema = yup.object().shape({
     .string()
     .trim()
     .required("Veuillez renseigner une description.")
-    .matches(/^[a-zA-Z0-9\s'",.;()#@€]*$/, "Les caractères spéciaux ne sont pas autorisés sauf ', ., ;, (, ), #, @, €'."),
+    .matches(/^[^<>]*$/, "Les caractères spéciaux sont autorisés sauf '<>'."),
   image: yup
     .mixed()
-    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif ou png", (value) => {
       return value && ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
     })
     .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => {

@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { setLogout } from "../state";
 import { useNavigate } from "react-router-dom";
 
-function ModifyAnnonceForm({ annonce, reloadAnnonces = () => {} }) {
+function ModifyAnnonceForm({ annonce, setClose = () => {}, reloadAnnonces = () => {} }) {
   const initialValues = {
     title: annonce.title,
     description: annonce.description,
@@ -53,6 +53,7 @@ function ModifyAnnonceForm({ annonce, reloadAnnonces = () => {} }) {
       if (savedAnnonce) {
         reloadAnnonces();
         notify("success", savedAnnonce.message);
+        setClose();
       }
     } catch (error) {
       const errors = error.inner.reduce((acc, error) => {

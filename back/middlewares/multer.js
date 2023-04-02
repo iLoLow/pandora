@@ -5,6 +5,7 @@ const MIME_TYPES = {
   "image/jpeg": "jpeg",
   "image/webp": "webp",
   "image/png": "png",
+  "image/gif": "gif",
 };
 
 const storage = multer.diskStorage({

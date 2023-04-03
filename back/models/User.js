@@ -39,9 +39,12 @@ class User {
    * @param user_id - L'user_id de l'utilisateur que vous souhaitez obtenir.
    * @param cb - fonction de rappel
    */
-  static get(user_id, cb) {
-    connection.query("SELECT * FROM users WHERE user_id = ?", [user_id], (err, result) => {
-      cb(err, result);
+  static get(user_id) {
+    return new Promise((resolve, reject) => {
+      connection.query("SELECT * FROM users WHERE user_id = ?", [user_id], (err, result) => {
+        if (err) reject(err);
+        resolve(result[0]);
+      });
     });
   }
 
@@ -79,14 +82,13 @@ class User {
    * @param password - le mot de passe que l'utilisateur a saisi dans le formulaire
    * @param cb - fonction de rappel
    */
-  static update(user_id, username, email, password, avatar_url, cb) {
-    connection.query(
-      "UPDATE users SET username = ?, email = ?, password = ?, avatar_url=?, WHERE user_id = ?",
-      [username, email, password, avatar_url, user_id],
-      (err, results) => {
-        cb(err, results);
-      }
-    );
+  static update(id, username, email, password, avatar_url) {
+    return new Promise((resolve, reject) => {
+      connection.query("UPDATE users SET username = ?, email = ?, password = ?, avatar_url=? WHERE id = ?", [username, email, password, avatar_url, id], (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      });
+    });
   }
 
   /**

@@ -66,7 +66,7 @@ class Annonce {
    */
   static getAllByUser(user_id) {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM Annonces  WHERE user_id = ? ORDER BY updated_at DESC", [user_id], (err, result) => {
+      connection.query("SELECT * FROM annonces  WHERE user_id = ? ORDER BY updated_at DESC", [user_id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
@@ -81,7 +81,7 @@ class Annonce {
    */
   static update(id, title, description, image_url) {
     return new Promise((resolve, reject) => {
-      connection.query("UPDATE Annonces SET title = ?, description = ?, image_url = ? WHERE id = ?", [title, description, image_url, id], (err, result) => {
+      connection.query("UPDATE annonces SET title = ?, description = ?, image_url = ? WHERE id = ?", [title, description, image_url, id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
@@ -95,7 +95,7 @@ class Annonce {
    */
   static delete(id) {
     return new Promise((resolve, reject) => {
-      connection.query("DELETE FROM Annonces WHERE id = ?", [id], (err, result) => {
+      connection.query("DELETE FROM annonces WHERE id = ?", [id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });

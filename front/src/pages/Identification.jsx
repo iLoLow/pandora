@@ -3,14 +3,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../state";
-import * as yup from "yup";
 import Dropzone from "react-dropzone";
-import { registerValidationSchema } from "../utils/schemasValidation";
+import { registerValidationSchema, loginValidationSchema } from "../utils/schemasValidation";
 import Button from "../components/Button";
 import useToast from "../hooks/useToast";
 
 function Identification() {
-  document.title = "Pandora RP";
 
   let initialValues = {
     username: "",
@@ -66,11 +64,6 @@ function Identification() {
       setErrors(errors);
     }
   };
-
-  const loginValidationSchema = yup.object().shape({
-    email: yup.string().trim().email().required("Veuillez renseigner une adresse email valide."),
-    password: yup.string().trim().required("Veuillez renseigner un mot de passe.").min(6, "Le mot de passe doit contenir au moins 6 caractères."),
-  });
 
   // Connexion d'un utilisateur
   const login = async () => {

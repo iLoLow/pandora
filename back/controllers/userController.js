@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import bcrypt from "bcrypt";
 
 /**
  * Il récupère tous les utilisateurs de la base de données et les renvoie dans un objet JSON
@@ -10,7 +11,7 @@ export const getAllUsers = (req, res, next) => {
   try {
     User.getAll((err, users) => {
       if (err) {
-        return res.status(500).json({ message: "Erreur interne du serveur" });
+        return res.status(500).json({ message: "Erreur interne du serveur", code: 500 });
       }
 
       for (let i = 0; i < users.length; i++) {
@@ -22,7 +23,7 @@ export const getAllUsers = (req, res, next) => {
       res.status(200).json(users);
     });
   } catch (err) {
-    res.status(500).json({ message: "Erreur interne du serveur" });
+    res.status(500).json({ error: "Erreur interne du serveur", code: 500 });
     next();
   }
 };
@@ -37,7 +38,7 @@ export const getUserById = (req, res, next) => {
   try {
     User.get(req.params.userId, (err, user) => {
       if (err) {
-        return res.status(500).json({ message: "Utilisateur non trouvé" });
+        return res.status(500).json({ error: "Utilisateur non trouvé", code: 500 });
         next();
       }
 
@@ -48,7 +49,7 @@ export const getUserById = (req, res, next) => {
       res.status(200).json(user);
     });
   } catch (err) {
-    res.status(500).json({ message: "Erreur interne du serveur" });
+    res.status(500).json({ error: "Erreur interne du serveur", code: 500 });
     next();
   }
 };
@@ -58,18 +59,36 @@ export const getUserById = (req, res, next) => {
  * @param req - l'objet de la requête
  * @param res - l'objet de réponse
  */
-export const updateUser = (req, res, next) => {
+export const updateUser = async (req, res, next) => {
   try {
-    const { username, email, password, avatar_url } = req.body;
-    User.update(req.params.userId, username, email, password, avatar_url, (err) => {
-      if (err) {
-        return res.status(500).json({ message: "Impossible de mettre à jour l'utilsateur" });
-        next();
-      }
-      res.status(200).json({ message: "Utilisateur mis à jour" });
-    });
+    const { username, email, oldPassword, password, avatar_url } = req.body;
+
+    // On recupère l'utilisateur grace à son user_id
+    const user = await User.get(req.params.userId);
+
+    // Si l'utilisateur n'existe pas
+    if (!user) return res.status(400).json({ error: "Email ou mot de passe incorrect", code: 400 });
+
+    // On vérifie que le mot de passe actuel est correct avec celui de la base de données
+    const validPassword = await bcrypt.compare(oldPassword, user.password);
+
+    // Si le mot de passe n'est pas correct
+    if (!validPassword) {
+      return res.status(400).json({ error: "Impossible de mettre à jour votre profil, Mot de passe actuel incorrect.", code: 400 });
+    }
+
+    // On hash le nouveau mot de passe
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Si l'utilisateur existe et que le mot de passe est correct
+    const savedUser = await User.update(user.id, username, email, hashedPassword, avatar_url);
+
+    if (savedUser) {
+      return res.status(200).json({ message: "Mise à jour de votre profil réussi.", code: 200 });
+    }
   } catch (err) {
-    res.status(500).json({ message: "Erreur interne du serveur" });
+    res.status(500).json({ error: "Erreur interne du serveur", code: 500 });
     next();
   }
 };
@@ -79,17 +98,16 @@ export const updateUser = (req, res, next) => {
  * @param req - L'objet de la requête.
  * @param res - l'objet de réponse
  */
-export const deleteUser = (req, res) => {
+export const deleteUser = (req, res, next) => {
   try {
     User.delete(req.params.userId, (err) => {
       if (err) {
-        return res.status(500).json({ message: "Impossible de supprimer l'utilisateur" });
-        next();
+        return res.status(500).json({ error: "Impossible de supprimer votre compte.", code: 500 });
       }
-      res.status(200).json({ message: "Utilisateur supprimé" });
+      res.status(200).json({ message: "Votre compte a été supprimer avec succès.", code: 200 });
     });
-  } catch (err) {
-    res.status(500).json({ message: "Erreur interne du serveur" });
+  } catch (error) {
+    res.status(500).json({ error: "Erreur interne du serveur", code: 500 });
     next();
   }
 };

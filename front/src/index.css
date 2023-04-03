@@ -6,6 +6,8 @@
   margin: 0;
   padding: 0;
   font-size: 16px;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
 }
 img {
   height: 100%;
@@ -30,7 +32,7 @@ body {
   --color-main: #cbdadc;
   --accent: #0d7f90;
   --shadow: #0d7f90e3;
-  --red: rgb(149, 8, 8);
+  --red: rgb(203 0 0);
   --green: rgb(3, 148, 34);
 }
 [data-theme="dark"] {

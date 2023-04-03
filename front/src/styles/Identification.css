@@ -43,7 +43,7 @@ input {
 }
 
 .errorSmall {
-  color: rgb(149, 8, 8);
+  color: var(--red);
   font-size: 0.8rem;
   margin-left: 5px;
 }
@@ -86,5 +86,5 @@ input {
 }
 
 .zone.zone-error {
-  border-color: rgb(149, 8, 8);
+  border-color: var(--red);
 }

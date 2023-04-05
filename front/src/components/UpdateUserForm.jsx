@@ -5,6 +5,7 @@ import Dropzone from "react-dropzone";
 import { updateProfilValidationSchema } from "../utils/schemasValidation";
 import Button from "../components/Button";
 import useToast from "../hooks/useToast";
+import { setLogout } from "../state";
 
 function UpdateUserForm() {
   const user = useSelector((state) => state.user);
@@ -13,9 +14,9 @@ function UpdateUserForm() {
   let initialValues = {
     username: user.username,
     email: user.email,
-    oldPassword: "",
-    password: "",
-    confirmPassword: "",
+    oldPassword: undefined,
+    password: undefined,
+    confirmPassword: undefined,
     avatar: null,
     avatar_url: user.avatar_url,
   };
@@ -28,7 +29,6 @@ function UpdateUserForm() {
 
   // Mise à jour du profil de l'utilisateur
   const updateUser = async () => {
-    console.log(values);
     try {
       const validatedFormdata = await updateProfilValidationSchema.validate(values, { abortEarly: false });
 
@@ -53,6 +53,8 @@ function UpdateUserForm() {
 
       if (savedUser) {
         notify("success", savedUser.message);
+        dispatch(setLogout());
+        navigate("/identification");
       }
     } catch (e) {
       const errors = e.inner.reduce((acc, error) => {
@@ -71,6 +73,7 @@ function UpdateUserForm() {
   return (
     <section className="sectionForm">
       <h2>Modification du profil</h2>
+      <p className="warning">Attention !!! Toutes modifications entraînera une déconnexion.</p>
       <form className="formIdentification" method="POST" onSubmit={handleSubmit}>
         <form-group>
           <label>Nom d'utilisateur :</label>
@@ -84,18 +87,30 @@ function UpdateUserForm() {
         </form-group>
         <form-group>
           <label>Mot de passe actuel :</label>
-          <input autoComplete="off" type="password" value={values.oldPassword} onChange={(e) => setValues({ ...values, oldPassword: e.target.value })} />
+          <input autoComplete="off" type="password" value={values.oldPassword} onChange={(e) => setValues({ ...values, oldPassword: e.target.value })} placeholder="Requis..." />
           {errors.oldPassword && <small className="errorSmall">{errors.oldPassword}</small>}
         </form-group>
         <form-group>
           <label>Nouveau Mot de passe :</label>
-          <input autoComplete="off" type="password" value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
+          <input
+            autoComplete="off"
+            type="password"
+            value={values.password}
+            onChange={(e) => setValues({ ...values, password: e.target.value === "" ? undefined : e.target.value })}
+            placeholder="Laisser vide pour ne pas modifier votre mot de passe."
+          />
           {errors.password && <small className="errorSmall">{errors.password}</small>}
         </form-group>
         <>
           <form-group>
             <label>Confirmation du Nouveau Mot de Passe :</label>
-            <input autoComplete="off" type="password" value={values.confirmPassword} onChange={(e) => setValues({ ...values, confirmPassword: e.target.value })} />
+            <input
+              autoComplete="off"
+              type="password"
+              value={values.confirmPassword}
+              onChange={(e) => setValues({ ...values, confirmPassword: e.target.value === "" ? undefined : e.target.value })}
+              placeholder="Laisser vide pour ne pas modifier votre mot de passe."
+            />
             {errors.confirmPassword && <small className="errorSmall">{errors.confirmPassword}</small>}
           </form-group>
 

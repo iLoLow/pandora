@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import useToast from "../hooks/useToast";
 import { useNavigate } from "react-router-dom";
 
-function AddAnnonceForm({ setClose= () => {}, reloadAnnonces = () => {} }) {
+function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
   const initialValues = {
     title: "",
     description: "",
@@ -13,9 +13,7 @@ function AddAnnonceForm({ setClose= () => {}, reloadAnnonces = () => {} }) {
     image_url: "",
   };
 
-
-
-  const { user_id } = useSelector((state) => state.user) || "";
+  const { user_id, username, avatar_url } = useSelector((state) => state.user) || "";
   const token = useSelector((state) => state.token) || "";
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
@@ -34,6 +32,8 @@ function AddAnnonceForm({ setClose= () => {}, reloadAnnonces = () => {} }) {
       }
 
       formData.append("user_id", user_id);
+      formData.append("username", username);
+      formData.append("avatar_url", avatar_url);
 
       const savedAnnonceResponse = await fetch("/api/annonces", {
         method: "POST",
@@ -72,7 +72,6 @@ function AddAnnonceForm({ setClose= () => {}, reloadAnnonces = () => {} }) {
   const handleAddAnnonceSubmit = (e) => {
     e.preventDefault();
     createAnnonce();
-    
   };
 
   return (

@@ -23,10 +23,15 @@ CREATE TABLE
 CREATE TABLE
     annonces (
         id INT(11) AUTO_INCREMENT PRIMARY KEY,
-        user_id VARCHAR(255) NOT NULL,
         title VARCHAR(255) NOT NULL,
         description LONGTEXT NOT NULL,
         image_url VARCHAR(255) NOT NULL,
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        user_id VARCHAR(255) NOT NULL,
+        username VARCHAR(255) NOT NULL,
+        avatar_url VARCHAR(255) NOT NULL
     );
+
+
+        UPDATE annonces SET avatar_url = (SELECT avatar_url FROM users WHERE user_id = 'ID de l utilisateur'), username = (SELECT username FROM users WHERE user_id = 'ID de l utilisateur') WHERE user_id = 'ID de l utilisateur';

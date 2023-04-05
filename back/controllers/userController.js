@@ -77,16 +77,19 @@ export const updateUser = async (req, res, next) => {
       return res.status(400).json({ error: "Impossible de mettre à jour votre profil, Mot de passe actuel incorrect.", code: 400 });
     }
 
-    // On hash le nouveau mot de passe
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    // Si l'utilisateur existe et que le mot de passe est correct
-    const savedUser = await User.update(user.id, username, email, hashedPassword, avatar_url);
-
-    if (savedUser) {
-      return res.status(200).json({ message: "Mise à jour de votre profil réussi.", code: 200 });
+    if (password !== undefined) {
+      // On hash le nouveau mot de passe si il est différent de undefined
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      await User.update(user.id, username, email, hashedPassword, avatar_url);
+    } else {
+      await User.update(user.id, username, email, user.password, avatar_url);
     }
+
+    // On met à jour les annonces de l'utilisateur avec son nouveau username et avatar_url
+    await User.updateUserInfosOnAnnonces(user.user_id, username, avatar_url);
+
+    return res.status(200).json({ message: "Mise à jour de votre profil réussi.", code: 200 });
   } catch (err) {
     res.status(500).json({ error: "Erreur interne du serveur", code: 500 });
     next();

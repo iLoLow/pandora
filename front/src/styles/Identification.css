@@ -15,6 +15,11 @@
   line-height: 2;
   text-transform: uppercase;
 }
+.warning {
+  color: var(--red);
+  font-size: 14px;
+  text-align: center;
+}
 
 .sectionForm .formIdentification {
   display: flex;
@@ -40,6 +45,9 @@ form-group {
 input {
   padding: 5px 10px;
   border-radius: 10px;
+}
+input::placeholder {
+  font-size: 14px;
 }
 
 .errorSmall {

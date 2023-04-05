@@ -1,10 +1,10 @@
 import Annonce from "../models/Annonce.js";
 
 export const createAnnonce = async (req, res) => {
-  const { user_id, title, description, image_url } = req.body;
+  const { title, description, user_id, image_url, username, avatar_url } = req.body;
 
   try {
-    await Annonce.create(user_id, title, description, image_url);
+    await Annonce.create(title, description, image_url, user_id, username, avatar_url);
     res.status(201).json({ message: "Annonce créée", code: 201 });
   } catch (error) {
     res.status(500).json({ error: "Impossible de créer l'annonce", code: 500 });

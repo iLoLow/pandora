@@ -92,6 +92,28 @@ class User {
   }
 
   /**
+   * La fonction met à jour le nom d'utilisateur et l'URL de l'avatar d'un utilisateur dans une table de
+   * base de données appelée "annonces" en fonction de son ID utilisateur.
+   * @param user_id - L'ID utilisateur est un identifiant unique pour un utilisateur dans le système. Il
+   * est utilisé pour identifier l'utilisateur dont les informations doivent être mises à jour dans la
+   * base de données.
+   * @param username - Le nouveau nom d'utilisateur qui remplacera le nom d'utilisateur actuel dans la
+   * base de données pour le user_id spécifié.
+   * @param avatar_url - Le paramètre `avatar_url` est une chaîne qui représente l'URL de l'image de
+   * l'avatar de l'utilisateur. Cette fonction met à jour les champs `username` et `avatar_url` dans la
+   * table `annonces` pour un `user_id` spécifique.
+   * @returns Un objet Promise est renvoyé.
+   */
+  static updateUserInfosOnAnnonces(user_id, username, avatar_url) {
+    return new Promise((resolve, reject) => {
+      connection.query("UPDATE annonces SET username = ?, avatar_url = ? WHERE user_id = ?", [username, avatar_url, user_id], (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      });
+    });
+  }
+
+  /**
    * Il supprime un utilisateur de la base de données
    * @param user_id - L'identifiant de l'utilisateur que vous souhaitez supprimer.
    * @param cb - fonction de rappel

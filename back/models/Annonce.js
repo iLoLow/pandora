@@ -6,12 +6,7 @@ import connection from "../config/connectionDB.js";
  * @class Annonces
  */
 class Annonce {
-  constructor(id, title, description, image_url) {
-    this.id = id;
-    this.title = title;
-    this.description = description;
-    this.image_url = image_url;
-  }
+  constructor() {}
 
   /**
    * Il crée une nouvelle annonce dans la base de données
@@ -21,12 +16,16 @@ class Annonce {
    * @param image_url - l'url de l'image
    * @returns Le résultat de la requête.
    */
-  static create(user_id, title, description, image_url) {
+  static create(title, description, image_url, user_id, username, avatar_url) {
     return new Promise((resolve, reject) => {
-      connection.query("INSERT INTO Annonces (user_id, title, description, image_url) VALUES (?, ?, ?, ?)", [user_id, title, description, image_url], (err, result) => {
-        if (err) reject(err);
-        resolve(result);
-      });
+      connection.query(
+        "INSERT INTO annonces (title, description, image_url, user_id, username, avatar_url) VALUES (?, ?, ?, ?, ?, ?)",
+        [title, description, image_url, user_id, username, avatar_url],
+        (err, result) => {
+          if (err) reject(err);
+          resolve(result);
+        }
+      );
     });
   }
 
@@ -36,25 +35,19 @@ class Annonce {
    */
   static getAll() {
     return new Promise((resolve, reject) => {
-      connection.query(
-        "SELECT annonces.*, users.username, users.avatar_url FROM annonces INNER JOIN users ON annonces.user_id = users.user_id ORDER BY annonces.updated_at DESC",
-        (err, result) => {
-          if (err) reject(err);
-          resolve(result);
-        }
-      );
+      connection.query("SELECT * FROM annonces ORDER BY annonces.updated_at DESC", (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      });
     });
   }
 
   static getLast({ limit = 1 }) {
     return new Promise((resolve, reject) => {
-      connection.query(
-        `SELECT annonces.*, users.username, users.avatar_url FROM Annonces INNER JOIN users ON annonces.user_id = users.user_id ORDER BY updated_at DESC LIMIT ${limit}`,
-        (err, result) => {
-          if (err) reject(err);
-          resolve(result);
-        }
-      );
+      connection.query(`SELECT * FROM Annonces ORDER BY updated_at DESC LIMIT ${limit}`, (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      });
     });
   }
 
@@ -66,7 +59,7 @@ class Annonce {
    */
   static getAllByUser(user_id) {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM annonces  WHERE user_id = ? ORDER BY updated_at DESC", [user_id], (err, result) => {
+      connection.query("SELECT * FROM annonces WHERE user_id = ? ORDER BY updated_at DESC", [user_id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });

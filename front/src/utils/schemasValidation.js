@@ -45,17 +45,21 @@ export const updateProfilValidationSchema = yup.object().shape({
   password: yup
     .string()
     .trim()
-    .required("Veuillez renseigner un mot de passe")
+    .nullable(true)
     .matches(
       /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,30})/g,
       "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial."
     )
-    .notOneOf([yup.ref("oldPassword"), null], "Le nouveau mot de passe doit être différent de l'ancien."),
+    .test("notOneOf", "Le nouveau mot de passe doit être différent de l'ancien.", function (value) {
+      return value === "" || value !== this.parent.oldPassword;
+    }),
   confirmPassword: yup
     .string()
     .trim()
-    .required("Veuillez confirmer votre mot de passe.")
-    .oneOf([yup.ref("password"), null], "Les mots de passe doivent correspondre"),
+    .nullable(true)
+    .test("notOneOf", "Le nouveau mot de passe doit être différent de l'ancien.", function (value) {
+      return value === "" || value !== this.parent.oldPassword;
+    }),
   avatar: yup
     .mixed()
     .nullable(true)

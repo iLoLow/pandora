@@ -11,13 +11,13 @@
 .sectionForm h2 {
   text-align: center;
   color: var(--text-primary);
-  font-size: 2rem;
+  font-size: clamp(1rem, 3vw, 2rem);
   line-height: 2;
   text-transform: uppercase;
 }
 .warning {
   color: var(--red);
-  font-size: 14px;
+  font-size: clamp(0.5rem, 3vw, 0.8rem);
   text-align: center;
 }
 

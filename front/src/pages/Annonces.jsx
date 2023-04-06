@@ -5,6 +5,7 @@ import Article from "../components/Article";
 import "../styles/Annonces.css";
 
 function Annonces() {
+  document.title = "Annonces";
   const [annonces, setAnnonces] = useState([]);
   const navigate = useNavigate();
 

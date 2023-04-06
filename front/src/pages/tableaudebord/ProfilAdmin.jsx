@@ -105,9 +105,7 @@ function ProfilAdmin() {
 
       {/* Profil Update */}
 
-      {isOpen && (
-        <UpdateUserForm />
-      )}
+      {isOpen && <UpdateUserForm />}
     </section>
   );
 }

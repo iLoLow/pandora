@@ -1,4 +1,4 @@
-import connection from "../config/connectionDB.js";
+import connection from "../config/connectionDB.mjs";
 
 /**
  * @class User model on the database mysql

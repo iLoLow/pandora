@@ -1,4 +1,4 @@
-import connection from "../config/connectionDB.js";
+import connection from "../config/connectionDB.mjs";
 
 /**
  *  Annonces class CRUD
@@ -44,7 +44,7 @@ class Annonce {
 
   static getLast({ limit = 1 }) {
     return new Promise((resolve, reject) => {
-      connection.query(`SELECT * FROM Annonces ORDER BY updated_at DESC LIMIT ${limit}`, (err, result) => {
+      connection.query(`SELECT * FROM annonces ORDER BY updated_at DESC LIMIT ${limit}`, (err, result) => {
         if (err) reject(err);
         resolve(result);
       });

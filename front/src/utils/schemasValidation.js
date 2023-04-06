@@ -103,7 +103,7 @@ export const annonceModifyValidationSchema = yup.object().shape({
     .string()
     .trim()
     .required("Veuillez renseigner une description.")
-    .matches(/^[a-zA-Z0-9\s'",.;()#@€]*$/, "Les caractères spéciaux ne sont pas autorisés sauf ', ., ;, (, ), #, @, €'."),
+    .matches(/^[^<>]*$/, "Les caractères spéciaux ne sont pas autorisés sauf ', ., ;, (, ), #, @, €'."),
   image: yup
     .mixed()
     .nullable(true)

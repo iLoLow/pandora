@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { getAllUsers, getUserById, updateUser, deleteUser } from "../controllers/userController.js";
-import { verifyToken } from "../middlewares/auth.js";
-import { multerStorage } from "../middlewares/multer.js";
+import { getAllUsers, getUserById, updateUser, deleteUser } from "../controllers/userController.mjs";
+import { verifyToken } from "../middlewares/auth.mjs";
+import { multerStorage } from "../middlewares/multer.mjs";
 
 const router = new Router();
 

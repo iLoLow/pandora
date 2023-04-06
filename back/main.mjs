@@ -1,13 +1,14 @@
 import Express from "express";
 import * as path from "path";
+import http from "http";
 import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import { fileURLToPath } from "url";
-import userRoutes from "./routes/userRoutes.js";
-import authRoutes from "./routes/authRoutes.js";
-import annonceRoutes from "./routes/annonceRoutes.js";
+import userRoutes from "./routes/userRoutes.mjs";
+import authRoutes from "./routes/authRoutes.mjs";
+import annonceRoutes from "./routes/annonceRoutes.mjs";
 
 // Resolve dirname anf filename for es6
 const __filename = fileURLToPath(import.meta.url); // Résolution du chemin du fichier
@@ -47,15 +48,17 @@ app.use("/api/annonces", annonceRoutes);
 
 // Attention ces routes doivent être définies après les routes de l'api !!! (sinon elles seront prioritaires)
 // Définition du dossier de build du front (React)
-app.use(Express.static(path.join(__dirname, "../front/dist")));
+app.use(Express.static(path.join(__dirname, "dist/")));
 
 // Redirection vers le fichier index.html
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../front/dist/index.html"), (err) => {
+  res.sendFile(path.join(__dirname, "dist/index.html"), (err) => {
     if (err) res.status(500).json(err);
   });
 });
 
-app.listen(process.env.PORT, () => {
+const server = http.createServer(app);
+
+server.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
 });

@@ -1,11 +1,11 @@
 {
   "name": "pandora-api",
   "version": "1.0.0",
-  "type": "module",
+  "type": "commonjs",
   "description": "backend for pandora website",
-  "main": "server.js",
+  "main": "app.cjs",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon app.cjs"
   },
   "author": "ilolow",
   "license": "ISC",

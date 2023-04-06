@@ -1,4 +1,4 @@
-import Annonce from "../models/Annonce.js";
+import Annonce from "../models/Annonce.mjs";
 
 export const createAnnonce = async (req, res) => {
   const { title, description, user_id, image_url, username, avatar_url } = req.body;

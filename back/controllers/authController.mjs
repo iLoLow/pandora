@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 import bcrypt from "bcrypt";
-import User from "../models/User.js";
+import User from "../models/User.mjs";
 import jwt from "jsonwebtoken";
 
 /**

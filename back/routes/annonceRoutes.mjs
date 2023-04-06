@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { multerStorage } from "../middlewares/multer.js";
-import { verifyToken } from "../middlewares/auth.js";
-import { createAnnonce, getAllAnnonces, getLastAnnonces, getAnnoncesByUser, updateAnnonce, deleteAnnonce } from "../controllers/annonceController.js";
+import { multerStorage } from "../middlewares/multer.mjs";
+import { verifyToken } from "../middlewares/auth.mjs";
+import { createAnnonce, getAllAnnonces, getLastAnnonces, getAnnoncesByUser, updateAnnonce, deleteAnnonce } from "../controllers/annonceController.mjs";
 
 const router = new Router();
 

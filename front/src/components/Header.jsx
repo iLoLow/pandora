@@ -23,6 +23,9 @@ function Header() {
         <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/annonces">
           Annonces
         </NavLink>
+        <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/equipepandora">
+          Equipe Pandora
+        </NavLink>
         <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/rejoindre">
           Nous rejoindre
         </NavLink>

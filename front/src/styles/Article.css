@@ -17,7 +17,7 @@
 }
 .articleImg {
   border-radius: 15px;
-  max-height: 330px;
+  max-height: 500px;
   height: 100%;
   object-fit: cover;
 }
@@ -34,6 +34,13 @@
   align-items: center;
   border-top: 1px solid var(--text-secondary);
   padding-top: 15px;
+}
+.articleLike {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1;
+  max-width: 100px;
 }
 
 .articleAuteur {

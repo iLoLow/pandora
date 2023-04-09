@@ -26,12 +26,12 @@ CREATE TABLE
         title VARCHAR(255) NOT NULL,
         description LONGTEXT NOT NULL,
         image_url VARCHAR(255) NOT NULL,
+        likes INT(11) NOT NULL DEFAULT 0,
+        liked_users LONGTEXT NOT NULL DEFAULT '[]',
+        disliked_users LONGTEXT NOT NULL DEFAULT '[]',
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         user_id VARCHAR(255) NOT NULL,
         username VARCHAR(255) NOT NULL,
         avatar_url VARCHAR(255) NOT NULL
     );
-
-
-        UPDATE annonces SET avatar_url = (SELECT avatar_url FROM users WHERE user_id = 'ID de l utilisateur'), username = (SELECT username FROM users WHERE user_id = 'ID de l utilisateur') WHERE user_id = 'ID de l utilisateur';

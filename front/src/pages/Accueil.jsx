@@ -1,27 +1,26 @@
-import { Link } from "react-router-dom";
 import Article from "../components/Article";
 import Banner from "../components/Banner";
 import "../styles/Accueil.css";
 import BannerDev from "../assets/SOYEZ_Laurent_Developpeur_WEB.gif";
 import { useState, useEffect } from "react";
-
 import BarreReseaux from "../components/BarreReseaux";
+document.title = "Pandora RP";
 
 function Accueil() {
-  document.title = "Pandora RP";
-
   const [annonces, setAnnonces] = useState([]);
 
+  const fetchAnnonces = async () => {
+    try {
+      const response = await fetch("/api/annonces/last");
+      const data = await response.json();
+      setAnnonces(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch("/api/annonces/last");
-        const data = await response.json();
-        setAnnonces(data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    fetchAnnonces();
   }, []);
 
   return (
@@ -34,7 +33,7 @@ function Accueil() {
           <p>Pandora RP est un serveur WhiteList</p>
         </div>
         <BarreReseaux />
-        {annonces && <Article annonce={annonces[0]} />}
+        {annonces.length >= 1 && <Article annonce={annonces[0]} reload={fetchAnnonces} />}
         <div className="banniereDev">
           <img src={BannerDev} alt="banner dev" />
         </div>

@@ -2,7 +2,7 @@ import connection from "../config/connectionDB.mjs";
 
 /**
  *  Annonces class CRUD
- *	@description This class is used to create, read, update and delete Annonces
+ *	@description Cette classe permet de créer, récupérer, mettre à jour et supprimer des annonces
  * @class Annonces
  */
 class Annonce {
@@ -42,6 +42,30 @@ class Annonce {
     });
   }
 
+  /**
+   * Récupère une annonce de la base de données
+   * @param id - l'id de l'annonce à récupérer
+   * @returns Une promesse
+   * @description Cette méthode est utilisée pour récupérer une annonce pour l'afficher dans la page
+   * annonce
+   */
+  static getById(id) {
+    return new Promise((resolve, reject) => {
+      connection.query("SELECT * FROM annonces WHERE id = ?", [id], (err, result) => {
+        if (err) reject(err);
+        resolve(result[0]);
+      });
+    });
+  }
+
+  /**
+   * Il renvoie une promesse qui se résout en un tableau de toutes les annonces appartenant à un
+   * utilisateur
+   * @param user_id - l'identifiant de l'utilisateur qui a posté l'annonce
+   * @returns Un tableau d'objets
+   * @description Cette méthode est utilisée pour récupérer les annonces d'un utilisateur
+   * pour les afficher dans son profil
+   */
   static getLast({ limit = 1 }) {
     return new Promise((resolve, reject) => {
       connection.query(`SELECT * FROM annonces ORDER BY updated_at DESC LIMIT ${limit}`, (err, result) => {
@@ -91,6 +115,80 @@ class Annonce {
       connection.query("DELETE FROM annonces WHERE id = ?", [id], (err, result) => {
         if (err) reject(err);
         resolve(result);
+      });
+    });
+  }
+
+  /**
+   * Il met à jour la base de données avec les nouvelles valeurs des champs liked_users, disliked_users
+   * pour la ligne dont l'id est égal à l'id passé en paramètre
+   * @param id - l'id de l'annonce à mettre à jour
+   * @param visitorId - l'id de l'utilisateur qui a liké ou disliké l'annonce
+   * @param isLiked - true si l'utilisateur a liké l'annonce, false sinon
+   * @param isDisliked - true si l'utilisateur a disliké l'annonce, false sinon
+   * @returns Le résultat de la requête.
+   * @description Cette méthode est utilisée pour liker ou disliker une annonce
+   */
+  static likeOrDislike(id, visitorId, isLiked, isDisliked) {
+    return new Promise((resolve, reject) => {
+      connection.query("SELECT * FROM annonces WHERE id = ?", [id], (err, result) => {
+        if (err) reject(err);
+        const annonce = result[0];
+
+        const likedUsers = JSON.parse(annonce.liked_users);
+        const dislikedUsers = JSON.parse(annonce.disliked_users);
+
+        const isLikedUsers = !!likedUsers.find((user) => user === visitorId);
+        const isDislikedUsers = !!dislikedUsers.find((user) => user === visitorId);
+
+        const actions = {
+          like: () => {
+            if (!isDislikedUsers) {
+              likedUsers.push(visitorId);
+            }
+          },
+          dislike: () => {
+            if (!isLikedUsers) {
+              dislikedUsers.push(visitorId);
+            }
+          },
+          likeAndDislike: () => {
+            likedUsers.splice(likedUsers.indexOf(visitorId), 1);
+            dislikedUsers.push(visitorId);
+          },
+          dislikeAndLike: () => {
+            dislikedUsers.splice(dislikedUsers.indexOf(visitorId), 1);
+            likedUsers.push(visitorId);
+          },
+        };
+
+        switch (true) {
+          case isLiked && !isDisliked && !isDislikedUsers:
+            actions.like();
+            break;
+          case isDisliked && !isLiked && !isLikedUsers:
+            actions.dislike();
+            break;
+          case isDisliked && isLikedUsers:
+            actions.likeAndDislike();
+            break;
+          case isLiked && isDislikedUsers:
+            actions.dislikeAndLike();
+            break;
+        }
+
+        const updatedAt = annonce.updated_at; // !! on renvoi la date de mise à jour pour eviter la mise à jour de l'annonce pendant les likes et dislikes
+        const likedUsersToSave = JSON.stringify(likedUsers);
+        const dislikedUsersToSave = JSON.stringify(dislikedUsers);
+
+        connection.query(
+          "UPDATE annonces SET liked_users = ?, disliked_users = ?, updated_at = ? WHERE id = ?",
+          [likedUsersToSave, dislikedUsersToSave, updatedAt, id],
+          (err, result) => {
+            if (err) reject(err);
+            resolve(result);
+          }
+        );
       });
     });
   }

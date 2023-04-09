@@ -4,6 +4,7 @@ const initialState = {
   mode: "light",
   user: null,
   token: null,
+  visitorId: null,
 };
 
 export const authSlice = createSlice({
@@ -21,9 +22,12 @@ export const authSlice = createSlice({
       state.user = null;
       state.token = null;
     },
+    setVisitorId: (state, action) => {
+      state.visitorId = action.payload;
+    },
   },
 });
 
-export const { setMode, setLogin, setLogout } = authSlice.actions;
+export const { setMode, setLogin, setLogout, setVisitorId } = authSlice.actions;
 
 export default authSlice.reducer;

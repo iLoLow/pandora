@@ -1,4 +1,3 @@
-import AnnonceForm from "../components/AnnonceForm";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Article from "../components/Article";
@@ -9,17 +8,19 @@ function Annonces() {
   const [annonces, setAnnonces] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch("/api/annonces");
-        const datas = await response.json();
+  const getAnnonces = async () => {
+    try {
+      const response = await fetch("/api/annonces");
+      const datas = await response.json();
 
-        setAnnonces(datas);
-      } catch (error) {
-        navigate("/erreur");
-      }
-    })();
+      setAnnonces(datas);
+    } catch (error) {
+      navigate("/erreur");
+    }
+  };
+
+  useEffect(() => {
+    getAnnonces();
   }, []);
 
   return (
@@ -27,7 +28,7 @@ function Annonces() {
       <section className="annonces">
         <h2 className="titleAnnonces">Annonces du Serveur</h2>
 
-        {annonces.length > 0 && annonces.map((annonce, k) => <Article key={k} annonce={annonce} />)}
+        {annonces.length > 0 && annonces.map((annonce, k) => <Article reload={getAnnonces} key={k} annonce={annonce} />)}
       </section>
     </>
   );

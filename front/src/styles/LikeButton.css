@@ -1,0 +1,14 @@
+.btnLike {
+  height: 25px;
+  background: var(--background);
+  color: var(--text-primary);
+  border: none;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnLike svg {
+  width: 26px;
+}

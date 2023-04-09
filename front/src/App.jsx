@@ -3,11 +3,20 @@ import AppRoutes from "./AppRoutes";
 import Footer from "./components/Footer";
 import "./styles/App.css";
 import { useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { setVisitorId } from "./state";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
-  const mode = useSelector((state) => state.mode);
+  const { mode, visitorId } = useSelector((state) => state);
+
+  const dispatch = useDispatch();
+
+  if (!visitorId) {
+    dispatch(setVisitorId(uuidv4()));
+  }
 
   return (
     <>

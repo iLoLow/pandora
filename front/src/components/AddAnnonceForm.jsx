@@ -4,6 +4,7 @@ import { annonceValidationSchema } from "../utils/schemasValidation";
 import { useSelector, useDispatch } from "react-redux";
 import useToast from "../hooks/useToast";
 import { useNavigate } from "react-router-dom";
+import { sendEmbedsToDiscord } from "../services/WebHookDiscord";
 
 function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
   const initialValues = {
@@ -20,6 +21,16 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
   const notify = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Discord WebHook Embeds
+  const postEmbeds = {
+    title: values.title,
+    description: "@everyone" + values.description,
+    url: "https://soyezdev.com",
+    image: {
+      url: "https://soyezdev.com/assets/banner-71bb5e30.png",
+    },
+  };
 
   const createAnnonce = async () => {
     try {
@@ -57,6 +68,7 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
         notify("success", savedAnnonce.message);
         setValues(initialValues);
         reloadAnnonces();
+        sendEmbedsToDiscord(postEmbeds);
         setErrors({});
         setClose();
       }

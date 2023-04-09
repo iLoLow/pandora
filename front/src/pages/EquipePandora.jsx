@@ -1,9 +1,9 @@
-
+import "../styles/EquipePandora.css";
 
 function EquipePandora() {
   return (
-    <section>
-        <h2>Equipe Pandora RP</h2>
+    <section className="equipePandora">
+      <h2>Equipe Pandora RP</h2>
     </section>
   );
 }

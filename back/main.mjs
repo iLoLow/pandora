@@ -25,6 +25,23 @@ app.use(Express.json());
 // Encodage des données
 app.use(Express.urlencoded({ extended: true }));
 
+const limitReached = (req, res) => {
+  res.status(429).json({ message: "Too many requests, please try again in an hour!" });
+  console.log("Too many requests, please try again in an hour!");
+};
+
+// Limite le nombre de requêtes par IP
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (15 minutes)
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  handler: limitReached, // Custom handler to send the response
+});
+
+// // Apply the rate limiting middleware to all requests
+app.use("/api/*", limiter);
+
 // Helmet vous aide à sécuriser vos applications Express en définissant diverses en-têtes HTTP.
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" })); // Protection contre les attaques de type Cross-Origin Resource Sharing (CORS)
@@ -57,16 +74,6 @@ app.get("/*", (req, res) => {
     if (err) res.status(500).json(err);
   });
 });
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per `window` (15 minutes)
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-});
-
-// Apply the rate limiting middleware to all requests
-app.use(limiter);
 
 const server = http.createServer(app);
 

@@ -1,11 +1,11 @@
-import connection from "../config/connectionDB.mjs";
-
+import mysql from "mysql2";
+import Database from "../config/Database.mjs";
 /**
  *  Annonces class CRUD
  *	@description Cette classe permet de créer, récupérer, mettre à jour et supprimer des annonces
  * @class Annonces
  */
-class Annonce {
+class Annonce extends Database {
   constructor() {}
 
   /**
@@ -18,7 +18,8 @@ class Annonce {
    */
   static create(title, description, image_url, user_id, username, avatar_url) {
     return new Promise((resolve, reject) => {
-      connection.query(
+      this.connectionStart();
+      this.connection().query(
         "INSERT INTO annonces (title, description, image_url, user_id, username, avatar_url) VALUES (?, ?, ?, ?, ?, ?)",
         [title, description, image_url, user_id, username, avatar_url],
         (err, result) => {
@@ -26,6 +27,7 @@ class Annonce {
           resolve(result);
         }
       );
+      this.connectionEnd();
     });
   }
 
@@ -35,10 +37,12 @@ class Annonce {
    */
   static getAll() {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM annonces ORDER BY annonces.updated_at DESC", (err, result) => {
+      this.connectionStart();
+      this.connection().query("SELECT * FROM annonces ORDER BY annonces.updated_at DESC", (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
+      this.connectionEnd();
     });
   }
 
@@ -51,10 +55,12 @@ class Annonce {
    */
   static getById(id) {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM annonces WHERE id = ?", [id], (err, result) => {
+      this.connectionStart();
+      this.connection().query("SELECT * FROM annonces WHERE id = ?", [id], (err, result) => {
         if (err) reject(err);
         resolve(result[0]);
       });
+      this.connectionEnd();
     });
   }
 
@@ -68,10 +74,12 @@ class Annonce {
    */
   static getLast({ limit = 1 }) {
     return new Promise((resolve, reject) => {
-      connection.query(`SELECT * FROM annonces ORDER BY updated_at DESC LIMIT ${limit}`, (err, result) => {
+      this.connectionStart();
+      this.connection().query(`SELECT * FROM annonces ORDER BY updated_at DESC LIMIT ${limit}`, (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
+      this.connectionEnd();
     });
   }
 
@@ -83,10 +91,12 @@ class Annonce {
    */
   static getAllByUser(user_id) {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM annonces WHERE user_id = ? ORDER BY updated_at DESC", [user_id], (err, result) => {
+      this.connectionStart();
+      this.connection().query("SELECT * FROM annonces WHERE user_id = ? ORDER BY updated_at DESC", [user_id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
+      this.connectionEnd();
     });
   }
 
@@ -98,10 +108,12 @@ class Annonce {
    */
   static update(id, title, description, image_url) {
     return new Promise((resolve, reject) => {
-      connection.query("UPDATE annonces SET title = ?, description = ?, image_url = ? WHERE id = ?", [title, description, image_url, id], (err, result) => {
+      this.connectionStart();
+      this.connection().query("UPDATE annonces SET title = ?, description = ?, image_url = ? WHERE id = ?", [title, description, image_url, id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
+      this.connectionEnd();
     });
   }
 
@@ -112,10 +124,12 @@ class Annonce {
    */
   static delete(id) {
     return new Promise((resolve, reject) => {
-      connection.query("DELETE FROM annonces WHERE id = ?", [id], (err, result) => {
+      this.connectionStart();
+      this.connection().query("DELETE FROM annonces WHERE id = ?", [id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
+      this.connectionEnd();
     });
   }
 
@@ -131,7 +145,8 @@ class Annonce {
    */
   static likeOrDislike(id, visitorId, isLiked, isDisliked) {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM annonces WHERE id = ?", [id], (err, result) => {
+      this.connectionStart();
+      this.connection().query("SELECT * FROM annonces WHERE id = ?", [id], (err, result) => {
         if (err) reject(err);
         const annonce = result[0];
 
@@ -181,7 +196,7 @@ class Annonce {
         const likedUsersToSave = JSON.stringify(likedUsers);
         const dislikedUsersToSave = JSON.stringify(dislikedUsers);
 
-        connection.query(
+        this.connection().query(
           "UPDATE annonces SET liked_users = ?, disliked_users = ?, updated_at = ? WHERE id = ?",
           [likedUsersToSave, dislikedUsersToSave, updatedAt, id],
           (err, result) => {
@@ -190,6 +205,7 @@ class Annonce {
           }
         );
       });
+      this.connectionEnd();
     });
   }
 }

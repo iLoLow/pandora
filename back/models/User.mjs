@@ -1,10 +1,11 @@
-import connection from "../config/connectionDB.mjs";
+import mysql from "mysql2";
+import Database from "../config/Database.mjs";
 
 /**
  * @class User model on the database mysql
  * @description This class is used to create, update, delete, and get users from the database.
  */
-class User {
+class User extends Database {
   constructor(user_id, username, email, password, avatar_url) {
     this.user_id = user_id;
     this.username = username;
@@ -22,13 +23,15 @@ class User {
    * @param cb - fonction de rappel
    */
   static create(user_id, username, email, password, avatar_url, cb) {
-    connection.query(
+    this.connectionStart();
+    this.connection().query(
       "INSERT INTO users (user_id, username, email, password, avatar_url) VALUES (?, ?, ?, ?,?)",
       [user_id, username, email, password, avatar_url],
       (err, result) => {
         cb(err, result);
       }
     );
+    this.connectionEnd();
   }
 
   /**
@@ -40,11 +43,13 @@ class User {
    * @param cb - fonction de rappel
    */
   static get(user_id) {
+    this.connectionStart();
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM users WHERE user_id = ?", [user_id], (err, result) => {
+      this.connection().query("SELECT * FROM users WHERE user_id = ?", [user_id], (err, result) => {
         if (err) reject(err);
         resolve(result[0]);
       });
+      this.connectionEnd();
     });
   }
 
@@ -54,11 +59,13 @@ class User {
    * @param email - L'e-mail de l'utilisateur que vous souhaitez obtenir.
    */
   static getByEmail(email) {
+    this.connectionStart();
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
+      this.connection().query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
         if (err) reject(err);
         resolve(result[0]);
       });
+      this.connectionEnd();
     });
   }
 
@@ -68,9 +75,11 @@ class User {
    * @param cb - fonction de rappel
    */
   static getAll(cb) {
-    connection.query("SELECT * FROM users", (err, results) => {
+    this.connectionStart();
+    this.connection().query("SELECT * FROM users", (err, results) => {
       cb(err, results);
     });
+    this.connectionEnd();
   }
 
   /**
@@ -83,11 +92,13 @@ class User {
    * @param cb - fonction de rappel
    */
   static update(id, username, email, password, avatar_url) {
+    this.connectionStart();
     return new Promise((resolve, reject) => {
-      connection.query("UPDATE users SET username = ?, email = ?, password = ?, avatar_url=? WHERE id = ?", [username, email, password, avatar_url, id], (err, result) => {
+      this.connection().query("UPDATE users SET username = ?, email = ?, password = ?, avatar_url=? WHERE id = ?", [username, email, password, avatar_url, id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
+      this.connectionEnd();
     });
   }
 
@@ -105,11 +116,13 @@ class User {
    * @returns Un objet Promise est renvoyé.
    */
   static updateUserInfosOnAnnonces(user_id, username, avatar_url) {
+    this.connectionStart();
     return new Promise((resolve, reject) => {
-      connection.query("UPDATE annonces SET username = ?, avatar_url = ? WHERE user_id = ?", [username, avatar_url, user_id], (err, result) => {
+      this.connection().query("UPDATE annonces SET username = ?, avatar_url = ? WHERE user_id = ?", [username, avatar_url, user_id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
+      this.connectionEnd();
     });
   }
 
@@ -119,8 +132,10 @@ class User {
    * @param cb - fonction de rappel
    */
   static delete(user_id, cb) {
-    connection.query("DELETE FROM users WHERE user_id = ?", [user_id], (err, results) => {
+    this.connectionStart();
+    this.connection().query("DELETE FROM users WHERE user_id = ?", [user_id], (err, results) => {
       cb(err, results);
+      this.connectionEnd();
     });
   }
 }

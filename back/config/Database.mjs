@@ -25,7 +25,7 @@ class Database {
     return Database.pool;
   }
 
-  async getConnect() {
+  getConnect() {
     return new Promise((resolve, reject) => {
       Database.pool.getConnection((err, connection) => {
         if (err) {

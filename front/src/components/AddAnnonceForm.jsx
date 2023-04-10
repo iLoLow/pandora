@@ -26,9 +26,9 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
   const postEmbeds = {
     title: values.title,
     description: "@everyone" + values.description,
-    url: "https://soyezdev.com",
+    url: import.meta.env.VITE_SITE_URL,
     image: {
-      url: "https://soyezdev.com/assets/banner-71bb5e30.png",
+      url: import.meta.env.VITE_SITE_URL + values.image_url,
     },
   };
 
@@ -68,6 +68,8 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
         notify("success", savedAnnonce.message);
         setValues(initialValues);
         reloadAnnonces();
+
+        console.log(postEmbeds);
         sendEmbedsToDiscord(postEmbeds);
         setErrors({});
         setClose();

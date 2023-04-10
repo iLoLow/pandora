@@ -45,8 +45,14 @@ app.use("/api/*", limiter);
 // Helmet vous aide à sécuriser vos applications Express en définissant diverses en-têtes HTTP.
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" })); // Protection contre les attaques de type Cross-Origin Resource Sharing (CORS)
-
-// CORS est un middleware Express qui peut être utilisé pour activer CORS avec diverses options.
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      connectSrc: ["'self'", "https://discord.com/api/webhooks/"],
+    },
+  })
+);
 app.use(cors());
 
 // journalisation pour Express (logs).

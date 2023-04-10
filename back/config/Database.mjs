@@ -1,33 +1,38 @@
 import mysql from "mysql2";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 class Database {
-  constructor() {}
+  constructor() {
+    if (!Database.instance) {
+      Database.instance = this;
+      Database.pool = mysql.createPool({
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0,
+      });
+    }
+    return Database.instance;
+  }
 
   static connection() {
-    return mysql.createConnection({
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-    });
+    return Database.pool;
   }
 
-  static connectionStart() {
-    this.connection().connect((err) => {
-      if (err) {
-        return console.log("Erreur de connection " + err.code);
-      }
-      console.log("Connection à la base de données réussie !");
-    });
-  }
-
-  static connectionEnd() {
-    this.connection().end((err) => {
-      if (err) {
-        return console.log("Erreur de déconnection " + err.code);
-      }
-      console.log("Déconnection de la base de données réussie !");
+  async getConnect() {
+    return new Promise((resolve, reject) => {
+      Database.pool.getConnection((err, connection) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(connection);
+      });
     });
   }
 }

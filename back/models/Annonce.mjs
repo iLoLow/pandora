@@ -1,5 +1,9 @@
-import mysql from "mysql2";
 import Database from "../config/Database.mjs";
+
+const db = new Database();
+
+const connection = await db.getConnect();
+
 /**
  *  Annonces class CRUD
  *	@description Cette classe permet de créer, récupérer, mettre à jour et supprimer des annonces
@@ -18,8 +22,7 @@ class Annonce extends Database {
    */
   static create(title, description, image_url, user_id, username, avatar_url) {
     return new Promise((resolve, reject) => {
-      this.connectionStart();
-      this.connection().query(
+      connection.query(
         "INSERT INTO annonces (title, description, image_url, user_id, username, avatar_url) VALUES (?, ?, ?, ?, ?, ?)",
         [title, description, image_url, user_id, username, avatar_url],
         (err, result) => {
@@ -27,7 +30,7 @@ class Annonce extends Database {
           resolve(result);
         }
       );
-      this.connectionEnd();
+      connection.release();
     });
   }
 
@@ -37,12 +40,11 @@ class Annonce extends Database {
    */
   static getAll() {
     return new Promise((resolve, reject) => {
-      this.connectionStart();
-      this.connection().query("SELECT * FROM annonces ORDER BY annonces.updated_at DESC", (err, result) => {
+      connection.query("SELECT * FROM annonces ORDER BY annonces.updated_at DESC", (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
-      this.connectionEnd();
+      connection.release();
     });
   }
 
@@ -55,12 +57,11 @@ class Annonce extends Database {
    */
   static getById(id) {
     return new Promise((resolve, reject) => {
-      this.connectionStart();
-      this.connection().query("SELECT * FROM annonces WHERE id = ?", [id], (err, result) => {
+      connection.query("SELECT * FROM annonces WHERE id = ?", [id], (err, result) => {
         if (err) reject(err);
-        resolve(result[0]);
+        resolve(result);
       });
-      this.connectionEnd();
+      connection.release();
     });
   }
 
@@ -74,12 +75,11 @@ class Annonce extends Database {
    */
   static getLast({ limit = 1 }) {
     return new Promise((resolve, reject) => {
-      this.connectionStart();
-      this.connection().query(`SELECT * FROM annonces ORDER BY updated_at DESC LIMIT ${limit}`, (err, result) => {
+      connection.query(`SELECT * FROM annonces ORDER BY updated_at DESC LIMIT ${limit}`, (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
-      this.connectionEnd();
+      connection.release();
     });
   }
 
@@ -91,12 +91,11 @@ class Annonce extends Database {
    */
   static getAllByUser(user_id) {
     return new Promise((resolve, reject) => {
-      this.connectionStart();
-      this.connection().query("SELECT * FROM annonces WHERE user_id = ? ORDER BY updated_at DESC", [user_id], (err, result) => {
+      connection.query("SELECT * FROM annonces WHERE user_id = ? ORDER BY updated_at DESC", [user_id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
-      this.connectionEnd();
+      connection.release();
     });
   }
 
@@ -108,12 +107,11 @@ class Annonce extends Database {
    */
   static update(id, title, description, image_url) {
     return new Promise((resolve, reject) => {
-      this.connectionStart();
-      this.connection().query("UPDATE annonces SET title = ?, description = ?, image_url = ? WHERE id = ?", [title, description, image_url, id], (err, result) => {
+      connection.query("UPDATE annonces SET title = ?, description = ?, image_url = ? WHERE id = ?", [title, description, image_url, id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
-      this.connectionEnd();
+      connection.release();
     });
   }
 
@@ -124,12 +122,11 @@ class Annonce extends Database {
    */
   static delete(id) {
     return new Promise((resolve, reject) => {
-      this.connectionStart();
-      this.connection().query("DELETE FROM annonces WHERE id = ?", [id], (err, result) => {
+      connection.query("DELETE FROM annonces WHERE id = ?", [id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
-      this.connectionEnd();
+      connection.release();
     });
   }
 
@@ -143,69 +140,64 @@ class Annonce extends Database {
    * @returns Le résultat de la requête.
    * @description Cette méthode est utilisée pour liker ou disliker une annonce
    */
-  static likeOrDislike(id, visitorId, isLiked, isDisliked) {
+  static async likeOrDislike(id, visitorId, isLiked, isDisliked) {
+    const annonce = await this.getById(id);
     return new Promise((resolve, reject) => {
-      this.connectionStart();
-      this.connection().query("SELECT * FROM annonces WHERE id = ?", [id], (err, result) => {
-        if (err) reject(err);
-        const annonce = result[0];
+      const likedUsers = JSON.parse(annonce[0].liked_users);
+      const dislikedUsers = JSON.parse(annonce[0].disliked_users);
 
-        const likedUsers = JSON.parse(annonce.liked_users);
-        const dislikedUsers = JSON.parse(annonce.disliked_users);
+      const isLikedUsers = !!likedUsers.find((user) => user === visitorId);
+      const isDislikedUsers = !!dislikedUsers.find((user) => user === visitorId);
 
-        const isLikedUsers = !!likedUsers.find((user) => user === visitorId);
-        const isDislikedUsers = !!dislikedUsers.find((user) => user === visitorId);
-
-        const actions = {
-          like: () => {
-            if (!isDislikedUsers) {
-              likedUsers.push(visitorId);
-            }
-          },
-          dislike: () => {
-            if (!isLikedUsers) {
-              dislikedUsers.push(visitorId);
-            }
-          },
-          likeAndDislike: () => {
-            likedUsers.splice(likedUsers.indexOf(visitorId), 1);
-            dislikedUsers.push(visitorId);
-          },
-          dislikeAndLike: () => {
-            dislikedUsers.splice(dislikedUsers.indexOf(visitorId), 1);
+      const actions = {
+        like: () => {
+          if (!isDislikedUsers) {
             likedUsers.push(visitorId);
-          },
-        };
-
-        switch (true) {
-          case isLiked && !isDisliked && !isDislikedUsers:
-            actions.like();
-            break;
-          case isDisliked && !isLiked && !isLikedUsers:
-            actions.dislike();
-            break;
-          case isDisliked && isLikedUsers:
-            actions.likeAndDislike();
-            break;
-          case isLiked && isDislikedUsers:
-            actions.dislikeAndLike();
-            break;
-        }
-
-        const updatedAt = annonce.updated_at; // !! on renvoi la date de mise à jour pour eviter la mise à jour de l'annonce pendant les likes et dislikes
-        const likedUsersToSave = JSON.stringify(likedUsers);
-        const dislikedUsersToSave = JSON.stringify(dislikedUsers);
-
-        this.connection().query(
-          "UPDATE annonces SET liked_users = ?, disliked_users = ?, updated_at = ? WHERE id = ?",
-          [likedUsersToSave, dislikedUsersToSave, updatedAt, id],
-          (err, result) => {
-            if (err) reject(err);
-            resolve(result);
           }
-        );
-      });
-      this.connectionEnd();
+        },
+        dislike: () => {
+          if (!isLikedUsers) {
+            dislikedUsers.push(visitorId);
+          }
+        },
+        likeAndDislike: () => {
+          likedUsers.splice(likedUsers.indexOf(visitorId), 1);
+          dislikedUsers.push(visitorId);
+        },
+        dislikeAndLike: () => {
+          dislikedUsers.splice(dislikedUsers.indexOf(visitorId), 1);
+          likedUsers.push(visitorId);
+        },
+      };
+
+      switch (true) {
+        case isLiked && !isDisliked && !isDislikedUsers:
+          actions.like();
+          break;
+        case isDisliked && !isLiked && !isLikedUsers:
+          actions.dislike();
+          break;
+        case isDisliked && isLikedUsers:
+          actions.likeAndDislike();
+          break;
+        case isLiked && isDislikedUsers:
+          actions.dislikeAndLike();
+          break;
+      }
+
+      const updatedAt = annonce[0].updated_at; // !! on renvoi la date de mise à jour pour eviter la mise à jour de l'annonce pendant les likes et dislikes
+      const likedUsersToSave = JSON.stringify(likedUsers);
+      const dislikedUsersToSave = JSON.stringify(dislikedUsers);
+
+      connection.query(
+        "UPDATE annonces SET liked_users = ?, disliked_users = ?, updated_at = ? WHERE id = ?",
+        [likedUsersToSave, dislikedUsersToSave, updatedAt, id],
+        (err, result) => {
+          if (err) reject(err);
+          resolve(result);
+        }
+      );
+      connection.release();
     });
   }
 }

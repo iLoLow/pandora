@@ -1,5 +1,8 @@
-import mysql from "mysql2";
 import Database from "../config/Database.mjs";
+
+const db = new Database();
+
+const connection = await db.getConnect();
 
 /**
  * @class User model on the database mysql
@@ -23,15 +26,14 @@ class User extends Database {
    * @param cb - fonction de rappel
    */
   static create(user_id, username, email, password, avatar_url, cb) {
-    this.connectionStart();
-    this.connection().query(
+    connection.query(
       "INSERT INTO users (user_id, username, email, password, avatar_url) VALUES (?, ?, ?, ?,?)",
       [user_id, username, email, password, avatar_url],
       (err, result) => {
         cb(err, result);
       }
     );
-    this.connectionEnd();
+    connection.release();
   }
 
   /**
@@ -43,13 +45,12 @@ class User extends Database {
    * @param cb - fonction de rappel
    */
   static get(user_id) {
-    this.connectionStart();
     return new Promise((resolve, reject) => {
-      this.connection().query("SELECT * FROM users WHERE user_id = ?", [user_id], (err, result) => {
+      connection.query("SELECT * FROM users WHERE user_id = ?", [user_id], (err, result) => {
         if (err) reject(err);
         resolve(result[0]);
       });
-      this.connectionEnd();
+      connection.release();
     });
   }
 
@@ -59,13 +60,12 @@ class User extends Database {
    * @param email - L'e-mail de l'utilisateur que vous souhaitez obtenir.
    */
   static getByEmail(email) {
-    this.connectionStart();
     return new Promise((resolve, reject) => {
-      this.connection().query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
+      connection.query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
         if (err) reject(err);
         resolve(result[0]);
       });
-      this.connectionEnd();
+      connection.release();
     });
   }
 
@@ -75,11 +75,10 @@ class User extends Database {
    * @param cb - fonction de rappel
    */
   static getAll(cb) {
-    this.connectionStart();
-    this.connection().query("SELECT * FROM users", (err, results) => {
+    connection.query("SELECT * FROM users", (err, results) => {
       cb(err, results);
     });
-    this.connectionEnd();
+    connection.release();
   }
 
   /**
@@ -92,13 +91,12 @@ class User extends Database {
    * @param cb - fonction de rappel
    */
   static update(id, username, email, password, avatar_url) {
-    this.connectionStart();
     return new Promise((resolve, reject) => {
-      this.connection().query("UPDATE users SET username = ?, email = ?, password = ?, avatar_url=? WHERE id = ?", [username, email, password, avatar_url, id], (err, result) => {
+      connection.query("UPDATE users SET username = ?, email = ?, password = ?, avatar_url=? WHERE id = ?", [username, email, password, avatar_url, id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
-      this.connectionEnd();
+      connection.release();
     });
   }
 
@@ -116,13 +114,12 @@ class User extends Database {
    * @returns Un objet Promise est renvoyé.
    */
   static updateUserInfosOnAnnonces(user_id, username, avatar_url) {
-    this.connectionStart();
     return new Promise((resolve, reject) => {
-      this.connection().query("UPDATE annonces SET username = ?, avatar_url = ? WHERE user_id = ?", [username, avatar_url, user_id], (err, result) => {
+      connection.query("UPDATE annonces SET username = ?, avatar_url = ? WHERE user_id = ?", [username, avatar_url, user_id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
-      this.connectionEnd();
+      connection.release();
     });
   }
 
@@ -132,11 +129,10 @@ class User extends Database {
    * @param cb - fonction de rappel
    */
   static delete(user_id, cb) {
-    this.connectionStart();
-    this.connection().query("DELETE FROM users WHERE user_id = ?", [user_id], (err, results) => {
+    connection.query("DELETE FROM users WHERE user_id = ?", [user_id], (err, results) => {
       cb(err, results);
-      this.connectionEnd();
     });
+    connection.release();
   }
 }
 

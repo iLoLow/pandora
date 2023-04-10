@@ -26,14 +26,14 @@ app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
 const limitReached = (req, res) => {
-  res.status(429).json({ message: "Too many requests, please try again in an hour!" });
-  console.log("Too many requests, please try again in an hour!");
+  res.status(429).json({ error: "Trop de requêtes, veuillez réessayer dans 15 minutes !", code: 429 }); // "Too many requests, please try again in an hour!
+  console.log("Trop de requêtes, veuillez réessayer dans 15 minutes !");
 };
 
 // Limite le nombre de requêtes par IP
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per `window` (15 minutes)
+  max: 300, // Limit each IP to 100 requests per `window` (15 minutes)
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
   handler: limitReached, // Custom handler to send the response

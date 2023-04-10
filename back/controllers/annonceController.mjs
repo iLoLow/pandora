@@ -23,7 +23,7 @@ export const getAllAnnonces = async (req, res) => {
 export const getAnnonce = async (req, res) => {
   try {
     const annonce = await Annonce.getById(req.params.id);
-    res.status(200).json(annonce);
+    res.status(200).json(annonce[0]);
   } catch (error) {
     res.status(500).json({ error: "Impossible de récupérer l'annonce", code: 500 });
   }
@@ -70,15 +70,11 @@ export const deleteAnnonce = async (req, res) => {
 };
 
 export const likeOrDislikeAnnonce = async (req, res) => {
-  const { visitorId, isLiked, isDisliked } = req.body;
-
-  console.log("visitorId", visitorId);
-
   try {
+    const { visitorId, isLiked, isDisliked } = req.body;
     await Annonce.likeOrDislike(req.params.id, visitorId, isLiked, isDisliked);
     res.status(200).json({ message: "Annonce likée", code: 200 });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: "Impossible de liker l'annonce", code: 500 });
   }
 };

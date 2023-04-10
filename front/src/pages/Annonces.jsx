@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Article from "../components/Article";
 import "../styles/Annonces.css";
+import useToast from "../hooks/useToast";
 
 function Annonces() {
   document.title = "Annonces";
   const [annonces, setAnnonces] = useState([]);
   const navigate = useNavigate();
+  const notify = useToast();
 
   const getAnnonces = async () => {
     try {
@@ -14,6 +16,10 @@ function Annonces() {
       const datas = await response.json();
 
       setAnnonces(datas);
+
+      if (datas.code === 429) {
+        notify("error", datas.error);
+      }
     } catch (error) {
       navigate("/erreur");
     }

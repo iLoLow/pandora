@@ -9,7 +9,6 @@ import Button from "../components/Button";
 import useToast from "../hooks/useToast";
 
 function Identification() {
-
   let initialValues = {
     username: "",
     email: "",
@@ -47,7 +46,7 @@ function Identification() {
 
       const savedUser = await savedUserResponse.json();
 
-      if (savedUser.code === 400 || savedUser.code === 500) {
+      if (savedUser.code === 400 || savedUser.code === 429 || savedUser.code === 500) {
         notify("error", savedUser.error);
         return;
       }
@@ -85,7 +84,7 @@ function Identification() {
 
       const loggedInUser = await loggedInResponse.json();
 
-      if (loggedInUser.code === 400 || loggedInUser.code === 500) {
+      if (loggedInUser.code === 400 || loggedInUser.code === 429 || loggedInUser.code === 500) {
         notify("error", loggedInUser.error);
         return;
       }

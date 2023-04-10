@@ -33,6 +33,10 @@ function AnnoncesAdmin() {
         notify("error", data.error);
       }
 
+      if (data.code === 429) {
+        notify("error", data.error);
+      }
+
       if (data.code === 403) {
         notify("error", data.error);
         dispatch(setLogout());

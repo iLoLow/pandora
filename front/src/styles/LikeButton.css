@@ -1,6 +1,6 @@
 .btnLike {
   height: 25px;
-  background: var(--background);
+  background: none;
   color: var(--text-primary);
   border: none;
   display: flex;

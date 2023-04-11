@@ -16,14 +16,6 @@
   margin-block: 10px;
   text-align: center;
 }
-
-.banniereDev {
-  display: none;
-  overflow: hidden;
-  border-radius: 10px;
-  max-width: 520px;
-  max-height: 200px;
-  object-fit: contain;
-  height: 100%;
-  width: 100%;
+.presentationDescription h2 {
+  font-size: 1.5rem;
 }

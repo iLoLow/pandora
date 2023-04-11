@@ -4,3 +4,8 @@
   margin: 35px auto;
   padding-inline: 10px;
 }
+.annonces .titleAnnonces {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-left: 5px;
+}

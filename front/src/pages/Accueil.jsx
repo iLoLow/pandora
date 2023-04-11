@@ -1,7 +1,6 @@
 import Article from "../components/Article";
 import Banner from "../components/Banner";
 import "../styles/Accueil.css";
-import BannerDev from "../assets/SOYEZ_Laurent_Developpeur_WEB.gif";
 import { useState, useEffect } from "react";
 import BarreReseaux from "../components/BarreReseaux";
 document.title = "Pandora RP";
@@ -40,9 +39,6 @@ function Accueil() {
         </div>
         <BarreReseaux />
         {annonces.length >= 1 && <Article annonce={annonces[0]} reload={fetchAnnonces} />}
-        <div className="banniereDev">
-          <img src={BannerDev} alt="banner dev" />
-        </div>
       </section>
     </>
   );

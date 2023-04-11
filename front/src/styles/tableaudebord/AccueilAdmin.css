@@ -1,13 +1,12 @@
 .accueilAdminHeader {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    gap: 20px;
-  }
-  
-  .accueilAdminHeader h2 {
-    flex: 1 1;
-    text-align: center;
-    font-size: clamp(1rem, 3vw, 2rem);
-  }
-  
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 20px;
+}
+
+.accueilAdminWrapper h2 {
+  flex: 1 1;
+  text-align: center;
+  font-size: clamp(1rem, 3vw, 2rem);
+}

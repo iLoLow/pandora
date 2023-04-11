@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 import userRoutes from "./routes/userRoutes.mjs";
 import authRoutes from "./routes/authRoutes.mjs";
 import annonceRoutes from "./routes/annonceRoutes.mjs";
+import imageRoutes from "./routes/imageRoutes.mjs";
 
 // Resolve dirname anf filename for es6
 const __filename = fileURLToPath(import.meta.url); // Résolution du chemin du fichier
@@ -60,6 +61,8 @@ app.use(morgan("dev"));
 
 // Définition de la route par défaut pour les assets
 app.use("/assets", Express.static(path.join(__dirname, "public/assets")));
+
+app.use("/api/thumbs", imageRoutes);
 
 // Definition des routes d'authentification
 app.use("/api/auth", authRoutes);

@@ -1,9 +1,17 @@
 import Annonce from "../models/Annonce.mjs";
+import sharp from "sharp";
+import * as path from "path";
 
 export const createAnnonce = async (req, res) => {
   const { title, description, user_id, image_url, username, avatar_url } = req.body;
 
   try {
+    const { filename: image } = req.file;
+    await sharp(req.file.path, { failOnError: false })
+      .resize(200)
+      .withMetadata()
+      .toFile(path.resolve(req.file.destination + "/thumbs/" + image));
+
     await Annonce.create(title, description, image_url, user_id, username, avatar_url);
     res.status(201).json({ message: "Annonce créée", code: 201 });
   } catch (error) {

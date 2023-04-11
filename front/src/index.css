@@ -33,8 +33,8 @@ body {
   --color-main: #cbdadc;
   --accent: #0d7f90;
   --shadow: #0d7f90e3;
-  --red: rgb(203 0 0);
-  --green: rgb(3, 148, 34);
+  --red: rgb(179, 3, 3);
+  --green: rgb(5, 142, 34);
 }
 [data-theme="dark"] {
   --background: #080c1d;

@@ -1,4 +1,50 @@
 .equipePandora {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 35px auto;
   padding-inline: 10px;
+  max-width: 1000px;
+}
+.equipePandoraTitre,
+.partenaireTitre {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-left: 5px;
+}
+.equipePandoraContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+  padding-inline: 20px;
+  width: 100%;
+}
+.partenaire {
+  margin: 35px auto;
+  padding-inline: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.partenaineContainer {
+  margin-top: 15px;
+}
+
+.banniereDev {
+  overflow: hidden;
+  border-radius: 10px;
+  max-width: 520px;
+  object-fit: contain;
+}
+.banniereDev img {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .equipePandoraContainer {
+    grid-template-columns: 1fr;
+  }
 }

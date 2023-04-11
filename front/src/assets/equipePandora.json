@@ -1,0 +1,37 @@
+[
+	{
+		"id": "1",
+		"nom": "Fusco#7338",
+		"nomrp": "Joaquín Mendez",
+		"avatarequipe": "/src/assets/Fusco.jpg",
+		"description":"Streameur et fondateur de la communauté Pandora RP.",
+		"fonction" : "Fondateur Pandora RP"
+		
+	},
+	{
+		"id": "2",
+		"nom": "bonobo#6969",
+		"nomrp": "Joaquín Mendez",
+		"avatarequipe": "/src/assets/aK_Led.gif",
+		"description": "Co-fondateur de la communauté Pandora RP.",
+		"fonction" : "Co-Fondateur Pandora RP, Dev FiveM Pandora RP"
+	},
+	{
+		"id": "3",
+		"nom": "aK_LeD#7824",
+		"nomrp": "Marceline Clark",
+		"avatarequipe": "/src/assets/aK_Led.gif",
+		"description": "Developpeur FiveM Pandora RP",
+		"fonction" : "Dev FiveM Pandora RP"
+	},
+	{
+		"id": "4",
+		"nom": "ZiOnnes#0001",
+		"nomrp": " ZiOnnes",
+		"avatarequipe": "/src/assets/zionnes.png",
+		"description": "Developpeur FiveM Pandora RP",
+		"fonction" : "Dev FiveM Pandora RP"
+	}
+	
+
+]

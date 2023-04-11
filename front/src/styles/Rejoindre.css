@@ -2,7 +2,15 @@
   display: flex;
   flex-direction: column;
   margin-block: 20px;
+  padding: 20px;
+  height: 100%;
 }
+
+.rejoindreImage img {
+  width: 200px;
+  border-radius: 10px;
+}
+
 .rejoindre .IconBar {
   display: flex;
   justify-content: center;
@@ -10,25 +18,63 @@
   margin-block: 20px;
 }
 .rejoindreTitre {
-  flex: 1 1;
   text-align: center;
   font-size: clamp(1rem, 3vw, 2rem);
 }
-.rejoindreTexte {
+.rejoindreContainer {
+  position: relative;
   text-align: center;
   line-height: 1.5;
   padding: 20px;
+  max-width: 700px;
+  margin: auto;
 }
-.rejoindreTexte h3 {
-  font-size: clamp(1rem, 3vw, 1.5rem);
+
+.rejoindreImage {
+  position: absolute;
+  bottom: -150px;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 20px;
 }
+
+.rejoindreTitre h2 {
+  font-size: clamp(1rem, 3vw, 2rem);
+}
+
+.rejoindreTitre h3 {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+}
+.rejoindreTexte {
+  margin-top: 2rem;
+}
+
 .rejoindreTexte p {
-  font-size: clamp(0.8rem, 3vw, 1rem);
+  font-size: clamp(0.8rem, 3vw, 1.1rem);
+  font-weight: 500;
+  line-height: 1.5;
   padding: 10px;
   text-align: justify;
 }
-.IconBar a {
-  width: 60px;
-  height: 60px;
-  padding: 10px;
+
+@media screen and (max-width: 768px) {
+  .rejoindre {
+    padding: 5px;
+  }
+  .rejoindreContainer {
+    padding: 5px;
+  }
+  .rejoindreImage img {
+    width: 150px;
+  }
+  .rejoindreTexte {
+    margin-top: 0;
+  }
+  .rejoindreImage {
+    position: relative;
+    bottom: 0;
+    right: 0;
+  }
 }

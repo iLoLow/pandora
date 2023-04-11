@@ -27,7 +27,7 @@
   }
 }
 
-@media screen and (max-width: 650px) {
+@media (max-width: 900px) {
   .IconBar {
     display: flex;
     flex-direction: initial;
@@ -35,8 +35,9 @@
     margin-left: 10px;
   }
   .IconBar a {
-    padding: 3px;
+    padding: 5px;
     margin: 5px;
-    width: 20px;
+    width: 25px;
+    height: 25px;
   }
 }

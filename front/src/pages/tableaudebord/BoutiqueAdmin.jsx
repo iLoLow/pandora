@@ -7,3 +7,4 @@ function BoutiqueAdmin() {
 }
 
 export default BoutiqueAdmin;
+//deux onglets pour la boutique , articles et formule d'abonnements.

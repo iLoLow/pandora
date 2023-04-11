@@ -1,7 +1,7 @@
 import CarteEquipe from "../components/CarteEquipe";
 import "../styles/EquipePandora.css";
 import datas from "../assets/equipePandora.json";
-import BannerDev from "../assets/SOYEZ_Laurent_Developpeur_WEB.gif";
+import BannerDev from "../assets/SOYEZ_Laurent_Developpeur_WEB.png";
 import { Link } from "react-router-dom";
 
 function EquipePandora() {

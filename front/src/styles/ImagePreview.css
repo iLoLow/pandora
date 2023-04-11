@@ -6,8 +6,8 @@
 
 .imagePreview {
   cursor: pointer;
-  flex: 1 1 130px;
-  height: 130px;
+  width: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden;
   transition: 0.2s ease-in-out;
@@ -45,13 +45,17 @@
   color: #fff;
   font-size: 0.8rem;
   text-align: center;
-  transition: 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.imagePreview:hover .imageInfo {
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .imageInfo h3 {
   margin: 0;
   padding: 0;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 500;
   text-transform: uppercase;
   text-shadow: 0 0 4px rgba(0, 0, 0, 1);
@@ -73,7 +77,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5);
   color: #fff;
   font-size: 1rem;
   font-weight: 500;

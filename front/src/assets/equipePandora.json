@@ -12,7 +12,7 @@
 		"id": "2",
 		"nom": "bonobo#6969",	
 		"nomrp": "Louis de funes",
-		"avatarequipe": "aK_Led.gif",
+		"avatarequipe": "bono.jpg",
 		"description": "Co-fondateur de la communauté Pandora RP.",
 		"fonction" : "Co-Fondateur Pandora RP, Dev FiveM Pandora RP"
 	},
@@ -31,6 +31,13 @@
 		"avatarequipe": "zionnes.png",
 		"description": "Developpeur FiveM Pandora RP",
 		"fonction" : "Dev FiveM Pandora RP"
+	},{
+		"id": "5",
+		"nom": "wollaw#2510",
+		"nomrp": " Lionnel Poivrou",
+		"avatarequipe": "Wollaw.png",
+		"description": "Developpeur Web Pandora RP",
+		"fonction" : "Developpeur Web Du Site Pandora RP"
 	}
 	
 

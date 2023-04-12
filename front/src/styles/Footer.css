@@ -15,13 +15,18 @@
 }
 
 .footer p span {
-  font-size: clamp(0.7rem, 4vw, 1rem);
+  font-size: clamp(0.6rem, 2vw, 1rem);
 }
 
 @media (max-width: 768px) {
   .footer {
     flex-direction: column;
     align-items: center;
+    padding: 10px 5px;
+    gap: 5px;
+  }
+  .footer h2 {
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
   }
   .footer p {
     flex-direction: column;

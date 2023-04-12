@@ -3,12 +3,12 @@
   flex-direction: column;
   align-items: center;
   margin: 35px auto;
-  padding-inline: 10px;
+  padding-inline: 15px;
   max-width: 1000px;
 }
 .equipePandoraTitre,
 .partenaireTitre {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
   font-weight: 600;
   margin-left: 5px;
 }
@@ -17,7 +17,6 @@
   grid-template-columns: 1fr 1fr;
   gap: 15px;
   margin-top: 15px;
-  padding-inline: 20px;
   width: 100%;
 }
 .partenaire {

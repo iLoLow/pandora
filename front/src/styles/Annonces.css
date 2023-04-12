@@ -2,10 +2,10 @@
   max-width: 900px;
   width: 100%;
   margin: 35px auto;
-  padding-inline: 10px;
+  padding-inline: 15px;
 }
 .annonces .titleAnnonces {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 1vw, 1.5rem);
   font-weight: 600;
   margin-left: 5px;
 }

@@ -12,7 +12,7 @@
 
 .carteEquipeTexte {
   font-weight: 400;
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 1vw, 1rem);
   width: 100%;
 }
 
@@ -25,12 +25,14 @@
 
 .carteEquipeTexte .item h3 {
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: clamp(0.9rem, 1vw, 1.2rem);
   margin-bottom: 0;
   white-space: nowrap;
   color: var(--text-secondary);
 }
-
+.item p {
+  font-size: clamp(0.7rem, 1vw, 1rem);
+}
 .carteEquipeTexte .item.description,
 .item.fonction {
   display: flex;

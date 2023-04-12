@@ -9,3 +9,9 @@
 .profil-img img {
   object-fit: cover;
 }
+@media screen and (max-width: 768px) {
+  .profil-img {
+    width: 35px;
+    height: 35px;
+  }
+}

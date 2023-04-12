@@ -10,7 +10,7 @@
 .articleTitre {
   text-align: center;
   border-bottom: 2px solid var(--text-secondary);
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 1vw, 1.5rem);
   padding-block: 15px;
   margin-bottom: 15px;
   text-transform: capitalize;
@@ -48,7 +48,9 @@
   align-items: center;
   gap: 10px;
 }
-
+.articleAuteur p {
+  font-size: clamp(0.5rem, 1vw, 1rem);
+}
 .articleDate {
   display: flex;
   flex-direction: column;
@@ -57,5 +59,17 @@
 }
 
 .articleDate p {
-  font-size: 0.8rem;
+  font-size: clamp(0.5rem, 1vw, 1rem);
+}
+@media screen and (max-width: 768px) {
+  .articleAuteur {
+    flex-direction: column;
+    align-items: flex-start;
+    align-items: center;
+    gap: 5px;
+  }
+  .articleLike {
+    flex-direction: column;
+    gap: 5px;
+  }
 }

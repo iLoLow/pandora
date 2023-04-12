@@ -82,6 +82,10 @@
     display: flex;
     z-index: 3;
   }
+  .NavMobile .profil-img {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 @media screen and (max-width: 440px) {

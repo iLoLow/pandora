@@ -3,6 +3,7 @@ import Avatar from "./Avatar";
 import moment from "../utils/moment";
 import LikeButton from "./LikeButton";
 import { useSelector } from "react-redux";
+import ReactMarkdown from "react-markdown";
 
 function Article({ annonce, reload = () => {} }) {
   const { visitorId } = useSelector((state) => state);
@@ -70,7 +71,7 @@ function Article({ annonce, reload = () => {} }) {
       <article className="article">
         <h2 className="articleTitre">{annonce.title}</h2>
         <img className="articleImg" src={annonce.image_url} alt="annonce" />
-        <p className="articleParagraphe">{annonce.description}</p>
+        <ReactMarkdown className="articleParagraphe" children={annonce.description} />
         <div className="articleFooter">
           <div className="articleAuteur">
             <Avatar avatarUrl={annonce.avatar_url} />

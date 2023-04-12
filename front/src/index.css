@@ -15,6 +15,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+ul,
+ol {
+  margin-block: 0.5em;
+  padding-inline-start: 20px;
+}
+
 h2 {
   font-weight: 600;
 }

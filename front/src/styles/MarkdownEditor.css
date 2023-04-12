@@ -1,0 +1,22 @@
+.editorWrapper {
+  border-radius: 10px;
+  background: white;
+  min-height: 300px;
+  overflow: hidden;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+.editorToolbar {
+  width: 100%;
+  border-bottom: 1px solid var(--shadow);
+  z-index: 1;
+}
+
+.editorToolbar img {
+  height: auto;
+}
+
+.editor {
+  padding: 0 10px;
+  color: black;
+}

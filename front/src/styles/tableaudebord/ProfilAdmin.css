@@ -10,6 +10,7 @@
   text-align: center;
   font-size: clamp(1rem, 3vw, 2rem);
 }
+
 .profilAdminCard {
   display: flex;
   border: 1px solid var(--text-secondary);
@@ -20,8 +21,9 @@
   margin: 0 auto;
   width: 100%;
 }
+
 .profilAdminAvatar {
-  max-width: 220px;
+  max-width: 200px;
   border-right: 1px solid var(--text-secondary);
   overflow: hidden;
   aspect-ratio: 1/1;
@@ -38,6 +40,11 @@
   text-transform: capitalize;
   color: var(--text-secondary);
   font-weight: 700;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+}
+.profilAdminInfoValue {
+  font-weight: 500;
+  font-size: clamp(0.9rem, 2vw, 1rem);
 }
 .profilAdminGestion {
   display: flex;

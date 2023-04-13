@@ -21,6 +21,13 @@
   box-shadow: -1px 1px 9px 0px var(--shadow);
 }
 
+.navMobile .profil-menu .profil-links {
+  top: -100%;
+  right: 50%;
+  align-items: center;
+  transform: translate(50%, -60%);
+}
+
 .profil-links a {
   color: var(--text-primary);
   text-decoration: none;

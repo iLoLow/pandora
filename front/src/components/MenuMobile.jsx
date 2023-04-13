@@ -15,8 +15,8 @@ function MenuMobile() {
         <span className="Burger"></span>
       </div>
       {isOpen && (
-        <nav className="NavMobile">
-          <ProfilMenu user={user} />
+        <nav className="navMobile">
+          <ProfilMenu user={user} menuOpen={isOpen} setMenuOpen={() => setIsOpen(!isOpen)} />
           <NavLink onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/">
             <span className="NavmobileFlex">
               <span className="NavMobileSvgHome">

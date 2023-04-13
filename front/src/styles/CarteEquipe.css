@@ -31,7 +31,7 @@
   color: var(--text-secondary);
 }
 .item p {
-  font-size: clamp(0.7rem, 1vw, 1rem);
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
 .carteEquipeTexte .item.description,
 .item.fonction {

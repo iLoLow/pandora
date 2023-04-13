@@ -19,4 +19,9 @@
 .editor {
   padding: 0 10px;
   color: black;
+  font-size: 12px;
+}
+
+.editor span {
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }

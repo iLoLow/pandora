@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import Avatar from "./Avatar";
 import useToast from "../hooks/useToast";
 
-function ProfilMenu({ user }) {
+function ProfilMenu({ user, menuOpen, setMenuOpen = () => {} }) {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const notify = useToast();
@@ -23,8 +23,14 @@ function ProfilMenu({ user }) {
     <div className="profil-menu" onClick={openHandleMenu}>
       <Avatar avatarUrl={user.avatar_url} />
       {isOpen && (
-        <div className="profil-links">
-          <Link to={"/tableaudebord"} onClick={() => setIsOpen(!isOpen)}>
+        <div className="profil-links" onMouseLeave={() => setIsOpen(!isOpen)}>
+          <Link
+            to={"/tableaudebord"}
+            onClick={() => {
+              setIsOpen(!isOpen);
+              setMenuOpen(!menuOpen);
+            }}
+          >
             Tableau de bord
           </Link>
           <Link
@@ -33,6 +39,7 @@ function ProfilMenu({ user }) {
               setIsOpen(!isOpen);
               dispatch(setLogout());
               notify("info", "Vous êtes déconnecté");
+              setMenuOpen(!menuOpen);
             }}
           >
             Déconnexion

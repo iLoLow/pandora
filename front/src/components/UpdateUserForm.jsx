@@ -97,7 +97,7 @@ function UpdateUserForm() {
             type="password"
             value={values.password}
             onChange={(e) => setValues({ ...values, password: e.target.value === "" ? undefined : e.target.value })}
-            placeholder="Laisser vide pour ne pas modifier votre mot de passe."
+            placeholder="Laisser vide pour ne pas modifier."
           />
           {errors.password && <small className="errorSmall">{errors.password}</small>}
         </form-group>
@@ -109,7 +109,7 @@ function UpdateUserForm() {
               type="password"
               value={values.confirmPassword}
               onChange={(e) => setValues({ ...values, confirmPassword: e.target.value === "" ? undefined : e.target.value })}
-              placeholder="Laisser vide pour ne pas modifier votre mot de passe."
+              placeholder="Laisser vide pour ne pas modifier."
             />
             {errors.confirmPassword && <small className="errorSmall">{errors.confirmPassword}</small>}
           </form-group>

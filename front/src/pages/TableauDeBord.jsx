@@ -28,9 +28,9 @@ function TableauDeBord() {
         setIsOpen(true);
       }
     };
+    handleResize();
 
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };

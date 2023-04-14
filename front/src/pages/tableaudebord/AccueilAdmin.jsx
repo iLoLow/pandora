@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function AccueilAdmin() {
   const [isCopied, setIsCopied] = useState(false);
-  const linkToCopy = "https://localhost:3000/identification";
+  const linkToCopy = "https://pandorarp.fr/identification";
 
   const handleCopyClick = async () => {
     try {

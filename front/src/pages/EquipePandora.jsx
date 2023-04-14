@@ -5,6 +5,7 @@ import BannerDev from "../assets/SOYEZ_Laurent_Developpeur_WEB.webp";
 import { Link } from "react-router-dom";
 
 function EquipePandora() {
+  document.title = "Equipe Pandora";
   return (
     <>
       <section className="equipePandora">

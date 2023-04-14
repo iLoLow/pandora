@@ -8,11 +8,16 @@
   border: 2px solid var(--text-secondary);
 }
 .banner img {
+  display: block;
   object-fit: cover;
+  object-position: 6px 76px;
 }
 
 @media screen and (max-width: 768px) {
   .banner {
     border-radius: 10px;
+  }
+  .banner img {
+    object-position: 0px 0px;
   }
 }

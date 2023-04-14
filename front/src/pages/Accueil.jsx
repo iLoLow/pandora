@@ -7,6 +7,7 @@ document.title = "Pandora RP";
 import useToast from "../hooks/useToast";
 
 function Accueil() {
+  document.title = "Pandora RP";
   const [annonces, setAnnonces] = useState([]);
   const notify = useToast();
 

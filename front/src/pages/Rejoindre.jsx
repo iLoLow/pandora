@@ -3,6 +3,7 @@ import "../styles/Rejoindre.css";
 import logo from "../assets/logoPandora.png";
 
 function Rejoindre() {
+  document.title = "Rejoindre";
   return (
     <>
       <section className="rejoindre">

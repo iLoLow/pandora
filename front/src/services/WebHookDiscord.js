@@ -1,4 +1,4 @@
-const Url = import.meta.env.VITE_WEBHOOK_DISCORD_URL;
+const Url = import.meta.env.VITE_WEBHOOK_DISCORD_URL_TEST;
 
 /**
  * Envoie un message sur le WebHook Discord

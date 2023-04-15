@@ -67,9 +67,9 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
       if (savedAnnonce) {
         notify("success", savedAnnonce.message);
         setValues(initialValues);
-        reloadAnnonces();
-
         //sendEmbedsToDiscord(postEmbeds);
+
+        reloadAnnonces();
         setErrors({});
         setClose();
       }

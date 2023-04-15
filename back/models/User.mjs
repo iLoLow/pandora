@@ -35,15 +35,24 @@ class User extends Database {
    * @param password - le mot de passe que l'utilisateur a saisi
    * @param cb - fonction de rappel
    */
-  static create(user_id, username, email, password, avatar_url, cb) {
-    connection.query(
-      "INSERT INTO users (user_id, username, email, password, avatar_url) VALUES (?, ?, ?, ?,?)",
-      [user_id, username, email, password, avatar_url],
-      (err, result) => {
-        cb(err, result);
-      }
-    );
-    connection.release();
+  static async create(user_id, username, email, password, avatar_url, cb) {
+    let is_admin = false;
+
+    const users = await this.getAll();
+    if (users.length === 0) {
+      is_admin = true;
+    }
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "INSERT INTO users (user_id, username, email, password, avatar_url, is_admin) VALUES (?, ?, ?, ?, ?, ?)",
+        [user_id, username, email, password, avatar_url, is_admin],
+        (err, result) => {
+          if (err) reject(err);
+          resolve(result);
+        }
+      );
+      connection.release();
+    });
   }
 
   /**
@@ -58,7 +67,7 @@ class User extends Database {
     return new Promise((resolve, reject) => {
       connection.query("SELECT * FROM users WHERE user_id = ?", [user_id], (err, result) => {
         if (err) reject(err);
-        resolve(result[0]);
+        resolve(result);
       });
       connection.release();
     });
@@ -84,11 +93,14 @@ class User extends Database {
    * rappel.
    * @param cb - fonction de rappel
    */
-  static getAll(cb) {
-    connection.query("SELECT * FROM users", (err, results) => {
-      cb(err, results);
+  static getAll() {
+    return new Promise((resolve, reject) => {
+      connection.query("SELECT * FROM users", (err, results) => {
+        if (err) reject(err);
+        resolve(results);
+      });
+      connection.release();
     });
-    connection.release();
   }
 
   /**

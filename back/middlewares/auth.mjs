@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import User from "../models/User.mjs";
 
 export const verifyToken = (req, res, next) => {
   try {
@@ -23,7 +24,29 @@ export const verifyToken = (req, res, next) => {
       next();
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Autorisation échouée, veuillez vous connecter.", code: 500 });
+    next();
+  }
+};
+
+/**
+ * Vérifie si l'utilsateur est admin
+ *
+ * @params { String } user_id Identifiant de l'utilisateur
+ * @params { function } Callback de retour si l'ultilisateur n'est pas admin
+ */
+export const checkIsAdmin = async (req, res, next) => {
+  try {
+    const { userId } = req.user;
+    const user = await User.get(userId);
+    if (!user[0].is_admin) {
+      return res.status(403).json({ error: "Vous n'êtes pas autorisé, veuillez contacter l'administrateur.", code: 403 });
+    }
+    next();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Erreur interne du serveur", code: 500 });
     next();
   }
 };

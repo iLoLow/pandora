@@ -2,40 +2,55 @@ import { useState, useEffect } from "react";
 import "../../styles/tableaudebord/GalerieAdmin.css";
 import ImagePreview from "../../components/ImagePreview";
 import useToast from "../../hooks/useToast";
+import { useSelector } from "react-redux";
 
 function GalerieAdmin() {
   const [galerie, setGalerie] = useState([]);
   const notify = useToast();
+  const token = useSelector((state) => state.token);
 
   const getAnnonces = async () => {
     try {
       const response = await fetch("/api/annonces");
-      return await response.json();
+      const data = await response.json();
+      if (data.code === 500) {
+        notify("error", data.error);
+      }
+      return data;
     } catch (error) {
-      console.error(error);
+      notify("error", "Une erreur c'est produite, veuillez contacter l'administrateur.");
     }
   };
 
   const getGalerie = async () => {
     try {
-      const response = await fetch("/api/thumbs");
-      return await response.json();
+      const response = await fetch("/api/thumbs", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json();
+
+      if (data.code === 500 || data.code === 403) {
+        notify("error", data.error);
+      }
+      return data;
     } catch (error) {
-      console.error(error);
+      notify("error", "Impossible de récupérer les images");
     }
   };
 
   const associateImagesWithAnnonces = async () => {
-    const annonces = await getAnnonces();
-    const galerie = await getGalerie();
     try {
-      const galerieWithAnnonces = galerie.map((image) => {
-        const annoncesIds = annonces.filter((annonce) => annonce.image_url === `/assets/${image.name}`).map((annonce) => annonce.id);
-        return { ...image, annoncesIds };
-      });
-      setGalerie(galerieWithAnnonces);
+      const annonces = await getAnnonces();
+      const galerie = await getGalerie();
+
+      if (galerie.length > 0) {
+        const galerieWithAnnonces = galerie.map((image) => {
+          const annoncesIds = annonces.filter((annonce) => annonce.image_url === `/assets/${image.name}`).map((annonce) => annonce.id);
+          return { ...image, annoncesIds };
+        });
+        setGalerie(galerieWithAnnonces);
+      }
     } catch (error) {
-      console.error(error);
       notify("error", "Impossible de récupérer les images");
     }
   };

@@ -1,22 +1,27 @@
 import fs from "fs";
 import * as path from "path";
 
-export const getAllImages = (req, res) => {
-  fs.readdir(path.join("public/assets/thumbs"), (err, files) => {
-    if (err) {
-      res.status(500).json({ error: "Error reading files" });
-    } else {
-      const images = files.map((file) => {
-        console.log(file);
-        return {
-          name: file,
-          type: file.split(".")[1],
-          url: `/assets/thumbs/${file}`,
-        };
-      });
-      res.json(images);
-    }
-  });
+export const getAllImages = async (req, res, next) => {
+  try {
+    fs.readdir(path.join("public/assets/thumbs"), (err, files) => {
+      if (err) {
+        res.status(500).json({ error: "Error reading files", code: 500 });
+      } else {
+        const images = files.map((file) => {
+          return {
+            name: file,
+            type: file.split(".")[1],
+            url: `/assets/thumbs/${file}`,
+          };
+        });
+        res.json(images);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Erreur interne du serveur.", code: 500 });
+    next();
+  }
 };
 
 export const deleteImage = async (req, res, next) => {

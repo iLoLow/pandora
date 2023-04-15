@@ -32,7 +32,9 @@ function Header() {
         <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/boutique">
           Boutique
         </NavLink>
-
+        <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/identification">
+          S"identifier
+        </NavLink>
         <Toggle />
         <ProfilMenu user={user} />
       </nav>

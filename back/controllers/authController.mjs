@@ -16,14 +16,19 @@ export const register = async (req, res, next) => {
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    User.create(user_id, username, email, hashedPassword, avatar_url, (err) => {
-      if (err) {
-        return res.status(400).json({ error: "Impossible de créer l'utilisateur avec cet email: " + email, code: 400 });
-        next();
-      }
-      res.status(201).json({ message: "Votre compte a bien été créé. Vous pouvez maintenant vous connecter.", code: 201 });
-    });
+
+    const savedUser = await User.create(user_id, username, email, hashedPassword, avatar_url);
+
+    console.log(savedUser);
+
+    if (!savedUser);
+
+    res.status(201).json({ message: "Votre compte a bien été créé. Vous pouvez maintenant vous connecter.", code: 201 });
   } catch (err) {
+    if (err.code === "ER_DUP_ENTRY") {
+      return res.status(400).json({ error: "Impossible de créer l'utilisateur avec cet email: " + email, code: 400 });
+      next();
+    }
     return res.status(500).json({ error: "Erreur lors de la création de l'utilisateur", code: 500 });
     next();
   }

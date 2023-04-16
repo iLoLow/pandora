@@ -112,12 +112,16 @@ class User extends Database {
    * @param password - le mot de passe que l'utilisateur a saisi dans le formulaire
    * @param cb - fonction de rappel
    */
-  static update(id, username, email, password, avatar_url) {
+  static update(id, username, email, password, avatar_url, is_admin) {
     return new Promise((resolve, reject) => {
-      connection.query("UPDATE users SET username = ?, email = ?, password = ?, avatar_url=? WHERE id = ?", [username, email, password, avatar_url, id], (err, result) => {
-        if (err) reject(err);
-        resolve(result);
-      });
+      connection.query(
+        "UPDATE users SET username = ?, email = ?, password = ?, avatar_url=?, is_admin=? WHERE id = ?",
+        [username, email, password, avatar_url, is_admin, id],
+        (err, result) => {
+          if (err) reject(err);
+          resolve(result);
+        }
+      );
       connection.release();
     });
   }

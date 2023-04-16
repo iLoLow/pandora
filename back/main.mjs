@@ -9,6 +9,7 @@ import rateLimit from "express-rate-limit";
 import { fileURLToPath } from "url";
 import userRoutes from "./routes/userRoutes.mjs";
 import authRoutes from "./routes/authRoutes.mjs";
+import adminRoutes from "./routes/adminRoutes.mjs";
 import annonceRoutes from "./routes/annonceRoutes.mjs";
 import imageRoutes from "./routes/imageRoutes.mjs";
 
@@ -66,6 +67,9 @@ app.use("/api/thumbs", imageRoutes);
 
 // Definition des routes d'authentification
 app.use("/api/auth", authRoutes);
+
+// Définition des routes del 'admin
+app.use("/api/admin", adminRoutes);
 
 // Definition de la route user
 app.use("/api/users", userRoutes);

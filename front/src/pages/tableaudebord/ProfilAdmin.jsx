@@ -6,48 +6,71 @@ import useToast from "../../hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../state";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UpdateUserForm from "../../components/UpdateUserForm";
+import AdminProfilCard from "../../components/AdminProfilCard";
+import AdminWrapper from "../../components/AdminWrapper";
 
 function ProfilAdmin() {
-  const user = useSelector((state) => state.user);
+  const { user_id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
   const notify = useToast();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState({});
+
+  const getUser = async () => {
+    try {
+      const response = await fetch("/api/users/" + user_id, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json();
+
+      if (data.code === 500 || data.code === 403) {
+        notify("error", data.error);
+      }
+      setUser(data);
+    } catch (error) {
+      //
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const deleteUser = async () => {
     try {
-      confirm("Voulez-vous supprimer définitivement votre compte ?");
+      if (confirm("Voulez-vous supprimer définitivement votre compte ?")) {
+        const response = await fetch("/api/users/" + user_id, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
 
-      const response = await fetch("/api/users/" + user.user_id, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
+        const data = await response.json();
 
-      const data = await response.json();
+        if (data.error) {
+          notify("error", data.error);
+          throw new Error(data.code + " " + data.error);
+        }
 
-      if (data.error) {
-        notify("error", data.error);
-        throw new Error(data.code + " " + data.error);
-      }
+        if (data.code === 500) {
+          notify("error", data.error);
+        }
 
-      if (data.code === 500) {
-        notify("error", data.error);
-      }
+        if (data.code === 403) {
+          notify("error", data.error);
+        }
 
-      if (data.code === 403) {
-        notify("error", data.error);
-      }
-
-      if (data) {
-        notify("success", data.message);
-        dispatch(setLogout());
-        navigate("/");
+        if (data) {
+          notify("success", data.message);
+          dispatch(setLogout());
+          navigate("/");
+        }
       }
     } catch (error) {
       console.error(error);
@@ -66,47 +89,19 @@ function ProfilAdmin() {
     return;
   }
 
+  const handleReloadUser = () => {
+    dispatch(setLogout());
+    navigate("/identification");
+  };
+
   return (
-    <section className="profilAdminWrapper">
-      {/* Header */}
-      <div className="profilAdminHeader">
-        <h2>Profil de {user.username}</h2>
-      </div>
-
+    <AdminWrapper title={"Gestion De Mon Profil"}>
       {/* Profil Card */}
-      <div className="profilAdminCard">
-        <div className="profilAdminAvatar">
-          <img src={user.avatar_url} alt="avatar" />
-        </div>
-        <div className="profilAdminInfo">
-          <div className="profilAdminInfoItem">
-            <span className="profilAdminInfoKey">nom d'utilisateur : </span>
-            <span className="profilAdminInfoValue">{user.username}</span>
-          </div>
-          <div className="profilAdminInfoItem">
-            <span className="profilAdminInfoKey">email: </span>
-            <span className="profilAdminInfoValue">{user.email}</span>
-          </div>
-          <div className="profilAdminInfoItem">
-            <span className="profilAdminInfoKey">date d'inscription : </span>
-            <span className="profilAdminInfoValue">{moment(user.created_at).format("DD/MM/YYYY")}</span>
-          </div>
-          <div className="profilAdminInfoItem">
-            <span className="profilAdminInfoKey">mise à jour : </span>
-            <span className="profilAdminInfoValue">{moment(user.updated_at).fromNow()}.</span>
-          </div>
-          {/* Gestion Profil */}
-          <div className="profilAdminGestion">
-            <Button children="Mettre à jour" color="green" onClick={updateHandleProfil} />
-            <Button children="Supprimer" color="red" onClick={deleteHandleProfil} />
-          </div>
-        </div>
-      </div>
-
+      <AdminProfilCard user={user} updateHandleProfil={updateHandleProfil} deleteHandleProfil={deleteHandleProfil} />
       {/* Profil Update */}
 
-      {isOpen && <UpdateUserForm />}
-    </section>
+      {isOpen && <UpdateUserForm user={user} handleReload={() => handleReloadUser()} />}
+    </AdminWrapper>
   );
 }
 

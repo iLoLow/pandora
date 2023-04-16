@@ -1,6 +1,7 @@
 import "../../styles/tableaudebord/AccueilAdmin.css";
 import Button from "../../components/Button";
 import { useState } from "react";
+import AdminWrapper from "../../components/AdminWrapper";
 
 function AccueilAdmin() {
   const [isCopied, setIsCopied] = useState(false);
@@ -16,13 +17,13 @@ function AccueilAdmin() {
   };
 
   return (
-    <section className="accueilAdminWrapper">
-      {/* header */}
-      <h2>Bienvenue sur le tableau de bord</h2>
+    <AdminWrapper title={"Bienvenue sur le tableau de bord"}>
       <div className="accueilAdminHeader">
         <Button onClick={handleCopyClick}>{isCopied ? "Copié !" : "Copier le lien d'inscription"}</Button>
       </div>
-    </section>
+      {/* body */}
+      <div className="accueilAdminBody"></div>
+    </AdminWrapper>
   );
 }
 export default AccueilAdmin;

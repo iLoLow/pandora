@@ -51,6 +51,11 @@ input {
 input::placeholder {
   font-size: clamp(0.7rem, 2vw, 0.9rem);
 }
+.formCheck {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .linkBtn {
   text-align: center;

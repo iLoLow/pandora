@@ -34,14 +34,6 @@ export const registerValidationSchema = yup.object().shape({
 export const updateProfilValidationSchema = yup.object().shape({
   username: yup.string().trim().required("Veuillez renseigner votre nom d'utilisateur.").min(4, "Le nom d'utilisateur doit contenir au moins 4 caractères."),
   email: yup.string().trim().email().required("Veuillez renseigner une adresse email valide."),
-  oldPassword: yup
-    .string()
-    .trim()
-    .required("Veuillez renseigner un mot de passe")
-    .matches(
-      /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,30})/g,
-      "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial."
-    ),
   password: yup
     .string()
     .trim()
@@ -49,16 +41,13 @@ export const updateProfilValidationSchema = yup.object().shape({
     .matches(
       /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,30})/g,
       "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial."
-    )
-    .test("notOneOf", "Le nouveau mot de passe doit être différent de l'ancien.", function (value) {
-      return value === "" || value !== this.parent.oldPassword;
-    }),
+    ),
   confirmPassword: yup
     .string()
     .trim()
     .nullable(true)
-    .test("notOneOf", "Le nouveau mot de passe doit être différent de l'ancien.", function (value) {
-      return value === "" || value !== this.parent.oldPassword;
+    .test("oneOf", "Veuillez saisir un mot de passe identique.", function (value) {
+      return value === "" || value === this.parent.password;
     }),
   avatar: yup
     .mixed()

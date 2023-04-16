@@ -3,6 +3,7 @@ import "../../styles/tableaudebord/GalerieAdmin.css";
 import ImagePreview from "../../components/ImagePreview";
 import useToast from "../../hooks/useToast";
 import { useSelector } from "react-redux";
+import AdminWrapper from "../../components/AdminWrapper";
 
 function GalerieAdmin() {
   const [galerie, setGalerie] = useState([]);
@@ -69,6 +70,7 @@ function GalerieAdmin() {
       if (window.confirm("Voulez-vous supprimer cette image ?")) {
         const response = await fetch(`/api/thumbs/${name}`, {
           method: "DELETE",
+          headers: { Authorization: "Bearer " + token },
         });
         if (response.ok) {
           notify("success", "Image supprimée avec succès");
@@ -81,8 +83,7 @@ function GalerieAdmin() {
   };
 
   return (
-    <section className="galerieAdmin">
-      <h2>Gestion des Images</h2>
+    <AdminWrapper title={"Gestion des Images"}>
       <div className="galerieAdminMessage">
         <svg stroke="rgb(179,2,3)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} className="w-6 h-6">
           <path
@@ -98,7 +99,7 @@ function GalerieAdmin() {
           <ImagePreview key={index} image={image} handleClick={() => deleteHandleImage(image)} />
         ))}
       </div>
-    </section>
+    </AdminWrapper>
   );
 }
 

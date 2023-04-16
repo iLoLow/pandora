@@ -1,0 +1,15 @@
+.sectionForm .formDiscord {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.webhookCheckbox {
+  display: flex;
+  align-items: center;
+}
+.webhookBtns {
+  display: flex;
+  justify-content: space-between;
+}

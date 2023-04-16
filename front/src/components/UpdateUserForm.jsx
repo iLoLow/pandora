@@ -1,30 +1,25 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Dropzone from "react-dropzone";
 import { updateProfilValidationSchema } from "../utils/schemasValidation";
 import Button from "../components/Button";
 import useToast from "../hooks/useToast";
-import { setLogout } from "../state";
 
-function UpdateUserForm() {
-  const user = useSelector((state) => state.user);
+function UpdateUserForm({ user, isAdministrator, handleReload = () => {} }) {
   const token = useSelector((state) => state.token);
 
   let initialValues = {
     username: user.username,
     email: user.email,
-    oldPassword: undefined,
     password: undefined,
     confirmPassword: undefined,
     avatar: null,
     avatar_url: user.avatar_url,
+    is_admin: user.is_admin,
   };
 
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const notify = useToast();
 
   // Mise à jour du profil de l'utilisateur
@@ -53,8 +48,7 @@ function UpdateUserForm() {
 
       if (savedUser) {
         notify("success", savedUser.message);
-        dispatch(setLogout());
-        navigate("/identification");
+        handleReload();
       }
     } catch (e) {
       const errors = e.inner.reduce((acc, error) => {
@@ -86,14 +80,9 @@ function UpdateUserForm() {
           {errors.email && <small className="errorSmall">{errors.email}</small>}
         </form-group>
         <form-group>
-          <label>Mot de passe actuel :</label>
-          <input autoComplete="off" type="password" value={values.oldPassword} onChange={(e) => setValues({ ...values, oldPassword: e.target.value })} placeholder="Requis..." />
-          {errors.oldPassword && <small className="errorSmall">{errors.oldPassword}</small>}
-        </form-group>
-        <form-group>
           <label>Nouveau Mot de passe :</label>
           <input
-            autoComplete="off"
+            autoComplete="new-password"
             type="password"
             value={values.password}
             onChange={(e) => setValues({ ...values, password: e.target.value === "" ? undefined : e.target.value })}
@@ -132,6 +121,14 @@ function UpdateUserForm() {
               </div>
             )}
           </Dropzone>
+          {isAdministrator && (
+            <form-group>
+              <div className="formCheck">
+                <label>Promouvoir en Administrateur: </label>
+                <input type="checkbox" value={1} checked={values.is_admin} onChange={(e) => setValues({ ...values, is_admin: Number(e.target.checked) })} />
+              </div>
+            </form-group>
+          )}
         </>
         <Button type="submit" children="Valider" />
       </form>

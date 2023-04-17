@@ -6,7 +6,7 @@ import useToast from "../../../hooks/useToast";
 import "../../../styles/tableaudebord/AdminUsers.css";
 import UpdateUserForm from "../../../components/UpdateUserForm";
 
-function AdminUsers() {
+function UsersAdmin() {
   const token = useSelector((state) => state.token);
   const [users, setUsers] = useState([]);
   const notify = useToast();
@@ -87,4 +87,4 @@ function AdminUsers() {
   );
 }
 
-export default AdminUsers;
+export default UsersAdmin;

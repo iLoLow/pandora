@@ -5,7 +5,7 @@ import useToast from "../../../hooks/useToast";
 import AdminAnnonceCard from "../../../components/AdminAnnonceCard";
 import ModifyAnnonceForm from "../../../components/ModifyAnnonceForm";
 
-function AdminAnnonces() {
+function AnnoncesAdmin() {
   const token = useSelector((state) => state.token);
   const [annonces, setAnnonces] = useState([]);
   const [editAnnonceIndex, setEditAnnonceIndex] = useState(-1);
@@ -73,4 +73,4 @@ function AdminAnnonces() {
   );
 }
 
-export default AdminAnnonces;
+export default AnnoncesAdmin;

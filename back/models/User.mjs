@@ -18,7 +18,7 @@ connection.on("error", async (err) => {
  * @class User model on the database mysql
  * @description This class is used to create, update, delete, and get users from the database.
  */
-class User extends Database {
+class User {
   constructor(user_id, username, email, password, avatar_url) {
     this.user_id = user_id;
     this.username = username;

@@ -1,0 +1,15 @@
+.addBoutiqueBtn {
+  flex: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  padding: 6px;
+  background: inherit;
+  border: 1px solid var(--text-secondary);
+  box-shadow: -1px 1px 8px 0px var(--shadow);
+  transition: box-shadow 0.2s ease-out;
+  cursor: pointer;
+}
+.addBoutiqueBtn:hover {
+  box-shadow: -1px 1px 8px 6px var(--shadow);
+}

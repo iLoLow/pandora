@@ -1,15 +1,24 @@
+import "../styles/TableauDeBord.css";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import "../styles/TableauDeBord.css";
-import { Routes, Route } from "react-router-dom";
-import ProfilAdmin from "./tableaudebord/ProfilAdmin";
-import AnnoncesAdmin from "./tableaudebord/AnnoncesAdmin";
-import BoutiqueAdmin from "./tableaudebord/BoutiqueAdmin";
-import AccueilAdmin from "./tableaudebord/AccueilAdmin";
-import GalerieAdmin from "./tableaudebord/GalerieAdmin";
-import AdminUsers from "./tableaudebord/admin/AdminUsers";
-import AdminAnnonces from "./tableaudebord/admin/AdminAnnonces";
 import { useSelector } from "react-redux";
+import { Routes, Route } from "react-router-dom";
+
+// Import component for home dashboard
+import AccueilAdmin from "./tableaudebord/AccueilAdmin";
+
+// Import components for Users
+import InfosUser from "./tableaudebord/InfosUser";
+import ProfilUser from "./tableaudebord/ProfilUser";
+import AnnoncesUser from "./tableaudebord/AnnoncesUser";
+
+//  Import components for Administration
+import InfosAdmin from "./tableaudebord/admin/InfosAdmin";
+import UsersAdmin from "./tableaudebord/admin/UsersAdmin";
+import AnnoncesAdmin from "./tableaudebord/admin/AnnoncesAdmin";
+import GalerieAdmin from "./tableaudebord/admin/GalerieAdmin";
+import ServicesAdmin from "./tableaudebord/admin/ServicesAdmin";
+import BoutiqueAdmin from "./tableaudebord/admin/BoutiqueAdmin";
 
 function TableauDeBord() {
   document.title = "Tableau de bord";
@@ -46,7 +55,7 @@ function TableauDeBord() {
             </span>
           </div>
         </div>
-        {/* Gestion utilisateur */}
+        {/* Gestion de l'utilisateur */}
         <h3 className="tableauDeBordCategorie">User</h3>
         <span className="tableauDeBordSeparateur"></span>
         <div className="tableauDeBordLinks">
@@ -76,7 +85,7 @@ function TableauDeBord() {
             <span>annonces</span>
           </NavLink>
         </div>
-
+        {/* Gestion de l'administration */}
         {!!is_admin && (
           <>
             <h3 className="tableauDeBordCategorie">Admin</h3>
@@ -155,14 +164,17 @@ function TableauDeBord() {
       </aside>
       <section className={isOpen ? "tableauDeBordBody" : "tableauDeBordBody  tableauDeBordBodySmall"}>
         <Routes>
-          <Route path="/" element={<AccueilAdmin />} />
-          <Route path="/profil" element={<ProfilAdmin />} />
-          <Route path="/annonces" element={<AnnoncesAdmin />} />
-          <Route path="/admin/infos" element={<ProfilAdmin />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="/admin/annonces" element={<AdminAnnonces />} />
+          {/* Routes Users */}
+          <Route path="/" element={<InfosUser />} />
+          <Route path="/profil" element={<ProfilUser />} />
+          <Route path="/annonces" element={<AnnoncesUser />} />
+
+          {/* Routes Administration */}
+          <Route path="/admin/infos" element={<InfosAdmin />} />
+          <Route path="/admin/users" element={<UsersAdmin />} />
+          <Route path="/admin/annonces" element={<AnnoncesAdmin />} />
           <Route path="/admin/galerie" element={<GalerieAdmin />} />
-          <Route path="/admin/services" element={<BoutiqueAdmin />} />
+          <Route path="/admin/services" element={<ServicesAdmin />} />
           <Route path="/admin/boutique" element={<BoutiqueAdmin />} />
         </Routes>
       </section>

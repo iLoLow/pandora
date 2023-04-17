@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import "../../styles/tableaudebord/AnnoncesAdmin.css";
+import "../../styles/tableaudebord/AnnoncesUser.css";
 import AddAnnonceForm from "../../components/AddAnnonceForm";
 import ModifyAnnonceForm from "../../components/ModifyAnnonceForm";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ import useToast from "../../hooks/useToast";
 import AdminWrapper from "../../components/AdminWrapper";
 import AdminAnnonceCard from "../../components/AdminAnnonceCard";
 
-function AnnoncesAdmin() {
+function AnnoncesUser() {
   const user = useSelector((state) => state.user) || {};
   const token = useSelector((state) => state.token) || "";
   const [annonces, setAnnonces] = useState([]);
@@ -105,4 +105,4 @@ function AnnoncesAdmin() {
   );
 }
 
-export default AnnoncesAdmin;
+export default AnnoncesUser;

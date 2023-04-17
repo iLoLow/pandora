@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import "../../styles/tableaudebord/GalerieAdmin.css";
-import ImagePreview from "../../components/ImagePreview";
-import useToast from "../../hooks/useToast";
+import "../../../styles/tableaudebord/GalerieAdmin.css";
+import ImagePreview from "../../../components/ImagePreview";
+import useToast from "../../../hooks/useToast";
 import { useSelector } from "react-redux";
-import AdminWrapper from "../../components/AdminWrapper";
+import AdminWrapper from "../../../components/AdminWrapper";
 
 function GalerieAdmin() {
   const [galerie, setGalerie] = useState([]);

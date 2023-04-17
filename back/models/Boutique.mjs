@@ -13,15 +13,16 @@ connection.on("error", async (err) => {
     throw err;
   }
 });
-class Boutique extends Database {
+class Boutique {
   constructor() {}
 
   //creation d'un article de la boutique dans la base de données
-  static create(name_article, description, price, image_url, boutique_id) {
+  static create(name_article, description, price, type_vehicule, image_url) {
+    console.log(name_article, description, price, type_vehicule, image_url);
     return new Promise((resolve, reject) => {
       connection.query(
-        "INSERT INTO boutique_items (name_article, description, price, image_url, boutique_id) VALUES (?, ?, ?, ?, ?)",
-        [name_article, description, price, image_url, boutique_id],
+        "INSERT INTO boutique_items (name_article, description, price, type_vehicule, image_url) VALUES (?, ?, ?, ?, ?)",
+        [name_article, description, price, type_vehicule, image_url],
         (err, result) => {
           if (err) reject(err);
           resolve(result);
@@ -51,11 +52,11 @@ class Boutique extends Database {
     });
   }
   //mise à jour d'un article de la boutique
-  static update(id, name_article, description, price, image_url, boutique_id) {
+  static update(id, name_article, description, price, type_vehicule, image_url) {
     return new Promise((resolve, reject) => {
       connection.query(
-        "UPDATE boutique_items SET name_article = ?, description = ?, price = ?, image_url = ?, boutique_id = ? WHERE id = ?",
-        [name_article, description, price, image_url, boutique_id, id],
+        "UPDATE boutique_items SET name_article = ?, description = ?, price = ?, type_vehicule = ?, image_url = ? WHERE id = ?",
+        [name_article, description, price, type_vehicule, image_url, id],
         (err, result) => {
           if (err) reject(err);
           resolve(result);

@@ -19,7 +19,7 @@ connection.on("error", async (err) => {
  *	@description Cette classe permet de créer, récupérer, mettre à jour et supprimer des annonces
  * @class Annonces
  */
-class Annonce extends Database {
+class Annonce {
   constructor() {}
 
   /**

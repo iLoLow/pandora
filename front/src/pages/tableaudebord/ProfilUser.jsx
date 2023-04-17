@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
-import "../../styles/tableaudebord/ProfilAdmin.css";
-import moment from "../../utils/moment";
-import Button from "../../components/Button";
+import "../../styles/tableaudebord/ProfilUser.css";
+
 import useToast from "../../hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../state";
@@ -11,7 +10,7 @@ import UpdateUserForm from "../../components/UpdateUserForm";
 import AdminProfilCard from "../../components/AdminProfilCard";
 import AdminWrapper from "../../components/AdminWrapper";
 
-function ProfilAdmin() {
+function ProfilUser() {
   const { user_id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
@@ -105,4 +104,4 @@ function ProfilAdmin() {
   );
 }
 
-export default ProfilAdmin;
+export default ProfilUser;

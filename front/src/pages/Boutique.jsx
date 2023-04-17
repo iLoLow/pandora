@@ -1,8 +1,8 @@
 import "../styles/Boutique.css";
 import { useEffect, useState } from "react";
-import BoutiqueItem from "../components/BoutiqueItem";
+import BoutiqueCard from "../components/BoutiqueCard";
 import { useNavigate } from "react-router-dom";
-import { useToast } from "react-toastify";
+import useToast from "../hooks/useToast";
 
 function Boutique() {
   document.title = "Boutique";
@@ -33,8 +33,7 @@ function Boutique() {
     <>
       <section className="boutique">
         <h2>Boutique</h2>
-
-        {items.length > 0 && items.map((item, k) => <BoutiqueItem key={k} item={item} />)}
+        <div className="itemsContainer">{items.length > 0 && items.map((item, k) => <BoutiqueCard key={k} item={item} />)}</div>
       </section>
     </>
   );

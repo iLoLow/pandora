@@ -1,11 +1,10 @@
-import "../styles/AnnonceForm.css";
 import Button from "../components/Button";
 import Dropzone from "react-dropzone";
 import MarkdownEditor from "../components/MarkdownEditor";
 
 function AnnonceForm({ values, setValues, errors, handleSubmit = () => {} }) {
   return (
-    <form className="formAnnonce" method="POST" onSubmit={handleSubmit}>
+    <form className="form" method="POST" onSubmit={handleSubmit}>
       <form-group>
         <label htmlFor="title">Titre :</label>
         <input type="text" name="title" id="title" value={values.title} onChange={(e) => setValues({ ...values, title: e.target.value })} />

@@ -10,7 +10,7 @@
 .banner img {
   display: block;
   object-fit: cover;
-  object-position: 6px 76px;
+  object-position: 0px 76px;
 }
 
 @media screen and (max-width: 768px) {

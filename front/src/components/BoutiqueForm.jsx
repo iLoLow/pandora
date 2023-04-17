@@ -2,9 +2,9 @@ import Dropzone from "react-dropzone";
 import Button from "./Button";
 import MarkdownEditor from "./MarkdownEditor";
 
-function FormBoutique({ values, setValues, errors, handleSubmit = () => {} }) {
+function BoutiqueForm({ values, setValues, errors, handleSubmit = () => {} }) {
   return (
-    <form className="formBoutique" method="POST" onSubmit={handleSubmit}>
+    <form className="form" method="POST" onSubmit={handleSubmit}>
       <form-group>
         <label htmlFor="name_article">Nom de l'article :</label>
         <input type="text" name="name_article" id="name_article" value={values.name_article} onChange={(e) => setValues({ ...values, name_article: e.target.value })} />
@@ -17,15 +17,9 @@ function FormBoutique({ values, setValues, errors, handleSubmit = () => {} }) {
         {errors.description && <small className="errorSmall">{errors.description}</small>}
       </form-group>
       <form-group>
-        <label htmlFor="type_de_vehicule">Type de véhicule :</label>
-        <input
-          type="text"
-          name="type_de_vehicule"
-          id="type_de_vehicule"
-          value={values.type_de_vehicule}
-          onChange={(e) => setValues({ ...values, type_de_vehicule: e.target.value })}
-        />
-        {errors.type_de_vehicule && <small className="errorSmall">{errors.type_de_vehicule}</small>}
+        <label htmlFor="type_vehicule">Type de véhicule :</label>
+        <input type="text" name="type_vehicule" id="type_vehicule" value={values.type_vehicule} onChange={(e) => setValues({ ...values, type_vehicule: e.target.value })} />
+        {errors.type_vehicule && <small className="errorSmall">{errors.type_vehicule}</small>}
       </form-group>
       <form-group>
         <label htmlFor="price">Prix :</label>
@@ -55,4 +49,4 @@ function FormBoutique({ values, setValues, errors, handleSubmit = () => {} }) {
   );
 }
 
-export default FormBoutique;
+export default BoutiqueForm;

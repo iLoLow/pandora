@@ -43,7 +43,7 @@ CREATE TABLE
     boutique_items(
         id INT AUTO_INCREMENT PRIMARY KEY,
         name_article VARCHAR(255) NOT NULL,
-        description TEXT NOT NULL,
+        description LONGTEXT NOT NULL,
         price DECIMAL(10, 2) NOT NULL,
         type_vehicule VARCHAR(255) NOT NULL,
         image_url VARCHAR(255) NOT NULL,

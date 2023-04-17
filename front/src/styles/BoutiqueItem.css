@@ -1,5 +1,7 @@
 .boutiqueItemContainer {
-  padding: 30px 15px;
+  padding: 50px 15px;
+  max-width: 1280px;
+  margin-inline: auto;
 }
 
 .boutiqueItemTitle {

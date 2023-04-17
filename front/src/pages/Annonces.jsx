@@ -29,14 +29,6 @@ function Annonces() {
     getAnnonces();
   }, []);
 
-  return (
-    <>
-      <section className="annonces">
-        <h2 className="titleAnnonces">Annonces du Serveur</h2>
-
-        {annonces.length > 0 && annonces.map((annonce, k) => <Article reload={getAnnonces} key={k} annonce={annonce} />)}
-      </section>
-    </>
-  );
+  return <section className="annonces">{annonces.length > 0 && annonces.map((annonce, k) => <Article reload={getAnnonces} key={k} annonce={annonce} />)}</section>;
 }
 export default Annonces;

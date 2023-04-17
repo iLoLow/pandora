@@ -9,10 +9,34 @@
   box-shadow: -1px 1px 6px 0 var(--shadow);
   cursor: pointer;
 }
+.boutiqueCardContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.boutiqueCardContainer:hover .textHover {
+  opacity: 1;
+}
+
 .imgContainer {
+  position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+.textHover {
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 250ms;
+  color: white;
 }
 .imgContainer img {
   width: 100%;
@@ -45,4 +69,8 @@
 .boutiqueCard .boutiqueCardPrice {
   border: 1px var(--text-secondary) solid;
   border-radius: 10px;
+}
+
+.boutiqueBtn {
+  margin: 5px;
 }

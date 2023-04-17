@@ -71,12 +71,12 @@ function UpdateUserForm({ user, isAdministrator, handleReload = () => {} }) {
       <form className="formIdentification" method="POST" onSubmit={handleSubmit}>
         <form-group>
           <label>Nom d'utilisateur :</label>
-          <input type="text" value={values.username} onChange={(e) => setValues({ ...values, username: e.target.value })} />
+          <input autoComplete="username" type="text" value={values.username} onChange={(e) => setValues({ ...values, username: e.target.value })} />
           {errors.username && <small className="errorSmall">{errors.username}</small>}
         </form-group>
         <form-group>
           <label>Email :</label>
-          <input type="email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />
+          <input autoComplete="username" type="email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />
           {errors.email && <small className="errorSmall">{errors.email}</small>}
         </form-group>
         <form-group>
@@ -94,7 +94,7 @@ function UpdateUserForm({ user, isAdministrator, handleReload = () => {} }) {
           <form-group>
             <label>Confirmation du Nouveau Mot de Passe :</label>
             <input
-              autoComplete="off"
+              autoComplete="new-password"
               type="password"
               value={values.confirmPassword}
               onChange={(e) => setValues({ ...values, confirmPassword: e.target.value === "" ? undefined : e.target.value })}

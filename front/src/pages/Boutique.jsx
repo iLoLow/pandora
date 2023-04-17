@@ -29,11 +29,15 @@ function Boutique() {
     getItems();
   }, []);
 
+  const handleReservationItem = () => {
+    console.log("click");
+  };
+
   return (
     <>
       <section className="boutique">
         <h2>Boutique</h2>
-        <div className="itemsContainer">{items.length > 0 && items.map((item, k) => <BoutiqueCard key={k} item={item} />)}</div>
+        <div className="itemsContainer">{items.length > 0 && items.map((item, k) => <BoutiqueCard key={k} item={item} handleRevervation={() => handleReservationItem()} />)}</div>
       </section>
     </>
   );

@@ -116,25 +116,25 @@ function Identification() {
         {formType === "signUp" && (
           <form-group>
             <label>Nom d'utilisateur :</label>
-            <input type="text" value={values.username} onChange={(e) => setValues({ ...values, username: e.target.value })} />
+            <input autoComplete="username" type="text" value={values.username} onChange={(e) => setValues({ ...values, username: e.target.value })} />
             {errors.username && <small className="errorSmall">{errors.username}</small>}
           </form-group>
         )}
         <form-group>
           <label>Email :</label>
-          <input type="email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />
+          <input autoComplete="username" type="email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />
           {errors.email && <small className="errorSmall">{errors.email}</small>}
         </form-group>
         <form-group>
           <label>Mot de passe :</label>
-          <input autoComplete="off" type="password" value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
+          <input autoComplete="new-password" type="password" value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
           {errors.password && <small className="errorSmall">{errors.password}</small>}
         </form-group>
         {isSignup && (
           <>
             <form-group>
               <label>Confirmation du mot de passe :</label>
-              <input autoComplete="off" type="password" value={values.confirmPassword} onChange={(e) => setValues({ ...values, confirmPassword: e.target.value })} />
+              <input autoComplete="new-password" type="password" value={values.confirmPassword} onChange={(e) => setValues({ ...values, confirmPassword: e.target.value })} />
               {errors.confirmPassword && <small className="errorSmall">{errors.confirmPassword}</small>}
             </form-group>
             <Dropzone multiple={false} onDrop={(acceptedFiles) => setValues({ ...values, avatar: acceptedFiles[0] })}>

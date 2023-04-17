@@ -59,13 +59,13 @@ npm run build
 - [x] application de admin = true sur le premier user inscrit
 - l'admin aura la possibilité de:
 
-  - [ ] gestion de tout les users avec la possibilité d'ajouter des admins
-  - [ ] gestion de toutes les annonces
+  - [x] gestion de tout les users avec la possibilité d'ajouter des admins
+  - [x] gestion de toutes les annonces
   - [x] gestion des images du serveur
   - [ ] creation et activation du service discord pour les embeds
-    - [ ] formulaire:
-      - [ ] champ url webhook
-      - [ ] champ url site
+    - [x] formulaire:
+      - [x] champ url webhook
+      - [x] champ url site
       - [ ] champ embeds
     - [ ] checkbox activation
     - [ ] bouton suppression du webhook

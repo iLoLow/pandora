@@ -12,6 +12,7 @@ import authRoutes from "./routes/authRoutes.mjs";
 import adminRoutes from "./routes/adminRoutes.mjs";
 import annonceRoutes from "./routes/annonceRoutes.mjs";
 import imageRoutes from "./routes/imageRoutes.mjs";
+import boutiqueRoutes from "./routes/boutiqueRoutes.mjs";
 
 // Resolve dirname anf filename for es6
 const __filename = fileURLToPath(import.meta.url); // Résolution du chemin du fichier
@@ -76,6 +77,9 @@ app.use("/api/users", userRoutes);
 
 // Définition de la route annonce
 app.use("/api/annonces", annonceRoutes);
+
+// Définition de la route boutique
+app.use("/api/boutique", boutiqueRoutes);
 
 // Attention ces routes doivent être définies après les routes de l'api !!! (sinon elles seront prioritaires)
 // Définition du dossier de build du front (React)

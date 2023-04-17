@@ -103,3 +103,30 @@ export const annonceModifyValidationSchema = yup.object().shape({
       return value === null || value.size <= 10000000;
     }),
 });
+
+export const boutique_itemValidationSchema = yup.object().shape({
+  name_article: yup
+    .string()
+    .trim()
+    .required("Veuillez renseigner un nom.")
+    .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
+  description: yup
+    .string()
+    .trim()
+    .required("Veuillez renseigner une description.")
+    .matches(/^[^<>]*$/, "Les caractères spéciaux ne sont pas autorisés sauf ', ., ;, (, ), #, @, €'."),
+  type_de_vehicule: yup
+    .string()
+    .trim()
+    .required("Veuillez renseigner un type de véhicule.")
+    .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
+  price: yup.number().required("Veuillez renseigner un prix.").positive("Le prix doit être positif.").integer("Le prix doit être un nombre entier."),
+  image: yup
+    .mixed()
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
+      return value && ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
+    })
+    .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => {
+      return value && value.size <= 10000000;
+    }),
+});

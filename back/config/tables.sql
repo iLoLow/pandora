@@ -23,11 +23,11 @@ CREATE TABLE
 
 CREATE TABLE
     annonces (
-        id INT(11) AUTO_INCREMENT PRIMARY KEY,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255) NOT NULL,
         description LONGTEXT NOT NULL,
         image_url VARCHAR(255) NOT NULL,
-        likes INT(11) NOT NULL DEFAULT 0,
+        likes INT NOT NULL DEFAULT 0,
         liked_users LONGTEXT NOT NULL DEFAULT '[]',
         disliked_users LONGTEXT NOT NULL DEFAULT '[]',
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -35,4 +35,18 @@ CREATE TABLE
         user_id VARCHAR(255) NOT NULL,
         username VARCHAR(255) NOT NULL,
         avatar_url VARCHAR(255) NOT NULL
+    );
+
+/* Création de la table boutique */
+
+CREATE TABLE
+    boutique_items(
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name_article VARCHAR(255) NOT NULL,
+        description TEXT NOT NULL,
+        price DECIMAL(10, 2) NOT NULL,
+        type_vehicule VARCHAR(255) NOT NULL,
+        image_url VARCHAR(255) NOT NULL,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );

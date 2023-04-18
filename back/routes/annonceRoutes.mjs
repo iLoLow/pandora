@@ -14,12 +14,12 @@ import {
 
 const router = new Router();
 
-router.post("/", verifyToken, multerStorage.single("image"), createAnnonce);
+router.post("/", verifyToken, multerStorage.single("annonce_image"), createAnnonce);
 router.get("/", getAllAnnonces);
 router.get("/single/:id", getAnnonce);
 router.get("/last", getLastAnnonces);
 router.get("/user/:userId", verifyToken, getAnnoncesByUser);
-router.patch("/:id", verifyToken, multerStorage.single("image"), updateAnnonce);
+router.patch("/:id", verifyToken, multerStorage.single("annonce_image"), updateAnnonce);
 router.delete("/:id", verifyToken, deleteAnnonce);
 router.patch("/like/:id", likeOrDislikeAnnonce);
 

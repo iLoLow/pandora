@@ -1,10 +1,12 @@
 import "../styles/AdminAnnonceCard.css";
 
 function AdminAnnonceCard({ annonce, handleEditAnnonce = () => {}, deleteHandleAnnonce = () => {} }) {
+  const img = annonce.image_url.split("annonces/")[1];
+
   return (
     <div className="tableauAnnonce">
       <div className="tableauAnnonceItem img">
-        <img src={annonce.image_url} alt="preview" className="tableauAnnonceImg" />
+        <img src={"/images/annonces/thumbs/" + img} alt="preview" className="tableauAnnonceImg" />
       </div>
       <div className="tableauAnnonceItem title ">
         <div className="tableauAnnonceItemHeader">

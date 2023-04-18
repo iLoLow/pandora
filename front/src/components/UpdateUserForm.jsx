@@ -13,8 +13,7 @@ function UpdateUserForm({ user, isAdministrator, handleReload = () => {} }) {
     email: user.email,
     password: undefined,
     confirmPassword: undefined,
-    avatar: null,
-    avatar_url: user.avatar_url,
+    avatar_image: null,
     is_admin: user.is_admin,
   };
 
@@ -51,6 +50,7 @@ function UpdateUserForm({ user, isAdministrator, handleReload = () => {} }) {
         handleReload();
       }
     } catch (e) {
+      console.log(e);
       const errors = e.inner.reduce((acc, error) => {
         return { ...acc, [error.path]: error.message };
       }, {});
@@ -103,17 +103,17 @@ function UpdateUserForm({ user, isAdministrator, handleReload = () => {} }) {
             {errors.confirmPassword && <small className="errorSmall">{errors.confirmPassword}</small>}
           </form-group>
 
-          <Dropzone multiple={false} onDrop={(acceptedFiles) => setValues({ ...values, avatar: acceptedFiles[0], avatar_url: "/assets/" + acceptedFiles[0].name })}>
+          <Dropzone multiple={false} onDrop={(acceptedFiles) => setValues({ ...values, avatar_image: acceptedFiles[0] })}>
             {({ getRootProps, getInputProps }) => (
               <div {...getRootProps()} className="dropzone">
-                <div className={errors.avatar ? "zone zone-error" : "zone"}>
+                <div className={errors.avatar_image ? "zone zone-error" : "zone"}>
                   <input {...getInputProps()} />
-                  {errors.avatar ? (
-                    <small className="errorSmall">{errors.avatar}</small>
-                  ) : values.avatar ? (
-                    <p>Image choisie : {values.avatar.name}</p>
-                  ) : values.avatar_url ? (
-                    <p>Image choisie : {values.avatar_url.split("/assets/")[1]}</p>
+                  {errors.avatar_image ? (
+                    <small className="errorSmall">{errors.avatar_image}</small>
+                  ) : values.avatar_image ? (
+                    <p>Image choisie : {values.avatar_image.name}</p>
+                  ) : !values.avatar_image ? (
+                    <p>Image choisie : {user.avatar_url.split("avatars/")[1]}</p>
                   ) : (
                     <p>Glissez-déposez votre avatar, ou cliquez pour sélectionner votre avatar.</p>
                   )}

@@ -10,10 +10,11 @@ import jwt from "jsonwebtoken";
  * @param next - une fonction qui sera appelée lorsque le middleware sera terminé.
  */
 export const register = async (req, res, next) => {
-  const { username, email, password, avatar_url } = req.body;
-  const user_id = v4();
-
   try {
+    const { username, email, password } = req.body;
+    const avatar_url = "/" + req.file.destination + "/" + req.file.originalname;
+    const user_id = v4();
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 

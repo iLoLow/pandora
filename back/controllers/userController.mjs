@@ -1,5 +1,6 @@
 import User from "../models/User.mjs";
 import bcrypt from "bcrypt";
+import fs from "fs";
 
 /**
  * Récuperation de tous les utilisateurs
@@ -46,7 +47,7 @@ export const getUserById = async (req, res, next) => {
  */
 export const updateUser = async (req, res, next) => {
   try {
-    const { username, email, password, avatar_url, is_admin } = req.body;
+    const { username, email, password, is_admin } = req.body;
 
     // On recupère l'utilisateur grace à son user_id
     const userArray = await User.get(req.params.userId);
@@ -57,6 +58,8 @@ export const updateUser = async (req, res, next) => {
     // Si l'utilisateur n'existe pas
     if (!user) return res.status(400).json({ error: "Email ou mot de passe incorrect", code: 400 });
 
+    const avatar_url = req.file ? "/" + req.file.destination + "/" + req.file.originalname : user.avatar_url;
+
     if (password !== undefined) {
       // On hash le nouveau mot de passe si il est différent de undefined
       const salt = await bcrypt.genSalt(10);
@@ -66,7 +69,18 @@ export const updateUser = async (req, res, next) => {
       await User.update(user.id, username, email, user.password, avatar_url, is_admin);
     }
 
+    //si  l'utilisateur a changé son image de profil on supprime l'ancienne image de profil
+    if (user.avatar_url !== avatar_url) {
+      // On supprime l'ancienne image de profil
+      fs.unlink(user.avatar_url.substring(1), (err) => {
+        if (err) {
+          console.log("Impossible de supprimer l'avatar : ", user.avatar_url);
+        }
+      });
+    }
+
     // On met à jour les annonces de l'utilisateur avec son nouveau username et avatar_url
+
     await User.updateUserInfosOnAnnonces(user.user_id, username, avatar_url);
 
     return res.status(200).json({ message: "Mise à jour de votre profil réussi.", code: 200 });

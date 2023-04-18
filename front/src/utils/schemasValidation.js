@@ -21,7 +21,7 @@ export const registerValidationSchema = yup.object().shape({
     .trim()
     .required("Veuillez confirmer votre mot de passe.")
     .oneOf([yup.ref("password"), null], "Les mots de passe doivent correspondre"),
-  avatar: yup
+  avatar_image: yup
     .mixed()
     .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
       return value && ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
@@ -49,7 +49,7 @@ export const updateProfilValidationSchema = yup.object().shape({
     .test("oneOf", "Veuillez saisir un mot de passe identique.", function (value) {
       return value === "" || value === this.parent.password;
     }),
-  avatar: yup
+  avatar_image: yup
     .mixed()
     .nullable(true)
     .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
@@ -71,7 +71,7 @@ export const annonceValidationSchema = yup.object().shape({
     .trim()
     .required("Veuillez renseigner une description.")
     .matches(/^[^<>]*$/, "Les caractères spéciaux sont autorisés sauf '<>'."),
-  image: yup
+  annonce_image: yup
     .mixed()
     .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif ou png", (value) => {
       return value && ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
@@ -93,7 +93,7 @@ export const annonceModifyValidationSchema = yup.object().shape({
     .trim()
     .required("Veuillez renseigner une description.")
     .matches(/^[^<>]*$/, "Les caractères spéciaux ne sont pas autorisés sauf ', ., ;, (, ), #, @, €'."),
-  image: yup
+  annonce_image: yup
     .mixed()
     .nullable(true)
     .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
@@ -121,7 +121,7 @@ export const addItemBoutiqueValidationSchema = yup.object().shape({
     .required("Veuillez renseigner un type de véhicule.")
     .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
   price: yup.number().required("Veuillez renseigner un prix.").positive("Le prix doit être positif."),
-  image: yup
+  boutique_image: yup
     .mixed()
     .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
       return value && ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
@@ -148,7 +148,7 @@ export const modifyItemBoutiqueValidationSchema = yup.object().shape({
     .required("Veuillez renseigner un type de véhicule.")
     .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
   price: yup.number().required("Veuillez renseigner un prix.").positive("Le prix doit être positif."),
-  image: yup
+  boutique_image: yup
     .mixed()
     .nullable(true)
     .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {

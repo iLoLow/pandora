@@ -13,7 +13,7 @@ import adminRoutes from "./routes/adminRoutes.mjs";
 import annonceRoutes from "./routes/annonceRoutes.mjs";
 import imageRoutes from "./routes/imageRoutes.mjs";
 import boutiqueRoutes from "./routes/boutiqueRoutes.mjs";
-
+import createFolders from "./utils/createFolders.mjs";
 // Resolve dirname anf filename for es6
 const __filename = fileURLToPath(import.meta.url); // Résolution du chemin du fichier
 const __dirname = path.dirname(__filename); // Résolution du chemin du fichier
@@ -61,8 +61,11 @@ app.use(cors());
 // journalisation pour Express (logs).
 app.use(morgan("dev"));
 
+// Creation des dossiers nécessaires aux images
+createFolders();
+
 // Définition de la route par défaut pour les assets
-app.use("/assets", Express.static(path.join(__dirname, "public/assets")));
+app.use("/images", Express.static(path.join(__dirname, "images")));
 
 app.use("/api/thumbs", imageRoutes);
 

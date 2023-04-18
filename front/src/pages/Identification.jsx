@@ -14,7 +14,7 @@ function Identification() {
     email: "",
     password: "",
     confirmPassword: "",
-    avatar: null,
+    avatar_image: null,
   };
 
   const [values, setValues] = useState(initialValues);
@@ -36,8 +36,6 @@ function Identification() {
       for (const value in validatedFormdata) {
         formData.append(value, validatedFormdata[value]);
       }
-
-      formData.append("avatar_url", "/assets/" + values.avatar.name);
 
       const savedUserResponse = await fetch("/api/auth/register", {
         method: "POST",
@@ -137,15 +135,15 @@ function Identification() {
               <input autoComplete="new-password" type="password" value={values.confirmPassword} onChange={(e) => setValues({ ...values, confirmPassword: e.target.value })} />
               {errors.confirmPassword && <small className="errorSmall">{errors.confirmPassword}</small>}
             </form-group>
-            <Dropzone multiple={false} onDrop={(acceptedFiles) => setValues({ ...values, avatar: acceptedFiles[0] })}>
+            <Dropzone multiple={false} onDrop={(acceptedFiles) => setValues({ ...values, avatar_image: acceptedFiles[0] })}>
               {({ getRootProps, getInputProps }) => (
                 <div {...getRootProps()} className="dropzone">
                   <div className={errors.avatar ? "zone zone-error" : "zone"}>
                     <input {...getInputProps()} />
-                    {errors.avatar ? (
-                      <small className="errorSmall">{errors.avatar}</small>
-                    ) : values.avatar ? (
-                      <p>Image choisie : {values.avatar.name}</p>
+                    {errors.avatar_image ? (
+                      <small className="errorSmall">{errors.avatar_image}</small>
+                    ) : values.avatar_image ? (
+                      <p>Image choisie : {values.avatar_image.name}</p>
                     ) : (
                       <p>Glissez-déposez votre avatar, ou cliquez pour sélectionner votre avatar.</p>
                     )}

@@ -10,8 +10,7 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
   const initialValues = {
     title: "",
     description: "",
-    image: null,
-    image_url: "",
+    annonce_image: null,
   };
 
   const { user_id, username, avatar_url } = useSelector((state) => state.user) || "";

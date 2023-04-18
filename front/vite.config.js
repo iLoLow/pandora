@@ -7,6 +7,7 @@ export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   return defineConfig({
     plugins: [react()],
+
     build: {
       rollupOptions: {
         output: {
@@ -21,7 +22,7 @@ export default ({ mode }) => {
     server: {
       proxy: {
         "/api": process.env.VITE_URL,
-        "/assets": process.env.VITE_URL,
+        "/images": process.env.VITE_URL,
       },
     },
   });

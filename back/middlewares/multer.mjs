@@ -9,13 +9,24 @@ const MIME_TYPES = {
 };
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./public/assets");
+  //gestion de plusieurs destinations de dossiers pour les different dossiers : public/images, public/images/avatars, public/images/annonces, public/images/annonces/thumbs, public/images/boutique, public/images/boutique/thumbs depuis les file fiedname
+  destination: (req, file, callback) => {
+    if (file.fieldname === "annonce_image") {
+      callback(null, "images/annonces");
+    } else if (file.fieldname === "avatar_image") {
+      callback(null, "images/avatars");
+    } else if (file.fieldname === "boutique_image") {
+      callback(null, "images/boutique");
+    } else {
+      callback(null, "images");
+    }
   },
-  filename: (req, file, cb) => {
-    // const extension = MIME_TYPES[file.mimetype];
-    // const name = file.originalname.split(".")[0];
-    cb(null, file.originalname);
+
+  //gestion du nom de fichier
+  filename: (req, file, callback) => {
+    const name = file.originalname.split(".")[0];
+    const extension = MIME_TYPES[file.mimetype];
+    callback(null, name + "-" + Date.now() + "." + extension);
   },
 });
 

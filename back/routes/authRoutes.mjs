@@ -4,7 +4,7 @@ import { multerStorage } from "../middlewares/multer.mjs";
 
 const router = new Router();
 
-router.post("/register", multerStorage.single("avatar"), register);
+router.post("/register", multerStorage.single("avatar_image"), register);
 router.post("/login", login);
 
 export default router;

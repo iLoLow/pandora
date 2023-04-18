@@ -11,7 +11,7 @@ function ModifyAnnonceForm({ annonce, setClose = () => {}, reloadAnnonces = () =
   const initialValues = {
     title: annonce.title,
     description: annonce.description,
-    image: null,
+    annonce_image: null,
     image_url: annonce.image_url,
   };
 
@@ -23,6 +23,7 @@ function ModifyAnnonceForm({ annonce, setClose = () => {}, reloadAnnonces = () =
   const notify = useToast();
 
   const editAnnonce = async () => {
+    console.log(values);
     try {
       const validatedAnnonces = await annonceModifyValidationSchema.validate(values, { abortEarly: false });
 
@@ -74,7 +75,7 @@ function ModifyAnnonceForm({ annonce, setClose = () => {}, reloadAnnonces = () =
     <div className="annonceFormTitle">
       <div className="containerForm">
         <h2>Modifier une annonce :</h2>
-        <AnnonceForm values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleModifyAnnonceSubmit(e)} />
+        <AnnonceForm annonce={annonce} values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleModifyAnnonceSubmit(e)} />
       </div>
     </div>
   );

@@ -5,10 +5,10 @@ import { createBoutiqueItem, getAllBoutiqueItems, getBoutiqueItem, updateBoutiqu
 
 const router = new Router();
 
-router.post("/", verifyToken, checkIsAdmin, multerStorage.single("image"), createBoutiqueItem);
+router.post("/", verifyToken, checkIsAdmin, multerStorage.single("boutique_image"), createBoutiqueItem);
 router.get("/", getAllBoutiqueItems);
 router.get("/single/:id", getBoutiqueItem);
-router.patch("/:id", verifyToken, checkIsAdmin, multerStorage.single("image"), updateBoutiqueItem);
+router.patch("/:id", verifyToken, checkIsAdmin, multerStorage.single("boutique_image"), updateBoutiqueItem);
 router.delete("/:id", verifyToken, checkIsAdmin, deleteBoutiqueItem);
 
 export default router;

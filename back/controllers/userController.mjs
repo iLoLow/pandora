@@ -58,7 +58,7 @@ export const updateUser = async (req, res, next) => {
     // Si l'utilisateur n'existe pas
     if (!user) return res.status(400).json({ error: "Email ou mot de passe incorrect", code: 400 });
 
-    const avatar_url = req.file ? "/" + req.file.destination + "/" + req.file.originalname : user.avatar_url;
+    const avatar_url = req.file ? "/" + req.file.destination + "/" + req.file.filename : user.avatar_url;
 
     if (password !== undefined) {
       // On hash le nouveau mot de passe si il est différent de undefined

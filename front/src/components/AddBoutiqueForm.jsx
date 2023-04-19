@@ -11,11 +11,9 @@ function AddBoutiqueForm({ setClose = () => {}, reloadBoutique = () => {} }) {
     description: "",
     price: 0,
     type_vehicule: "",
-    image: null,
-    image_url: "",
+    boutique_image: null,
   };
 
-  const { user_id, username, avatar_url } = useSelector((state) => state.user) || "";
   const token = useSelector((state) => state.token) || "";
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});

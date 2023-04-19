@@ -18,7 +18,6 @@ class Boutique {
 
   //creation d'un article de la boutique dans la base de données
   static create(name_article, description, price, type_vehicule, image_url) {
-    console.log(name_article, description, price, type_vehicule, image_url);
     return new Promise((resolve, reject) => {
       connection.query(
         "INSERT INTO boutique_items (name_article, description, price, type_vehicule, image_url) VALUES (?, ?, ?, ?, ?)",

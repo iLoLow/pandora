@@ -13,7 +13,7 @@ function EditBoutiqueItem({ item, setClose = () => {}, reload = () => {} }) {
     description: item.description,
     price: item.price,
     type_vehicule: item.type_vehicule,
-    image: null,
+    boutique_image: null,
     image_url: item.image_url,
   };
 
@@ -58,7 +58,6 @@ function EditBoutiqueItem({ item, setClose = () => {}, reload = () => {} }) {
         setClose();
       }
     } catch (error) {
-      console.log(error);
       const errors = error.inner.reduce((acc, error) => {
         return { ...acc, [error.path]: error.message };
       }, {});
@@ -76,7 +75,7 @@ function EditBoutiqueItem({ item, setClose = () => {}, reload = () => {} }) {
   return (
     <div className="containerForm">
       <h2>Modifier un article :</h2>
-      <BoutiqueForm values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleModifySubmit(e)} />
+      <BoutiqueForm boutique={item} values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleModifySubmit(e)} />
     </div>
   );
 }

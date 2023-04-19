@@ -2,7 +2,7 @@ import Dropzone from "react-dropzone";
 import Button from "./Button";
 import MarkdownEditor from "./MarkdownEditor";
 
-function BoutiqueForm({ values, setValues, errors, handleSubmit = () => {} }) {
+function BoutiqueForm({ boutique, values, setValues, errors, handleSubmit = () => {} }) {
   return (
     <form className="form" method="POST" onSubmit={handleSubmit}>
       <form-group>
@@ -26,17 +26,17 @@ function BoutiqueForm({ values, setValues, errors, handleSubmit = () => {} }) {
         <input type="number" name="price" id="price" value={values.price} onChange={(e) => setValues({ ...values, price: e.target.value })} />
         {errors.price && <small className="errorSmall">{errors.price}</small>}
       </form-group>
-      <Dropzone multiple={false} onDrop={(acceptedFiles) => setValues({ ...values, image: acceptedFiles[0], image_url: "/assets/" + acceptedFiles[0].name })}>
+      <Dropzone multiple={false} onDrop={(acceptedFiles) => setValues({ ...values, boutique_image: acceptedFiles[0] })}>
         {({ getRootProps, getInputProps }) => (
           <div {...getRootProps()} className="dropzone">
-            <div className={errors.image ? "zone zone-error" : "zone"}>
+            <div className={errors.boutique_image ? "zone zone-error" : "zone"}>
               <input {...getInputProps()} />
-              {errors.image ? (
-                <small className="errorSmall">{errors.image}</small>
-              ) : values.image ? (
-                <p>Image choisie : {values.image.name}</p>
-              ) : values.image_url ? (
-                <p>Image choisie : {values.image_url.split("/assets/")[1]}</p>
+              {errors.boutique_image ? (
+                <small className="errorSmall">{errors.boutique_image}</small>
+              ) : values.boutique_image ? (
+                <p>Image choisie : {values.boutique_image.name}</p>
+              ) : boutique && boutique.image_url ? (
+                <p>Image choisie : {boutique.image_url.split("/boutique/")[1]}</p>
               ) : (
                 <p>Glissez-déposez une image ici, ou cliquez pour sélectionner une image.</p>
               )}

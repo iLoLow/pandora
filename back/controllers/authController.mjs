@@ -12,7 +12,7 @@ import jwt from "jsonwebtoken";
 export const register = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
-    const avatar_url = "/" + req.file.destination + "/" + req.file.originalname;
+    const avatar_url = "/" + req.file.destination + "/" + req.file.filename;
     const user_id = v4();
 
     const salt = await bcrypt.genSalt(10);

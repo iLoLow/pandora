@@ -2,7 +2,7 @@ import Dropzone from "react-dropzone";
 import Button from "./Button";
 import MarkdownEditor from "./MarkdownEditor";
 
-function BoutiqueForm({ boutique, values, setValues, errors, handleSubmit = () => {} }) {
+function BoutiqueForm({ item, values, setValues, errors, handleSubmit = () => {} }) {
   return (
     <form className="form" method="POST" onSubmit={handleSubmit}>
       <form-group>
@@ -26,19 +26,29 @@ function BoutiqueForm({ boutique, values, setValues, errors, handleSubmit = () =
         <input type="number" name="price" id="price" value={values.price} onChange={(e) => setValues({ ...values, price: e.target.value })} />
         {errors.price && <small className="errorSmall">{errors.price}</small>}
       </form-group>
-      <Dropzone multiple={false} onDrop={(acceptedFiles) => setValues({ ...values, boutique_image: acceptedFiles[0] })}>
+      <Dropzone multiple={true} onDrop={(acceptedFiles) => setValues({ ...values, boutique_image: values.boutique_image.concat(...acceptedFiles) })}>
         {({ getRootProps, getInputProps }) => (
           <div {...getRootProps()} className="dropzone">
             <div className={errors.boutique_image ? "zone zone-error" : "zone"}>
               <input {...getInputProps()} />
               {errors.boutique_image ? (
                 <small className="errorSmall">{errors.boutique_image}</small>
-              ) : values.boutique_image ? (
-                <p>Image choisie : {values.boutique_image.name}</p>
-              ) : boutique && boutique.image_url ? (
-                <p>Image choisie : {boutique.image_url.split("/boutique/")[1]}</p>
+              ) : values.boutique_image.length > 0 ? (
+                <div>
+                  <p>Image(s) : </p>
+                  {values.boutique_image.map((img, k) => (
+                    <p key={k}>{img.name}</p>
+                  ))}
+                </div>
+              ) : item && item.image_url ? (
+                <div>
+                  <p>Image(s) :</p>
+                  {JSON.parse(item.image_url).map((img, k) => (
+                    <p key={k}>{img.split("/boutique/")[1]}</p>
+                  ))}
+                </div>
               ) : (
-                <p>Glissez-déposez une image ici, ou cliquez pour sélectionner une image.</p>
+                <p>Glissez-déposez vos images ici, ou cliquez pour sélectionner vos images.</p>
               )}
             </div>
           </div>

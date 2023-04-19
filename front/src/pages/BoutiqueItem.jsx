@@ -9,7 +9,7 @@ function BoutiqueItem() {
 
   return (
     <section className="boutiqueItemContainer">
-      <Slider arrayImages={[item.image_url, item.image_url]} />
+      <Slider arrayImages={JSON.parse(item.image_url)} />
       <div className="boutiqueItemInfos">
         <h2 className="boutiqueItemTitle">{item.name_article}</h2>
         <div className="boutiqueItemTag">{item.type_vehicule}</div>

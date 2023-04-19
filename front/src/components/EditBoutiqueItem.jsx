@@ -13,7 +13,7 @@ function EditBoutiqueItem({ item, setClose = () => {}, reload = () => {} }) {
     description: item.description,
     price: item.price,
     type_vehicule: item.type_vehicule,
-    boutique_image: null,
+    boutique_image: [],
     image_url: item.image_url,
   };
 
@@ -30,9 +30,15 @@ function EditBoutiqueItem({ item, setClose = () => {}, reload = () => {} }) {
 
       const formData = new FormData();
 
-      for (let value in validated) {
-        formData.append(value, validated[value]);
-      }
+      formData.append("name_article", validated.name_article);
+      formData.append("description", validated.description);
+      formData.append("type_vehicule", validated.type_vehicule);
+      formData.append("price", validated.price);
+      formData.append("image_url", item.image_url);
+
+      validated.boutique_image.forEach((image) => {
+        formData.append("boutique_image", image);
+      });
 
       const response = await fetch("/api/boutique/" + item.id, {
         method: "PATCH",
@@ -75,7 +81,7 @@ function EditBoutiqueItem({ item, setClose = () => {}, reload = () => {} }) {
   return (
     <div className="containerForm">
       <h2>Modifier un article :</h2>
-      <BoutiqueForm boutique={item} values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleModifySubmit(e)} />
+      <BoutiqueForm item={item} values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleModifySubmit(e)} />
     </div>
   );
 }

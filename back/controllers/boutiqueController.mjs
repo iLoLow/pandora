@@ -8,15 +8,19 @@ export const createBoutiqueItem = async (req, res) => {
   const { name_article, description, price, type_vehicule } = req.body;
 
   try {
-    const image_url = "/" + req.file.destination + "/" + req.file.filename;
+    const files = req.files;
+    let image_url = [];
 
-    const { filename: image } = req.file;
-    await sharp(req.file.path, { failOnError: false })
-      .resize(200)
-      .withMetadata()
-      .toFile(path.resolve(req.file.destination + "/thumbs/" + image));
+    files.forEach(async (file) => {
+      const url = "/" + file.destination + "/" + file.filename;
+      image_url.push(url);
+      await sharp(file.path, { failOnError: false })
+        .resize(600)
+        .withMetadata()
+        .toFile(path.resolve(file.destination + "/thumbs/" + file.filename));
+    });
 
-    await Boutique.create(name_article, description, price, type_vehicule, image_url);
+    await Boutique.create(name_article, description, price, type_vehicule, JSON.stringify(image_url));
     res.status(201).json({ message: "Article créé", code: 201 });
   } catch (error) {
     res.status(500).json({ error: "Impossible de créer l'article", code: 500 });
@@ -48,30 +52,41 @@ export const updateBoutiqueItem = async (req, res) => {
   try {
     const { name_article, description, price, type_vehicule, image_url } = req.body;
 
-    const new_image_url = req.file ? "/" + req.file.destination + "/" + req.file.filename : image_url;
+    let new_image_url = [];
 
-    // si nouvelle image on crée sa thumbnail
-    if (req.file) {
-      await sharp(req.file.path, { failOnError: false })
-        .resize(200)
-        .withMetadata()
-        .toFile(path.resolve(req.file.destination + "/thumbs/" + req.file.filename));
+    if (req.files.length > 0) {
+      let files = req.files;
+
+      files.forEach(async (file) => {
+        const url = "/" + file.destination + "/" + file.filename;
+        new_image_url.push(url);
+        await sharp(file.path, { failOnError: false })
+          .resize(600)
+          .withMetadata()
+          .toFile(path.resolve(file.destination + "/thumbs/" + file.filename));
+      });
+    } else {
+      new_image_url = JSON.parse(image_url);
     }
 
-    await Boutique.update(req.params.id, name_article, description, price, type_vehicule, new_image_url);
+    await Boutique.update(req.params.id, name_article, description, price, type_vehicule, JSON.stringify(new_image_url));
 
-    if (image_url !== new_image_url) {
-      const oldImageName = image_url.split("boutique/")[1];
-      fs.unlink(image_url.substring(1), (err) => {
-        if (err) {
-          console.log("Impossible de supprimer l'image de l'article : ", req.file.filename);
-        }
-      });
+    if (image_url !== JSON.stringify(new_image_url)) {
+      const images = JSON.parse(image_url);
 
-      fs.unlink("images/boutique/thumbs/" + oldImageName, (err) => {
-        if (err) {
-          console.log("Impossible de supprimer le thumbnail de l'article : ", req.file.filename);
-        }
+      images.forEach((img) => {
+        const oldImageName = img.split("boutique/")[1];
+        fs.unlink(img.substring(1), (err) => {
+          if (err) {
+            console.log("Impossible de supprimer l'image de l'article : ", img);
+          }
+        });
+
+        fs.unlink("images/boutique/thumbs/" + oldImageName, (err) => {
+          if (err) {
+            console.log("Impossible de supprimer le thumbnail de l'article : ", img);
+          }
+        });
       });
     }
 
@@ -81,7 +96,11 @@ export const updateBoutiqueItem = async (req, res) => {
     res.status(500).json({ error: "Impossible de mettre à jour l'article", code: 500 });
   }
 };
-//supprimer un article
+
+/**
+ * Supression d'un article
+ *
+ */
 export const deleteBoutiqueItem = async (req, res) => {
   try {
     if (!req.params.id) {
@@ -89,17 +108,22 @@ export const deleteBoutiqueItem = async (req, res) => {
     }
     const boutique = await Boutique.getOne(req.params.id);
     const { image_url } = boutique[0];
-    const imageName = image_url.split("boutique/")[1];
 
-    fs.unlink(image_url.substring(1), (err) => {
-      if (err) {
-        console.log("Impossible de supprimer l'image de l'article : ", imageName);
-      }
-    });
-    fs.unlink("images/boutique/thumbs/" + imageName, (err) => {
-      if (err) {
-        console.log("Impossible de supprimer l'image de l'article : ", imageName);
-      }
+    const images = JSON.parse(image_url);
+
+    images.forEach((img) => {
+      const imageName = img.split("boutique/")[1];
+
+      fs.unlink(img.substring(1), (err) => {
+        if (err) {
+          console.log("Impossible de supprimer l'image de l'article : ", imageName);
+        }
+      });
+      fs.unlink("images/boutique/thumbs/" + imageName, (err) => {
+        if (err) {
+          console.log("Impossible de supprimer l'image de l'article : ", imageName);
+        }
+      });
     });
 
     await Boutique.delete(req.params.id);

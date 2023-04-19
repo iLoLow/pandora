@@ -11,7 +11,7 @@ function AddBoutiqueForm({ setClose = () => {}, reloadBoutique = () => {} }) {
     description: "",
     price: 0,
     type_vehicule: "",
-    boutique_image: null,
+    boutique_image: [],
   };
 
   const token = useSelector((state) => state.token) || "";
@@ -27,9 +27,14 @@ function AddBoutiqueForm({ setClose = () => {}, reloadBoutique = () => {} }) {
 
       const formData = new FormData();
 
-      for (let value in validatedItems) {
-        formData.append(value, validatedItems[value]);
-      }
+      formData.append("name_article", validatedItems.name_article);
+      formData.append("description", validatedItems.description);
+      formData.append("price", validatedItems.price);
+      formData.append("type_vehicule", validatedItems.type_vehicule);
+
+      validatedItems.boutique_image.forEach((image) => {
+        formData.append("boutique_image", image);
+      });
 
       const response = await fetch("/api/boutique", {
         method: "POST",

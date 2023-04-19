@@ -102,7 +102,7 @@ function BoutiqueAdmin() {
       {boutiqueItems.length > 0 &&
         boutiqueItems.map((item, index) => (
           <div key={item.id}>
-            <AdminBoutiqueCard boutique={item} editHandle={() => setEditBoutiqueItemIndex(index)} deleteHandle={() => deleteHandleBoutiqueItem(item.id)} />
+            <AdminBoutiqueCard item={item} editHandle={() => setEditBoutiqueItemIndex(index)} deleteHandle={() => deleteHandleBoutiqueItem(item.id)} />
 
             {editBoutiqueItemIndex === index && <EditBoutiqueItem item={item} setClose={() => setEditBoutiqueItemIndex(-1)} reload={() => getBoutiqueItems()} />}
           </div>

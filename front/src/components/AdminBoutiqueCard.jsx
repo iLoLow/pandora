@@ -1,26 +1,27 @@
 import "../styles/AdminBoutiqueCard.css";
 
-function AdminBoutiqueCard({ boutique, editHandle = () => {}, deleteHandle = () => {} }) {
-  const img = boutique.image_url.split("boutique/")[1];
+function AdminBoutiqueCard({ item, editHandle = () => {}, deleteHandle = () => {} }) {
+  const imageUrl = JSON.parse(item.image_url)[0].split("boutique/")[1];
+
   return (
     <article className="tableauBoutique">
       <div className="tableauBoutiqueItem img">
-        <img src={"/images/boutique/thumbs/" + img} alt="preview" />
+        <img src={"/images/boutique/thumbs/" + imageUrl} alt="preview" />
       </div>
 
       {/* Infos */}
       <div className="tableauBoutiqueItem">
         <div className="tableauBoutiqueItemHeader infos">
           <h3>Nom :</h3>
-          <p>{boutique.name_article}</p>
+          <p>{item.name_article}</p>
         </div>
         <div className="tableauBoutiqueItemHeader infos">
           <h3>Type :</h3>
-          <p className="tableauBoutiqueCardType">{boutique.type_vehicule}</p>
+          <p className="tableauBoutiqueCardType">{item.type_vehicule}</p>
         </div>
         <div className="tableauBoutiqueItemHeader infos">
           <h3>Prix :</h3>
-          <p className="tableauBoutiqueCardPrice">{boutique.price} €</p>
+          <p className="tableauBoutiqueCardPrice">{item.price} €</p>
         </div>
       </div>
 
@@ -29,7 +30,7 @@ function AdminBoutiqueCard({ boutique, editHandle = () => {}, deleteHandle = () 
         <div className="tableauBoutiqueItemHeader">
           <h3>Description :</h3>
         </div>
-        <p className="tableauBoutiqueCardDesc">{boutique.description}</p>
+        <p className="tableauBoutiqueCardDesc">{item.description}</p>
       </div>
       <div className="tableauBoutiqueItem btns">
         <div className="tableauBoutiqueIcone" onClick={editHandle}>

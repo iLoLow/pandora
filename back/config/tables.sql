@@ -46,7 +46,7 @@ CREATE TABLE
         description LONGTEXT NOT NULL,
         price DECIMAL(10, 2) NOT NULL,
         type_vehicule VARCHAR(255) NOT NULL,
-        image_url VARCHAR(255) NOT NULL,
+        image_url LONGTEXT NOT NULL DEFAULT '[]',
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );

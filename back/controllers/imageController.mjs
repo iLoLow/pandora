@@ -1,22 +1,32 @@
-import fs from "fs";
+import fs from "fs/promises";
 import * as path from "path";
 
 export const getAllImages = async (req, res, next) => {
   try {
-    fs.readdir(path.join("public/assets/thumbs"), (err, files) => {
-      if (err) {
-        res.status(500).json({ error: "Error reading files", code: 500 });
-      } else {
-        const images = files.map((file) => {
-          return {
-            name: file,
-            type: file.split(".")[1],
-            url: `/assets/thumbs/${file}`,
-          };
-        });
-        res.json(images);
+    const imagesByDirectories = {};
+    const imagesDirs = {
+      avatars: "images/avatars",
+      annonces: "images/annonces/thumbs",
+      boutique: "images/boutique/thumbs",
+    };
+
+    for (const dir in imagesDirs) {
+      const files = await fs.readdir(imagesDirs[dir]);
+
+      let arrayFiles = [];
+
+      for (const file of files) {
+        const fileObject = {
+          name: file,
+          url: "/" + imagesDirs[dir] + "/" + file,
+        };
+        arrayFiles.push(fileObject);
       }
-    });
+
+      imagesByDirectories[dir] = arrayFiles;
+    }
+
+    res.status(200).json(imagesByDirectories);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Erreur interne du serveur.", code: 500 });

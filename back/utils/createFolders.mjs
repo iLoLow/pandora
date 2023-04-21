@@ -9,6 +9,9 @@ const __dirname = path.dirname(__filename); // Résolution du chemin du fichier
 const createFolders = async () => {
   const imagesPath = path.join(__dirname, "../images");
 
+  // path banner
+  const bannerPath = path.join(__dirname, "../images/banner");
+
   // path avatar
   const avatarsPath = path.join(__dirname, "../images/avatars");
 
@@ -27,6 +30,14 @@ const createFolders = async () => {
     .catch(() => false);
   if (!imagesPathExists) {
     await fs.mkdir(imagesPath);
+  }
+  // creation du dossier avatars
+  const bannerPathExists = await fs
+    .access(bannerPath)
+    .then(() => true)
+    .catch(() => false);
+  if (!bannerPathExists) {
+    await fs.mkdir(bannerPath);
   }
 
   // creation du dossier avatars

@@ -1,8 +1,8 @@
 import "../styles/Button.css";
 
-function Button({ color = "red" | "green", type = "button", onClick = () => {}, children }) {
+function Button({ disabled = false, color = "red" | "green", type = "button", onClick = () => {}, children }) {
   return (
-    <button type={type} className={"globalButton " + color} onClick={onClick}>
+    <button type={type} className={"globalButton " + color} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );

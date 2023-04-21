@@ -4,21 +4,17 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 
-// Import component for home dashboard
-import AccueilAdmin from "./tableaudebord/AccueilAdmin";
-
 // Import components for Users
 import InfosUser from "./tableaudebord/InfosUser";
 import ProfilUser from "./tableaudebord/ProfilUser";
 import AnnoncesUser from "./tableaudebord/AnnoncesUser";
 
 //  Import components for Administration
-import InfosAdmin from "./tableaudebord/admin/InfosAdmin";
 import UsersAdmin from "./tableaudebord/admin/UsersAdmin";
 import AnnoncesAdmin from "./tableaudebord/admin/AnnoncesAdmin";
 import GalerieAdmin from "./tableaudebord/admin/GalerieAdmin";
-import ServicesAdmin from "./tableaudebord/admin/ServicesAdmin";
 import BoutiqueAdmin from "./tableaudebord/admin/BoutiqueAdmin";
+import ReglagesAdmin from "./tableaudebord/admin/ReglagesAdmin";
 
 function TableauDeBord() {
   document.title = "Tableau de bord";
@@ -91,14 +87,6 @@ function TableauDeBord() {
             <h3 className="tableauDeBordCategorie">Admin</h3>
             <span className="tableauDeBordSeparateur"></span>
             <div className="tableauDeBordLinks">
-              <NavLink to="/tableaudebord/admin/infos">
-                <span className="tableauDeBordIcone">
-                  <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <path d="M256 56C145.72 56 56 145.72 56 256s89.72 200 200 200 200-89.72 200-200S366.28 56 256 56zm0 82a26 26 0 11-26 26 26 26 0 0126-26zm48 226h-88a16 16 0 010-32h28v-88h-16a16 16 0 010-32h32a16 16 0 0116 16v104h28a16 16 0 010 32z" />
-                  </svg>
-                </span>
-                <span>infos</span>
-              </NavLink>
               <NavLink to="/tableaudebord/admin/users">
                 <span className="tableauDeBordIcone">
                   <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -126,28 +114,6 @@ function TableauDeBord() {
                 </span>
                 <span>Galerie</span>
               </NavLink>
-              <NavLink to="/tableaudebord/admin/services">
-                <span className="tableauDeBordIcone">
-                  <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <path
-                      d="M212.2,453l-15.5-15.5c-23.2,23-43.1,30.6-60.9,30.6c-10.1,0-20.1-2.5-30.4-7.6c-10.3-5.1-20.8-12.9-31-23.1
-		c-10.2-10.2-18-20.7-23.1-31c-5.1-10.3-7.6-20.3-7.6-30.4c0.1-17.8,7.7-37.8,30.6-60.9c54.7-54.7,65.6-65.6,65.7-65.7l-15.5-15.5
-		l-15.5,15.5l153.3,153.3l15.5-15.5l-15.5-15.5c-0.1,0.1-10.9,10.9-65.7,65.7L212.2,453l15.5,15.5c54.7-54.7,65.6-65.6,65.7-65.7
-		l15.5-15.5L124.6,203.1l-15.5,15.5c-0.1,0.1-10.9,10.9-65.7,65.7C14.7,312.9-0.1,344.6,0,376.2c0,17.5,4.5,34.4,12.1,49.8
-		c7.7,15.5,18.4,29.6,31.3,42.5c12.9,12.9,27,23.7,42.5,31.3c15.4,7.7,32.3,12.2,49.8,12.1c31.6,0.1,63.4-14.7,91.9-43.5L212.2,453z
-		 M299.8,59l15.5,15.5c23.2-23,43.1-30.6,60.9-30.6c10.1,0,20.1,2.5,30.4,7.6c10.3,5.1,20.8,12.9,31,23.1l0,0
-		c10.2,10.2,18,20.7,23.1,31c5.1,10.3,7.6,20.3,7.6,30.4c-0.1,17.8-7.7,37.8-30.6,61c-27.4,27.4-43.8,43.8-53.4,53.4
-		c-9.6,9.6-12.3,12.3-12.3,12.3l15.5,15.5l15.5-15.5L249.6,109.2l-15.5,15.5l15.5,15.5c0,0,11-11,65.7-65.7l0,0L299.8,59l-15.5-15.5
-		c-27.4,27.4-43.8,43.8-53.4,53.4c-9.6,9.6-12.3,12.3-12.3,12.3l-15.5,15.5l184.2,184.2l15.5-15.4c0,0,11-11,65.7-65.7
-		c28.7-28.6,43.5-60.3,43.5-91.9c0-17.5-4.5-34.4-12.1-49.8c-7.7-15.5-18.4-29.6-31.3-42.5l0,0c-12.9-12.9-27-23.7-42.5-31.3
-		C410.6,4.5,393.7,0,376.2,0c-31.6-0.1-63.4,14.7-91.9,43.5l0,0L299.8,59z M234.1,212.2l-15.5-15.5l-54.7,54.7l31,31l54.7-54.7
-		l-31-31L234.1,212.2l-15.5-15.5l-54.7,54.7l31,31l54.7-54.7l-31-31L234.1,212.2z M299.8,277.9l-15.5-15.5l-54.7,54.7l31,31
-		l54.7-54.7l-31-31L299.8,277.9l-15.5-15.5l-54.7,54.7l31,31l54.7-54.7l-31-31L299.8,277.9z"
-                    />
-                  </svg>
-                </span>
-                <span>services</span>
-              </NavLink>
               <NavLink to="/tableaudebord/admin/boutique">
                 <span className="tableauDeBordIcone">
                   <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -157,6 +123,15 @@ function TableauDeBord() {
                   </svg>
                 </span>
                 <span>boutique</span>
+              </NavLink>
+              <NavLink to="/tableaudebord/admin/reglages">
+                <span className="tableauDeBordIcone">
+                  <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <circle cx="256" cy="256" r="48" />
+                    <path d="M470.39 300l-.47-.38-31.56-24.75a16.11 16.11 0 01-6.1-13.33v-11.56a16 16 0 016.11-13.22L469.92 212l.47-.38a26.68 26.68 0 005.9-34.06l-42.71-73.9a1.59 1.59 0 01-.13-.22A26.86 26.86 0 00401 92.14l-.35.13-37.1 14.93a15.94 15.94 0 01-14.47-1.29q-4.92-3.1-10-5.86a15.94 15.94 0 01-8.19-11.82l-5.59-39.59-.12-.72A27.22 27.22 0 00298.76 26h-85.52a26.92 26.92 0 00-26.45 22.39l-.09.56-5.57 39.67a16 16 0 01-8.13 11.82 175.21 175.21 0 00-10 5.82 15.92 15.92 0 01-14.43 1.27l-37.13-15-.35-.14a26.87 26.87 0 00-32.48 11.34l-.13.22-42.77 73.95a26.71 26.71 0 005.9 34.1l.47.38 31.56 24.75a16.11 16.11 0 016.1 13.33v11.56a16 16 0 01-6.11 13.22L42.08 300l-.47.38a26.68 26.68 0 00-5.9 34.06l42.71 73.9a1.59 1.59 0 01.13.22 26.86 26.86 0 0032.45 11.3l.35-.13 37.07-14.93a15.94 15.94 0 0114.47 1.29q4.92 3.11 10 5.86a15.94 15.94 0 018.19 11.82l5.56 39.59.12.72A27.22 27.22 0 00213.24 486h85.52a26.92 26.92 0 0026.45-22.39l.09-.56 5.57-39.67a16 16 0 018.18-11.82c3.42-1.84 6.76-3.79 10-5.82a15.92 15.92 0 0114.43-1.27l37.13 14.95.35.14a26.85 26.85 0 0032.48-11.34 2.53 2.53 0 01.13-.22l42.71-73.89a26.7 26.7 0 00-5.89-34.11zm-134.48-40.24a80 80 0 11-83.66-83.67 80.21 80.21 0 0183.66 83.67z" />
+                  </svg>
+                </span>
+                <span>Réglages</span>
               </NavLink>
             </div>
           </>
@@ -170,12 +145,11 @@ function TableauDeBord() {
           <Route path="/annonces" element={<AnnoncesUser />} />
 
           {/* Routes Administration */}
-          <Route path="/admin/infos" element={<InfosAdmin />} />
           <Route path="/admin/users" element={<UsersAdmin />} />
           <Route path="/admin/annonces" element={<AnnoncesAdmin />} />
           <Route path="/admin/galerie" element={<GalerieAdmin />} />
-          <Route path="/admin/services" element={<ServicesAdmin />} />
           <Route path="/admin/boutique" element={<BoutiqueAdmin />} />
+          <Route path="/admin/reglages" element={<ReglagesAdmin />} />
         </Routes>
       </section>
     </div>

@@ -2,16 +2,12 @@ import { useNavigate } from "react-router-dom";
 import "../styles/BoutiqueCard.css";
 import Button from "./Button";
 
-function BoutiqueCard({ item, handleRevervation = () => {} }) {
+function BoutiqueCard({ item, handleDetailItem = () => {}, handleReservation = () => {} }) {
   const imageUrl = JSON.parse(item.image_url)[0].split("boutique/")[1];
-  const navigation = useNavigate();
-
-  const idItem = () => {
-    navigation("/boutique/" + item.id, { state: { item } });
-  };
+  const isIncart = JSON.parse(localStorage.getItem("panier"))?.find((cartItem) => cartItem.id === item.id);
   return (
     <article className="boutiqueCard">
-      <div className="boutiqueCardContainer" onClick={idItem}>
+      <div className="boutiqueCardContainer" onClick={handleDetailItem}>
         <div className="imgContainer">
           <span className="textHover">Voir Détails</span>
           <img src={"/images/boutique/thumbs/" + imageUrl} alt={item.name_article} />
@@ -23,7 +19,9 @@ function BoutiqueCard({ item, handleRevervation = () => {} }) {
         </div>
       </div>
       <div className="boutiqueBtn">
-        <Button color="green" children="Réserver" onClick={handleRevervation} />
+        <Button color="green" onClick={() => handleReservation()} disabled={isIncart}>
+          {isIncart ? "Déjà  dans le panier" : "Ajouter au panier"}
+        </Button>
       </div>
     </article>
   );

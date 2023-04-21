@@ -9,6 +9,8 @@
   box-shadow: -1px 1px 6px 0 var(--shadow);
   cursor: pointer;
   max-width: 400px;
+  text-align: center;
+  line-height: 1.5;
 }
 .boutiqueCardContainer {
   display: flex;
@@ -73,5 +75,5 @@
 }
 
 .boutiqueBtn {
-  margin: 5px;
+  margin-bottom: 10px;
 }

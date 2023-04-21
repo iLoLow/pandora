@@ -69,9 +69,4 @@ npm run build
       - [ ] champ embeds
     - [ ] checkbox activation
     - [ ] bouton suppression du webhook
-
-- sur la page d'accueil du tableau de bord:
-  - [ ] nombre d'annonces
-  - [ ] nombre de users avec leur infos (nombre d'annonces ,date d'inscription ...)
-  - [ ] annonce la plus populaire
-  - [ ] nombre de visite sur le site
+  - [ ] finir la galerie d'images

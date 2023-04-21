@@ -77,7 +77,7 @@ export const updateAnnonce = async (req, res) => {
     //si l'image de l'annonce est modifiée on supprime l'ancienne image et son thumbs puis on enregistre la nouvelle image on redimensionne l'image et on enregistre le thumbs.
     if (image_url !== new_image_url) {
       const oldImageName = image_url.split("annonces/")[1];
-      // On supprime l'ancienne image de profil
+      // On supprime l'ancienne image de l'annonce
       fs.unlink(image_url.substring(1), (err) => {
         if (err) {
           console.log("Impossible de supprimer l'image de l'annonce : ", req.file.filename);

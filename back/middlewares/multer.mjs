@@ -17,6 +17,8 @@ const storage = multer.diskStorage({
       callback(null, "images/avatars");
     } else if (file.fieldname === "boutique_image") {
       callback(null, "images/boutique");
+    } else if (file.fieldname === "banner_image") {
+      callback(null, "images/banner");
     } else {
       callback(null, "images");
     }

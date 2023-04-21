@@ -6,7 +6,10 @@ import { useSelector } from "react-redux";
 import AdminWrapper from "../../../components/AdminWrapper";
 
 function GalerieAdmin() {
-  const [galerie, setGalerie] = useState([]);
+  const [galerieAvatars, setGalerieAvatars] = useState([]);
+  const [galerieAnnonces, setGalerieAnnonces] = useState([]);
+  const [galerieBoutique, setGalerieBoutique] = useState([]);
+
   const notify = useToast();
   const token = useSelector((state) => state.token);
 
@@ -19,6 +22,7 @@ function GalerieAdmin() {
       }
       return data;
     } catch (error) {
+      console.log(error);
       notify("error", "Une erreur c'est produite, veuillez contacter l'administrateur.");
     }
   };
@@ -28,36 +32,38 @@ function GalerieAdmin() {
       const response = await fetch("/api/thumbs", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      const data = await response.json();
+      const datas = await response.json();
 
-      if (data.code === 500 || data.code === 403) {
-        notify("error", data.error);
+      if (datas.code === 500 || datas.code === 403) {
+        notify("error", datas.error);
       }
-      return data;
+      setGalerieAvatars(datas.avatars);
+      setGalerieAnnonces(datas.annonces);
+      setGalerieBoutique(datas.boutique);
     } catch (error) {
       notify("error", "Impossible de récupérer les images");
     }
   };
 
-  const associateImagesWithAnnonces = async () => {
-    try {
-      const annonces = await getAnnonces();
-      const galerie = await getGalerie();
+  // const associateImagesWithAnnonces = async () => {
+  //   try {
+  //     const annonces = await getAnnonces();
+  //     const galerie = await getGalerie();
 
-      if (galerie.length > 0) {
-        const galerieWithAnnonces = galerie.map((image) => {
-          const annoncesIds = annonces.filter((annonce) => annonce.image_url === `/assets/${image.name}`).map((annonce) => annonce.id);
-          return { ...image, annoncesIds };
-        });
-        setGalerie(galerieWithAnnonces);
-      }
-    } catch (error) {
-      notify("error", "Impossible de récupérer les images");
-    }
-  };
+  //     if (galerie.length > 0) {
+  //       const galerieWithAnnonces = galerie.map((image) => {
+  //         const annoncesIds = annonces.filter((annonce) => annonce.image_url === `/assets/${image.name}`).map((annonce) => annonce.id);
+  //         return { ...image, annoncesIds };
+  //       });
+  //       setGalerie(galerieWithAnnonces);
+  //     }
+  //   } catch (error) {
+  //     notify("error", "Impossible de récupérer les images");
+  //   }
+  // };
 
   useEffect(() => {
-    associateImagesWithAnnonces();
+    getGalerie();
   }, []);
 
   const deleteHandleImage = async (image) => {
@@ -95,9 +101,9 @@ function GalerieAdmin() {
         <p>Vous pouvez supprimer les images qui ne sont pas utilisées par une annonce.</p>
       </div>
       <div className="galerieAdminContainer">
-        {galerie.map((image, index) => (
-          <ImagePreview key={index} image={image} handleClick={() => deleteHandleImage(image)} />
-        ))}
+        {galerieAvatars && galerieAvatars.map((image, index) => <ImagePreview key={index} image={image} handleClick={() => deleteHandleImage(image)} />)}
+        {galerieAnnonces && galerieAnnonces.map((image, index) => <ImagePreview key={index} image={image} handleClick={() => deleteHandleImage(image)} />)}
+        {galerieBoutique && galerieBoutique.map((image, index) => <ImagePreview key={index} image={image} handleClick={() => deleteHandleImage(image)} />)}
       </div>
     </AdminWrapper>
   );

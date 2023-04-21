@@ -120,7 +120,13 @@ export const addItemBoutiqueValidationSchema = yup.object().shape({
     .trim()
     .required("Veuillez renseigner un type de véhicule.")
     .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
-  price: yup.number().required("Veuillez renseigner un prix.").positive("Le prix doit être positif."),
+  price: yup
+    .number()
+    .required("Veuillez renseigner un prix.")
+    .positive("Le prix doit être positif.")
+    .min(1, "Le prix minumun est de 1€.")
+    .max(1000, "Le prix maximum et de 1000€."),
+
   boutique_image: yup
     .array()
     .required()
@@ -149,7 +155,12 @@ export const modifyItemBoutiqueValidationSchema = yup.object().shape({
     .trim()
     .required("Veuillez renseigner un type de véhicule.")
     .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
-  price: yup.number().required("Veuillez renseigner un prix.").positive("Le prix doit être positif."),
+  price: yup
+    .number()
+    .required("Veuillez renseigner un prix.")
+    .positive("Le prix doit être positif.")
+    .min(1, "Le prix minumun est de 1€.")
+    .max(1000, "Le prix maximum et de 1000€."),
   boutique_image: yup
     .array()
     .nullable(true)
@@ -158,5 +169,28 @@ export const modifyItemBoutiqueValidationSchema = yup.object().shape({
     })
     .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (values) => {
       return values !== [] && values.map((value) => value.size <= 10000000);
+    }),
+});
+
+export const bannerValidationSchema = yup.object().shape({
+  banner_image: yup
+    .mixed()
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
+      return value && ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
+    })
+    .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => {
+      return value && value.size <= 10000000;
+    }),
+});
+
+export const modifyBannerValidationSchema = yup.object().shape({
+  banner_image: yup
+    .mixed()
+    .nullable(true)
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
+      return value === null || ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
+    })
+    .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => {
+      return value === null || value.size <= 10000000;
     }),
 });

@@ -8,7 +8,6 @@ import Rejoindre from "./pages/Rejoindre";
 import Partenariat from "./pages/Partenariat";
 import EquipePandora from "./pages/EquipePandora";
 import TableauDeBord from "./pages/TableauDeBord";
-import BoutiqueItem from "./pages/BoutiqueItem";
 import { useSelector } from "react-redux";
 
 function AppRoutes() {
@@ -20,7 +19,6 @@ function AppRoutes() {
       <Route path="/rejoindre" element={<Rejoindre />} />
       <Route path="/equipepandora" element={<EquipePandora />} />
       <Route path="/boutique" element={<Boutique />} />
-      <Route path="/boutique/:id" element={<BoutiqueItem />} />
       <Route path="/partenariat" element={<Partenariat />} />
       <Route path="/identification" element={<Identification />} />
       <Route path="/tableaudebord/*" element={user ? <TableauDeBord /> : <Identification />} />

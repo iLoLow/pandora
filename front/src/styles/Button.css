@@ -16,13 +16,21 @@
 .globalButton:hover {
   opacity: 1;
 }
+
 .globalButton.red {
   background: var(--red);
 }
 .globalButton.green {
   background: var(--green);
 }
+.globalButton:disabled {
+  background: rgb(55, 134, 73);
+  cursor: not-allowed;
+}
+.globalButton:disabled:hover {
+  opacity: 0.8;
 
+}
 @media screen and (max-width: 768px) {
   .globalButton {
     padding: 5px 10px;

@@ -19,7 +19,7 @@
 }
 
 .tableauAnnonceItem h3 {
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-size: clamp(0.8rem, 2vw, 1rem);
 }
 

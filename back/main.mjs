@@ -14,6 +14,7 @@ import annonceRoutes from "./routes/annonceRoutes.mjs";
 import imageRoutes from "./routes/imageRoutes.mjs";
 import boutiqueRoutes from "./routes/boutiqueRoutes.mjs";
 import bannerRoutes from "./routes/bannerRoutes.mjs";
+import webhookRoutes from "./routes/webhookRoutes.mjs";
 import createFolders from "./utils/createFolders.mjs";
 // Resolve dirname anf filename for es6
 const __filename = fileURLToPath(import.meta.url); // Résolution du chemin du fichier
@@ -87,6 +88,9 @@ app.use("/api/boutique", boutiqueRoutes);
 
 // Définition de la route pour le banner
 app.use("/api/banner", bannerRoutes);
+
+// Définition de la route pour les webhooks
+app.post("/api/webhooks", webhookRoutes);
 
 // Attention ces routes doivent être définies après les routes de l'api !!! (sinon elles seront prioritaires)
 // Définition du dossier de build du front (React)

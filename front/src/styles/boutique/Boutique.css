@@ -1,0 +1,60 @@
+.boutiqueContainer {
+  position: relative;
+}
+
+.boutiquePanierBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 6;
+}
+
+.boutiqueContainer h2 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.boutiqueComponents {
+  transition: margin-right 250ms ease-in-out;
+  z-index: 1;
+}
+
+.boutiqueComponents.panierIsOpen {
+  margin-right: 260px;
+}
+
+.boutiqueCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-rows: minmax(200px, 100%);
+  gap: 1rem;
+  padding-block: 60px 30px;
+  padding-inline: 15px;
+  border-radius: 10px;
+}
+
+.boutiquePanier {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  width: 60px;
+  height: 100%;
+
+  line-height: 2;
+  transition: width 250ms ease-in-out;
+  overflow: hidden;
+  z-index: 5;
+}
+.boutiquePanier.isOpen {
+  width: 260px;
+}
+
+@media screen and (max-width: 768px) {
+  .boutiquePanier {
+    background: transparent;
+  }
+  .boutiqueComponents.panierIsOpen {
+    margin-right: 0;
+  }
+}

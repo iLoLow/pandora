@@ -1,5 +1,5 @@
-import BarreReseaux from "../components/BarreReseaux";
-import "../styles/Rejoindre.css";
+import BarreReseaux from "../components/others/BarreReseaux";
+import "../styles/pages/Rejoindre.css";
 import logo from "../assets/logoPandora.png";
 
 function Rejoindre() {

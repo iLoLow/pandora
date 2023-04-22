@@ -3,17 +3,11 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useToast from "../../../hooks/useToast";
-import AdminWrapper from "../../../components/AdminWrapper";
-import AdminBoutiqueCard from "../../../components/AdminBoutiqueCard";
-import AddBoutiqueForm from "../../../components/AddBoutiqueForm";
-import EditBoutiqueItem from "../../../components/EditBoutiqueItem";
+import AdminWrapper from "../../../components/Others/AdminWrapper";
+import AdminBoutiqueCard from "../../../components/Boutique/AdminBoutiqueCard";
+import AddBoutiqueForm from "../../../components/Boutique/AddBoutiqueForm";
+import EditBoutiqueItem from "../../../components/Boutique/EditBoutiqueItem";
 import "../../../styles/tableaudebord/BoutiqueAdmin.css";
-
-// composant AddBoutiqueItem => BoutiqueForm
-// composant UpdateBoutiqueItem => BoutiqueForm
-
-// dans boutique admin AddBoutiqueForm
-// CardBoutiqueItemsAdmin
 
 function BoutiqueAdmin() {
   const token = useSelector((state) => state.token) || "";

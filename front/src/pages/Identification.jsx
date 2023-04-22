@@ -1,11 +1,11 @@
-import "../styles/Identification.css";
+import "../styles/pages/Identification.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../state";
 import Dropzone from "react-dropzone";
 import { registerValidationSchema, loginValidationSchema } from "../utils/schemasValidation";
-import Button from "../components/Button";
+import Button from "../components/Others/Button";
 import useToast from "../hooks/useToast";
 
 function Identification() {

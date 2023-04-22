@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../../styles/tableaudebord/AnnoncesUser.css";
-import AddAnnonceForm from "../../components/AddAnnonceForm";
-import ModifyAnnonceForm from "../../components/ModifyAnnonceForm";
+import AddAnnonceForm from "../../components/Annonce/AddAnnonceForm";
+import ModifyAnnonceForm from "../../components/Annonce/ModifyAnnonceForm";
 import { useNavigate } from "react-router-dom";
 import { setLogout } from "../../state";
 import { useDispatch } from "react-redux";
 import useToast from "../../hooks/useToast";
-import AdminWrapper from "../../components/AdminWrapper";
-import AdminAnnonceCard from "../../components/AdminAnnonceCard";
+import AdminWrapper from "../../components/Others/AdminWrapper";
+import AdminAnnonceCard from "../../components/Annonce/AdminAnnonceCard";
 
 function AnnoncesUser() {
   const user = useSelector((state) => state.user) || {};

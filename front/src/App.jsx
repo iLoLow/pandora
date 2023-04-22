@@ -1,6 +1,6 @@
-import Header from "./components/Header";
+import Header from "./components/Layout/Header";
 import AppRoutes from "./AppRoutes";
-import Footer from "./components/Footer";
+import Footer from "./components/Layout/Footer";
 import "./styles/App.css";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";

@@ -1,8 +1,8 @@
-import Article from "../components/Article";
-import Banner from "../components/Banner";
-import "../styles/Accueil.css";
+import Article from "../components/Annonce/Article";
+import Banner from "../components/Banner/Banner";
+import "../styles/pages/Accueil.css";
 import { useState, useEffect } from "react";
-import BarreReseaux from "../components/BarreReseaux";
+import BarreReseaux from "../components/Others/BarreReseaux";
 document.title = "Pandora RP";
 import useToast from "../hooks/useToast";
 

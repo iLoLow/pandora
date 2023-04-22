@@ -1,4 +1,4 @@
-import "../styles/Partenariat.css";
+import "../styles/pages/Partenariat.css";
 
 function Partenariat() {
   return (

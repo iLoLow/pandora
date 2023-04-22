@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../styles/Erreur.css";
+import "../styles/layout/Erreur.css";
 
 function Erreur() {
   document.title = "Erreur";

@@ -1,7 +1,7 @@
 import "../../styles/tableaudebord/AccueilAdmin.css";
-import Button from "../../components/Button";
+import Button from "../../components/Others/Button";
 import { useState } from "react";
-import AdminWrapper from "../../components/AdminWrapper";
+import AdminWrapper from "../../components/Others/AdminWrapper";
 
 function AccueilAdmin() {
   const [isCopied, setIsCopied] = useState(false);

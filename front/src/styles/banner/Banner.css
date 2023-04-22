@@ -1,0 +1,19 @@
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  overflow: hidden;
+  max-height: 270px;
+  border: 2px solid var(--text-secondary);
+}
+.banner img {
+  display: block;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+  .banner {
+    border-radius: 10px;
+  }
+}

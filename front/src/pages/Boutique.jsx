@@ -1,9 +1,9 @@
-import "../styles/Boutique.css";
+import "../styles/boutique/Boutique.css";
 import { useEffect, useState } from "react";
-import BoutiqueCard from "../components/BoutiqueCard";
+import BoutiqueCard from "../components/Boutique/BoutiqueCard";
 import { useNavigate } from "react-router-dom";
 import useToast from "../hooks/useToast";
-import Panier from "../components/Panier";
+import Panier from "../components/Boutique/Panier";
 import BoutiqueItem from "../pages/BoutiqueItem";
 
 function Boutique() {
@@ -11,6 +11,7 @@ function Boutique() {
   const [items, setItems] = useState([]);
   const [detail, setDetail] = useState({});
   const [openDetail, setOpenDetail] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("panier")) || []);
   const navigate = useNavigate();
   const notify = useToast();
@@ -48,26 +49,56 @@ function Boutique() {
     setOpenDetail(!openDetail);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsOpen(false);
+      } else {
+        setIsOpen(true);
+      }
+    };
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <section className="boutiqueContainer">
-        {!openDetail && (
-          <div className="itemsContainer">
-            {items.length > 0 &&
-              items.map((item, k) => (
-                <BoutiqueCard
-                  key={k}
-                  handleDetailItem={() => {
-                    setDetail(item), setOpenDetail(!openDetail);
-                  }}
-                  item={item}
-                  handleReservation={() => handleReservation(item)}
-                />
-              ))}
+        <div className="boutiquePanierBtn">
+          <div className=" panierIconeNumero" onClick={() => setIsOpen(!isOpen)}>
+            <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <circle cx="176" cy="416" r="32" />
+              <circle cx="400" cy="416" r="32" />
+              <path d="M456.8 120.78a23.92 23.92 0 00-18.56-8.78H133.89l-6.13-34.78A16 16 0 00112 64H48a16 16 0 000 32h50.58l45.66 258.78A16 16 0 00160 368h256a16 16 0 000-32H173.42l-5.64-32h241.66A24.07 24.07 0 00433 284.71l28.8-144a24 24 0 00-5-19.93z" />
+            </svg>
+            <span className="panierNumero">{cart.length}</span>
           </div>
-        )}
-        {openDetail && <BoutiqueItem item={detail} handleReservation={() => handleReservation(detail)} handleCloseDetail={() => handleCloseDetail()} />}
-        <Panier cart={cart} setCart={(v) => setCart(v)} />
+        </div>
+        <div className={isOpen ? "boutiquePanier isOpen" : "boutiquePanier"}>
+          <Panier cart={cart} setCart={(v) => setCart(v)} isOpen={isOpen} />
+        </div>
+        <div className={isOpen ? "boutiqueComponents panierIsOpen" : "boutiqueComponents"}>
+          {!openDetail && (
+            <div className="boutiqueCards">
+              {items.length > 0 &&
+                items.map((item, k) => (
+                  <BoutiqueCard
+                    key={k}
+                    handleDetailItem={() => {
+                      setDetail(item), setOpenDetail(!openDetail);
+                    }}
+                    item={item}
+                    handleReservation={() => handleReservation(item)}
+                  />
+                ))}
+            </div>
+          )}
+          {openDetail && <BoutiqueItem isOpen={isOpen} item={detail} handleReservation={() => handleReservation(detail)} handleCloseDetail={() => handleCloseDetail()} />}
+        </div>
       </section>
     </>
   );

@@ -1,5 +1,5 @@
-import CarteEquipe from "../components/CarteEquipe";
-import "../styles/EquipePandora.css";
+import CarteEquipe from "../components/Others/CarteEquipe";
+import "../styles/pages/EquipePandora.css";
 import datas from "../assets/equipePandora.json";
 import BannerDev from "../assets/SOYEZ_Laurent_Developpeur_WEB.webp";
 import { Link } from "react-router-dom";

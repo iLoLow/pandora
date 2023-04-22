@@ -1,4 +1,4 @@
-import "../styles/TableauDeBord.css";
+import "../styles/pages/TableauDeBord.css";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";

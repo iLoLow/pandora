@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Article from "../components/Article";
-import "../styles/Annonces.css";
+import Article from "../components/Annonce/Article";
+import "../styles/annonce/Annonces.css";
 import useToast from "../hooks/useToast";
 
 function Annonces() {

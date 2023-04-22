@@ -6,9 +6,9 @@ import { useDispatch } from "react-redux";
 import { setLogout } from "../../state";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import UpdateUserForm from "../../components/UpdateUserForm";
-import AdminProfilCard from "../../components/AdminProfilCard";
-import AdminWrapper from "../../components/AdminWrapper";
+import UpdateUserForm from "../../components/Tableaudebord/UpdateUserForm";
+import AdminProfilCard from "../../components/Tableaudebord/AdminProfilCard";
+import AdminWrapper from "../../components/Others/AdminWrapper";
 
 function ProfilUser() {
   const { user_id } = useSelector((state) => state.user);

@@ -1,9 +1,9 @@
-import AdminWrapper from "../../../components/AdminWrapper";
+import AdminWrapper from "../../../components/Others/AdminWrapper";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import useToast from "../../../hooks/useToast";
-import AdminAnnonceCard from "../../../components/AdminAnnonceCard";
-import ModifyAnnonceForm from "../../../components/ModifyAnnonceForm";
+import AdminAnnonceCard from "../../../components/Annonce/AdminAnnonceCard";
+import ModifyAnnonceForm from "../../../components/Annonce/ModifyAnnonceForm";
 
 function AnnoncesAdmin() {
   const token = useSelector((state) => state.token);

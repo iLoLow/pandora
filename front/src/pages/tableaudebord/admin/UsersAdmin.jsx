@@ -1,10 +1,11 @@
-import AdminWrapper from "../../../components/AdminWrapper";
-import AdminProfilCard from "../../../components/AdminProfilCard";
+import AdminWrapper from "../../../components/Others/AdminWrapper";
+import AdminProfilCard from "../../../components/Tableaudebord/AdminProfilCard";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import useToast from "../../../hooks/useToast";
 import "../../../styles/tableaudebord/AdminUsers.css";
-import UpdateUserForm from "../../../components/UpdateUserForm";
+import UpdateUserForm from "../../../components/Tableaudebord/UpdateUserForm";
+import { Navigate } from "react-router-dom";
 
 function UsersAdmin() {
   const token = useSelector((state) => state.token);
@@ -56,6 +57,8 @@ function UsersAdmin() {
 
         if (data.code === 403) {
           notify("error", data.error);
+          dispatch(setLogout());
+          Navigate("/identification");
         }
 
         if (data) {

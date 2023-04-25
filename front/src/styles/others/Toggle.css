@@ -3,7 +3,7 @@
   height: 26px;
   z-index: 10;
   border-radius: 15px;
-  border: inset 1px #0d7f90;
+  border: solid 1px #0d7f90;
   overflow: hidden;
   padding: 1px;
   cursor: pointer;
@@ -17,12 +17,21 @@
   width: 20px;
   height: 20px;
   background: white;
-  border: inset 1px #0d7f90;
+  border: solid 1px #0d7f90;
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   transition: transform 0.2s;
 }
 
 .toggleBtn .toggle.dark {
-  transform: translateX(calc(100% - 6px));
+  transform: translateX(calc(100% - 8px));
+}
+
+/* Attention classe pour les webhooks */
+.toggleBtn .toggle.active {
+  background: var(--green);
+  transform: translateX(calc(100% - 8px));
+}
+.toggleBtn .toggle.inactive {
+  background: var(--red);
 }

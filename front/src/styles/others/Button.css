@@ -24,12 +24,11 @@
   background: var(--green);
 }
 .globalButton:disabled {
-  background: rgb(55, 134, 73);
+  opacity: 0.4;
   cursor: not-allowed;
 }
 .globalButton:disabled:hover {
-  opacity: 0.8;
-
+  opacity: 0.4;
 }
 @media screen and (max-width: 768px) {
   .globalButton {

@@ -12,6 +12,7 @@
 .btnLike svg {
   width: 26px;
 }
+
 @media screen and (max-width: 768px) {
   .btnLike {
     height: 20px;

@@ -13,6 +13,8 @@
   font-size: clamp(1.2rem, 2vw, 1.5rem);
   font-weight: 600;
   margin-left: 5px;
+  color: var(--text-secondary);
+  border-bottom: 1px var(--text-secondary) solid;
 }
 
 .boutiqueComponents {
@@ -21,7 +23,7 @@
 }
 
 .boutiqueComponents.panierIsOpen {
-  margin-right: 260px;
+  margin-right: 270px;
 }
 
 .boutiqueCards {
@@ -40,20 +42,20 @@
   right: 0;
   width: 60px;
   height: 100%;
-
   line-height: 2;
   transition: width 250ms ease-in-out;
   overflow: hidden;
   z-index: 5;
 }
 .boutiquePanier.isOpen {
-  width: 260px;
+  width: 270px;
 }
 
 @media screen and (max-width: 768px) {
   .boutiquePanier {
     background: transparent;
   }
+
   .boutiqueComponents.panierIsOpen {
     margin-right: 0;
   }

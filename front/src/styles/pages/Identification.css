@@ -1,3 +1,7 @@
+.pageIdentification {
+  padding-inline: 10px;
+}
+
 .sectionForm {
   margin: 40px auto;
   padding: 20px;
@@ -42,15 +46,6 @@ form-group {
   margin-left: 5px;
 }
 
-input {
-  padding: 5px 10px;
-  border-radius: 10px;
-  font-size: clamp(0.8rem, 2vw, 1rem);
-}
-
-input::placeholder {
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
-}
 .formCheck {
   display: flex;
   align-items: center;
@@ -66,6 +61,9 @@ input::placeholder {
 
 .linkBtn:hover {
   text-decoration: underline;
+}
+.formFooterP {
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 @media screen and (max-width: 768px) {

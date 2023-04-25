@@ -1,10 +1,31 @@
+.containerbanner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 100%;
+}
+
 .bannerWrapper {
   position: relative;
   border-radius: 15px;
   overflow: hidden;
 }
-.bannerWrapper img {
+
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  overflow: hidden;
+  max-height: 270px;
+  border: 2px solid var(--text-secondary);
+}
+.banner img {
   display: block;
+  object-fit: cover;
 }
 .infosBanner {
   position: absolute;

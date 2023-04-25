@@ -1,10 +1,6 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;1,100;1,700&display=swap"); */
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&display=swap");
+
 * {
-  /* font-family: "Roboto", sans-serif; */
-  /* font-family: "Anuphan", sans-serif; */
   font-family: "Inter", sans-serif;
   box-sizing: border-box;
   margin: 0;
@@ -99,6 +95,7 @@ a:hover {
 
 /*Style Formulaire*/
 .containerForm {
+  width: 100%;
   padding: 20px;
   border: 2px solid var(--text-secondary);
   box-shadow: -1px 1px 9px 0px var(--shadow);
@@ -127,26 +124,22 @@ a:hover {
   font-weight: 500;
   margin-left: 5px;
 }
-
-.form button {
-  background: #0d7f90;
-  margin: auto;
+input {
+  padding: 5px 10px;
   border-radius: 10px;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  color: white;
-  font-weight: bold;
-  transition: 0.3s ease-in-out;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  border: 2px solid var(--accent);
+  box-shadow: -1px 1px 4px 0px var(--shadow);
 }
-.form button:hover {
-  background: #07616e;
+
+input::placeholder {
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
 }
 
 .dropzone {
   background: white;
   border-radius: 10px;
-  border: 2px solid rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--accent);
   min-height: 80px;
   cursor: pointer;
   padding: 10px;

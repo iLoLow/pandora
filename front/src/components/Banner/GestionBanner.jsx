@@ -50,12 +50,12 @@ function GestionBanner() {
   }, []);
 
   return (
-    <div>
+    <div className="containerbanner">
       <h2>Gestion Du Banner</h2>
       {banner.length === 0 ? <AddBannerForm reload={() => getBanner()} /> : <ModifyBannerForm banner={banner[0]} reload={() => getBanner()} />}
       {banner.length > 0 && (
         <div className="bannerWrapper">
-          <div>
+          <div className="banner">
             <img src={banner[0].image_url} alt="banner" />
           </div>
           <div className="infosBanner">

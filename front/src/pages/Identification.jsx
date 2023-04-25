@@ -108,63 +108,65 @@ function Identification() {
   };
 
   return (
-    <section className="sectionForm">
-      <h2>{formType === "login" ? "Connexion" : "Enregistrement"}</h2>
-      <form className="formIdentification" method="POST" onSubmit={handleSubmit}>
-        {formType === "signUp" && (
-          <form-group>
-            <label>Nom d'utilisateur :</label>
-            <input autoComplete="username" type="text" value={values.username} onChange={(e) => setValues({ ...values, username: e.target.value })} />
-            {errors.username && <small className="errorSmall">{errors.username}</small>}
-          </form-group>
-        )}
-        <form-group>
-          <label>Email :</label>
-          <input autoComplete="username" type="email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />
-          {errors.email && <small className="errorSmall">{errors.email}</small>}
-        </form-group>
-        <form-group>
-          <label>Mot de passe :</label>
-          <input autoComplete="new-password" type="password" value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
-          {errors.password && <small className="errorSmall">{errors.password}</small>}
-        </form-group>
-        {isSignup && (
-          <>
+    <div className="pageIdentification">
+      <section className="sectionForm">
+        <h2>{formType === "login" ? "Connexion" : "Enregistrement"}</h2>
+        <form className="formIdentification" method="POST" onSubmit={handleSubmit}>
+          {formType === "signUp" && (
             <form-group>
-              <label>Confirmation du mot de passe :</label>
-              <input autoComplete="new-password" type="password" value={values.confirmPassword} onChange={(e) => setValues({ ...values, confirmPassword: e.target.value })} />
-              {errors.confirmPassword && <small className="errorSmall">{errors.confirmPassword}</small>}
+              <label>Nom d'utilisateur :</label>
+              <input autoComplete="username" type="text" value={values.username} onChange={(e) => setValues({ ...values, username: e.target.value })} />
+              {errors.username && <small className="errorSmall">{errors.username}</small>}
             </form-group>
-            <Dropzone multiple={false} onDrop={(acceptedFiles) => setValues({ ...values, avatar_image: acceptedFiles[0] })}>
-              {({ getRootProps, getInputProps }) => (
-                <div {...getRootProps()} className="dropzone">
-                  <div className={errors.avatar ? "zone zone-error" : "zone"}>
-                    <input {...getInputProps()} />
-                    {errors.avatar_image ? (
-                      <small className="errorSmall">{errors.avatar_image}</small>
-                    ) : values.avatar_image ? (
-                      <p>Image choisie : {values.avatar_image.name}</p>
-                    ) : (
-                      <p>Glissez-déposez votre avatar, ou cliquez pour sélectionner votre avatar.</p>
-                    )}
+          )}
+          <form-group>
+            <label>Email :</label>
+            <input autoComplete="username" type="email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />
+            {errors.email && <small className="errorSmall">{errors.email}</small>}
+          </form-group>
+          <form-group>
+            <label>Mot de passe :</label>
+            <input autoComplete="new-password" type="password" value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
+            {errors.password && <small className="errorSmall">{errors.password}</small>}
+          </form-group>
+          {isSignup && (
+            <>
+              <form-group>
+                <label>Confirmation du mot de passe :</label>
+                <input autoComplete="new-password" type="password" value={values.confirmPassword} onChange={(e) => setValues({ ...values, confirmPassword: e.target.value })} />
+                {errors.confirmPassword && <small className="errorSmall">{errors.confirmPassword}</small>}
+              </form-group>
+              <Dropzone multiple={false} onDrop={(acceptedFiles) => setValues({ ...values, avatar_image: acceptedFiles[0] })}>
+                {({ getRootProps, getInputProps }) => (
+                  <div {...getRootProps()} className="dropzone">
+                    <div className={errors.avatar ? "zone zone-error" : "zone"}>
+                      <input {...getInputProps()} />
+                      {errors.avatar_image ? (
+                        <small className="errorSmall">{errors.avatar_image}</small>
+                      ) : values.avatar_image ? (
+                        <p>Image choisie : {values.avatar_image.name}</p>
+                      ) : (
+                        <p>Glissez-déposez votre avatar, ou cliquez pour sélectionner votre avatar.</p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              )}
-            </Dropzone>
-          </>
-        )}
-        <Button type="submit" children={isLogin ? "Se connecter" : "S'inscrire"} />
-      </form>
-      <div
-        className="linkBtn"
-        onClick={() => {
-          setErrors({});
-          setFormType(isLogin ? "signUp" : "login");
-        }}
-      >
-        {isLogin ? <p>Vous n'avez pas de compte ? Inscrivez-vous</p> : <p>Vous avez déjà un compte ? Connectez-vous</p>}
-      </div>
-    </section>
+                )}
+              </Dropzone>
+            </>
+          )}
+          <Button color="green" type="submit" children={isLogin ? "Se connecter" : "S'inscrire"} />
+        </form>
+        <div
+          className="linkBtn"
+          onClick={() => {
+            setErrors({});
+            setFormType(isLogin ? "signUp" : "login");
+          }}
+        >
+          {isLogin ? <p className="formFooterP">Vous n'avez pas de compte ? Inscrivez-vous</p> : <p>Vous avez déjà un compte ? Connectez-vous</p>}
+        </div>
+      </section>
+    </div>
   );
 }
 

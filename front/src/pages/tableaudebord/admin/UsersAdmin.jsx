@@ -1,17 +1,20 @@
 import AdminWrapper from "../../../components/Others/AdminWrapper";
 import AdminProfilCard from "../../../components/Tableaudebord/AdminProfilCard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import useToast from "../../../hooks/useToast";
 import "../../../styles/tableaudebord/AdminUsers.css";
 import UpdateUserForm from "../../../components/Tableaudebord/UpdateUserForm";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { setLogout } from "../../../state";
 
 function UsersAdmin() {
   const token = useSelector((state) => state.token);
   const [users, setUsers] = useState([]);
   const notify = useToast();
   const [editUserIndex, setUserIndex] = useState(-1);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const getUsers = async () => {
     try {
@@ -58,7 +61,7 @@ function UsersAdmin() {
         if (data.code === 403) {
           notify("error", data.error);
           dispatch(setLogout());
-          Navigate("/identification");
+          navigate("/identification");
         }
 
         if (data) {

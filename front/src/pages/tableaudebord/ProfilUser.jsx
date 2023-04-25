@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import "../../styles/tableaudebord/ProfilUser.css";
-
 import useToast from "../../hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../state";
@@ -26,8 +25,13 @@ function ProfilUser() {
       });
       const data = await response.json();
 
-      if (data.code === 500 || data.code === 403) {
+      if (data.code === 500) {
         notify("error", data.error);
+      }
+      if (data.code === 403) {
+        notify("error", data.error);
+        dispatch(setLogout());
+        navigate("/identification");
       }
       setUser(data);
     } catch (error) {
@@ -63,6 +67,8 @@ function ProfilUser() {
 
         if (data.code === 403) {
           notify("error", data.error);
+          dispatch(setLogout());
+          navigate("/identification");
         }
 
         if (data) {

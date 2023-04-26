@@ -4,7 +4,7 @@ import { annonceValidationSchema } from "../../utils/schemasValidation";
 import { useSelector, useDispatch } from "react-redux";
 import useToast from "../../hooks/useToast";
 import { useNavigate } from "react-router-dom";
-import { sendEmbedsToDiscord } from "../../services/WebHookDiscord";
+import { sendEmbedsToDiscordAnnonce } from "../../services/WebHookDiscord";
 
 function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
   const initialValues = {
@@ -25,7 +25,10 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
   const postEmbeds = {
     title: values.title,
     description: "@everyone" + values.description,
+
     url: import.meta.env.VITE_SITE_URL,
+    color: 3447003,
+
     image: {
       url: import.meta.env.VITE_SITE_URL + values.image_url,
     },
@@ -66,8 +69,7 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
       if (savedAnnonce) {
         notify("success", savedAnnonce.message);
         setValues(initialValues);
-        //sendEmbedsToDiscord(postEmbeds);
-
+        sendEmbedsToDiscordAnnonce(postEmbeds);
         reloadAnnonces();
         setErrors({});
         setClose();

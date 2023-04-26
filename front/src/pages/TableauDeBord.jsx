@@ -14,7 +14,8 @@ import UsersAdmin from "./tableaudebord/admin/UsersAdmin";
 import AnnoncesAdmin from "./tableaudebord/admin/AnnoncesAdmin";
 import GalerieAdmin from "./tableaudebord/admin/GalerieAdmin";
 import BoutiqueAdmin from "./tableaudebord/admin/BoutiqueAdmin";
-import ReglagesAdmin from "./tableaudebord/admin/ReglagesAdmin";
+import BannerAdmin from "./tableaudebord/admin/BannerAdmin";
+import WebhookAdmin from "./tableaudebord/admin/WebhookAdmin";
 
 function TableauDeBord() {
   document.title = "Tableau de bord";
@@ -124,14 +125,24 @@ function TableauDeBord() {
                 </span>
                 <span>boutique</span>
               </NavLink>
-              <NavLink to="/tableaudebord/admin/reglages">
+              <NavLink to="/tableaudebord/admin/banner">
                 <span className="tableauDeBordIcone">
                   <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <circle cx="256" cy="256" r="48" />
                     <path d="M470.39 300l-.47-.38-31.56-24.75a16.11 16.11 0 01-6.1-13.33v-11.56a16 16 0 016.11-13.22L469.92 212l.47-.38a26.68 26.68 0 005.9-34.06l-42.71-73.9a1.59 1.59 0 01-.13-.22A26.86 26.86 0 00401 92.14l-.35.13-37.1 14.93a15.94 15.94 0 01-14.47-1.29q-4.92-3.1-10-5.86a15.94 15.94 0 01-8.19-11.82l-5.59-39.59-.12-.72A27.22 27.22 0 00298.76 26h-85.52a26.92 26.92 0 00-26.45 22.39l-.09.56-5.57 39.67a16 16 0 01-8.13 11.82 175.21 175.21 0 00-10 5.82 15.92 15.92 0 01-14.43 1.27l-37.13-15-.35-.14a26.87 26.87 0 00-32.48 11.34l-.13.22-42.77 73.95a26.71 26.71 0 005.9 34.1l.47.38 31.56 24.75a16.11 16.11 0 016.1 13.33v11.56a16 16 0 01-6.11 13.22L42.08 300l-.47.38a26.68 26.68 0 00-5.9 34.06l42.71 73.9a1.59 1.59 0 01.13.22 26.86 26.86 0 0032.45 11.3l.35-.13 37.07-14.93a15.94 15.94 0 0114.47 1.29q4.92 3.11 10 5.86a15.94 15.94 0 018.19 11.82l5.56 39.59.12.72A27.22 27.22 0 00213.24 486h85.52a26.92 26.92 0 0026.45-22.39l.09-.56 5.57-39.67a16 16 0 018.18-11.82c3.42-1.84 6.76-3.79 10-5.82a15.92 15.92 0 0114.43-1.27l37.13 14.95.35.14a26.85 26.85 0 0032.48-11.34 2.53 2.53 0 01.13-.22l42.71-73.89a26.7 26.7 0 00-5.89-34.11zm-134.48-40.24a80 80 0 11-83.66-83.67 80.21 80.21 0 0183.66 83.67z" />
                   </svg>
                 </span>
-                <span>Réglages</span>
+                <span>Banner</span>
+              </NavLink>
+              <NavLink to="/tableaudebord/admin/webhook">
+                <span className="tableauDeBordIcone">
+                  <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <title>Logo Discord</title>
+                    <path d="M464 66.52A50 50 0 00414.12 17L97.64 16A49.65 49.65 0 0048 65.52V392c0 27.3 22.28 48 49.64 48H368l-13-44 109 100zM324.65 329.81s-8.72-10.39-16-19.32C340.39 301.55 352.5 282 352.5 282a139 139 0 01-27.85 14.25 173.31 173.31 0 01-35.11 10.39 170.05 170.05 0 01-62.72-.24 184.45 184.45 0 01-35.59-10.4 141.46 141.46 0 01-17.68-8.21c-.73-.48-1.45-.72-2.18-1.21-.49-.24-.73-.48-1-.48-4.36-2.42-6.78-4.11-6.78-4.11s11.62 19.09 42.38 28.26c-7.27 9.18-16.23 19.81-16.23 19.81-53.51-1.69-73.85-36.47-73.85-36.47 0-77.06 34.87-139.62 34.87-139.62 34.87-25.85 67.8-25.12 67.8-25.12l2.42 2.9c-43.59 12.32-63.44 31.4-63.44 31.4s5.32-2.9 14.28-6.77c25.91-11.35 46.5-14.25 55-15.21a24 24 0 014.12-.49 205.62 205.62 0 0148.91-.48 201.62 201.62 0 0172.89 22.95s-19.13-18.15-60.3-30.45l3.39-3.86s33.17-.73 67.81 25.16c0 0 34.87 62.56 34.87 139.62 0-.28-20.35 34.5-73.86 36.19z" />
+                    <path d="M212.05 218c-13.8 0-24.7 11.84-24.7 26.57s11.14 26.57 24.7 26.57c13.8 0 24.7-11.83 24.7-26.57.25-14.76-10.9-26.57-24.7-26.57zM300.43 218c-13.8 0-24.7 11.84-24.7 26.57s11.14 26.57 24.7 26.57c13.81 0 24.7-11.83 24.7-26.57S314 218 300.43 218z" />
+                  </svg>
+                </span>
+                <span>WebHooks</span>
               </NavLink>
             </div>
           </>
@@ -149,7 +160,8 @@ function TableauDeBord() {
           <Route path="/admin/annonces" element={<AnnoncesAdmin />} />
           <Route path="/admin/galerie" element={<GalerieAdmin />} />
           <Route path="/admin/boutique" element={<BoutiqueAdmin />} />
-          <Route path="/admin/reglages" element={<ReglagesAdmin />} />
+          <Route path="/admin/banner" element={<BannerAdmin />} />
+          <Route path="/admin/webhook" element={<WebhookAdmin />} />
         </Routes>
       </section>
     </div>

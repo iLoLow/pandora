@@ -109,6 +109,7 @@ export const addItemBoutiqueValidationSchema = yup.object().shape({
     .string()
     .trim()
     .required("Veuillez renseigner un nom.")
+    .max(19, "Le nom ne doit pas dépasser 19 caractères.")
     .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
   description: yup
     .string()
@@ -144,6 +145,7 @@ export const modifyItemBoutiqueValidationSchema = yup.object().shape({
     .string()
     .trim()
     .required("Veuillez renseigner un nom.")
+    .max(19, "Le nom ne doit pas dépasser 19 caractères.")
     .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
   description: yup
     .string()
@@ -193,4 +195,23 @@ export const modifyBannerValidationSchema = yup.object().shape({
     .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => {
       return value === null || value.size <= 10000000;
     }),
+});
+
+export const panierValidationSchema = yup.object().shape({
+  pseudo_id: yup
+    .string()
+    .trim()
+    .required("Veuillez renseigner votre identifiant discord.")
+    .matches(/[0-9]/, "L'identifiant discord ne doit contenir que des chiffres.")
+    .min(3, "Votre identifiant doit faire au minimum 3 caractères."),
+});
+
+export const addWebhookValidationSchema = yup.object().shape({
+  webhook_url: yup.string().required("Veuillez renseigner l'url du webhook discord.").trim().url().required("Veuillez saisir l'url du webhook discord."),
+  server_id: yup
+    .string()
+    .required("Veuillez renseigner l'identifiant du serveur discord.")
+    .trim()
+    .matches(/[0-9]/, "L'identifiant du serveur discord ne doit contenir que des chiffres."),
+  role_id: yup.string().required("Veuillez renseigner l'identifiant du rôle discord.").trim().matches(/[0-9]/, "L'identifiant du rôle discord ne doit contenir que des chiffres."),
 });

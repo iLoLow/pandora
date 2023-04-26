@@ -1,7 +1,7 @@
 import "../styles/boutique/Boutique.css";
 import { useEffect, useState } from "react";
 import BoutiqueCard from "../components/Boutique/BoutiqueCard";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import useToast from "../hooks/useToast";
 import Panier from "../components/Boutique/Panier";
 import BoutiqueItem from "../pages/BoutiqueItem";
@@ -21,13 +21,17 @@ function Boutique() {
       const response = await fetch("/api/boutique");
       const datas = await response.json();
 
+      if (datas.length === 0) {
+        navigate("/boutique/maintenance");
+      }
+
       setItems(datas);
 
       if (datas.code === 429) {
         notify("error", datas.error);
       }
     } catch (error) {
-      navigate("/erreur");
+      navigate("/boutique/maintenance");
     }
   };
 
@@ -36,12 +40,19 @@ function Boutique() {
   }, []);
 
   const handleReservation = (item) => {
-    const newCart = [...cart].concat(item);
+    const newItem = {
+      id: item.id,
+      name_article: item.name_article,
+      type_vehicule: item.type_vehicule,
+      price: item.price,
+    };
 
-    setCart(newCart);
+    const newCart = [...cart].concat(newItem);
 
     // Enregistrer le panier mis à jour dans le localStorage
     localStorage.setItem("panier", JSON.stringify(newCart));
+    setCart(JSON.parse(localStorage.getItem("panier")));
+    notify("success", "Article ajouté au panier");
   };
 
   const handleCloseDetail = () => {
@@ -79,7 +90,7 @@ function Boutique() {
           </div>
         </div>
         <div className={isOpen ? "boutiquePanier isOpen" : "boutiquePanier"}>
-          <Panier cart={cart} setCart={(v) => setCart(v)} isOpen={isOpen} />
+          <Panier cart={cart} setCart={setCart} isOpen={isOpen} />
         </div>
         <div className={isOpen ? "boutiqueComponents panierIsOpen" : "boutiqueComponents"}>
           {!openDetail && (

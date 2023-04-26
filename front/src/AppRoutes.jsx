@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Annonces from "./pages/Annonces";
 import Boutique from "./pages/Boutique";
+import BoutiqueClose from "./pages/BoutiqueClose";
 import Erreur from "./pages/Erreur";
 import Accueil from "./pages/Accueil";
 import Identification from "./pages/Identification";
@@ -19,6 +20,7 @@ function AppRoutes() {
       <Route path="/rejoindre" element={<Rejoindre />} />
       <Route path="/equipepandora" element={<EquipePandora />} />
       <Route path="/boutique" element={<Boutique />} />
+      <Route path="/boutique/maintenance" element={<BoutiqueClose />} />
       <Route path="/partenariat" element={<Partenariat />} />
       <Route path="/identification" element={<Identification />} />
       <Route path="/tableaudebord/*" element={user ? <TableauDeBord /> : <Identification />} />

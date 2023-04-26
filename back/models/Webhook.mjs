@@ -17,9 +17,9 @@ connection.on("error", async (err) => {
 class Webhook {
   constructor() {}
 
-  static create(webhook_url, is_active) {
+  static create(type, webhook_url, server_id, role_id) {
     return new Promise((resolve, reject) => {
-      connection.query("INSERT INTO webhooks (webhook_url, is_active) VALUES (?, ?)", [webhook_url, is_active], (err, result) => {
+      connection.query("INSERT INTO webhooks (type, webhook_url, server_id, role_id) VALUES (?, ?, ?, ? )", [type, webhook_url, server_id, role_id], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
@@ -37,9 +37,9 @@ class Webhook {
     });
   }
 
-  static getById(id) {
+  static getWebhookbyType(type) {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM webhooks WHERE id = ?", [id], (err, result) => {
+      connection.query("SELECT * FROM webhooks WHERE type=?", [type], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
@@ -47,9 +47,9 @@ class Webhook {
     });
   }
 
-  static update(id, webhook_url, is_active) {
+  static activate(type, active) {
     return new Promise((resolve, reject) => {
-      connection.query("UPDATE webhooks SET webhook_url = ?, is_active = ? WHERE id = ?", [webhook_url, is_active, id], (err, result) => {
+      connection.query("UPDATE webhooks SET active = ? WHERE type = ?", [active, type], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });
@@ -57,9 +57,9 @@ class Webhook {
     });
   }
 
-  static delete(id) {
+  static delete(type) {
     return new Promise((resolve, reject) => {
-      connection.query("DELETE FROM webhooks WHERE id = ?", [id], (err, result) => {
+      connection.query("DELETE FROM webhooks WHERE type = ?", [type], (err, result) => {
         if (err) reject(err);
         resolve(result);
       });

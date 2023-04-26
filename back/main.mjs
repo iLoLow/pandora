@@ -44,7 +44,27 @@ const limiter = rateLimit({
   handler: limitReached, // Custom handler to send the response
 });
 
-// // Apply the rate limiting middleware to all requests
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content, Accept, Content-Type, content-disposition, Authorization");
+//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+//   res.setHeader("Cross-Origin-Resource-Policy", "same-site");
+//   res.setHeader(
+//     "Content-Security-policy",
+//     "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/; img-src * 'self' data: blob:; connect-src 'self' https://fonts.gstatic.com/ https://fonts.googleapis.com/ https://discord.com/api/webhooks/"
+//   );
+
+//   next();
+// });
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
+// Apply the rate limiting middleware to all requests
 app.use("/api/*", limiter);
 
 // Helmet vous aide à sécuriser vos applications Express en définissant diverses en-têtes HTTP.
@@ -54,11 +74,14 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      connectSrc: ["'self'", "https://discord.com/api/webhooks/"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/"],
+      imgSrc: ["*", "'self'", "data: blob:"],
+      connectSrc: ["'self'", "https://fonts.gstatic.com/", "https://fonts.googleapis.com/", "https://discord.com/api/webhooks/"],
     },
   })
 );
-app.use(cors());
+app.use(cors({ allowedHeaders: ["Origin", "X-Requested-With", "Content", "Accept", "Content-Type", "Content-Disposition", "Authorization"] }));
 
 // journalisation pour Express (logs).
 app.use(morgan("dev"));
@@ -90,7 +113,7 @@ app.use("/api/boutique", boutiqueRoutes);
 app.use("/api/banner", bannerRoutes);
 
 // Définition de la route pour les webhooks
-app.post("/api/webhooks", webhookRoutes);
+app.use("/api/webhooks", webhookRoutes);
 
 // Attention ces routes doivent être définies après les routes de l'api !!! (sinon elles seront prioritaires)
 // Définition du dossier de build du front (React)

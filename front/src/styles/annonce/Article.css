@@ -28,9 +28,9 @@
 }
 .articleParagraphe p {
   font-size: clamp(0.8rem, 2vw, 1rem);
+  margin-block: 1rem;
 }
 .articleFooter {
-  margin-top: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -75,7 +75,7 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   margin-top: 70px;
-  background: var(--color-main);
+  /*background: var(--color-main);*/
 }
 
 /* Custom message React Toastify */

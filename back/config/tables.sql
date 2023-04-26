@@ -1,10 +1,8 @@
 -- SQLBook: Code
 
+/* table users */
+
 DROP TABLE users;
-
-DROP TABLE annonces;
-
-/* Création de la table users */
 
 CREATE TABLE
     users (
@@ -19,7 +17,9 @@ CREATE TABLE
         updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
 
-/* Création de la table annonces */
+/* table annonces */
+
+DROP TABLE annonces;
 
 CREATE TABLE
     annonces (
@@ -37,7 +37,9 @@ CREATE TABLE
         avatar_url VARCHAR(255) NOT NULL
     );
 
-/* Création de la table boutique */
+/* table boutique */
+
+DROP TABLE boutique_items;
 
 CREATE TABLE
     boutique_items(
@@ -51,7 +53,9 @@ CREATE TABLE
         updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
 
-/* Création de la table banner */
+/* table banner */
+
+DROP TABLE banners;
 
 CREATE TABLE
     banners(
@@ -61,11 +65,18 @@ CREATE TABLE
         updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
 
+DROP TABLE webhooks;
+
 CREATE TABLE
-    Webhooks(
+    webhooks(
         id INT AUTO_INCREMENT PRIMARY KEY,
+        type VARCHAR(255) NOT NULL,
         webhook_url VARCHAR(255) NOT NULL,
-        is_active BOOLEAN NOT NULL DEFAULT false,
+        server_id VARCHAR(255) NOT NULL,
+        role_id VARCHAR(255) NOT NULL,
+        active BOOLEAN NOT NULL DEFAULT false,
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
+
+SELECT * FROM webhooks WHERE type="boutique" 

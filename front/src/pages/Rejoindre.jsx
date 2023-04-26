@@ -1,6 +1,5 @@
 import BarreReseaux from "../components/others/BarreReseaux";
 import "../styles/pages/Rejoindre.css";
-import logo from "../assets/logoPandora.png";
 
 function Rejoindre() {
   document.title = "Rejoindre";
@@ -13,7 +12,7 @@ function Rejoindre() {
             <h3>Avec une vraie expérience roleplay et du jamais vue sur GTA RP?</h3>
           </div>
           <div className="rejoindreImage">
-            <img src={logo} alt="rejoindre" />
+            <img src="/logoPandora.png" alt="rejoindre" />
           </div>
           <div className="rejoindreTexte">
             <p>

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AnnonceForm from "./AnnonceForm";
 import { annonceValidationSchema } from "../../utils/schemasValidation";
 import { useSelector, useDispatch } from "react-redux";
 import useToast from "../../hooks/useToast";
 import { useNavigate } from "react-router-dom";
-import { sendEmbedsToDiscordAnnonce } from "../../services/WebHookDiscord";
+import { getInfosWebhook, sendEmbedsToDiscord } from "../../services/WebHookDiscord";
 
 function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
   const initialValues = {
@@ -16,23 +16,34 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
   const { user_id, username, avatar_url } = useSelector((state) => state.user) || "";
   const token = useSelector((state) => state.token) || "";
   const [values, setValues] = useState(initialValues);
+  const [whInfos, setWhInfos] = useState({});
   const [errors, setErrors] = useState({});
   const notify = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Discord WebHook Embeds
-  const postEmbeds = {
-    title: values.title,
-    description: "@everyone" + values.description,
-
-    url: import.meta.env.VITE_SITE_URL,
-    color: 3447003,
-
-    image: {
-      url: import.meta.env.VITE_SITE_URL + values.image_url,
-    },
+  const renameFileImage = (originalFile, newName) => {
+    const extension = originalFile.type.split("image/")[1];
+    const name = newName + "." + extension;
+    return new File([originalFile], name, {
+      type: originalFile.type,
+      lastModified: originalFile.lastModified,
+    });
   };
+
+  const getInfosWebhookAnnonces = async () => {
+    try {
+      const wh = await getInfosWebhook("annonces");
+
+      setWhInfos(wh);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getInfosWebhookAnnonces();
+  }, []);
 
   const createAnnonce = async () => {
     try {
@@ -67,14 +78,42 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
       }
 
       if (savedAnnonce) {
+        const file = renameFileImage(validatedAnnonces.annonce_image, "annonce");
+        const message = {
+          content: `<@&${whInfos.role_id}>`,
+          embeds: [
+            {
+              color: 3447003,
+              title: values.title,
+              description: values.description,
+              image: {
+                url: `attachment://${file.name}`,
+              },
+              fields: [
+                {
+                  name: "\u200B",
+                  value: `[Visiter Pandora RP](${import.meta.env.VITE_SITE_URL})`,
+                },
+              ],
+            },
+          ],
+        };
+
+        const formdataDiscord = new FormData();
+
+        formdataDiscord.append("blob", file);
+        formdataDiscord.append("payload_json", JSON.stringify(message));
+        await sendEmbedsToDiscord(whInfos.webhook_url, formdataDiscord);
+
         notify("success", savedAnnonce.message);
         setValues(initialValues);
-        sendEmbedsToDiscordAnnonce(postEmbeds);
+
         reloadAnnonces();
         setErrors({});
         setClose();
       }
     } catch (error) {
+      console.log(error);
       const errors = error.inner.reduce((acc, error) => {
         return { ...acc, [error.path]: error.message };
       }, {});

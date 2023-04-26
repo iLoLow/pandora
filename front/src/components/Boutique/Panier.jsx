@@ -5,6 +5,7 @@ import { toBlob } from "html-to-image";
 import { panierValidationSchema } from "../../utils/schemasValidation";
 import useToast from "../../hooks/useToast";
 import { useNavigate, Link } from "react-router-dom";
+import { getInfosWebhook, sendEmbedsToDiscord } from "../../services/WebHookDiscord";
 
 function Panier({ isOpen, cart, setCart }) {
   const initialvalues = {
@@ -22,10 +23,9 @@ function Panier({ isOpen, cart, setCart }) {
   const notify = useToast();
   const navigate = useNavigate();
 
-  const getInfosWebhook = async () => {
+  const getInfosWebhookBoutique = async () => {
     try {
-      const response = await fetch("/api/webhooks/boutique");
-      const wh = await response.json();
+      const wh = await getInfosWebhook("boutique");
 
       if (!Boolean(wh.active)) {
         navigate("/boutique/maintenance");
@@ -38,7 +38,7 @@ function Panier({ isOpen, cart, setCart }) {
   };
 
   useEffect(() => {
-    getInfosWebhook();
+    getInfosWebhookBoutique();
   }, []);
 
   /**
@@ -103,7 +103,6 @@ function Panier({ isOpen, cart, setCart }) {
       const validated = await panierValidationSchema.validate(values, { abortEarly: false });
 
       const formdata = new FormData();
-
       const file = await htmlToFile();
       formdata.append("blob", file);
 
@@ -121,20 +120,16 @@ function Panier({ isOpen, cart, setCart }) {
 
       formdata.append("payload_json", JSON.stringify(message));
 
-      const response = await fetch(values.webhook_url, {
-        method: "POST",
-        body: formdata,
-      });
+      const data = await sendEmbedsToDiscord(values.webhook_url, formdata);
 
-      const data = await response.json();
       if (data) {
         setChannelId(data.channel_id);
         localStorage.removeItem("panier");
         setCart([]);
-        // TODO: A remplacer (voir discord salon) sur l'api https://discord.com/channels/
         notify("success", "Panier envoyé sur discord avec succès");
       }
     } catch (error) {
+      console.log(error);
       const errors = error.inner.reduce((acc, error) => {
         return { ...acc, [error.path]: error.message };
       }, {});

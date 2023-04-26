@@ -1,45 +1,45 @@
-const Url = import.meta.env.VITE_WEBHOOK_DISCORD_URL_TEST;
+/**
+ * Récupère les infos d'un webhook depuis la DB.api
+ * @param {String} // Type de webhook (annonces | boutique)
+ */
+export const getInfosWebhook = (type) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch("/api/webhooks/" + type);
+      const data = await response.json();
+      if (data) {
+        resolve(data);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 
 /**
  * Envoie un message sur le WebHook Discord
  * https://discord.com/developers/docs/resources/channel#embed-object
- * @param {Object} objectEmbeds
+ * @param {string} url du webhook discord
+ * @param {FormData} body formdata
  */
-export const sendEmbedsToDiscord = async (file) => {
-  try {
-    const formdata = new FormData();
-    formdata.append("blob", file);
-    const embed = {
-      title: "hello",
-      url: "attachment://" + file.filename,
-    };
+export const sendEmbedsToDiscord = async (url, body) => {
+  return await new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: body,
+      });
 
-    const response = await fetch(Url, {
-      method: "POST",
-      body: formdata,
-      payload: JSON.stringify({ embeds: [embed] }),
-    });
+      if (response.status === 204) {
+        resolve();
+      }
+      const data = await response.json();
 
-    const data = await response.json();
-
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const sendEmbedsToDiscordAnnonce = async (objectEmbeds) => {
-  try {
-    const response = fetch(Url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ embeds: [objectEmbeds] }),
-    });
-    const json = await response.json();
-    console.log(json);
-  } catch (error) {
-    console.log(error);
-  }
+      if (data) {
+        resolve(data);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
 };

@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../assets/logoPandora.png";
 import "../../styles/layout/Header.css";
 import MenuMobile from "./MenuMobile";
 import ProfilMenu from "./ProfilMenu";
@@ -13,7 +12,7 @@ function Header() {
     <header className="header">
       <Link to="/" aria-label="Accueil">
         <div className="logo-pandora">
-          <img src={logo} alt="logo pandora" />
+          <img src="/logoPandora.png" alt="logo pandora" />
         </div>
       </Link>
       <nav className="navDesktop">

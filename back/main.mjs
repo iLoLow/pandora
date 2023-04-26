@@ -60,7 +60,7 @@ const limiter = rateLimit({
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Headers", "Accept, Accept-Language, Content-Language, Content-Type");
   next();
 });
 
@@ -81,6 +81,8 @@ app.use(
     },
   })
 );
+
+// { allowedHeaders: ["Origin", "X-Requested-With", "Content", "Accept", "Content-Type", "Content-Disposition", "Authorization"] }
 app.use(cors({ allowedHeaders: ["Origin", "X-Requested-With", "Content", "Accept", "Content-Type", "Content-Disposition", "Authorization"] }));
 
 // journalisation pour Express (logs).

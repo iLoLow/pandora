@@ -1,4 +1,4 @@
-import BarreReseaux from "../components/others/BarreReseaux";
+import BarreReseaux from "../components/Others/BarreReseaux";
 import "../styles/pages/Rejoindre.css";
 
 function Rejoindre() {

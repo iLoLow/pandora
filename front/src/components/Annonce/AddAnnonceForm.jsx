@@ -79,6 +79,8 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
 
       if (savedAnnonce) {
         const file = renameFileImage(validatedAnnonces.annonce_image, "annonce");
+        const url = window.location.origin;
+
         const message = {
           content: `<@&${whInfos.role_id}>`,
           embeds: [
@@ -92,7 +94,7 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
               fields: [
                 {
                   name: "\u200B",
-                  value: `[Visiter Pandora RP](${import.meta.env.VITE_SITE_URL})`,
+                  value: `[Visiter Pandora RP](${url})`,
                 },
               ],
             },

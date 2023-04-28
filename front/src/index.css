@@ -80,17 +80,23 @@ a:hover {
 
 /* Custom message React Toastify */
 .toastify {
-  margin-top: 80px;
+  margin-top: 130px;
 }
 .toastMessage {
-  background: var(--color-main) !important;
+  background: var(--background) !important;
   box-shadow: -1px 1px 9px 0px var(--shadow) !important;
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   text-transform: capitalize !important;
+  border-radius: 10px !important;
 }
 .Toastify__close-button {
   color: var(--text-primary) !important;
+}
+@media screen and (max-width: 768px) {
+  .toastMessage {
+    margin-inline: 20px !important;
+  }
 }
 
 /*Style Formulaire*/
@@ -115,6 +121,9 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+.form .globalButton {
+  margin-inline: auto;
 }
 
 .form label {
@@ -185,5 +194,8 @@ input::placeholder {
   .form {
     padding: 20px 10px 20px;
     gap: 10px;
+  }
+  .containerForm {
+    padding: 5px;
   }
 }

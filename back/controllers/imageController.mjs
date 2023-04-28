@@ -1,5 +1,4 @@
-import fs from "fs/promises";
-import * as path from "path";
+import fs from "fs";
 
 export const getAllImages = async (req, res, next) => {
   try {
@@ -11,7 +10,7 @@ export const getAllImages = async (req, res, next) => {
     };
 
     for (const dir in imagesDirs) {
-      const files = await fs.readdir(imagesDirs[dir]);
+      const files = await fs.promises.readdir(imagesDirs[dir]);
 
       let arrayFiles = [];
 
@@ -35,14 +34,15 @@ export const getAllImages = async (req, res, next) => {
 };
 
 export const deleteImage = async (req, res, next) => {
-  const { name } = req.params;
-  const filePathThumb = path.join("public/assets/thumbs", name);
-  const filePathImage = path.join("public/assets", name);
+  const { name, url } = req.body;
   try {
-    fs.unlinkSync(filePathThumb);
-    fs.unlinkSync(filePathImage);
+    fs.unlinkSync(url.substring(1));
+    if (url.includes("thumbs")) {
+      fs.unlinkSync(url.substring(1).split("thumbs")[0] + name);
+    }
     res.json({ message: "Image supprimée avec succès.", code: 200 });
   } catch (err) {
-    res.status(500).json({ error: "Error deleting files" });
+    console.log(err);
+    res.status(500).json({ error: "Impossible de supprimer l'image" });
   }
 };

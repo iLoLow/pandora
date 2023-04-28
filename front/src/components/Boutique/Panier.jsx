@@ -6,6 +6,7 @@ import { panierValidationSchema } from "../../utils/schemasValidation";
 import useToast from "../../hooks/useToast";
 import { useNavigate, Link } from "react-router-dom";
 import { getInfosWebhook, sendEmbedsToDiscord } from "../../services/WebHookDiscord";
+import identifiant from "../../assets/discord.gif";
 
 function Panier({ isOpen, cart, setCart }) {
   const initialvalues = {
@@ -192,6 +193,7 @@ function Panier({ isOpen, cart, setCart }) {
         </div>
         <Button color="red" children="Vider le panier" onClick={() => handleClearPanier()} />
         <form className="form" action="post" onSubmit={(e) => handleSubmitPanier(e)}>
+          <div className="containerImgIdentifiant">{/* <img src={identifiant} alt="" /> */}</div>
           <form-group>
             <label>Votre Identifiant Discord :</label>
             <input type="text" value={values.pseudo_id} onChange={(e) => setValues({ ...values, pseudo_id: e.target.value })} />
@@ -201,9 +203,8 @@ function Panier({ isOpen, cart, setCart }) {
         </form>
         {channelId && (
           <div>
-            <p>Tu peux suivre ta réservation sur le serveur discord</p>
-            <Link target="__blank" to={"discord://discord/channels/" + values.server_id + "/" + channelId}>
-              Discord
+            <Link className="link" to={"discord://discord/channels/" + values.server_id + "/" + channelId}>
+              Voir ma réservation sur Discord
             </Link>
           </div>
         )}

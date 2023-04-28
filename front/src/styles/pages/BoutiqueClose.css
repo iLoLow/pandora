@@ -6,9 +6,25 @@
   margin: auto;
 }
 
+.maintenance img {
+  margin-top: 30px;
+  max-width: 400px;
+}
+.maintenance h1 {
+  font-size: clamp(1rem, 3vw, 2rem);
+}
+.maintenance p {
+  font-size: clamp(0.8rem, 3vw, 1.1rem);
+}
+
 .maintenance .IconBar {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-block: 20px;
+}
+
+.maintenance .link {
+  text-decoration: underline;
+  font-size: clamp(0.8rem, 3vw, 1.1rem);
 }

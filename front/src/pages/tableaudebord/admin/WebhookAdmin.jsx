@@ -52,16 +52,16 @@ function WebhookAdmin() {
 
   return (
     <AdminWrapper title="Webhooks">
-      <div className="webhookContainer">
-        <div className="webhookWrapper">
-          <h3>Webhook Annonces</h3>
+      <section className="webhookContainer">
+        <div className="containerForm">
+          <h2>Webhook Annonces</h2>
           <AddWebhookForm values={valuesAnnonces} setValues={setValuesAnnonces} reload={() => getWebhooks()} />
         </div>
-        <div className="webhookWrapper">
-          <h3>Webhook Boutique</h3>
+        <div className="containerForm">
+          <h2>Webhook Boutique</h2>
           <AddWebhookForm values={valuesBoutique} setValues={setValuesBoutique} reload={() => getWebhooks()} />
         </div>
-      </div>
+      </section>
     </AdminWrapper>
   );
 }

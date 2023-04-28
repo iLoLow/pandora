@@ -2,11 +2,8 @@
   max-width: 1280px;
   margin-inline: auto;
 }
-.webhookWrapper {
+.containerForm {
   margin-top: 30px;
-}
-.webhookWrapper h3 {
-  margin: 10px;
 }
 
 .webhookBtnsWrapper {

@@ -1,3 +1,8 @@
+.galerieAdminInfos {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
 .galerieAdminMessage {
   margin-block: 1rem;
   text-align: center;
@@ -11,6 +16,17 @@
   flex: none;
   width: 2rem;
   height: 2rem;
+}
+
+.galerieAdminFiltres {
+  margin-block: 15px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.galerieAdminFiltres h3 {
+  min-width: fit-content;
 }
 .galerieAdminContainer {
   display: grid;

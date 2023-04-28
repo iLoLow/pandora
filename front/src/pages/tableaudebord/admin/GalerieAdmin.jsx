@@ -2,30 +2,19 @@ import { useState, useEffect } from "react";
 import "../../../styles/tableaudebord/GalerieAdmin.css";
 import ImagePreview from "../../../components/Others/ImagePreview";
 import useToast from "../../../hooks/useToast";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AdminWrapper from "../../../components/Others/AdminWrapper";
+import { useNavigate } from "react-router-dom";
+import { setLogout } from "../../../state";
 
 function GalerieAdmin() {
-  const [galerieAvatars, setGalerieAvatars] = useState([]);
-  const [galerieAnnonces, setGalerieAnnonces] = useState([]);
-  const [galerieBoutique, setGalerieBoutique] = useState([]);
+  const [galerie, setGalerie] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("");
 
   const notify = useToast();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
-
-  const getAnnonces = async () => {
-    try {
-      const response = await fetch("/api/annonces");
-      const data = await response.json();
-      if (data.code === 500) {
-        notify("error", data.error);
-      }
-      return data;
-    } catch (error) {
-      console.log(error);
-      notify("error", "Une erreur c'est produite, veuillez contacter l'administrateur.");
-    }
-  };
 
   const getGalerie = async () => {
     try {
@@ -34,76 +23,76 @@ function GalerieAdmin() {
       });
       const datas = await response.json();
 
-      if (datas.code === 500 || datas.code === 403) {
+      if (datas.code === 500) {
         notify("error", datas.error);
       }
-      setGalerieAvatars(datas.avatars);
-      setGalerieAnnonces(datas.annonces);
-      setGalerieBoutique(datas.boutique);
+      if (datas.code === 403) {
+        notify("error", datas.error);
+        dispatch(setLogout());
+        navigate("/identification");
+      }
+      setGalerie(datas);
     } catch (error) {
       notify("error", "Impossible de récupérer les images");
     }
   };
 
-  // const associateImagesWithAnnonces = async () => {
-  //   try {
-  //     const annonces = await getAnnonces();
-  //     const galerie = await getGalerie();
-
-  //     if (galerie.length > 0) {
-  //       const galerieWithAnnonces = galerie.map((image) => {
-  //         const annoncesIds = annonces.filter((annonce) => annonce.image_url === `/assets/${image.name}`).map((annonce) => annonce.id);
-  //         return { ...image, annoncesIds };
-  //       });
-  //       setGalerie(galerieWithAnnonces);
-  //     }
-  //   } catch (error) {
-  //     notify("error", "Impossible de récupérer les images");
-  //   }
-  // };
-
   useEffect(() => {
     getGalerie();
   }, []);
 
-  const deleteHandleImage = async (image) => {
-    const { name, annoncesIds } = image;
+  const filteredGalerie = galerie[selectedFilter];
 
-    if (annoncesIds.length > 0) {
-      notify("warning", "Cette image est utilisée par une ou plusieurs annonces. Veuillez supprimer les annonces avant de supprimer l'image.");
-      return;
-    } else {
-      if (window.confirm("Voulez-vous supprimer cette image ?")) {
-        const response = await fetch(`/api/thumbs/${name}`, {
-          method: "DELETE",
-          headers: { Authorization: "Bearer " + token },
-        });
-        if (response.ok) {
-          notify("success", "Image supprimée avec succès");
-          associateImagesWithAnnonces();
-        } else {
-          notify("error", "Impossible de supprimer l'image");
-        }
+  const deleteHandleImage = async (image) => {
+    const { name } = image;
+
+    if (window.confirm("Voulez-vous supprimer cette image ?")) {
+      const response = await fetch(`/api/thumbs/${name}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(image),
+      });
+      if (response.ok) {
+        notify("success", "Image supprimée avec succès");
+        getGalerie();
+      } else {
+        notify("error", "Impossible de supprimer l'image");
       }
     }
   };
 
   return (
     <AdminWrapper title={"Gestion des Images"}>
-      <div className="galerieAdminMessage">
-        <svg stroke="rgb(179,2,3)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} className="w-6 h-6">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-          />
-        </svg>
-        <p>Vous pouvez supprimer les images qui ne sont pas utilisées par une annonce.</p>
+      <div className="galerieAdminInfos">
+        <div className="galerieAdminMessage">
+          <svg stroke="rgb(179,2,3)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} className="w-6 h-6">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+            />
+          </svg>
+          <p>Vérifier que les images ne soit plus utilisées avant la suppression !</p>
+        </div>
+        <div className="galerieAdminFiltres">
+          <h3>Filtres:</h3>
+          <select value={selectedFilter} onChange={(e) => setSelectedFilter(e.target.value)}>
+            <option value="all">Toutes</option>
+            <option value="avatars">Avatars</option>
+            <option value="annonces">Annonces</option>
+            <option value="boutique">Boutique</option>
+          </select>
+        </div>
       </div>
       <div className="galerieAdminContainer">
-        {galerieAvatars && galerieAvatars.map((image, index) => <ImagePreview key={index} image={image} handleClick={() => deleteHandleImage(image)} />)}
-        {galerieAnnonces && galerieAnnonces.map((image, index) => <ImagePreview key={index} image={image} handleClick={() => deleteHandleImage(image)} />)}
-        {galerieBoutique && galerieBoutique.map((image, index) => <ImagePreview key={index} image={image} handleClick={() => deleteHandleImage(image)} />)}
+        {galerie && filteredGalerie
+          ? Object.keys(galerie).map(
+              (key) => selectedFilter === key && filteredGalerie.map((image, index) => <ImagePreview key={index} image={image} handleClick={() => deleteHandleImage(image)} />)
+            )
+          : Object.keys(galerie).map((key) => galerie[key].map((image, index) => <ImagePreview key={index} image={image} handleClick={() => deleteHandleImage(image)} />))}
       </div>
     </AdminWrapper>
   );

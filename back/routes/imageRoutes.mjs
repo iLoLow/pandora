@@ -4,6 +4,6 @@ import { verifyToken, checkIsAdmin } from "../middlewares/auth.mjs";
 const router = new Router();
 
 router.get("/", verifyToken, checkIsAdmin, getAllImages);
-router.delete("/:name", verifyToken, checkIsAdmin, deleteImage);
+router.delete("/:id", verifyToken, checkIsAdmin, deleteImage);
 
 export default router;

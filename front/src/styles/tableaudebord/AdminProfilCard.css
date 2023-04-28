@@ -15,6 +15,9 @@
   overflow: hidden;
   aspect-ratio: 1/1;
 }
+.profilAdminAvatar img {
+  object-fit: cover;
+}
 .profilAdminInfo {
   display: flex;
   flex-direction: column;

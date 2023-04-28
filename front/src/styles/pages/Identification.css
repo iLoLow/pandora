@@ -31,6 +31,9 @@
   gap: 20px;
   padding: 20px;
 }
+.formIdentification .globalButton {
+  margin-inline: auto;
+}
 
 form-group {
   display: flex;
@@ -64,6 +67,9 @@ form-group {
 }
 .formFooterP {
   font-size: clamp(0.8rem, 2vw, 1rem);
+}
+.linkBtn:hover {
+  color: var(--accent);
 }
 
 @media screen and (max-width: 768px) {

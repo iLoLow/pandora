@@ -13,3 +13,10 @@
 .addBoutiqueBtn:hover {
   box-shadow: -1px 1px 8px 6px var(--shadow);
 }
+
+@media screen and (max-width: 768px) {
+  .addBoutiqueBtn {
+    width: 35px;
+    height: 35px;
+  }
+}

@@ -12,6 +12,22 @@
 .btnLike svg {
   width: 26px;
 }
+.LikedSvg:hover {
+  animation: svgAnimLike 0.6s forwards;
+}
+@keyframes svgAnimLike {
+  50% {
+    transform: translate(5px, -5px) rotate(-45deg);
+  }
+}
+.DislikedSvg:hover {
+  animation: svgAnimDisliked 0.6s forwards;
+}
+@keyframes svgAnimDisliked {
+  50% {
+    transform: translate(5px, -5px) rotate(45deg);
+  }
+}
 
 @media screen and (max-width: 768px) {
   .btnLike {

@@ -21,7 +21,6 @@ function ImagePreview({ image, handleClick = () => {} }) {
         <img id={image.url} width={100} height={100} style={{ display: loading || error ? "none" : "block" }} src={image.url} alt={image.name} />
         <div className="imageInfo">
           <h3>{image.name}</h3>
-          {/* <div>{image.annoncesIds.length > 0 ? <span>Annonces n° {image.annoncesIds.join(" & ")} </span> : <span>Aucune annonce</span>}</div> */}
         </div>
         <div className="deleteBtn">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

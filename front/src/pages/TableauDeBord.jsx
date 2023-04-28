@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 
 // Import components for Users
-import InfosUser from "./tableaudebord/InfosUser";
+
 import ProfilUser from "./tableaudebord/ProfilUser";
 import AnnoncesUser from "./tableaudebord/AnnoncesUser";
 
@@ -56,14 +56,6 @@ function TableauDeBord() {
         <h3 className="tableauDeBordCategorie">User</h3>
         <span className="tableauDeBordSeparateur"></span>
         <div className="tableauDeBordLinks">
-          <NavLink to="/tableaudebord">
-            <span className="tableauDeBordIcone">
-              <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path d="M256 56C145.72 56 56 145.72 56 256s89.72 200 200 200 200-89.72 200-200S366.28 56 256 56zm0 82a26 26 0 11-26 26 26 26 0 0126-26zm48 226h-88a16 16 0 010-32h28v-88h-16a16 16 0 010-32h32a16 16 0 0116 16v104h28a16 16 0 010 32z" />
-              </svg>
-            </span>
-            <span>infos</span>
-          </NavLink>
           <NavLink to="/tableaudebord/profil">
             <span className="tableauDeBordIcone">
               <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -151,7 +143,6 @@ function TableauDeBord() {
       <section className={isOpen ? "tableauDeBordBody" : "tableauDeBordBody  tableauDeBordBodySmall"}>
         <Routes>
           {/* Routes Users */}
-          <Route path="/" element={<InfosUser />} />
           <Route path="/profil" element={<ProfilUser />} />
           <Route path="/annonces" element={<AnnoncesUser />} />
 

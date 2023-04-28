@@ -3,16 +3,39 @@
 }
 
 .boutiquePanierBtn {
-  position: absolute;
-  top: 10px;
+  position: fixed;
+  top: 75px;
   right: 10px;
   z-index: 6;
+  border-radius: 50%;
+  box-shadow: 0 0 3px 2px var(--shadow);
+  background: var(--background);
+  padding: 4px;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+}
+
+.boutiquePanierBtnNumero {
+  position: absolute;
+  left: 25px;
+  top: 10px;
+  transform: translate(-50%, -50%);
+  background: var(--red);
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
 }
 
 .boutiqueContainer h2 {
   font-size: clamp(1.2rem, 2vw, 1.5rem);
   font-weight: 600;
-  margin-left: 5px;
   color: var(--text-secondary);
   border-bottom: 1px var(--text-secondary) solid;
 }
@@ -38,7 +61,7 @@
 
 .boutiquePanier {
   position: fixed;
-  top: 70px;
+  top: 57px;
   right: 0;
   width: 60px;
   height: 100%;

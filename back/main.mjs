@@ -46,23 +46,10 @@ const limiter = rateLimit({
 
 // app.use((req, res, next) => {
 //   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content, Accept, Content-Type, content-disposition, Authorization");
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
-//   res.setHeader("Cross-Origin-Resource-Policy", "same-site");
-//   res.setHeader(
-//     "Content-Security-policy",
-//     "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/; img-src * 'self' data: blob:; connect-src 'self' https://fonts.gstatic.com/ https://fonts.googleapis.com/ https://discord.com/api/webhooks/"
-//   );
-
+//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+//   res.setHeader("Access-Control-Allow-Headers", "Accept, Accept-Language, Content-Language, Content-Type");
 //   next();
 // });
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Accept, Accept-Language, Content-Language, Content-Type");
-  next();
-});
 
 // Apply the rate limiting middleware to all requests
 app.use("/api/*", limiter);
@@ -83,7 +70,7 @@ app.use(
 );
 
 // { allowedHeaders: ["Origin", "X-Requested-With", "Content", "Accept", "Content-Type", "Content-Disposition", "Authorization"] }
-app.use(cors({ allowedHeaders: ["Origin", "X-Requested-With", "Content", "Accept", "Content-Type", "Content-Disposition", "Authorization"] }));
+app.use(cors());
 
 // journalisation pour Express (logs).
 app.use(morgan("dev"));

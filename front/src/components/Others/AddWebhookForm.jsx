@@ -126,38 +126,36 @@ function AddWebhookForm({ values, setValues, reload = () => {} }) {
   };
 
   return (
-    <section className="containerForm">
-      <form className="form" method="POST" onSubmit={(e) => handleAddWebhookSubmit(e)}>
-        <form-group>
-          <label>URL du Webhook :</label>
-          <input type="text" value={values.webhook_url} onChange={(e) => setValues({ ...values, webhook_url: e.target.value })} />
-          {errorsAnnonces.webhook_url && <small className="errorSmall">{errorsAnnonces.webhook_url}</small>}
-          {errorsBoutique.webhook_url && <small className="errorSmall">{errorsBoutique.webhook_url}</small>}
-        </form-group>
-        <form-group>
-          <label>ID du serveur Discord :</label>
-          <input type="text" value={values.server_id} onChange={(e) => setValues({ ...values, server_id: e.target.value })} />
-          {errorsAnnonces.server_id && <small className="errorSmall">{errorsAnnonces.server_id}</small>}
-          {errorsBoutique.server_id && <small className="errorSmall">{errorsBoutique.server_id}</small>}
-        </form-group>
-        <form-group>
-          <label>ID du Rôle à mentionner:</label>
-          <input type="text" value={values.role_id} onChange={(e) => setValues({ ...values, role_id: e.target.value })} />
-          {errorsAnnonces.role_id && <small className="errorSmall">{errorsAnnonces.role_id}</small>}
-          {errorsBoutique.role_id && <small className="errorSmall">{errorsBoutique.role_id}</small>}
-        </form-group>
+    <form className="form" method="POST" onSubmit={(e) => handleAddWebhookSubmit(e)}>
+      <form-group>
+        <label>URL du Webhook :</label>
+        <input type="text" value={values.webhook_url} onChange={(e) => setValues({ ...values, webhook_url: e.target.value })} />
+        {errorsAnnonces.webhook_url && <small className="errorSmall">{errorsAnnonces.webhook_url}</small>}
+        {errorsBoutique.webhook_url && <small className="errorSmall">{errorsBoutique.webhook_url}</small>}
+      </form-group>
+      <form-group>
+        <label>ID du serveur Discord :</label>
+        <input type="text" value={values.server_id} onChange={(e) => setValues({ ...values, server_id: e.target.value })} />
+        {errorsAnnonces.server_id && <small className="errorSmall">{errorsAnnonces.server_id}</small>}
+        {errorsBoutique.server_id && <small className="errorSmall">{errorsBoutique.server_id}</small>}
+      </form-group>
+      <form-group>
+        <label>ID du Rôle à mentionner:</label>
+        <input type="text" value={values.role_id} onChange={(e) => setValues({ ...values, role_id: e.target.value })} />
+        {errorsAnnonces.role_id && <small className="errorSmall">{errorsAnnonces.role_id}</small>}
+        {errorsBoutique.role_id && <small className="errorSmall">{errorsBoutique.role_id}</small>}
+      </form-group>
 
-        <div className="webhookBtnsWrapper">
-          <div className="webhookBtns">
-            <Button disabled={!!values.id} type="submit" color="green" children="Enregistrer" />
-            <Button disabled={!values.id || !!values.active} type="button" color="red" children="Supprimer" onClick={handleDelete} />
-          </div>
-          <div className="toggleBtn" onClick={() => handelActiveWebhook()}>
-            <span className={!!values.active ? "toggle active" : "toggle inactive"}></span>
-          </div>
+      <div className="webhookBtnsWrapper">
+        <div className="webhookBtns">
+          <Button disabled={!!values.id} type="submit" color="green" children="Enregistrer" />
+          <Button disabled={!values.id || !!values.active} type="button" color="red" children="Supprimer" onClick={handleDelete} />
         </div>
-      </form>
-    </section>
+        <div className="toggleBtn" onClick={() => handelActiveWebhook()}>
+          <span className={!!values.active ? "toggle active" : "toggle inactive"}></span>
+        </div>
+      </div>
+    </form>
   );
 }
 

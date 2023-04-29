@@ -1,5 +1,6 @@
 .boutiqueContainer {
   position: relative;
+  height: 100%;
 }
 
 .boutiquePanierBtn {
@@ -60,8 +61,7 @@
 }
 
 .boutiquePanier {
-  position: fixed;
-  top: 57px;
+  position: absolute;
   right: 0;
   width: 60px;
   height: 100%;

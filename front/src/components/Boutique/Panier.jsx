@@ -193,7 +193,7 @@ function Panier({ isOpen, cart, setCart }) {
         </div>
         <Button color="red" children="Vider le panier" onClick={() => handleClearPanier()} />
         <form className="form" action="post" onSubmit={(e) => handleSubmitPanier(e)}>
-          <div className="containerImgIdentifiant">{/* <img src={identifiant} alt="" /> */}</div>
+          <div className="containerImgIdentifiant">{<img src={identifiant} alt="" />}</div>
           <form-group>
             <label>Votre Identifiant Discord :</label>
             <input type="text" value={values.pseudo_id} onChange={(e) => setValues({ ...values, pseudo_id: e.target.value })} />

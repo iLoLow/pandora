@@ -17,7 +17,7 @@ function MenuMobile() {
       {isOpen && (
         <nav className="navMobile">
           <ProfilMenu user={user} menuOpen={isOpen} setMenuOpen={() => setIsOpen(!isOpen)} />
-          <NavLink onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/">
+          <NavLink aria-label="Accueil" onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/">
             <span className="NavmobileFlex">
               <span className="NavMobileSvgHome">
                 <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -27,7 +27,7 @@ function MenuMobile() {
               Accueil
             </span>
           </NavLink>
-          <NavLink onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/annonces">
+          <NavLink aria-label="Annonces" onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/annonces">
             <span className="NavmobileFlex">
               <span className="NavMobileSvgHome">
                 <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -38,7 +38,7 @@ function MenuMobile() {
               Annonces
             </span>
           </NavLink>
-          <NavLink onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/equipepandora">
+          <NavLink aria-label="Notre equipe" onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/equipepandora">
             <span className="NavmobileFlex">
               <span className="NavMobileSvgHome">
                 <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -48,7 +48,7 @@ function MenuMobile() {
               Notre Equipe
             </span>
           </NavLink>
-          <NavLink onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/rejoindre">
+          <NavLink aria-label="Nous Rejoindre" onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/rejoindre">
             <span className="NavmobileFlex">
               <span className="NavMobileSvgHome">
                 <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -58,7 +58,7 @@ function MenuMobile() {
               Nous rejoindre
             </span>
           </NavLink>
-          <NavLink onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/boutique">
+          <NavLink aria-label="Boutique" onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/boutique">
             <span className="NavmobileFlex">
               <span className="NavMobileSvgHome">
                 <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

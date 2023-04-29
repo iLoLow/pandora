@@ -39,10 +39,10 @@ body {
 :root {
   --background: rgb(193, 225, 231);
   --text-primary: black;
-  --text-secondary: #0d7f90;
+  --text-secondary: #054a57;
   --color-form: #4aadbc29;
   --color-main: #cbdadc;
-  --accent: #0d7f90;
+  --accent: #054a57;
   --shadow: #0d7f90e3;
   --red: rgb(179, 3, 3);
   --green: rgb(5, 142, 34);
@@ -53,6 +53,7 @@ body {
   --color-form: rgba(255, 255, 255, 0.034);
   --color-main: #080c1d;
   --accent: #04deff;
+  --text-secondary: #04deff;
 }
 a {
   color: inherit;
@@ -74,7 +75,7 @@ a:hover {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 70px;
+  margin-top: 65px;
   /*background: var(--color-main);*/
 }
 

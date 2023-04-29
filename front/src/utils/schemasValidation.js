@@ -7,7 +7,15 @@ export const loginValidationSchema = yup.object().shape({
 });
 export const registerValidationSchema = yup.object().shape({
   username: yup.string().trim().required("Veuillez renseigner votre nom d'utilisateur.").min(4, "Le nom d'utilisateur doit contenir au moins 4 caractères."),
-  email: yup.string().trim().email().required("Veuillez renseigner une adresse email valide."),
+  email: yup
+    .string()
+    .trim()
+    .email()
+    .required("Veuillez renseigner une adresse email valide.")
+    .matches(
+      /^(?![._\-])(?!.*\.\.)(?!.*__)(?!.*--)(?!.*\.@)(?!.*-@)(?!.*_@)[\w.-]+@(?![_\-])(?!.*__)(?!.*--)(?!.*_\.)(?!.*-\.)[a-zA-Z_-]+?\.[a-zA-Z]{2,3}$/,
+      "Veuillez renseigner une adresse email valide."
+    ),
   password: yup
     .string()
     .trim()

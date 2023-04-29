@@ -18,14 +18,12 @@
   transform: translateX(0);
   border-left: 1px var(--accent) solid;
   box-shadow: -1px 1px 9px 0px var(--shadow);
+  overflow: auto;
 }
 
 .containerImgIdentifiant {
-  background: url("discord.gif") no-repeat;
-  background-position: 0 100%;
   position: relative;
-  width: 100%;
-  height: 200px;
+
   overflow: hidden;
   border-radius: 5px;
 }

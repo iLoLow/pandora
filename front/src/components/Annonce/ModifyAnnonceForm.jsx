@@ -23,7 +23,6 @@ function ModifyAnnonceForm({ annonce, setClose = () => {}, reloadAnnonces = () =
   const notify = useToast();
 
   const editAnnonce = async () => {
-    console.log(values);
     try {
       const validatedAnnonces = await annonceModifyValidationSchema.validate(values, { abortEarly: false });
 

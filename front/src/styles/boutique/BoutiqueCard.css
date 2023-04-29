@@ -59,7 +59,7 @@
   font-size: clamp(0.9rem, 1vw, 1.2rem);
   margin-bottom: 0;
 
-  color: var(--text-secondary);
+  color: var(--accent);
   border-bottom: 1px var(--text-secondary) solid;
 }
 .boutiqueCardDesc {

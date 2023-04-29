@@ -16,23 +16,20 @@ function Header() {
         </div>
       </Link>
       <nav className="navDesktop">
-        <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/">
+        <NavLink aria-label="Accueil" className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/">
           Accueil
         </NavLink>
-        <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/annonces">
+        <NavLink aria-label="Annonces" className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/annonces">
           Annonces
         </NavLink>
-        <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/equipepandora">
+        <NavLink aria-label="Notre equipe" className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/equipepandora">
           Notre Equipe
         </NavLink>
-        <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/rejoindre">
+        <NavLink aria-label="Nous rejoindre" className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/rejoindre">
           Nous rejoindre
         </NavLink>
-        <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/boutique">
+        <NavLink aria-label="Boutique" className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/boutique">
           Boutique
-        </NavLink>
-        <NavLink className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/identification">
-          S"identifier
         </NavLink>
         <Toggle />
         <ProfilMenu user={user} />

@@ -79,7 +79,7 @@ function TableauDeBord() {
           <>
             <h3 className="tableauDeBordCategorie">Admin</h3>
             <span className="tableauDeBordSeparateur"></span>
-            <div className="tableauDeBordLinks">
+            <div className="tableauDeBordLinks tableauDeBordLinksScroll">
               <NavLink to="/tableaudebord/admin/users">
                 <span className="tableauDeBordIcone">
                   <svg fill="#0d7f90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

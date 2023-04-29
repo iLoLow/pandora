@@ -28,7 +28,7 @@
   font-size: clamp(0.9rem, 1vw, 1.2rem);
   margin-bottom: 0;
   white-space: nowrap;
-  color: var(--text-secondary);
+  color: var(--accent);
 }
 .item p {
   font-size: clamp(0.8rem, 2vw, 1rem);

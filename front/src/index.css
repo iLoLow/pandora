@@ -39,10 +39,10 @@ body {
 :root {
   --background: rgb(193, 225, 231);
   --text-primary: black;
-  --text-secondary: #054a57;
+  --text-secondary: #0d7f90e3;
   --color-form: #4aadbc29;
   --color-main: #cbdadc;
-  --accent: #054a57;
+  --accent: #0d494e;
   --shadow: #0d7f90e3;
   --red: rgb(179, 3, 3);
   --green: rgb(5, 142, 34);
@@ -104,7 +104,7 @@ a:hover {
 .containerForm {
   width: 100%;
   padding: 20px;
-  border: 2px solid var(--text-secondary);
+  border: 2px solid var(--shadow);
   box-shadow: -1px 1px 9px 0px var(--shadow);
   border-radius: 15px;
   background: var(--color-form);
@@ -138,7 +138,7 @@ input {
   padding: 5px 10px;
   border-radius: 10px;
   font-size: clamp(0.8rem, 2vw, 1rem);
-  border: 2px solid var(--accent);
+  border: 2px solid var(--shadow);
   box-shadow: -1px 1px 4px 0px var(--shadow);
 }
 
@@ -149,7 +149,7 @@ input::placeholder {
 .dropzone {
   background: white;
   border-radius: 10px;
-  border: 2px solid var(--accent);
+  border: 2px solid var(--shadow);
   min-height: 80px;
   cursor: pointer;
   padding: 10px;
@@ -169,7 +169,7 @@ input::placeholder {
   align-items: center;
   border-width: 2px;
   border-style: dashed;
-  border-color: #07616e;
+  border-color: var(--shadow);
   border-radius: 5px;
   width: 100%;
   height: 100%;

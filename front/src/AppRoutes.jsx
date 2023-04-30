@@ -7,6 +7,8 @@ import Accueil from "./pages/Accueil";
 import Identification from "./pages/Identification";
 import Rejoindre from "./pages/Rejoindre";
 import EquipePandora from "./pages/EquipePandora";
+import Cgu from "./pages/Cgu";
+import Rgpd from "./pages/Rgpd";
 import TableauDeBord from "./pages/TableauDeBord";
 import { useSelector } from "react-redux";
 
@@ -22,6 +24,9 @@ function AppRoutes() {
       <Route path="/boutique/maintenance" element={<BoutiqueClose />} />
       <Route path="/identification" element={<Identification />} />
       <Route path="/tableaudebord/*" element={user ? <TableauDeBord /> : <Identification />} />
+      <Route path="/cgu" element={<Cgu />} />
+      <Route path="/rgpd" element={<Rgpd />} />
+
       <Route path="*" element={<Erreur />} />
     </Routes>
   );

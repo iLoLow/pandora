@@ -14,6 +14,15 @@ function Footer() {
         </span>
         <span>© Tous droits réservés. 2023</span>
       </p>
+      <h2>Liens utiles</h2>
+      <span className="flexLink">
+        <Link className="lien" to={"/cgu"}>
+          CGU
+        </Link>
+        <Link className="lien" to={"/rgpd"}>
+          RGPD
+        </Link>
+      </span>
     </footer>
   );
 }

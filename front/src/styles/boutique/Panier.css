@@ -16,7 +16,7 @@
 }
 .panierItems.isOpen {
   transform: translateX(0);
-  border-left: 1px var(--accent) solid;
+  border-left: 1px var(--shadow) solid;
   box-shadow: -1px 1px 9px 0px var(--shadow);
   overflow: auto;
 }
@@ -43,7 +43,7 @@ caption {
 th,
 td {
   font-size: 14px;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--shadow);
   padding: 4px;
   white-space: nowrap;
   text-overflow: ellipsis;

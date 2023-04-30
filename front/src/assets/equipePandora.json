@@ -42,18 +42,29 @@
 	},
 	{
 		"id": "6",
-		"nom": "Sam_bzh29#1650",
+			"nom": "Sam_bzh29#1650",
 		"nomrp": "Tony Miller",
 		"avatarequipe": "sam.jpg",
-		"description": "Helpeur : Douanier Pandora",
-		"fonction" : "Helpeur"
+		"description": "Modérateur : Douanier Pandora",
+		"fonction" : "Modérateur"
+		
 	},
+
 	{
 		"id": "7",
+		"nom": "zqsd#8888",
+		"nomrp": "Roméo Landors",
+		"avatarequipe": "romeo.gif",
+		"description": "Helpeur  : Douanier, Chef de police Pandora RP",
+		"fonction" : "Helpeur"
+	
+	},
+	{
+		"id": "8",
 		"nom": "wollaw#2510",
-		"nomrp": "Wollaw",
+		"nomrp": "Lionnel Poivrou",
 		"avatarequipe": "Wollaw.png",
-		"description": "Developpeur Web Pandora RP",
+		"description": "Developpeur Web Pandora RP, Journaliste",
 		"fonction" : "Developpeur Web Du Site Pandora RP"
 	}
 

@@ -39,6 +39,17 @@
   padding-inline: 20px;
   align-items: center;
 }
+.NavDesktopFlex {
+  display: flex;
+}
+.NavDesktopsvgHome {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+.navDesktop .link {
+  display: flex;
+}
 .link {
   text-decoration: none;
   color: inherit;

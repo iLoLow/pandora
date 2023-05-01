@@ -1,3 +1,8 @@
+.articleWrapper {
+  max-width: 1000px;
+  width: 100%;
+}
+
 .article {
   border: 1px solid var(--shadow);
   border-radius: 5px;
@@ -26,8 +31,11 @@
   line-height: 1.5;
 }
 .articleParagraphe p {
-  font-size: clamp(0.8rem, 2vw, 1rem);
+  font-size: clamp(0.75rem, 2vw, 1rem);
   margin-block: 1rem;
+}
+.articleParagraphe li {
+  font-size: clamp(0.75rem, 2vw, 1rem);
 }
 .articleFooter {
   display: flex;

@@ -23,9 +23,9 @@
 
 .containerImgIdentifiant {
   position: relative;
-
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 10px;
+  border: 1px solid var(--shadow);
 }
 
 #panier {

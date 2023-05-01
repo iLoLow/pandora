@@ -23,9 +23,9 @@ function Banner() {
   }
 
   return (
-    <section className="banner">
+    <div className="banner">
       <img src={banner[0].image_url} alt="banniere pandora rp" />
-    </section>
+    </div>
   );
 }
 

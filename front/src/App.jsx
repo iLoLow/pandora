@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { setVisitorId } from "./state";
 import { v4 as uuidv4 } from "uuid";
+import ScrollToTop from "./components/Others/ScrollToTop";
 
 function App() {
   const { mode, visitorId } = useSelector((state) => state);
@@ -37,6 +38,7 @@ function App() {
           />
           <AppRoutes />
         </main>
+        <ScrollToTop />
         <Footer />
       </div>
     </>

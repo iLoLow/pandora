@@ -16,6 +16,7 @@ import GalerieAdmin from "./tableaudebord/admin/GalerieAdmin";
 import BoutiqueAdmin from "./tableaudebord/admin/BoutiqueAdmin";
 import BannerAdmin from "./tableaudebord/admin/BannerAdmin";
 import WebhookAdmin from "./tableaudebord/admin/WebhookAdmin";
+import ScrollToTop from "../components/Others/ScrollToTop";
 
 function TableauDeBord() {
   document.title = "Tableau de bord";

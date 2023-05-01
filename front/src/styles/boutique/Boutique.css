@@ -3,7 +3,8 @@
   height: 100%;
 }
 
-.boutiquePanierBtn {
+.boutiquePanierBtn,
+.BtnClosePanier {
   position: fixed;
   top: 75px;
   right: 10px;
@@ -17,6 +18,15 @@
   cursor: pointer;
 }
 
+.BtnClosePanier {
+  display: none;
+}
+.boutiquePanierBtnOpen .BtnClosePanier {
+  display: block;
+}
+.boutiquePanierBtnOpen .btnPanier {
+  display: none;
+}
 .boutiquePanierBtnNumero {
   position: absolute;
   left: 25px;

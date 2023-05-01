@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  border-bottom: 2px solid var(--text-secondary);
+  border-bottom: 2px solid var(--shadow);
   position: fixed;
   background: var(--background);
   box-shadow: -1px 1px 9px 0px var(--shadow);

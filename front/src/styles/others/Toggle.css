@@ -1,7 +1,7 @@
 .toggleBtn {
   width: 40px;
   height: 26px;
-  z-index: 10;
+  z-index: 9;
   border-radius: 15px;
   border: solid 1px #0d7f90;
   overflow: hidden;

@@ -12,7 +12,7 @@
   /* padding-inline: 15px; */
   width: 200px;
   background: var(--background);
-  border-right: 2px solid var(--text-secondary);
+  border-right: 2px solid var(--shadow);
   transition: width 250ms ease-in-out;
   overflow: hidden;
   overflow-y: auto;
@@ -38,7 +38,7 @@
   padding-inline: 15px;
 }
 .tableauDeBordLinksScroll {
-  margin-block: 15px 70px;
+  margin-block: 15px 100px;
 }
 .tableauDeBordSeparateur {
   display: block;

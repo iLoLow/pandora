@@ -12,7 +12,7 @@ function Rejoindre() {
             <h3>Avec une vraie expérience roleplay et du jamais vue sur GTA RP?</h3>
           </div>
           <div className="rejoindreImage">
-            <img src="/logoPandora.png" alt="rejoindre" />
+            <img src="/logoPandora.webp" alt="rejoindre" />
           </div>
           <div className="rejoindreTexte">
             <p>

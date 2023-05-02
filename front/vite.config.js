@@ -9,6 +9,8 @@ export default ({ mode }) => {
     plugins: [react()],
 
     build: {
+      cssMinify: true,
+      minify: true,
       rollupOptions: {
         output: {
           manualChunks(id) {

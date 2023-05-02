@@ -12,7 +12,7 @@ function Header() {
     <header className="header">
       <Link to="/" aria-label="Accueil">
         <div className="logo-pandora">
-          <img src="/logoPandora.png" alt="logo pandora" />
+          <img src="/logoPandora.webp" alt="logo pandora" />
         </div>
       </Link>
       <nav className="navDesktop">

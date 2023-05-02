@@ -6,7 +6,7 @@ import { panierValidationSchema } from "../../utils/schemasValidation";
 import useToast from "../../hooks/useToast";
 import { useNavigate, Link } from "react-router-dom";
 import { getInfosWebhook, sendEmbedsToDiscord } from "../../services/WebHookDiscord";
-import identifiant from "../../assets/discord.gif";
+import identifiant from "../../assets/discord.webp";
 
 function Panier({ cart, setCart }) {
   const initialvalues = {

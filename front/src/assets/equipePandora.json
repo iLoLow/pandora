@@ -3,7 +3,7 @@
 		"id": "1",
 		"nom": "Fusco#7338",
 		"nomrp": "El Mencho González",
-		"avatarequipe": "Fusco.jpg",
+		"avatarequipe": "Fusco.webp",
 		"description":"Streameur et fondateur de la communauté Pandora RP, SuperAdmin IG",
 		"fonction" : "Fondateur Pandora RP"
 		
@@ -12,7 +12,7 @@
 		"id": "2",
 		"nom": "bonobo#6969",	
 		"nomrp": "Shang chi",
-		"avatarequipe": "bono.jpg",
+		"avatarequipe": "bono.webp",
 		"description": "Co-fondateur de la communauté Pandora RP, SuperAdmin IG",
 		"fonction" : "Co-Fondateur Pandora RP, Dev FiveM Pandora RP"
 	},
@@ -20,7 +20,7 @@
 		"id": "3",
 		"nom": "aK_LeD#7824",
 		"nomrp": "Marceline Clark",
-		"avatarequipe": "aK_Led.gif",
+		"avatarequipe": "aK_Led.webp",
 		"description": "Developpeur FiveM Pandora RP, SuperAdmin IG",
 		"fonction" : "Dev FiveM Pandora RP"
 	},
@@ -28,7 +28,7 @@
 		"id": "4",
 		"nom": "ZiOnnes#0001",
 		"nomrp": " ZiOnnes",
-		"avatarequipe": "zionnes.png",
+		"avatarequipe": "zionnes.webp",
 		"description": "Developpeur FiveM Pandora RP, SuperAdmin IG",
 		"fonction" : "Dev FiveM Pandora RP"
 	},
@@ -36,7 +36,7 @@
 		"id": "5",
 		"nom": "Fischer__#2898",
 		"nomrp": "Adrien Willer",
-		"avatarequipe": "ficher.jpg",
+		"avatarequipe": "ficher.webp",
 		"description": "Modérateur : Douanier Pandora RP & Administrateur IG",
 		"fonction" : "Modérateur"
 	},
@@ -44,7 +44,7 @@
 		"id": "6",
 			"nom": "Sam_bzh29#1650",
 		"nomrp": "Tony Miller",
-		"avatarequipe": "sam.jpg",
+		"avatarequipe": "sam.webp",
 		"description": "Modérateur : Douanier Pandora",
 		"fonction" : "Modérateur"
 		
@@ -54,7 +54,7 @@
 		"id": "7",
 		"nom": "zqsd#8888",
 		"nomrp": "Roméo Landors",
-		"avatarequipe": "romeo.gif",
+		"avatarequipe": "romeo.webp",
 		"description": "Helpeur  : Douanier, Chef de police Pandora RP",
 		"fonction" : "Helpeur"
 	
@@ -63,7 +63,7 @@
 		"id": "8",
 		"nom": "wollaw#2510",
 		"nomrp": "Lionnel Poivrou",
-		"avatarequipe": "Wollaw.png",
+		"avatarequipe": "Wollaw.webp",
 		"description": "Developpeur Web Pandora RP, Journaliste",
 		"fonction" : "Developpeur Web Du Site Pandora RP"
 	}

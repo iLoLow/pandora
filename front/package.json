@@ -7,7 +7,8 @@
     "host": "vite --host 0.0.0.0",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-sitemap": "node src/generateSitemap.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -31,6 +32,7 @@
     "@types/react-dom": "^18.0.11",
     "@types/redux-persist": "^4.3.1",
     "@vitejs/plugin-react": "^3.1.0",
+    "sitemap": "^7.1.1",
     "vite": "^4.2.0"
   }
 }

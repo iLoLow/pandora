@@ -6,7 +6,7 @@
   border-top: 1px solid var(--shadow);
   box-shadow: -1px 1px 9px 0px var(--shadow);
   background: var(--background);
-  z-index: 8;
+  z-index: 5;
 }
 
 .footer span {

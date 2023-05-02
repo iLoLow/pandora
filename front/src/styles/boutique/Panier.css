@@ -1,24 +1,11 @@
 .panierItems {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 20px;
-  padding: 40px 10px;
-  transform: translateX(260px);
-  transition: transform 250ms ease-in-out;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, var(--background) 1%);
+  max-width: 260px;
 }
-.panierItems .globalButton {
-  margin-inline: auto;
-}
-.panierItems .form {
-  gap: 0;
-}
-.panierItems.isOpen {
-  transform: translateX(0);
-  border-left: 1px var(--shadow) solid;
-  box-shadow: -1px 1px 9px 0px var(--shadow);
-  overflow: auto;
+.panierItemsDeleteBtn {
+  display: inline-flex;
+  justify-content: center;
+  margin-block: 1rem;
+  width: 100%;
 }
 
 .containerImgIdentifiant {
@@ -36,6 +23,7 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
+
 caption {
   font-weight: 700;
 }

@@ -71,24 +71,27 @@
 }
 
 .boutiquePanier {
-  position: absolute;
+  position: fixed;
+  top: 65px;
   right: 0;
-  width: 60px;
+  overflow: auto;
   height: 100%;
   line-height: 2;
-  transition: width 250ms ease-in-out;
-  overflow: hidden;
+  transform: translateX(260px);
+  transition: transform 250ms ease-in-out;
+  max-width: 260px;
+  padding: 40px 10px 180px 10px;
+  background: var(--background);
+  border-left: 1px var(--shadow) solid;
+  box-shadow: -1px 1px 9px 0px var(--shadow);
   z-index: 5;
 }
+
 .boutiquePanier.isOpen {
-  width: 270px;
+  transform: translateX(0);
 }
 
 @media screen and (max-width: 768px) {
-  .boutiquePanier {
-    background: transparent;
-  }
-
   .boutiqueComponents.panierIsOpen {
     margin-right: 0;
   }

@@ -16,7 +16,9 @@ function MenuMobile() {
       </div>
       {isOpen && (
         <nav className="navMobile">
-          <ProfilMenu user={user} menuOpen={isOpen} setMenuOpen={() => setIsOpen(!isOpen)} />
+          <div className="navMobileProfil">
+            <ProfilMenu user={user} menuOpen={isOpen} setMenuOpen={() => setIsOpen(!isOpen)} />
+          </div>
           <NavLink aria-label="Accueil" onClick={() => setIsOpen(false)} className={({ isActive }) => (isActive ? "link link-active" : "link")} end to="/">
             <span className="NavmobileFlex">
               <span className="NavMobileSvgHome">

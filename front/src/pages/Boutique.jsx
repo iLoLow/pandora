@@ -74,12 +74,12 @@ function Boutique() {
           </span>
           <span className="BtnClosePanier">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <path fill="none" stroke="#0d7f90" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368" />
+              <path fill="none" stroke="#0d7f90" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M368 368L144 144M368 144L144 368" />
             </svg>
           </span>
         </div>
         <div className={isOpen ? "boutiquePanier isOpen" : "boutiquePanier"}>
-          <Panier cart={cart} setCart={setCart} isOpen={isOpen} />
+          <Panier cart={cart} setCart={setCart} />
         </div>
         <div className={isOpen ? "boutiqueComponents panierIsOpen" : "boutiqueComponents"}>
           {!openDetail && (

@@ -8,7 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { getInfosWebhook, sendEmbedsToDiscord } from "../../services/WebHookDiscord";
 import identifiant from "../../assets/discord.gif";
 
-function Panier({ isOpen, cart, setCart }) {
+function Panier({ cart, setCart }) {
   const initialvalues = {
     webhook_url: "",
     server_id: "",
@@ -153,7 +153,7 @@ function Panier({ isOpen, cart, setCart }) {
 
   return (
     <>
-      <div className={isOpen ? "panierItems isOpen" : "panierItems"}>
+      <div className="panierItems">
         <h3>Réservation</h3>
         <div id="panier">
           {cart && (
@@ -191,7 +191,9 @@ function Panier({ isOpen, cart, setCart }) {
             </table>
           )}
         </div>
-        <Button color="red" children="Vider le panier" onClick={() => handleClearPanier()} />
+        <div className="panierItemsDeleteBtn">
+          <Button color="red" children="Vider le panier" onClick={() => handleClearPanier()} />
+        </div>
         <form className="form" action="post" onSubmit={(e) => handleSubmitPanier(e)}>
           <div className="containerImgIdentifiant">{<img src={identifiant} alt="" />}</div>
           <form-group>

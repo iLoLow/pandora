@@ -9,6 +9,26 @@
 
   z-index: 2;
 }
+
+.navMobileProfil {
+  width: 50%;
+}
+
+.navMobileProfil .profil-menu {
+  margin-left: auto;
+  width: fit-content;
+}
+
+.navMobileProfil .profil-menu .profil-links {
+  align-items: center;
+  transform: translate(-40%, -80%);
+}
+
+.navMobileProfil .profil-menu .profil-img {
+  width: 50px;
+  height: 50px;
+}
+
 .navMobile .link {
   width: 50%;
 }
@@ -82,14 +102,14 @@
     display: flex;
     z-index: 3;
   }
-  .navMobile .profil-img {
-    width: 60px;
-    height: 60px;
-  }
 }
 
 @media screen and (max-width: 440px) {
   .navMobile .link {
+    width: 90%;
+  }
+
+  .navMobileProfil {
     width: 90%;
   }
 }

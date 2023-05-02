@@ -68,6 +68,7 @@ function AddBoutiqueForm({ setClose = () => {}, reloadBoutique = () => {} }) {
 
       setErrors(errors);
     }
+    console.log(values.type_vehicule);
   };
   const handleBoutiqueItemSubmit = (e) => {
     e.preventDefault();

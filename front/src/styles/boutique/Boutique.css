@@ -54,10 +54,26 @@
 .boutiqueComponents {
   transition: margin-right 250ms ease-in-out;
   z-index: 1;
+  padding-block: 30px;
 }
 
 .boutiqueComponents.panierIsOpen {
   margin-right: 270px;
+}
+.filtre {
+  display: flex;
+  justify-content: center;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+.filtre select {
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  border-radius: 5px;
+  margin-left: 5px;
+  border: 1px solid var(--shadow);
+  outline: none;
+  cursor: pointer;
 }
 
 .boutiqueCards {
@@ -65,7 +81,6 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: minmax(200px, 100%);
   gap: 1rem;
-  padding-block: 60px 30px;
   padding-inline: 15px;
   border-radius: 10px;
 }
@@ -94,5 +109,10 @@
 @media screen and (max-width: 768px) {
   .boutiqueComponents.panierIsOpen {
     margin-right: 0;
+  }
+}
+@media screen and (max-width: 300px) {
+  .filtre {
+    justify-content: flex-start;
   }
 }

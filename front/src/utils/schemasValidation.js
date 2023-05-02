@@ -124,11 +124,8 @@ export const addItemBoutiqueValidationSchema = yup.object().shape({
     .trim()
     .required("Veuillez renseigner une description.")
     .matches(/^[^<>]*$/, "Les caractères spéciaux ne sont pas autorisés sauf ', ., ;, (, ), #, @, €'."),
-  type_vehicule: yup
-    .string()
-    .trim()
-    .required("Veuillez renseigner un type de véhicule.")
-    .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
+  type_vehicule: yup.string().trim().oneOf(["voiture", "moto"], "Veuillez sélectionner un type de véhicule valide."),
+
   price: yup
     .number()
     .required("Veuillez renseigner un prix.")
@@ -160,11 +157,7 @@ export const modifyItemBoutiqueValidationSchema = yup.object().shape({
     .trim()
     .required("Veuillez renseigner une description.")
     .matches(/^[^<>]*$/, "Les caractères spéciaux ne sont pas autorisés sauf ', ., ;, (, ), #, @, €'."),
-  type_vehicule: yup
-    .string()
-    .trim()
-    .required("Veuillez renseigner un type de véhicule.")
-    .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
+  type_vehicule: yup.string().trim().oneOf(["voiture", "moto"], "Veuillez sélectionner un type de véhicule valide."),
   price: yup
     .number()
     .required("Veuillez renseigner un prix.")

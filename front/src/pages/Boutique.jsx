@@ -9,12 +9,17 @@ import BoutiqueItem from "../pages/BoutiqueItem";
 function Boutique() {
   document.title = "Boutique";
   const [items, setItems] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("");
+  const filteredItem = items.filter((item) => selectedFilter === "" || item.type_vehicule === selectedFilter);
   const [detail, setDetail] = useState({});
   const [openDetail, setOpenDetail] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("panier")) || []);
   const navigate = useNavigate();
   const notify = useToast();
+  const handleFilterChange = (event) => {
+    setSelectedFilter(event.target.value);
+  };
 
   const getAllBoutiqueItems = async () => {
     try {
@@ -82,12 +87,20 @@ function Boutique() {
           <Panier cart={cart} setCart={setCart} />
         </div>
         <div className={isOpen ? "boutiqueComponents panierIsOpen" : "boutiqueComponents"}>
+          <div className="filtre">
+            <h3>Filtres : </h3>
+            <select value={selectedFilter} onChange={handleFilterChange}>
+              <option value="">Tous les types</option>
+              <option value="voiture">Voiture</option>
+              <option value="moto">Moto</option>
+            </select>
+          </div>
           {!openDetail && (
             <div className="boutiqueCards">
               {items.length > 0 &&
-                items.map((item, k) => (
+                filteredItem.map((item) => (
                   <BoutiqueCard
-                    key={k}
+                    key={item.id}
                     handleDetailItem={() => {
                       setDetail(item), setOpenDetail(!openDetail);
                     }}
@@ -105,3 +118,4 @@ function Boutique() {
 }
 
 export default Boutique;
+/*        */

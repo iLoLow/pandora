@@ -17,8 +17,11 @@ function BoutiqueForm({ item, values, setValues, errors, handleSubmit = () => {}
         {errors.description && <small className="errorSmall">{errors.description}</small>}
       </form-group>
       <form-group>
-        <label htmlFor="type_vehicule">Type de véhicule :</label>
-        <input type="text" name="type_vehicule" id="type_vehicule" value={values.type_vehicule} onChange={(e) => setValues({ ...values, type_vehicule: e.target.value })} />
+        <select value={values.type_vehicule} onChange={(e) => setValues({ ...values, type_vehicule: e.target.value })}>
+          <option value="Type">Type de véhicule</option>
+          <option value="voiture">Voiture</option>
+          <option value="moto">Moto</option>
+        </select>
         {errors.type_vehicule && <small className="errorSmall">{errors.type_vehicule}</small>}
       </form-group>
       <form-group>

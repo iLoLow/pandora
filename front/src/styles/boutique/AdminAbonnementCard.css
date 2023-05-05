@@ -73,7 +73,7 @@
 .tableauAbonnementIcone .delete {
   fill: var(--red);
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .tableauAbonnement {
     grid-template-columns: 1fr;
   }

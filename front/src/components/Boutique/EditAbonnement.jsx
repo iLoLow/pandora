@@ -79,7 +79,7 @@ function EditAbonnement({ abonnement, setClose = () => {}, reloadAbonnement = ()
   return (
     <div className="containerForm">
       <h2>Modifier un Abonnement :</h2>
-      <AbonnementForm abonnement={abonnement} values={values} setValues={setValues} errors={errors} handleSubmit={handleModifySubmit} />
+      <AbonnementForm abonnement={abonnement} values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleModifySubmit(e)} />
     </div>
   );
 }

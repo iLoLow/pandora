@@ -41,7 +41,7 @@
 }
 
 .tableauBoutiqueItemHeader.infos p {
-  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
 }
 
 .tableauBoutiqueItem.desc p {
@@ -51,7 +51,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin: 5px 10px;
-  font-size: clamp(0.8rem, 2vw, 1rem);
+  font-size: clamp(0.8rem, 1.3vw, 1rem);
 }
 
 .tableauBoutiqueItem.btns {
@@ -79,7 +79,7 @@
 .tableauBoutiqueIcone .delete {
   fill: var(--red);
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
   .tableauBoutique {
     grid-template-columns: 1fr;
   }

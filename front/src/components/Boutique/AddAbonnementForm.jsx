@@ -76,7 +76,7 @@ function AddAbonnementForm({ setClose = () => {}, reloadAbonnement = () => {} })
   return (
     <div className="containerForm">
       <h2>Ajouter un Abonnement : </h2>
-      <AbonnementForm values={values} setValues={setValues} errors={errors} handleSubmit={handleAbonnementSubmit} />
+      <AbonnementForm values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleAbonnementSubmit(e)} />
     </div>
   );
 }

@@ -67,6 +67,7 @@
   font-size: clamp(0.8rem, 2vw, 1rem);
   padding: 0 10px;
   margin-bottom: 10px;
+  gap: 10px;
 }
 .filtre {
   display: flex;

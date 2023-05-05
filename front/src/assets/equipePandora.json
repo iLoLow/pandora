@@ -8,24 +8,17 @@
 		"fonction" : "Fondateur Pandora RP"
 		
 	},
+
 	{
 		"id": "2",
-		"nom": "bonobo#6969",	
-		"nomrp": "Shang chi",
-		"avatarequipe": "bono.webp",
-		"description": "Co-fondateur de la communauté Pandora RP, SuperAdmin IG",
-		"fonction" : "Co-Fondateur Pandora RP, Dev FiveM Pandora RP"
-	},
-	{
-		"id": "3",
 		"nom": "aK_LeD#7824",
 		"nomrp": "Marceline Clark",
 		"avatarequipe": "aK_Led.webp",
-		"description": "Developpeur FiveM Pandora RP, SuperAdmin IG",
+		"description": "Co-fondateur de la communauté Pandora RP,Developpeur FiveM Pandora RP, SuperAdmin IG",
 		"fonction" : "Dev FiveM Pandora RP"
 	},
 	{
-		"id": "4",
+		"id": "3",
 		"nom": "ZiOnnes#0001",
 		"nomrp": " ZiOnnes",
 		"avatarequipe": "zionnes.webp",
@@ -33,7 +26,7 @@
 		"fonction" : "Dev FiveM Pandora RP"
 	},
 	{
-		"id": "5",
+		"id": "4",
 		"nom": "Fischer__#2898",
 		"nomrp": "Adrien Willer",
 		"avatarequipe": "ficher.webp",
@@ -41,7 +34,7 @@
 		"fonction" : "Modérateur"
 	},
 	{
-		"id": "6",
+		"id": "5",
 			"nom": "Sam_bzh29#1650",
 		"nomrp": "Tony Miller",
 		"avatarequipe": "sam.webp",
@@ -51,7 +44,7 @@
 	},
 
 	{
-		"id": "7",
+		"id": "6",
 		"nom": "zqsd#8888",
 		"nomrp": "Roméo Landors",
 		"avatarequipe": "romeo.webp",
@@ -60,7 +53,7 @@
 	
 	},
 	{
-		"id": "8",
+		"id": "7",
 		"nom": "wollaw#2510",
 		"nomrp": "Lionnel Poivrou",
 		"avatarequipe": "Wollaw.webp",

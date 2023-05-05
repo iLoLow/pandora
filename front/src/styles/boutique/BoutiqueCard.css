@@ -61,6 +61,9 @@
   color: var(--accent);
   border-bottom: 1px var(--text-secondary) solid;
 }
+.boutiqueCardType {
+  text-transform: capitalize;
+}
 .boutiqueCardDesc {
   display: -webkit-box;
   line-clamp: 1;

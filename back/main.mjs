@@ -13,6 +13,7 @@ import adminRoutes from "./routes/adminRoutes.mjs";
 import annonceRoutes from "./routes/annonceRoutes.mjs";
 import imageRoutes from "./routes/imageRoutes.mjs";
 import boutiqueRoutes from "./routes/boutiqueRoutes.mjs";
+import abonnementRoutes from "./routes/abonnementRoutes.mjs";
 import bannerRoutes from "./routes/bannerRoutes.mjs";
 import webhookRoutes from "./routes/webhookRoutes.mjs";
 import createFolders from "./utils/createFolders.mjs";
@@ -97,6 +98,9 @@ app.use("/api/annonces", annonceRoutes);
 
 // Définition de la route boutique
 app.use("/api/boutique", boutiqueRoutes);
+
+//Définition de la route pour les abonnements
+app.use("/api/abonnement", abonnementRoutes);
 
 // Définition de la route pour le banner
 app.use("/api/banner", bannerRoutes);

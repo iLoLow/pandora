@@ -23,6 +23,10 @@ const createFolders = async () => {
   const boutiquePath = path.join(__dirname, "../images/boutique");
   const boutiqueThumbsPath = path.join(__dirname, "../images/boutique/thumbs");
 
+  //path abonnement
+  const abonnementPath = path.join(__dirname, "../images/abonnement");
+  const abonnementThumbsPath = path.join(__dirname, "../images/abonnement/thumbs");
+
   // creation du dossier images
   const imagesPathExists = await fs
     .access(imagesPath)
@@ -31,7 +35,7 @@ const createFolders = async () => {
   if (!imagesPathExists) {
     await fs.mkdir(imagesPath);
   }
-  // creation du dossier avatars
+  // creation du dossier banner
   const bannerPathExists = await fs
     .access(bannerPath)
     .then(() => true)
@@ -83,6 +87,24 @@ const createFolders = async () => {
     .catch(() => false);
   if (!boutiqueThumbsPathExists) {
     await fs.mkdir(boutiqueThumbsPath);
+  }
+
+  // creation du dossier abonnement
+  const abonnementPathExists = await fs
+    .access(abonnementPath)
+    .then(() => true)
+    .catch(() => false);
+  if (!abonnementPathExists) {
+    await fs.mkdir(abonnementPath);
+  }
+
+  // creation du dossier abonnement/thumbs
+  const abonnementThumbsPathExists = await fs
+    .access(abonnementThumbsPath)
+    .then(() => true)
+    .catch(() => false);
+  if (!abonnementThumbsPathExists) {
+    await fs.mkdir(abonnementThumbsPath);
   }
 };
 //creation des dossiers necessaires aux images

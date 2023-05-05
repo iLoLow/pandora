@@ -54,15 +54,23 @@
 .boutiqueComponents {
   transition: margin-right 250ms ease-in-out;
   z-index: 1;
-  padding-block: 30px;
+  padding-block: 10px 30px;
 }
 
 .boutiqueComponents.panierIsOpen {
   margin-right: 270px;
 }
-.filtre {
+.categorieBtn {
   display: flex;
   justify-content: center;
+  align-items: center;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+.filtre {
+  display: flex;
+  align-items: center;
   font-size: clamp(0.8rem, 2vw, 1rem);
   padding: 0 10px;
   margin-bottom: 10px;
@@ -72,6 +80,7 @@
   border-radius: 5px;
   margin-left: 5px;
   border: 1px solid var(--shadow);
+  box-shadow: 0 0 3px 1px var(--shadow);
   outline: none;
   cursor: pointer;
 }

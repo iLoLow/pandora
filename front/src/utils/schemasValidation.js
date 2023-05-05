@@ -175,6 +175,65 @@ export const modifyItemBoutiqueValidationSchema = yup.object().shape({
     }),
 });
 
+export const addAbonnementValidationSchema = yup.object().shape({
+  name_abonnement: yup
+    .string()
+    .trim()
+    .required("Veuillez renseigner un nom.")
+    .max(19, "Le nom ne doit pas dépasser 19 caractères.")
+    .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
+  description: yup
+    .string()
+    .trim()
+    .required("Veuillez renseigner une description.")
+    .matches(/^[^<>]*$/, "Les caractères spéciaux ne sont pas autorisés sauf ', ., ;, (, ), #, @, €'."),
+  price: yup
+    .number()
+    .required("Veuillez renseigner un prix.")
+    .positive("Le prix doit être positif.")
+    .min(1, "Le prix minumun est de 1€.")
+    .max(1000, "Le prix maximum et de 1000€."),
+  abonnement_image: yup
+    .array()
+    .required()
+    .min(1, "Veuillez ajouter au moins une image.")
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (values) => {
+      return values !== [] && values.map((value) => ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type));
+    })
+    .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (values) => {
+      return values !== [] && values.map((value) => value.size <= 10000000);
+    }),
+});
+
+export const modifyAbonnementValidationSchema = yup.object().shape({
+  name_abonnement: yup
+    .string()
+    .trim()
+    .required("Veuillez renseigner un nom.")
+    .max(19, "Le nom ne doit pas dépasser 19 caractères.")
+    .matches(/^[a-zA-Z0-9\s]*$/, "Les caractères spéciaux ne sont pas autorisés."),
+  description: yup
+    .string()
+    .trim()
+    .required("Veuillez renseigner une description.")
+    .matches(/^[^<>]*$/, "Les caractères spéciaux ne sont pas autorisés sauf ', ., ;, (, ), #, @, €'."),
+  price: yup
+    .number()
+    .required("Veuillez renseigner un prix.")
+    .positive("Le prix doit être positif.")
+    .min(1, "Le prix minumun est de 1€.")
+    .max(1000, "Le prix maximum et de 1000€."),
+  abonnement_image: yup
+    .array()
+    .nullable(true)
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (values) => {
+      return values !== [] && values.map((value) => ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type));
+    })
+    .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (values) => {
+      return values !== [] && values.map((value) => value.size <= 10000000);
+    }),
+});
+
 export const bannerValidationSchema = yup.object().shape({
   banner_image: yup
     .mixed()

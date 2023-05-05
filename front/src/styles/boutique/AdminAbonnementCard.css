@@ -1,117 +1,105 @@
-.tableauBoutique {
+.tableauAbonnement {
   display: grid;
   grid-template-columns: 120px 0.5fr 1fr 40px;
-  grid-template-rows: 120px;
+  grid-template-rows: 115px;
   margin-top: 15px;
   border: 1px solid var(--shadow);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: -1px 1px 6px 0 var(--shadow);
 }
-
-.tableauBoutiqueItem {
+.tableauAbonnementItem {
   border-right: 1px solid var(--shadow);
 }
-
-.tableauBoutiqueItemHeader {
+.tableauAbonnementItemHeader {
   padding: 10px;
   border-bottom: 1px solid var(--shadow);
 }
-
-.tableauBoutiqueItemHeader.infos {
+.tableauAbonnementItem.infos {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
-.tableauBoutiqueItem h3 {
+.tableauAbonnementItem h3 {
   text-transform: capitalize;
   font-size: clamp(0.8rem, 2vw, 1rem);
 }
-
-.tableauBoutiqueItem.img {
+.tableauAbonnementItem.img {
   overflow: hidden;
 }
-
-.tableauBoutiqueItem.img img {
+.tableauAbonnementItem.img img {
   display: block;
   width: 120px;
   height: 120px;
   object-fit: cover;
 }
 
-.tableauBoutiqueItemHeader.infos p {
-  font-size: clamp(0.8rem, 1.5vw, 1rem);
+.tableauAbonnementItem.infos p {
+  margin: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
-
-.tableauBoutiqueItem.desc p {
+.tableauAbonnementItem.desc p {
   display: -webkit-box;
   line-clamp: 3;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin: 5px 10px;
+  margin: 5px;
   font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
-.tableauBoutiqueItem.btns {
+.tableauAbonnementItem.btns {
   border-right: none;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
 }
-
-.tableauBoutiqueIcone {
+.tableauAbonnementIcone {
   opacity: 0.7;
   transition: all 0.2s ease-in-out;
 }
-
-.tableauBoutiqueIcone svg {
+.tableauAbonnementIcone svg {
   width: 26px;
   cursor: pointer;
 }
 
-.tableauBoutiqueIcone:hover {
+.tableauAbonnementIcone:hover {
   opacity: 1;
 }
-
-.tableauBoutiqueIcone .delete {
+.tableauAbonnementIcone .delete {
   fill: var(--red);
 }
 @media screen and (max-width: 768px) {
-  .tableauBoutique {
+  .tableauAbonnement {
     grid-template-columns: 1fr;
   }
-  .tableauBoutiqueItem {
+  .tableauAbonnementItem {
     border-right: none;
     border-top: 1px solid var(--shadow);
   }
-
-  .tableauBoutiqueItem.img {
+  .tableauAbonnementItem.img {
     border-top: none;
   }
-  .tableauBoutiqueItem.img img {
+  .tableauAbonnementItem.img img {
     width: 100%;
   }
-  .tableauBoutiqueItem.name,
-  .tableauBoutiqueItem.desc {
-    padding: 0px;
-  }
-  .tableauBoutiqueItem.desc p {
+  .tableauAbonnementItem.desc p {
     margin: 5px;
   }
-  .tableauBoutiqueItemHeader {
+
+  .tableauAbonnementItemHeader {
     border-bottom: none;
     padding: 5px;
   }
-
-  .tableauBoutiqueItem.btns {
+  .tableauAbonnementItem.btns {
     flex-direction: row;
     padding: 5px;
   }
-
-  .tableauBoutiqueIcone svg {
+  .tableauAbonnementIcone svg {
     width: 20px;
     height: 20px;
   }

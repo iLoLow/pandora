@@ -92,7 +92,7 @@ function Panier({ cart, setCart }) {
     const newPanier = cart.filter((item) => item.id !== id);
     localStorage.setItem("panier", JSON.stringify(newPanier));
     setCart(newPanier);
-    notify("success", "Vehicule supprimé");
+    notify("success", "Article supprimé");
   };
 
   const submitPanier = async () => {
@@ -160,7 +160,7 @@ function Panier({ cart, setCart }) {
             <table>
               <thead>
                 <tr>
-                  <th>Véhicule</th>
+                  <th>Véhicule / VIP</th>
                   <th>Prix</th>
                 </tr>
               </thead>

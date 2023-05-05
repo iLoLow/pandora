@@ -1,17 +1,16 @@
 import { useState } from "react";
-import BoutiqueForm from "./BoutiqueForm";
-import { addItemBoutiqueValidationSchema } from "../../utils/schemasValidation";
+import { addAbonnementValidationSchema } from "../../utils/schemasValidation";
 import { useSelector, useDispatch } from "react-redux";
 import useToast from "../../hooks/useToast";
 import { useNavigate } from "react-router-dom";
+import AbonnementForm from "./AbonnementForm";
 
-function AddBoutiqueForm({ setClose = () => {}, reloadBoutique = () => {} }) {
+function AddAbonnementForm({ setClose = () => {}, reloadAbonnement = () => {} }) {
   const initialValues = {
-    name_article: "",
+    name_abonnement: "",
     description: "",
     price: 0,
-    type_vehicule: "",
-    boutique_image: [],
+    abonnement_image: [],
   };
 
   const token = useSelector((state) => state.token) || "";
@@ -21,22 +20,21 @@ function AddBoutiqueForm({ setClose = () => {}, reloadBoutique = () => {} }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const createBoutiqueItem = async () => {
+  const createAbonnement = async () => {
     try {
-      const validatedItems = await addItemBoutiqueValidationSchema.validate(values, { abortEarly: false });
+      const validatedItems = await addAbonnementValidationSchema.validate(values, { abortEarly: false });
 
       const formData = new FormData();
 
-      formData.append("name_article", validatedItems.name_article);
+      formData.append("name_abonnement", validatedItems.name_abonnement);
       formData.append("description", validatedItems.description);
       formData.append("price", validatedItems.price);
-      formData.append("type_vehicule", validatedItems.type_vehicule);
 
-      validatedItems.boutique_image.forEach((image) => {
-        formData.append("boutique_image", image);
+      validatedItems.abonnement_image.forEach((image) => {
+        formData.append("abonnement_image", image);
       });
 
-      const response = await fetch("/api/boutique", {
+      const response = await fetch("/api/abonnement", {
         method: "POST",
         headers: { Authorization: "Bearer " + token },
         body: formData,
@@ -57,7 +55,7 @@ function AddBoutiqueForm({ setClose = () => {}, reloadBoutique = () => {} }) {
       if (savedItem) {
         notify("success", savedItem.message);
         setValues(initialValues);
-        reloadBoutique();
+        reloadAbonnement();
         setErrors({});
         setClose();
       }
@@ -69,18 +67,18 @@ function AddBoutiqueForm({ setClose = () => {}, reloadBoutique = () => {} }) {
       setErrors(errors);
     }
   };
-  const handleBoutiqueItemSubmit = (e) => {
+
+  const handleAbonnementSubmit = (e) => {
     e.preventDefault();
-    createBoutiqueItem();
+    createAbonnement();
   };
 
   return (
     <div className="containerForm">
-      <h2>Ajouter un article : </h2>
-
-      <BoutiqueForm values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleBoutiqueItemSubmit(e)} />
+      <h2>Ajouter un Abonnement : </h2>
+      <AbonnementForm values={values} setValues={setValues} errors={errors} handleSubmit={handleAbonnementSubmit} />
     </div>
   );
 }
 
-export default AddBoutiqueForm;
+export default AddAbonnementForm;

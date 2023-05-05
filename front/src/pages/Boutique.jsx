@@ -5,10 +5,13 @@ import { useNavigate, Navigate } from "react-router-dom";
 import useToast from "../hooks/useToast";
 import Panier from "../components/Boutique/Panier";
 import BoutiqueItem from "../pages/BoutiqueItem";
+import Abonnement from "../components/Boutique/Abonnement";
+import Button from "../components/Others/Button";
 
 function Boutique() {
   document.title = "Boutique";
   const [items, setItems] = useState([]);
+
   const [selectedFilter, setSelectedFilter] = useState("");
   const filteredItem = items.filter((item) => selectedFilter === "" || item.type_vehicule === selectedFilter);
   const [detail, setDetail] = useState({});
@@ -20,7 +23,18 @@ function Boutique() {
   const handleFilterChange = (event) => {
     setSelectedFilter(event.target.value);
   };
+  //si l'utilisaateur et sur la page boutique alors le bouton vehicule est desactivé
+  const [isVehicleButtonDisabled] = useState(false);
+  const [isAbonnementButtonDisabled] = useState(false);
 
+  //si l'utilisateur clique sur le bouton vip
+  const [showAbonnement, setShowAbonnement] = useState(false);
+  const handleAboVIPClick = () => {
+    setShowAbonnement(true);
+  };
+  const handlevehiculeClick = () => {
+    setShowAbonnement(false);
+  };
   const getAllBoutiqueItems = async () => {
     try {
       const response = await fetch("/api/boutique");
@@ -57,7 +71,7 @@ function Boutique() {
     // Enregistrer le panier mis à jour dans le localStorage
     localStorage.setItem("panier", JSON.stringify(newCart));
     setCart(JSON.parse(localStorage.getItem("panier")));
-    notify("success", "Article ajouté au panier");
+    notify("success", "Vehicule ajouté au panier");
   };
 
   const handleCloseDetail = () => {
@@ -87,29 +101,37 @@ function Boutique() {
           <Panier cart={cart} setCart={setCart} />
         </div>
         <div className={isOpen ? "boutiqueComponents panierIsOpen" : "boutiqueComponents"}>
-          <div className="filtre">
-            <h3>Filtres : </h3>
-            <select value={selectedFilter} onChange={handleFilterChange}>
-              <option value="">Tous les types</option>
-              <option value="voiture">Voiture</option>
-              <option value="moto">Moto</option>
-            </select>
+          <div className="categorieBtn">
+            <Button children="Véhicule" onClick={handlevehiculeClick} disabled={isVehicleButtonDisabled || !showAbonnement} />
+            <Button children="Abo VIP" onClick={handleAboVIPClick} disabled={isAbonnementButtonDisabled || showAbonnement} />
           </div>
-          {!openDetail && (
-            <div className="boutiqueCards">
-              {items.length > 0 &&
-                filteredItem.map((item) => (
-                  <BoutiqueCard
-                    key={item.id}
-                    handleDetailItem={() => {
-                      setDetail(item), setOpenDetail(!openDetail);
-                    }}
-                    item={item}
-                    handleReservation={() => handleReservation(item)}
-                  />
-                ))}
-            </div>
+
+          {!openDetail && !showAbonnement && (
+            <>
+              <div className="filtre">
+                <h3>Filtres : </h3>
+                <select value={selectedFilter} onChange={handleFilterChange}>
+                  <option value="">Tous les types</option>
+                  <option value="voiture">Voiture</option>
+                  <option value="moto">Moto</option>
+                </select>
+              </div>
+              <div className="boutiqueCards">
+                {items.length > 0 &&
+                  filteredItem.map((item) => (
+                    <BoutiqueCard
+                      key={item.id}
+                      handleDetailItem={() => {
+                        setDetail(item), setOpenDetail(!openDetail);
+                      }}
+                      item={item}
+                      handleReservation={() => handleReservation(item)}
+                    />
+                  ))}
+              </div>
+            </>
           )}
+          {showAbonnement && <Abonnement cart={cart} setCart={setCart} />}
           {openDetail && <BoutiqueItem isOpen={isOpen} item={detail} handleReservation={() => handleReservation(detail)} handleCloseDetail={() => handleCloseDetail()} />}
         </div>
       </section>
@@ -118,4 +140,3 @@ function Boutique() {
 }
 
 export default Boutique;
-/*        */

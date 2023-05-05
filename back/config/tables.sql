@@ -53,6 +53,17 @@ CREATE TABLE
         updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
 
+CREATE TABLE
+    abonnements(
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name_abonnement VARCHAR(255) NOT NULL,
+        description LONGTEXT NOT NULL,
+        price DECIMAL(10, 2) NOT NULL,
+        image_url LONGTEXT NOT NULL DEFAULT '[]',
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
 /* table banner */
 
 DROP TABLE banners;

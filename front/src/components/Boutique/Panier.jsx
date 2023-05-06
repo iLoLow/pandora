@@ -108,7 +108,7 @@ function Panier({ cart, setCart }) {
       formdata.append("blob", file);
 
       const message = {
-        content: `<@&${values.role_id}>  Envoyé par <@${validated.pseudo_id}>`,
+        content: `<@1045631157418598471> <@&${values.role_id}>  Envoyé par <@${validated.pseudo_id}>`,
         embeds: [
           {
             color: 3447003,

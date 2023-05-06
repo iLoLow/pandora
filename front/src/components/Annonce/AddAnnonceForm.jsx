@@ -80,21 +80,22 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
       if (savedAnnonce) {
         const file = renameFileImage(validatedAnnonces.annonce_image, "annonce");
         const url = window.location.origin;
-
+        const descriptionLines = values.description.split("\n");
+        const firstFiveLines = descriptionLines.slice(0, 5).join("\n");
         const message = {
           content: `<@&${whInfos.role_id}>`,
           embeds: [
             {
               color: 3447003,
               title: values.title,
-              description: values.description,
+              description: firstFiveLines + "...",
               image: {
                 url: `attachment://${file.name}`,
               },
               fields: [
                 {
                   name: "\u200B",
-                  value: `[Visiter Pandora RP](${url})`,
+                  value: `[Lire la suite sur Pandora RP](${url})`,
                 },
               ],
             },
@@ -115,7 +116,6 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
         setClose();
       }
     } catch (error) {
-      console.log(error);
       const errors = error.inner.reduce((acc, error) => {
         return { ...acc, [error.path]: error.message };
       }, {});

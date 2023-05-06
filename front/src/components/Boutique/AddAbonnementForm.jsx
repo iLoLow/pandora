@@ -55,6 +55,7 @@ function AddAbonnementForm({ setClose = () => {}, reloadAbonnement = () => {} })
       if (savedItem) {
         notify("success", savedItem.message);
         setValues(initialValues);
+
         reloadAbonnement();
         setErrors({});
         setClose();

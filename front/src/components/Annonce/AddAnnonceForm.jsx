@@ -106,7 +106,9 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
 
         formdataDiscord.append("blob", file);
         formdataDiscord.append("payload_json", JSON.stringify(message));
-        await sendEmbedsToDiscord(whInfos.webhook_url, formdataDiscord);
+        if (Boolean(whInfos.active)) {
+          await sendEmbedsToDiscord(whInfos.webhook_url, formdataDiscord);
+        }
 
         notify("success", savedAnnonce.message);
         setValues(initialValues);

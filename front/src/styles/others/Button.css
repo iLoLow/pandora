@@ -2,7 +2,7 @@
   border-radius: 10px;
   padding: 10px 20px;
   border: none;
-  background: var(--text-secondary);
+  background: var(--btn);
   transition: 350ms;
   cursor: pointer;
   color: var(--text-primary);

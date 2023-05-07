@@ -42,6 +42,7 @@ function Abonnement({ cart, setCart }) {
   useEffect(() => {
     getAllAbonnementItems();
   }, []);
+
   return (
     <div className="abonnementCards">
       {items.map((item) => (

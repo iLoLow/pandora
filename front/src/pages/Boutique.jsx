@@ -29,12 +29,7 @@ function Boutique() {
 
   //si l'utilisateur clique sur le bouton vip
   const [showAbonnement, setShowAbonnement] = useState(false);
-  const handleAboVIPClick = () => {
-    setShowAbonnement(true);
-  };
-  const handlevehiculeClick = () => {
-    setShowAbonnement(false);
-  };
+
   const getAllBoutiqueItems = async () => {
     try {
       const response = await fetch("/api/boutique");
@@ -77,6 +72,15 @@ function Boutique() {
   const handleCloseDetail = () => {
     setDetail({});
     setOpenDetail(!openDetail);
+  };
+
+  const handleAboVIPClick = () => {
+    setShowAbonnement(true);
+  };
+
+  const handlevehiculeClick = () => {
+    setShowAbonnement(false);
+    getAllBoutiqueItems();
   };
 
   return (

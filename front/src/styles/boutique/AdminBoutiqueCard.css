@@ -24,6 +24,12 @@
   justify-content: space-between;
 }
 
+.tableauBoutiqueItemHeader.infos p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .tableauBoutiqueItem h3 {
   text-transform: capitalize;
   font-size: clamp(0.8rem, 2vw, 1rem);

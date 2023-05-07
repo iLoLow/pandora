@@ -58,7 +58,7 @@
 }
 
 .boutiqueComponents.panierIsOpen {
-  margin-right: 270px;
+  margin-right: 280px;
 }
 .categorieBtn {
   display: flex;
@@ -102,9 +102,9 @@
   overflow: auto;
   height: 100%;
   line-height: 2;
-  transform: translateX(260px);
+  transform: translateX(290px);
   transition: transform 250ms ease-in-out;
-  max-width: 260px;
+  max-width: 290px;
   padding: 40px 10px 180px 10px;
   background: var(--background);
   border-left: 1px var(--shadow) solid;

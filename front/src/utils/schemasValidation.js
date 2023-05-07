@@ -31,8 +31,8 @@ export const registerValidationSchema = yup.object().shape({
     .oneOf([yup.ref("password"), null], "Les mots de passe doivent correspondre"),
   avatar_image: yup
     .mixed()
-    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
-      return value && ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) => {
+      return value && ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type);
     })
     .test("fileSize", "Le fichier est trop volumineux, taille maximum de 2Mo.", (value) => {
       return value && value.size <= 2000000;
@@ -60,8 +60,8 @@ export const updateProfilValidationSchema = yup.object().shape({
   avatar_image: yup
     .mixed()
     .nullable(true)
-    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
-      return value === null || ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) => {
+      return value === null || ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type);
     })
     .test("fileSize", "Le fichier est trop volumineux, taille maximum de 2Mo.", (value) => {
       return value === null || value.size <= 2000000;
@@ -81,8 +81,8 @@ export const annonceValidationSchema = yup.object().shape({
     .matches(/^[^<>]*$/, "Les caractères spéciaux sont autorisés sauf '<>'."),
   annonce_image: yup
     .mixed()
-    .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif ou png", (value) => {
-      return value && ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) => {
+      return value && ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type);
     })
     .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => {
       return value && value.size <= 10000000;
@@ -104,8 +104,8 @@ export const annonceModifyValidationSchema = yup.object().shape({
   annonce_image: yup
     .mixed()
     .nullable(true)
-    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
-      return value === null || ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) => {
+      return value === null || ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type);
     })
     .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => {
       return value === null || value.size <= 10000000;
@@ -125,24 +125,24 @@ export const addItemBoutiqueValidationSchema = yup.object().shape({
     .required("Veuillez renseigner une description.")
     .matches(/^[^<>]*$/, "Les caractères spéciaux ne sont pas autorisés sauf ', ., ;, (, ), #, @, €'."),
   type_vehicule: yup.string().trim().oneOf(["voiture", "moto"], "Veuillez sélectionner un type de véhicule valide."),
-
   price: yup
     .number()
     .required("Veuillez renseigner un prix.")
     .positive("Le prix doit être positif.")
     .min(1, "Le prix minumun est de 1€.")
     .max(1000, "Le prix maximum et de 1000€."),
-
   boutique_image: yup
     .array()
     .required()
     .min(1, "Veuillez ajouter au moins une image.")
-    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (values) => {
-      return values !== [] && values.map((value) => ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type));
-    })
-    .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (values) => {
-      return values !== [] && values.map((value) => value.size <= 10000000);
-    }),
+    .of(
+      yup
+        .mixed()
+        .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) =>
+          ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type)
+        )
+        .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => value.size <= 10000000)
+    ),
 });
 
 export const modifyItemBoutiqueValidationSchema = yup.object().shape({
@@ -167,12 +167,14 @@ export const modifyItemBoutiqueValidationSchema = yup.object().shape({
   boutique_image: yup
     .array()
     .nullable(true)
-    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (values) => {
-      return values !== [] && values.map((value) => ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type));
-    })
-    .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (values) => {
-      return values !== [] && values.map((value) => value.size <= 10000000);
-    }),
+    .of(
+      yup
+        .mixed()
+        .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) =>
+          ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type)
+        )
+        .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => value.size <= 10000000)
+    ),
 });
 
 export const addAbonnementValidationSchema = yup.object().shape({
@@ -197,12 +199,14 @@ export const addAbonnementValidationSchema = yup.object().shape({
     .array()
     .required()
     .min(1, "Veuillez ajouter au moins une image.")
-    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (values) => {
-      return values !== [] && values.map((value) => ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type));
-    })
-    .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (values) => {
-      return values !== [] && values.map((value) => value.size <= 10000000);
-    }),
+    .of(
+      yup
+        .mixed()
+        .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) =>
+          ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type)
+        )
+        .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => value.size <= 10000000)
+    ),
 });
 
 export const modifyAbonnementValidationSchema = yup.object().shape({
@@ -226,19 +230,21 @@ export const modifyAbonnementValidationSchema = yup.object().shape({
   abonnement_image: yup
     .array()
     .nullable(true)
-    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (values) => {
-      return values !== [] && values.map((value) => ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type));
-    })
-    .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (values) => {
-      return values !== [] && values.map((value) => value.size <= 10000000);
-    }),
+    .of(
+      yup
+        .mixed()
+        .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) =>
+          ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type)
+        )
+        .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => value.size <= 10000000)
+    ),
 });
 
 export const bannerValidationSchema = yup.object().shape({
   banner_image: yup
     .mixed()
-    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
-      return value && ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) => {
+      return value && ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type);
     })
     .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => {
       return value && value.size <= 10000000;
@@ -249,8 +255,8 @@ export const modifyBannerValidationSchema = yup.object().shape({
   banner_image: yup
     .mixed()
     .nullable(true)
-    .test("fileFormat", "Le fichier doit être au format jpg, jpeg ou png", (value) => {
-      return value === null || ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(value.type);
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) => {
+      return value === null || ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type);
     })
     .test("fileSize", "Le fichier est trop volumineux, taille maximum de 10Mo.", (value) => {
       return value === null || value.size <= 10000000;

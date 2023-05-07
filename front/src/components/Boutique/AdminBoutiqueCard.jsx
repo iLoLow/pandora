@@ -12,15 +12,15 @@ function AdminBoutiqueCard({ item, editHandle = () => {}, deleteHandle = () => {
       {/* Infos */}
       <div className="tableauBoutiqueItem">
         <div className="tableauBoutiqueItemHeader infos">
-          <h3>Nom :</h3>
+          <h3>Nom:</h3>
           <p>{item.name_article}</p>
         </div>
         <div className="tableauBoutiqueItemHeader infos">
-          <h3>Type :</h3>
+          <h3>Type:</h3>
           <p className="tableauBoutiqueCardType">{item.type_vehicule}</p>
         </div>
         <div className="tableauBoutiqueItemHeader infos">
-          <h3>Prix :</h3>
+          <h3>Prix:</h3>
           <p className="tableauBoutiqueCardPrice">{item.price} €</p>
         </div>
       </div>

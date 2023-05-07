@@ -62,8 +62,8 @@ function AddBoutiqueForm({ setClose = () => {}, reloadBoutique = () => {} }) {
         setClose();
       }
     } catch (error) {
-      const errors = error.inner.reduce((acc, error) => {
-        return { ...acc, [error.path]: error.message };
+      const errors = error.inner.reduce((acc, err) => {
+        return { ...acc, [err.path.split("[")[0]]: err.message };
       }, {});
 
       setErrors(errors);

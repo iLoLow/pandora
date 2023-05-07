@@ -48,6 +48,7 @@ body {
   --color-main: #cbdadc;
   --accent: #0d494e;
   --shadow: #0d7f90e3;
+  --btn: #04a1f8;
   --red: rgb(179, 3, 3);
   --green: rgb(5, 142, 34);
 }
@@ -57,6 +58,7 @@ body {
   --color-form: rgba(255, 255, 255, 0.034);
   --color-main: #080c1d;
   --accent: #04deff;
+  --btn: #0d7f90e3;
   --text-secondary: #04deff;
 }
 a {

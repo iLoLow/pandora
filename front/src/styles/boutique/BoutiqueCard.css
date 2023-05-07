@@ -56,6 +56,9 @@
 .boutiqueCardInfo h3 {
   text-transform: uppercase;
   font-weight: 600;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: clamp(0.9rem, 1vw, 1.2rem);
   margin-bottom: 0;
   color: var(--accent);

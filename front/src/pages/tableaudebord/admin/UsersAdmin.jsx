@@ -66,6 +66,7 @@ function UsersAdmin() {
 
         if (data) {
           notify("success", data.message);
+          getUsers();
         }
       }
     } catch (error) {

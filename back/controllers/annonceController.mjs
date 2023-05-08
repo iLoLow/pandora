@@ -11,7 +11,7 @@ export const createAnnonce = async (req, res) => {
 
     const { filename: image } = req.file;
     await sharp(req.file.path, { failOnError: false })
-      .resize(200)
+      .resize(600)
       .withMetadata()
       .toFile(path.resolve(req.file.destination + "/thumbs/" + image));
 
@@ -67,7 +67,7 @@ export const updateAnnonce = async (req, res) => {
     // si nouvelle image on crée sa thumbnail
     if (req.file) {
       await sharp(req.file.path, { failOnError: false })
-        .resize(200)
+        .resize(600)
         .withMetadata()
         .toFile(path.resolve(req.file.destination + "/thumbs/" + req.file.filename));
     }

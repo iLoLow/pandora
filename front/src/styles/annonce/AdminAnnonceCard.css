@@ -80,6 +80,7 @@
 @media screen and (max-width: 768px) {
   .tableauAnnonce {
     grid-template-columns: 1fr;
+    grid-template-rows: 200px;
   }
   .tableauAnnonceItem {
     border-right: none;
@@ -91,6 +92,7 @@
   }
   .tableauAnnonceItem.img img {
     width: 100%;
+    height: 200px;
   }
   .tableauAnnonceItem.title,
   .tableauAnnonceItem.desc {

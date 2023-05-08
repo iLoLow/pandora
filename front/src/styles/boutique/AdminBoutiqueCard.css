@@ -88,6 +88,7 @@
 @media screen and (max-width: 1000px) {
   .tableauBoutique {
     grid-template-columns: 1fr;
+    grid-template-rows: 200px;
   }
   .tableauBoutiqueItem {
     border-right: none;
@@ -99,6 +100,7 @@
   }
   .tableauBoutiqueItem.img img {
     width: 100%;
+    height: 200px;
   }
   .tableauBoutiqueItem.name,
   .tableauBoutiqueItem.desc {

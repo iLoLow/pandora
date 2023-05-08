@@ -76,6 +76,7 @@
 @media screen and (max-width: 900px) {
   .tableauAbonnement {
     grid-template-columns: 1fr;
+    grid-template-rows: 200px;
   }
   .tableauAbonnementItem {
     border-right: none;
@@ -86,6 +87,7 @@
   }
   .tableauAbonnementItem.img img {
     width: 100%;
+    height: 200px;
   }
   .tableauAbonnementItem.desc p {
     margin: 5px;

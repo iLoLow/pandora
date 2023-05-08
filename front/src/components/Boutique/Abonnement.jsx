@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import useToast from "../../hooks/useToast";
 import AbonnementCard from "./AbonnementCard";
 import "../../styles/boutique/Abonnement.css";
+import BoutiqueItem from "../../pages/BoutiqueItem";
 
-//affichage des abonnements
 function Abonnement({ cart, setCart }) {
   document.title = "Abonnement";
 
@@ -18,7 +18,6 @@ function Abonnement({ cart, setCart }) {
 
     const newCart = [...cart].concat(newItem);
 
-    // Enregistrer le panier mis à jour dans le localStorage
     localStorage.setItem("panier", JSON.stringify(newCart));
     setCart(JSON.parse(localStorage.getItem("panier")));
     notify("success", "Abonnement ajouté au panier");
@@ -43,11 +42,30 @@ function Abonnement({ cart, setCart }) {
     getAllAbonnementItems();
   }, []);
 
+  const [detail, setDetail] = useState({});
+  const [openDetail, setOpenDetail] = useState(false);
+  const [showAbonnement, setShowAbonnement] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const handleCloseDetail = () => {
+    setDetail({});
+    setOpenDetail(!openDetail);
+    setShowAbonnement(true);
+  };
+
   return (
     <div className="abonnementCards">
-      {items.map((item) => (
-        <AbonnementCard key={item.id} abonnement={item} handleReservation={() => handleReservation(item)} />
-      ))}
+      {showAbonnement &&
+        items.map((item) => (
+          <AbonnementCard
+            key={item.id}
+            item={item}
+            handleDetailItem={() => {
+              setDetail(item), setOpenDetail(!openDetail), setShowAbonnement(!showAbonnement);
+            }}
+            handleReservation={() => handleReservation(item)}
+          />
+        ))}
+      {openDetail && <BoutiqueItem isOpen={isOpen} item={detail} handleReservation={() => handleReservation(detail)} handleCloseDetail={() => handleCloseDetail()} />}
     </div>
   );
 }

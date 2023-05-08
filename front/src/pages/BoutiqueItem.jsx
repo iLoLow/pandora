@@ -16,7 +16,7 @@ function BoutiqueItem({ item, handleReservation = () => {}, handleCloseDetail = 
       <Slider arrayImages={JSON.parse(item.image_url)} />
       <div className="boutiqueItemInfos">
         <h2 className="boutiqueItemTitle">{item.name_article}</h2>
-        <div className="boutiqueItemTag">{item.type_vehicule}</div>
+        {item.type_vehicule && <div className="boutiqueItemTag">{item.type_vehicule}</div>}
         <ReactMarkdown className="boutiqueItemDescription" children={item.description} />
       </div>
       <div className="boutiqueItemCart">

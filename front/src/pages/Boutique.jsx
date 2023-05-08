@@ -76,6 +76,7 @@ function Boutique() {
 
   const handleAboVIPClick = () => {
     setShowAbonnement(true);
+    setOpenDetail(false); // Fermer BoutiqueItem
   };
 
   const handlevehiculeClick = () => {
@@ -135,8 +136,11 @@ function Boutique() {
               </div>
             </>
           )}
+
+          {openDetail && !showAbonnement && (
+            <BoutiqueItem isOpen={isOpen} item={detail} handleReservation={() => handleReservation(detail)} handleCloseDetail={() => handleCloseDetail()} />
+          )}
           {showAbonnement && <Abonnement cart={cart} setCart={setCart} />}
-          {openDetail && <BoutiqueItem isOpen={isOpen} item={detail} handleReservation={() => handleReservation(detail)} handleCloseDetail={() => handleCloseDetail()} />}
         </div>
       </section>
     </>

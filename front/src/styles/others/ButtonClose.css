@@ -1,0 +1,14 @@
+.closeBtn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  opacity: 0.5;
+  transition: opacity 250ms;
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  opacity: 1;
+}

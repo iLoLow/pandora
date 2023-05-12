@@ -85,14 +85,14 @@ export const updateAnnonce = async (req, res) => {
       });
       fs.unlink("images/annonces/thumbs/" + oldImageName, (err) => {
         if (err) {
-          console.log("Impossible de supprimer l'image de l'annonce : ", req.file.filename);
+          console.log("Impossible de supprimer l'image de l'annonce: ", req.file.filename);
         }
       });
     }
 
-    res.status(200).json({ message: "Annonce mise à jour", code: 200 });
+    res.status(200).json({ message: "Annonce mise à jour.", code: 200 });
   } catch (error) {
-    res.status(500).json({ error: "Impossible de mettre à jour l'annonce", code: 500 });
+    res.status(500).json({ error: "Impossible de mettre à jour l'annonce.", code: 500 });
   }
 };
 

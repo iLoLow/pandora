@@ -6,11 +6,11 @@ function CarteEquipe({ data }) {
       <div className="carteEquipeTexte">
         <div className="item">
           <h3 className="carteEquipeTexteNom">Pseudo Discord : </h3>
-          <p>{data.nom}</p>
+          <p>{data.pseudo_discord}</p>
         </div>
         <div className="item">
           <h3 className="carteEquipeTexteNom">Nom et Prénom RP : </h3>
-          <p>{data.nomrp}</p>
+          <p>{data.nom_prenom_rp}</p>
         </div>
         <div className="item fonction">
           <h3 className="carteEquipeTexteNom">Fonction : </h3>
@@ -22,7 +22,7 @@ function CarteEquipe({ data }) {
         </div>
       </div>
       <div className="carteEquipeImage">
-        <img src={data.avatarequipe} alt="photo de l'équipe" />
+        <img src={data.avatar_url} alt="photo de l'équipe" />
       </div>
     </div>
   );

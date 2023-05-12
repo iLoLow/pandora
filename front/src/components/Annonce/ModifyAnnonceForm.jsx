@@ -6,6 +6,7 @@ import useToast from "../../hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../state";
 import { useNavigate } from "react-router-dom";
+import ButtonClose from "../Others/ButtonClose";
 
 function ModifyAnnonceForm({ annonce, setClose = () => {}, reloadAnnonces = () => {} }) {
   const initialValues = {
@@ -66,6 +67,7 @@ function ModifyAnnonceForm({ annonce, setClose = () => {}, reloadAnnonces = () =
 
   const handleModifyAnnonceSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     editAnnonce();
     setErrors({});
   };
@@ -73,6 +75,7 @@ function ModifyAnnonceForm({ annonce, setClose = () => {}, reloadAnnonces = () =
   return (
     <div className="annonceFormTitle">
       <div className="containerForm">
+        <ButtonClose handleClick={() => setClose()} />
         <h2>Modifier une annonce :</h2>
         <AnnonceForm annonce={annonce} values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleModifyAnnonceSubmit(e)} />
       </div>

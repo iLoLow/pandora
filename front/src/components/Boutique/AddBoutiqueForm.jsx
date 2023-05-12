@@ -4,6 +4,7 @@ import { addItemBoutiqueValidationSchema } from "../../utils/schemasValidation";
 import { useSelector, useDispatch } from "react-redux";
 import useToast from "../../hooks/useToast";
 import { useNavigate } from "react-router-dom";
+import ButtonClose from "../Others/ButtonClose";
 
 function AddBoutiqueForm({ setClose = () => {}, reloadBoutique = () => {} }) {
   const initialValues = {
@@ -71,11 +72,13 @@ function AddBoutiqueForm({ setClose = () => {}, reloadBoutique = () => {} }) {
   };
   const handleBoutiqueItemSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     createBoutiqueItem();
   };
 
   return (
     <div className="containerForm">
+      <ButtonClose handleClick={() => setClose()} />
       <h2>Ajouter un article : </h2>
 
       <BoutiqueForm values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleBoutiqueItemSubmit(e)} />

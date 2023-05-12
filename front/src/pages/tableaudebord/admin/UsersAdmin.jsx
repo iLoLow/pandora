@@ -13,6 +13,7 @@ function UsersAdmin() {
   const [users, setUsers] = useState([]);
   const notify = useToast();
   const [editUserIndex, setUserIndex] = useState(-1);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -85,8 +86,8 @@ function UsersAdmin() {
         {users &&
           users.map((user, index) => (
             <div key={index}>
-              <AdminProfilCard user={user} updateHandleProfil={() => setUserIndex(index)} deleteHandleProfil={() => deleteUser(user.user_id)} />
-              {editUserIndex === index && <UpdateUserForm user={user} handleReload={() => handleReloadUsers()} isAdministrator={true} />}
+              <AdminProfilCard user={user} updateHandleProfil={() => setUserIndex(index) || setIsOpen(!isOpen)} deleteHandleProfil={() => deleteUser(user.user_id)} />
+              {isOpen && editUserIndex === index && <UpdateUserForm user={user} handleReload={() => handleReloadUsers()} isAdministrator={true} />}
             </div>
           ))}
       </div>

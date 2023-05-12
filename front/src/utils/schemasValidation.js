@@ -281,3 +281,35 @@ export const addWebhookValidationSchema = yup.object().shape({
     .matches(/[0-9]/, "L'identifiant du serveur discord ne doit contenir que des chiffres."),
   role_id: yup.string().required("Veuillez renseigner l'identifiant du rôle discord.").trim().matches(/[0-9]/, "L'identifiant du rôle discord ne doit contenir que des chiffres."),
 });
+
+export const equipeValidationSchema = yup.object().shape({
+  pseudo_discord: yup.string().required("Veuillez saisir votre pseudo discord.").trim().min(3, "Votre pseudo doit faire au minimum 3 caractères."),
+  nom_prenom_rp: yup.string().required("Veuillez saisir votre nom et prénom RP.").trim().min(3, "Votre nom et prénom RP doit faire au minimum 3 caractères."),
+  fonction: yup.string().required("Veuillez décrire votre fonction.").trim().min(3, "Votre fonction doit faire au minimum 3 caractères."),
+  description: yup.string().required("Veuillez décrire votre description.").trim().min(6, "Votre description doit faire au minimum 6 caractères."),
+  avatar_image: yup
+    .mixed()
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) => {
+      return value && ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type);
+    })
+    .test("fileSize", "Le fichier est trop volumineux, taille maximum de 2Mo.", (value) => {
+      return value && value.size <= 2000000;
+    })
+    .required("Veuillez choisir une image."),
+});
+
+export const modifyEquipeValidationSchema = yup.object().shape({
+  pseudo_discord: yup.string().required("Veuillez saisir votre pseudo discord.").trim().min(3, "Votre pseudo doit faire au minimum 3 caractères."),
+  nom_prenom_rp: yup.string().required("Veuillez saisir votre nom et prénom RP.").trim().min(3, "Votre nom et prénom RP doit faire au minimum 3 caractères."),
+  fonction: yup.string().required("Veuillez décrire votre fonction.").trim().min(3, "Votre fonction doit faire au minimum 3 caractères."),
+  description: yup.string().required("Veuillez décrire votre description.").trim().min(6, "Votre description doit faire au minimum 6 caractères."),
+  avatar_image: yup
+    .mixed()
+    .nullable(true)
+    .test("fileFormat", "Le fichier doit être au format jpg, jpeg, gif, png et webp", (value) => {
+      return value === null || ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"].includes(value.type);
+    })
+    .test("fileSize", "Le fichier est trop volumineux, taille maximum de 2Mo.", (value) => {
+      return value === null || value.size <= 2000000;
+    }),
+});

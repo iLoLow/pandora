@@ -6,6 +6,7 @@ import { setLogout } from "../../state";
 import useToast from "../../hooks/useToast";
 import BoutiqueForm from "./BoutiqueForm";
 import { modifyItemBoutiqueValidationSchema } from "../../utils/schemasValidation";
+import ButtonClose from "../Others/ButtonClose";
 
 function EditBoutiqueItem({ item, setClose = () => {}, reload = () => {} }) {
   const initialValues = {
@@ -74,12 +75,14 @@ function EditBoutiqueItem({ item, setClose = () => {}, reload = () => {} }) {
 
   const handleModifySubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     editItem();
     setErrors({});
   };
 
   return (
     <div className="containerForm">
+      <ButtonClose handleClick={() => setClose()} />
       <h2>Modifier un article :</h2>
       <BoutiqueForm item={item} values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleModifySubmit(e)} />
     </div>

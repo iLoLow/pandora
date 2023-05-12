@@ -63,6 +63,7 @@ function ModifyBannerForm({ banner, reload = () => {} }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     modifyBanner();
   };
 

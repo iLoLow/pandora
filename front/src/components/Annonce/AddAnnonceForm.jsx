@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import useToast from "../../hooks/useToast";
 import { useNavigate } from "react-router-dom";
 import { getInfosWebhook, sendEmbedsToDiscord } from "../../services/WebHookDiscord";
+import ButtonClose from "../Others/ButtonClose";
 
 function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
   const initialValues = {
@@ -128,12 +129,14 @@ function AddAnnonceForm({ setClose = () => {}, reloadAnnonces = () => {} }) {
 
   const handleAddAnnonceSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     createAnnonce();
   };
 
   return (
     <div className="annonceFormTitle">
       <div className="containerForm">
+        <ButtonClose handleClick={() => setClose()} />
         <h2>Ajouter Une Annonce :</h2>
         <AnnonceForm values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleAddAnnonceSubmit(e)} />
       </div>

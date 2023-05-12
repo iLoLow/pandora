@@ -64,6 +64,7 @@ function AddBannerForm({ reload = () => {} }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     createBanner();
   };
 

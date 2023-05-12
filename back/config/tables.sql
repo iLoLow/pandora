@@ -1,5 +1,3 @@
--- SQLBook: Code
-
 /* table users */
 
 DROP TABLE users;
@@ -89,3 +87,22 @@ CREATE TABLE
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
+
+DROP TABLE equipe;
+
+CREATE TABLE
+    equipe(
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        pseudo_discord VARCHAR(255) NOT NULL,
+        nom_prenom_rp VARCHAR(255) NOT NULL,
+        fonction VARCHAR(255) NOT NULL,
+        description LONGTEXT NOT NULL,
+        avatar_url VARCHAR(255) NOT NULL,
+        order_id INT,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
+UPDATE equipe
+SET order_id = LAST_INSERT_ID()
+WHERE id = LAST_INSERT_ID();

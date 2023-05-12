@@ -6,6 +6,7 @@ import { setLogout } from "../../state";
 import useToast from "../../hooks/useToast";
 import AbonnementForm from "./AbonnementForm";
 import { modifyAbonnementValidationSchema } from "../../utils/schemasValidation";
+import ButtonClose from "../Others/ButtonClose";
 
 function EditAbonnement({ abonnement, setClose = () => {}, reloadAbonnement = () => {} }) {
   const initialValues = {
@@ -72,12 +73,14 @@ function EditAbonnement({ abonnement, setClose = () => {}, reloadAbonnement = ()
 
   const handleModifySubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     editAbonnement();
     setErrors({});
   };
 
   return (
     <div className="containerForm">
+      <ButtonClose handleClick={() => setClose()} />
       <h2>Modifier un Abonnement :</h2>
       <AbonnementForm abonnement={abonnement} values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleModifySubmit(e)} />
     </div>

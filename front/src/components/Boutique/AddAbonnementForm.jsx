@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import useToast from "../../hooks/useToast";
 import { useNavigate } from "react-router-dom";
 import AbonnementForm from "./AbonnementForm";
+import ButtonClose from "../Others/ButtonClose";
 
 function AddAbonnementForm({ setClose = () => {}, reloadAbonnement = () => {} }) {
   const initialValues = {
@@ -71,11 +72,13 @@ function AddAbonnementForm({ setClose = () => {}, reloadAbonnement = () => {} })
 
   const handleAbonnementSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     createAbonnement();
   };
 
   return (
     <div className="containerForm">
+      <ButtonClose handleClick={() => setClose()} />
       <h2>Ajouter un Abonnement : </h2>
       <AbonnementForm values={values} setValues={setValues} errors={errors} handleSubmit={(e) => handleAbonnementSubmit(e)} />
     </div>

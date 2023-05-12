@@ -37,9 +37,7 @@
   margin-block: 15px 10px;
   padding-inline: 15px;
 }
-.tableauDeBordLinksScroll {
-  margin-block: 15px 120px;
-}
+
 .tableauDeBordSeparateur {
   display: block;
   height: 1px;
@@ -125,5 +123,11 @@
   }
   .tableauDeBordBody.tableauDeBordBodySmall {
     margin-left: 40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tableauDeBordAside {
+    padding-top: 68px;
   }
 }

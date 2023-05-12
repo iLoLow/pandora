@@ -36,7 +36,6 @@ class Annonce {
         "INSERT INTO annonces (title, description, image_url, user_id, username, avatar_url) VALUES (?, ?, ?, ?, ?, ?)",
         [title, description, image_url, user_id, username, avatar_url],
         (err, result) => {
-          console.log(result);
           if (err) reject(err);
           resolve(result);
         }

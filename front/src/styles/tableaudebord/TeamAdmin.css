@@ -14,6 +14,14 @@
   box-shadow: -1px 1px 8px 6px var(--shadow);
 }
 
+.dragOverlay {
+  opacity: 0.8;
+}
+
+.dragOverlay:first-child {
+  filter: blur(1px);
+}
+
 @media screen and (max-width: 768px) {
   .addEquipeBtn {
     width: 35px;

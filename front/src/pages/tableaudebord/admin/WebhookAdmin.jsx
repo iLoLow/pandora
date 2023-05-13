@@ -31,8 +31,8 @@ function WebhookAdmin() {
     try {
       const response = await fetch("/api/webhooks");
       const data = await response.json();
-      if (data.code === 500) {
-        notify("error", data.error);
+      if (data.error) {
+        return notify("error", data.error);
       }
 
       if (data) {
@@ -49,6 +49,10 @@ function WebhookAdmin() {
   useEffect(() => {
     getWebhooks();
   }, []);
+
+  if (!valuesAnnonces.id || !valuesBoutique.id) {
+    return;
+  }
 
   return (
     <AdminWrapper title="Webhooks">

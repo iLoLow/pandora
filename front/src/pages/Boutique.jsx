@@ -35,15 +35,10 @@ function Boutique() {
       const response = await fetch("/api/boutique");
       const datas = await response.json();
 
-      if (datas.length === 0) {
+      if (datas.error) {
         navigate("/boutique/maintenance");
       }
-
       setItems(datas);
-
-      if (datas.code === 429) {
-        notify("error", datas.error);
-      }
     } catch (error) {
       navigate("/boutique/maintenance");
     }

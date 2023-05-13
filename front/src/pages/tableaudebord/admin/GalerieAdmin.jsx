@@ -64,6 +64,10 @@ function GalerieAdmin() {
     }
   };
 
+  if (galerie.error) {
+    return;
+  }
+
   return (
     <AdminWrapper title={"Gestion des Images"}>
       <div className="galerieAdminInfos">

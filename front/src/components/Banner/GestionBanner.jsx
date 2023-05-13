@@ -16,6 +16,10 @@ function GestionBanner() {
       const response = await fetch("/api/banner");
       const data = await response.json();
 
+      if (data.error) {
+        notify("error", data.error);
+      }
+
       setBanner(data);
     } catch (error) {
       console.log(error);
@@ -31,7 +35,7 @@ function GestionBanner() {
         });
         const data = await response.json();
 
-        if (data.code === 500 || data.code === 403) {
+        if (data.error) {
           notify("error", data.error);
         }
 
@@ -48,6 +52,10 @@ function GestionBanner() {
   useEffect(() => {
     getBanner();
   }, []);
+
+  if (banner.error) {
+    return;
+  }
 
   return (
     <div className="containerbanner">

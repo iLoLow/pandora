@@ -25,7 +25,7 @@ function ProfilUser() {
       });
       const data = await response.json();
 
-      if (data.code === 500) {
+      if (data.code === 500 || data.code === 429) {
         notify("error", data.error);
       }
       if (data.code === 403) {
@@ -61,7 +61,7 @@ function ProfilUser() {
           throw new Error(data.code + " " + data.error);
         }
 
-        if (data.code === 500) {
+        if (data.code === 500 || data.code === 429) {
           notify("error", data.error);
         }
 
@@ -90,21 +90,18 @@ function ProfilUser() {
     deleteUser();
   };
 
-  if (!user) {
-    return;
-  }
-
   const handleReloadUser = () => {
     dispatch(setLogout());
     navigate("/identification");
   };
 
+  if (user.error) {
+    return;
+  }
+
   return (
     <AdminWrapper title={"Gestion De Mon Profil"}>
-      {/* Profil Card */}
       <AdminProfilCard user={user} updateHandleProfil={updateHandleProfil} deleteHandleProfil={deleteHandleProfil} />
-      {/* Profil Update */}
-
       {isOpen && <UpdateUserForm user={user} handleReload={() => handleReloadUser()} />}
     </AdminWrapper>
   );

@@ -23,7 +23,7 @@ function UsersAdmin() {
         headers: { Authorization: "Bearer " + token },
       });
       const datas = await response.json();
-      if (datas.code === 500 || datas.code === 403) {
+      if (datas.code === 500 || datas.code === 403 || datas.code === 429) {
         notify("error", datas.error);
       }
       setUsers(datas);
@@ -55,7 +55,7 @@ function UsersAdmin() {
           throw new Error(data.code + " " + data.error);
         }
 
-        if (data.code === 500) {
+        if (data.code === 500 || data.code === 429) {
           notify("error", data.error);
         }
 
@@ -79,6 +79,10 @@ function UsersAdmin() {
     getUsers();
     setUserIndex(-1);
   };
+
+  if (users.error) {
+    return;
+  }
 
   return (
     <AdminWrapper title="Gestion Des Utilisateurs">

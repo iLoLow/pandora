@@ -62,6 +62,10 @@ function AnnoncesAdmin() {
     }
   };
 
+  if (annonces.error) {
+    return;
+  }
+
   return (
     <AdminWrapper title="Gestion Des Annonces">
       <div className="adminAnnoncesCards">

@@ -15,11 +15,11 @@ function Annonces() {
       const response = await fetch("/api/annonces");
       const datas = await response.json();
 
-      setAnnonces(datas);
-
-      if (datas.code === 429) {
-        notify("error", datas.error);
+      if (datas.error) {
+        navigate("/erreur");
       }
+
+      setAnnonces(datas);
     } catch (error) {
       navigate("/erreur");
     }

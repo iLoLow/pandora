@@ -18,15 +18,7 @@ function Banner() {
     getBanner();
   }, []);
 
-  if (banner.length === 0) {
-    return;
-  }
-
-  return (
-    <div className="banner">
-      <img src={banner[0].image_url} alt="banniere pandora rp" />
-    </div>
-  );
+  return <div className="banner">{banner.length > 0 && <img src={banner[0].image_url} alt="banniere pandora rp" />}</div>;
 }
 
 export default Banner;

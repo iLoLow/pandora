@@ -4,24 +4,23 @@ import "../styles/pages/Accueil.css";
 import { useState, useEffect } from "react";
 import BarreReseaux from "../components/Others/BarreReseaux";
 document.title = "Pandora RP";
-import useToast from "../hooks/useToast";
+import { useNavigate } from "react-router-dom";
 
 function Accueil() {
   document.title = "Pandora RP";
   const [annonces, setAnnonces] = useState([]);
-  const notify = useToast();
+  const navigate = useNavigate();
 
   const fetchAnnonces = async () => {
     try {
       const response = await fetch("/api/annonces/last");
       const data = await response.json();
-      setAnnonces(data);
-
-      if (data.code === 429) {
-        notify("error", data.error);
+      if (data.error) {
+        navigate("/erreur");
       }
+      setAnnonces(data);
     } catch (error) {
-      console.log(error);
+      navigate("/erreur");
     }
   };
 
@@ -39,7 +38,7 @@ function Accueil() {
           <p>Pandora RP est un serveur WhiteList</p>
         </div>
         <BarreReseaux />
-        {annonces.length >= 1 && <Article annonce={annonces[0]} reload={fetchAnnonces} />}
+        {annonces.length > 0 && <Article annonce={annonces[0]} reload={fetchAnnonces} />}
       </section>
     </>
   );

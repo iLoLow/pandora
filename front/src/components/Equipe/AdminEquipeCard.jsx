@@ -1,15 +1,17 @@
 import "../../styles/equipe/AdminEquipeCard.css";
 import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 function AdminEquipeCard({ equipe, handleEditEquipe = () => {}, deleteHandleEquipe = () => {} }) {
-  const { attributes, listeners, setNodeRef, setActivatorNodeRef, transition } = useSortable({ id: equipe.id });
+  const { attributes, listeners, setNodeRef, setActivatorNodeRef, transition, isDragging } = useSortable({ id: equipe.id });
   const style = {
+    opacity: isDragging ? 0.4 : undefined,
     transition,
   };
 
   return (
-    <div className="tableauEquipe" style={style} ref={setNodeRef} {...attributes}>
-      <div className="dragBtn" ref={setActivatorNodeRef} {...listeners}>
+    <div className="tableauEquipe" style={style} ref={setNodeRef} {...attributes} {...listeners}>
+      <div className="dragBtn" ref={setActivatorNodeRef}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#0d7f90">
           <path
             fillRule="evenodd"

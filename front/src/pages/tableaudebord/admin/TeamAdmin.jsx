@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import useToast from "../../../hooks/useToast";
 import { useNavigate } from "react-router-dom";
 import { setLogout } from "../../../state";
-import { DndContext, DragOverlay, closestCenter, KeyboardSensor, PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { DndContext, DragOverlay, KeyboardSensor, PointerSensor, TouchSensor, useSensor, useSensors, defaultDropAnimationSideEffects } from "@dnd-kit/core";
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import AdminEquipeCard from "../../../components/Equipe/AdminEquipeCard";
@@ -13,7 +13,7 @@ import "../../../styles/tableaudebord/TeamAdmin.css";
 import AddEquipeForm from "../../../components/Equipe/AddEquipeForm";
 import EditEquipeForm from "../../../components/Equipe/EditEquipeForm";
 
-function UsersAdmin() {
+function TeamAdmin() {
   const token = useSelector((state) => state.token);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ function UsersAdmin() {
       });
       const data = await response.json();
 
-      if (data.code === 500) {
+      if (data.code === 500 || data.code === 429) {
         notify("error", data.error);
       }
 
@@ -55,6 +55,7 @@ function UsersAdmin() {
         setTeam(data);
       }
     } catch (error) {
+      navigate("error");
       console.error(error);
     }
   };
@@ -100,17 +101,15 @@ function UsersAdmin() {
         const activeDraggableIndex = team.findIndex((t) => t.id === parseInt(active.id));
         const overDraggableIndex = team.findIndex((t) => t.id === parseInt(over.id));
 
-        const activeDraggable = team.find((t) => t.id === parseInt(active.id));
-        const overDraggable = team.find((t) => t.id === parseInt(over.id));
-
-        // mettre à jour le order du active avec le order du over
-        await updateOrderMemberById(active.id, overDraggable.order_id);
-        // mettre à jour le order du order avec le order du active
-        await updateOrderMemberById(over.id, activeDraggable.order_id);
-
         setTeam(([...items]) => {
           return arrayMove(items, activeDraggableIndex, overDraggableIndex);
         });
+
+        const activeDraggable = team.find((t) => t.id === parseInt(active.id));
+        const overDraggable = team.find((t) => t.id === parseInt(over.id));
+        await updateOrderMemberById(active.id, overDraggable.order_id);
+        await updateOrderMemberById(over.id, activeDraggable.order_id);
+
         setActiveId(null);
         getTeamByOrder();
       }
@@ -153,6 +152,20 @@ function UsersAdmin() {
     setMemberOverlay(activeMember);
   }, [activeId, setMemberOverlay]);
 
+  if (team.error) {
+    return;
+  }
+
+  const dropAnimationConfig = {
+    sideEffects: defaultDropAnimationSideEffects({
+      styles: {
+        active: {
+          opacity: "0.4",
+        },
+      },
+    }),
+  };
+
   return (
     <AdminWrapper title="Gestion De L'Équipe">
       <button className="addEquipeBtn" onClick={() => setAddEquipeItem(!addEquipeItem)}>
@@ -161,17 +174,18 @@ function UsersAdmin() {
         </svg>
       </button>
       {addEquipeItem && <AddEquipeForm setClose={() => setAddEquipeItem(!addEquipeItem)} reloadEquipes={() => getTeamByOrder()} />}
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd} modifiers={[restrictToVerticalAxis]}>
+      <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd} onDragCancel={() => setActiveId(null)} modifiers={[restrictToVerticalAxis]}>
         <SortableContext items={team} strategy={verticalListSortingStrategy}>
-          {team.map((equipe, index) => (
-            <div key={index}>
+          {team.length > 0 &&
+            team.map((equipe, index) => (
               <div key={index}>
-                <AdminEquipeCard equipe={equipe} handleEditEquipe={() => setEditMemberIndex(index)} deleteHandleEquipe={() => handleDeleteMemberTeam(equipe.id)} />
+                <div key={index}>
+                  <AdminEquipeCard equipe={equipe} handleEditEquipe={() => setEditMemberIndex(index)} deleteHandleEquipe={() => handleDeleteMemberTeam(equipe.id)} />
+                </div>
+                {editMemberIndex === index && <EditEquipeForm equipe={equipe} setClose={() => setEditMemberIndex(-1)} reloadEquipes={() => getTeamByOrder()} />}
               </div>
-              {editMemberIndex === index && <EditEquipeForm equipe={equipe} setClose={() => setEditMemberIndex(-1)} reloadEquipes={() => getTeamByOrder()} />}
-            </div>
-          ))}
-          <DragOverlay adjustScale={true} style={{ opacity: "0.8" }}>
+            ))}
+          <DragOverlay dropAnimation={dropAnimationConfig} className="dragOverlay">
             {activeId && <AdminEquipeCardOverlay equipe={memberOverlay} />}
           </DragOverlay>
         </SortableContext>
@@ -180,4 +194,4 @@ function UsersAdmin() {
   );
 }
 
-export default UsersAdmin;
+export default TeamAdmin;

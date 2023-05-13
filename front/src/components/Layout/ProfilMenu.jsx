@@ -25,7 +25,7 @@ function ProfilMenu({ user, menuOpen, setMenuOpen = () => {} }) {
       {isOpen && (
         <div className="profil-links" onMouseLeave={() => setIsOpen(!isOpen)}>
           <Link
-            to={"/tableaudebord/profil"}
+            to={"/tableaudebord"}
             onClick={() => {
               setIsOpen(!isOpen);
               setMenuOpen(!menuOpen);

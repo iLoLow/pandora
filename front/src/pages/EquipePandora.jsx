@@ -3,9 +3,9 @@ import "../styles/pages/EquipePandora.css";
 import BannerDev from "../assets/SOYEZ_Laurent_Developpeur_WEB.webp";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-document.title = "Equipe Pandora";
 
 function EquipePandora() {
+  document.title = "Equipe Pandora";
   const [team, setTeam] = useState([]);
 
   const getTeam = async () => {

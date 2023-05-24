@@ -12,9 +12,10 @@
 }
 .logo-pandora {
   position: absolute;
-  top: -10px;
-  width: 120px;
-  height: 120px;
+  top: 7px;
+  left: 10px;
+  width: 100px;
+  height: 100px;
 }
 
 .logo-pandora::after {
@@ -59,6 +60,10 @@
 .link-active {
   text-decoration: underline;
   color: var(--accent);
+}
+.link:hover svg,
+.link-active svg {
+  fill: var(--accent);
 }
 
 @media screen and (max-width: 768px) {

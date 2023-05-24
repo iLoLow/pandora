@@ -3,7 +3,7 @@
   height: 26px;
   z-index: 9;
   border-radius: 15px;
-  border: solid 1px #0d7f90;
+  border: solid 1px #5b52fd;
   overflow: hidden;
   padding: 1px;
   cursor: pointer;
@@ -17,7 +17,7 @@
   width: 20px;
   height: 20px;
   background: white;
-  border: solid 1px #0d7f90;
+  border: solid 1px #5b52fd;
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   transition: transform 0.2s;

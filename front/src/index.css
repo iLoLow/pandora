@@ -42,12 +42,12 @@ body {
 :root {
   --background: rgb(193, 225, 231);
   --text-primary: black;
-  --text-secondary: #0d7f90e3;
+  --text-secondary: #5b52fde3;
   --color-form: #4aadbc29;
   --color-main: #cbdadc;
-  --accent: #0d494e;
-  --shadow: #0d7f90e3;
-  --btn: #04a1f8;
+  --accent: #3b2a93;
+  --shadow: #5b52fdf7;
+  --btn: #5b52fd;
   --red: rgb(179, 3, 3);
   --green: rgb(5, 142, 34);
 }
@@ -56,9 +56,10 @@ body {
   --text-primary: rgb(224, 219, 219);
   --color-form: rgba(255, 255, 255, 0.034);
   --color-main: #080c1d;
-  --accent: #04deff;
-  --btn: #0d7f90e3;
-  --text-secondary: #04deff;
+  --shadow: #5b52fd96;
+  --accent: #5b52fda2;
+  --btn: #5b52fd;
+  --text-secondary: #5b52fd;
 }
 a {
   color: inherit;

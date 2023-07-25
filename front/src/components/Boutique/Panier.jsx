@@ -201,6 +201,11 @@ function Panier({ cart, setCart }) {
             <input type="text" value={values.pseudo_id} onChange={(e) => setValues({ ...values, pseudo_id: e.target.value })} />
             {errors.pseudo_id && <small className="errorSmall">{errors.pseudo_id}</small>}
           </form-group>
+          <form-group>
+            <input type="checkbox" />
+            <label>J'accepte les conditions générales de ventes</label>
+          </form-group>
+
           <Button type="submit" color="green" children="Valider" />
         </form>
         {channelId && (

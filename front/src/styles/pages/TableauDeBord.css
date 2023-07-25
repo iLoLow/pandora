@@ -33,7 +33,7 @@
 .tableauDeBordLinks {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   margin-block: 15px 10px;
   padding-inline: 15px;
 }

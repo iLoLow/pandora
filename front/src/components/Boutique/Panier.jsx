@@ -26,15 +26,18 @@ function Panier({ cart, setCart }) {
 
   const getInfosWebhookBoutique = async () => {
     try {
-      const wh = await getInfosWebhook("boutique");
+      const webhooks = await getInfosWebhook("boutique");
 
-      if (!Boolean(wh.active)) {
+      const wh = webhooks[0];
+
+      if (!wh || !Boolean(wh.active)) {
         navigate("/boutique/maintenance");
       }
-
-      setValues({ ...values, webhook_url: wh.webhook_url, server_id: wh.server_id, role_id: wh.role_id, active: Boolean(wh.active) });
+      if (wh) {
+        setValues({ ...values, webhook_url: wh.webhook_url, server_id: wh.server_id, role_id: wh.role_id, active: Boolean(wh.active) });
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

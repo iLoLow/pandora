@@ -5,6 +5,7 @@
 export const getInfosWebhook = (type) => {
   return new Promise(async (resolve, reject) => {
     try {
+      if (!type) throw new Error("Type is not defined !!!");
       const response = await fetch("/api/webhooks/" + type);
       const data = await response.json();
       if (data) {

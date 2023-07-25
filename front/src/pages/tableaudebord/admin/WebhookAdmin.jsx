@@ -42,17 +42,13 @@ function WebhookAdmin() {
         setValuesBoutique(whboutique);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   useEffect(() => {
     getWebhooks();
   }, []);
-
-  if (!valuesAnnonces.id || !valuesBoutique.id) {
-    return;
-  }
 
   return (
     <AdminWrapper title="Webhooks">

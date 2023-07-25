@@ -17,6 +17,8 @@ import abonnementRoutes from "./routes/abonnementRoutes.mjs";
 import bannerRoutes from "./routes/bannerRoutes.mjs";
 import webhookRoutes from "./routes/webhookRoutes.mjs";
 import createFolders from "./utils/createFolders.mjs";
+import defaultQueries from "./config/defaultQueries.mjs";
+
 // Resolve dirname anf filename for es6
 const __filename = fileURLToPath(import.meta.url); // Résolution du chemin du fichier
 const __dirname = path.dirname(__filename); // Résolution du chemin du fichier
@@ -123,4 +125,5 @@ const server = http.createServer(app);
 
 server.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
+  defaultQueries();
 });

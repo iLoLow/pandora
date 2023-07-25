@@ -23,7 +23,7 @@ export const getAllWebhooks = async (req, res) => {
 export const getWebhookByType = async (req, res) => {
   try {
     const webhook = await Webhook.getWebhookbyType(req.params.type);
-    res.status(200).json(webhook[0]);
+    res.status(200).json(webhook);
   } catch (error) {
     res.status(500).json({ error: "Impossible de récupérer le webhook", code: 500 });
   }
